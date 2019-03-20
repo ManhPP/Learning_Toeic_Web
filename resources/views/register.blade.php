@@ -10,7 +10,7 @@
     <title>Register</title>
 
     <!-- Icons font CSS-->
-    <link href="{{ URL::asset("css/material-design-iconic-font.min.css") }}" rel="stylesheet" media="all">
+    <link href="{{ URL::asset("fonts/mdi-font/css/material-design-iconic-font.min.css") }}" rel="stylesheet" media="all">
     <link rel="stylesheet" type="text/css" href="{{ URL::asset("fonts/font-awesome-4.7.0/css/font-awesome.min.css") }}">
     <!-- Font special for pages-->
     <link href="https://fonts.googleapis.com/css?family=Poppins:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
