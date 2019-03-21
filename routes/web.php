@@ -30,3 +30,7 @@ Route::get('/reading', function(){
 Route::get('/listening', function(){
     return view('plHome');
 });
+
+Route::get('/testing', function(){
+    return view('testHome');
+});
