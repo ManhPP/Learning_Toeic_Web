@@ -26,3 +26,7 @@ Route::get('/register', function(){
 Route::get('/reading', function(){
     return view('prHome');
 });
+
+Route::get('/listening', function(){
+    return view('plHome');
+});
