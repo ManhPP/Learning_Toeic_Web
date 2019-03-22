@@ -47,3 +47,7 @@ Route::get("/forum/add-discuss", function(){
 Route::get("/test-toeic", function(){
     return view("testToeic");
 });
+
+Route::get("/forum/view-post", function(){
+    return view("viewPost");
+});
