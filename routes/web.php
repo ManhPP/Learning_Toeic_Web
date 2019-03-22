@@ -38,3 +38,7 @@ Route::get('/testing', function(){
 Route::get("/forum", function(){
     return view("forumHome");
 });
+
+Route::get("/forum/add-discuss", function(){
+    return view("addDiscuss");
+});
