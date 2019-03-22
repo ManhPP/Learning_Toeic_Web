@@ -34,3 +34,7 @@ Route::get('/listening', function(){
 Route::get('/testing', function(){
     return view('testHome');
 });
+
+Route::get("/forum", function(){
+    return view("forumHome");
+});
