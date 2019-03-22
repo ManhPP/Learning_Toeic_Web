@@ -39,6 +39,11 @@ Route::get("/forum", function(){
     return view("forumHome");
 });
 
+
 Route::get("/forum/add-discuss", function(){
     return view("addDiscuss");
+});
+
+Route::get("/test-toeic", function(){
+    return view("testToeic");
 });
