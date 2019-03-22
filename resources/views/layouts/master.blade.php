@@ -5,10 +5,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" type="text/css" href="{{ URL::asset("css/bootstrap.min.css") }}">
-    <link rel="stylesheet" type="text/css" href="{{ URL::asset("css/home-css.css") }}">
-	<link rel="stylesheet" type="text/css" href="{{ URL::asset("css/prhome-css.css") }}">
-	<link rel="stylesheet" type="text/css" href="{{ URL::asset("css/animate.css") }}">
-    <link rel="stylesheet" type="text/css" href="{{ URL::asset("css/swiper.min.css") }}">
+
+    @yield("css")
+
+	{{--<link rel="stylesheet" type="text/css" href="{{ URL::asset("css/animate.css") }}">--}}
+    {{--<link rel="stylesheet" type="text/css" href="{{ URL::asset("css/swiper.min.css") }}">--}}
+    {{--<link rel="stylesheet" type="text/css" href="{{ URL::asset("css/home-css.css") }}">--}}
+    {{--<link rel="stylesheet" type="text/css" href="{{ URL::asset("css/prhome-css.css") }}">--}}
     
     <title>@yield('title')</title>
 </head>
@@ -81,15 +84,15 @@
         <div class="footer row">
             <div class="col-8">
                 <div class="line">ABOUT US</div>
-                <div class="line"><img src="/imgs/locate.png"><span>Địa chỉ:Số 1, Đại Cồ Việt, Bách Khoa, Hà Nội</span></div>
-                <div class="line"><img src="/imgs/contact.png"><span>SDT:+84 327201345</span></div>
-                <div class="line"><img src="/imgs/email.png"><span>Email: bktoiec@gmail.com</span></div>
+                <div class="line"><img src="{{URL::asset("imgs/locate.png")}}"><span>Địa chỉ:Số 1, Đại Cồ Việt, Bách Khoa, Hà Nội</span></div>
+                <div class="line"><img src="{{URL::asset("imgs/contact.png")}}"><span>SDT:+84 327201345</span></div>
+                <div class="line"><img src="{{URL::asset("imgs/email.png")}}"><span>Email: bktoiec@gmail.com</span></div>
             </div>
             <div class="col-4">
                 <div class="line">CONTACT</div>
                 <div class="line">
-                    <img style="margin-right: 3px; width: 32px; height: 32px" src="/imgs/fb.png">
-                    <img src="/imgs/twitter.png" style="width: 32px; height: 32px">
+                    <img style="margin-right: 3px; width: 32px; height: 32px" src="{{URL::asset("imgs/fb.png")}}">
+                    <img src="{{URL::asset("imgs/twitter.png")}}" style="width: 32px; height: 32px">
                 </div>
             </div>
         </div>

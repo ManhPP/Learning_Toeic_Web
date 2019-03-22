@@ -1,5 +1,10 @@
 @extends('layouts.master')
 @section('title',"practice test home")
+@section("css")
+	<link rel="stylesheet" type="text/css" href="{{ URL::asset("css/prhome-css.css") }}">
+	<link rel="stylesheet" type="text/css" href="{{ URL::asset("css/swiper.min.css") }}">
+	<link rel="stylesheet" type="text/css" href="{{ URL::asset("css/animate.css") }}">
+@endsection
 
 @section('navbar')
 	@parent	
@@ -10,7 +15,7 @@
 	<div class="body">
 
 		<!-- cover -->
-		<div class="cover">
+		<div class="cover" style="background: url('{{URL::asset("imgs/prHome/reading.jpg")}}')">
 
 		</div>
 
@@ -24,7 +29,7 @@
 				<div class="swiper-wrapper">
 					<div class="swiper-slide row">
 						<div class="test col-12">
-							<img src="/imgs/prHome/test.jpg">
+							<img src="{{URL::asset("imgs/prHome/test.jpg")}}">
 						</div>
 						<div class="detail-lession col-12">
 							Test 1: IIG 2018
@@ -32,7 +37,7 @@
 					</div>
 					<div class="swiper-slide row">
 						<div class="test col-12">
-							<img src="/imgs/prHome/test.jpg">
+							<img src="{{URL::asset("imgs/prHome/test.jpg")}}">
 						</div>
 						<div class="detail-lession col-12">
 							Test 2: IIG 2018
@@ -40,7 +45,7 @@
 					</div>
 					<div class="swiper-slide row">
 						<div class="test col-12">
-							<img src="/imgs/prHome/test.jpg">
+							<img src="{{URL::asset("imgs/prHome/test.jpg")}}">
 						</div>
 						<div class="detail-lession col-12">
 							Test 3: IIG 2018
@@ -48,7 +53,7 @@
 					</div>
 					<div class="swiper-slide row">
 						<div class="test col-12">
-							<img src="/imgs/prHome/test.jpg">
+							<img src="{{URL::asset("imgs/prHome/test.jpg")}}">
 						</div>
 						<div class="detail-lession col-12">
 							Test 4: IIG 2018
@@ -56,7 +61,7 @@
 					</div>
 					<div class="swiper-slide row">
 						<div class="test col-12">
-							<img src="/imgs/prHome/test.jpg">
+							<img src="{{URL::asset("imgs/prHome/test.jpg")}}">
 						</div>
 						<div class="detail-lession col-12">
 							Test 5: IIG 2018
@@ -64,7 +69,7 @@
 					</div>
 					<div class="swiper-slide row">
 						<div class="test col-12">
-							<img src="/imgs/prHome/test.jpg">
+							<img src="{{URL::asset("imgs/prHome/test.jpg")}}">
 						</div>
 						<div class="detail-lession col-12">
 							Test 6: IIG 2018
@@ -72,7 +77,7 @@
 					</div>
 					<div class="swiper-slide row">
 						<div class="test col-12">
-							<img src="/imgs/prHome/test.jpg">
+							<img src="{{URL::asset("imgs/prHome/test.jpg")}}">
 						</div>
 						<div class="detail-lession col-12">
 							Test 7: IIG 2018
@@ -80,7 +85,7 @@
 					</div>
 					<div class="swiper-slide row">
 						<div class="test col-12">
-							<img src="/imgs/prHome/test.jpg">
+							<img src="{{URL::asset("imgs/prHome/test.jpg")}}">
 						</div>
 						<div class="detail-lession col-12">
 							Test 8: IIG 2018
@@ -88,7 +93,7 @@
 					</div>
 					<div class="swiper-slide row">
 						<div class="test col-12">
-							<img src="/imgs/prHome/test.jpg">
+							<img src="{{URL::asset("imgs/prHome/test.jpg")}}">
 						</div>
 						<div class="detail-lession col-12">
 							Test 9: IIG 2018
@@ -96,7 +101,7 @@
 					</div>
 					<div class="swiper-slide row">
 						<div class="test col-12">
-							<img src="/imgs/prHome/test.jpg">
+							<img src="{{URL::asset("imgs/prHome/test.jpg")}}">
 						</div>
 						<div class="detail-lession col-12">
 							Test 10: IIG 2018 111111111111h1h1h1h1h1h1h1h1h1h1h1h1h1h1h
@@ -136,35 +141,35 @@
 					<tbody>
 						<tr class="d-flex r">
 							<td class="col-12 col-sm-10 col-md-7">
-								<span><img src="/imgs/prHome/book.png"></span>
+								<span><img src="{{URL::asset("imgs/prHome/book.png")}}"></span>
 								<span>Test 1: Hello word!!</span>
 							</td>
 							<td class="col-0 col-sm-2 col-md-5 count">1500</td>
 						</tr>
 						<tr class="d-flex r">
 							<td class="col-12 col-sm-10 col-md-7">
-								<span><img src="/imgs/prHome/book.png"></span>
+								<span><img src="{{URL::asset("imgs/prHome/book.png")}}"></span>
 								<span>Test 2: Hello word!!</span>
 							</td>
 							<td class="col-0 col-sm-2 col-md-5 count">1320</td>
 						</tr>
 						<tr class="d-flex r">
 							<td class="col-12 col-sm-10 col-md-7">
-								<span><img src="/imgs/prHome/book.png"></span>
+								<span><img src="{{URL::asset("imgs/prHome/book.png")}}"></span>
 								<span>Test 3: Hello word!!</span>
 							</td>
 							<td class="col-0 col-sm-2 col-md-5 count">980</td>
 						</tr>
 						<tr class="d-flex r">
 							<td class="col-12 col-sm-10 col-md-7">
-								<span><img src="/imgs/prHome/book.png"></span>
+								<span><img src="{{URL::asset("imgs/prHome/book.png")}}"></span>
 								<span>Test 4: Hello word!!</span>
 							</td>
 							<td class="col-0 col-sm-2 col-md-5 count">600</td>
 						</tr>
 						<tr class="d-flex r">
 							<td class="col-12 col-sm-10 col-md-7">
-								<span><img src="/imgs/prHome/book.png"></span>
+								<span><img src="{{URL::asset("imgs/prHome/book.png")}}"></span>
 								<span>Test 5: Hello word!!</span>
 							</td>
 							<td class="col-0 col-sm-2 col-md-5 count">580</td>

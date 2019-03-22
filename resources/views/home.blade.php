@@ -1,6 +1,9 @@
 `@extends('layouts.master')
 
 @section('title', 'home')
+@section("css")
+	<link rel="stylesheet" type="text/css" href="{{ URL::asset("css/home-css.css") }}">
+@endsection
 @section('navbar')
 	@parent
 @endsection
@@ -65,7 +68,7 @@
 	<!-- chon cac part -->
 	<!-- cho bai doc -->
 	<div class="container-tab">
-		<img class="ext" id="ex1" src="/imgs/home/close.png">
+		<img class="ext" id="ex1" src="{{URL::asset("imgs/home/close.png")}}">
 		<div class="part-choice" id="part1"><p>Practice part 1</p></div>
 		<div class="part-choice" id="part2"><p>Practice part 2</p></div>
 		<div class="part-choice" id="part3"><p>Practice part 3</p></div>
@@ -75,7 +78,7 @@
 
 	<!-- cho bai nghe -->
 	<div class="container-tab">
-		<img class="ext" id="ex2" src="/imgs/home/close.png">
+		<img class="ext" id="ex2" src="{{URL::asset("imgs/home/close.png")}}">
 		<div class="part-choice" id="part5"><p>Practice part 5</p></div>
 		<div class="part-choice" id="part6"><p>Practice part 6</p></div>
 		<div class="part-choice" id="part7"><p>Practice part 7</p></div>	

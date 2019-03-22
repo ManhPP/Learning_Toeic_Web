@@ -33,7 +33,7 @@ html, body{
 	width: 100%;
 	height: 420px;
 	margin-top: 55px;
-	background: url(/imgs/prHome/reading.jpg);
+	/*background: url("/imgs/prHome/reading.jpg");*/
 	background-size: cover;
 }
 
