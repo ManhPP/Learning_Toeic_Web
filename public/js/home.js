@@ -2,7 +2,6 @@ var flagRead=0, flagLis=0;
 
 
 $(document).ready(function(){
-	
 });
 
 $(document).on("click", "#services", function(){

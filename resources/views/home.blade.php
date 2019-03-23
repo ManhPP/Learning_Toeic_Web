@@ -1,8 +1,9 @@
-`@extends('layouts.master')
+@extends('layouts.master')
 
 @section('title', 'home')
 @section("css")
 	<link rel="stylesheet" type="text/css" href="{{ URL::asset("css/home-css.css") }}">
+	<link rel="stylesheet" type="text/css" href="{{ URL::asset("css/animate.css") }}">
 @endsection
 @section('navbar')
 	@parent
@@ -28,7 +29,7 @@
 	</div>
 
 
-	<!-- contnet -->
+	<!-- content -->
 	<div class="content-services">
 		<div class="container-fluid" style="margin-top: 4em; margin-bottom: 5em">
 			<p class="wow fadeInLeft" data-wow-delay="1s" 
@@ -90,8 +91,10 @@
 	@parent
 @endsection
 
-<script type="text/javascript" src="{{ URL::asset("js/wow.min.js") }}"></script>
-<script type="text/javascript" src="{{ URL::asset("js/home-js.js") }}"></script>
-<script>
-	new WOW().init();
-</script>
+@section("js")
+	<script type="text/javascript" src="{{ URL::asset("js/wow.min.js") }}"></script>
+	<script type="text/javascript" src="{{ URL::asset("js/home.js") }}"></script>
+	<script>
+		new WOW().init();
+	</script>
+@endsection
