@@ -1,0 +1,175 @@
+*{
+	font-family:  HelveticaNeueW01-45Ligh,Helvetica,Arial,sans-serif;
+}
+
+.row{
+	width: 100%;
+	margin: 0;
+}
+
+html, body{
+	height: 97%;
+	width: 100%;
+}
+
+/*header*/
+.nav-background{
+	background-color: #010a29;
+}
+
+.head-bar li a{
+	margin: 0 15px 0 0 !important;
+	color: white !important;
+}
+
+#services div {
+	background: #efefef33 ;
+	border: none;
+	padding: 0;
+}
+
+@media (min-width: 767px){
+	#services div {
+		position: absolute;
+		top: 52px;
+	}
+}
+
+#services div a{
+	color: #4a4242 !important;
+	padding: 8px;
+}
+
+
+@media (max-width: 767px){
+	.for-dark{
+		background-color: #b7b7b7db !important;
+	}
+}
+
+@media (min-width: 767px){
+	.for-dark{
+		background: #efefef33 !important;
+	}
+}
+
+
+
+/*body*/
+.body{
+	width: 100%;
+	margin-top: 55px;
+}
+
+.time-detail{
+	text-align: center;
+	padding: 20px;
+}
+
+
+.content-container{
+	margin: 0 auto;
+	box-shadow: 1px 1px 11px -1px;
+	padding-bottom: 4em !important;
+	padding: 0;
+	background: whitesmoke;
+}
+
+.header-content{
+	width: 100%;
+	height: 40px;
+	background: #e44e04;
+}
+
+.header-content div{
+	line-height: 40px;
+	height: 100%;
+	color: white;
+}
+
+
+.audio{
+	text-align: center;
+	margin: 25px 0;
+}
+
+.intro{
+	text-align: center;
+}
+
+.intro img{
+	max-width: 100%;
+	min-width: 60%;
+}
+
+
+.list-cau{
+	margin: 0 auto;
+}
+
+.no-ques{
+	border: 1.2px solid blue;
+	width: 3.5em;
+	height: 1.8em;
+	line-height: 1.8em;
+	text-align: center;
+	margin: 40px auto 5px 1%;
+	border-radius: 10px;
+}
+
+.ques{
+	width: 65%;
+	margin: 0 auto;
+}
+
+.tick{
+	margin: 0 auto;
+	text-align: center;
+	border-bottom: 1px solid #dcdcdc;
+}
+
+/* end body */
+
+/*footer*/
+.footer{
+	height: 190px;
+	width: 100%;
+	background-color: #383C3F;
+	margin-top: 10em;
+	color: white;
+}
+
+@media (min-width: 768px){
+	.footer{
+		padding: 12px 68px;
+	}
+}
+
+.footer img{
+	width: 24px;
+	height: 24px;
+}
+
+.line{
+	margin-top: 14px;
+}
+
+/*login*/
+.login-input{
+	height: 3em;
+	color: white;
+	background-color: rgb(29, 40, 47);
+	border-top: none;
+	border-left: none;
+	border-right: none;
+	border-bottom: 1px solid;
+	border-radius: 6px;
+}
+
+.no-outline:focus{
+	outline: 0 !important;
+}
+
+#myModal{
+	top: 140px;
+}
