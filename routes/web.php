@@ -71,3 +71,11 @@ Route::get("/listening/part4",function(){
 Route::get("/reading/part5",function(){
     return view("part5");
 });
+
+Route::get("/reading/part6",function(){
+    return view("part6");
+});
+
+Route::get("/reading/part7",function(){
+    return view("part7");
+});
