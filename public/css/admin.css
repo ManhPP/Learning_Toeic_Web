@@ -1,0 +1,110 @@
+*{
+  font-size: 0.97em;
+}
+body,html{
+	height: 100%;
+	overflow-x: hidden;
+}
+
+.container-fluid{
+	padding: 0;
+	margin: 0;
+	height: 100%;
+}
+
+.sidebar-nav {
+  position: fixed;
+  top: 0;
+  height: 100%;
+  width: 15em;
+  margin: 0;
+  padding: 0;
+  background-color: #212529;
+  list-style: none;
+  z-index: 1;
+}
+
+.choice{
+  color: white !important;
+}
+
+.sidebar-nav li {
+  text-indent: 2em;
+  line-height: 3.5em;
+}
+
+.sidebar-nav li a {
+  display: block;
+  text-decoration: none;
+  color: #999999;
+}
+
+.sidebar-nav li a:hover {
+  text-decoration: none;
+  color: #fff;
+  background: rgba(255, 255, 255, 0.2);
+}
+
+.sidebar-nav li a:active, .sidebar-nav li a:focus {
+  text-decoration: none;
+}
+
+.ico-manag{
+	width: 1.5em;
+	margin-right: 0.5em;
+}
+
+.ico-header{
+	width: 1.3em;
+}
+
+/*bang*/
+th,td{
+	text-align: center;
+	overflow-x: auto;
+	height: 3.8em;
+	overflow-y: hidden;
+  font-size: 13px;
+}
+
+tr:hover {
+  background-color:#ffff66;
+}
+
+.main-table{
+	overflow-x: auto;
+}
+
+.pre-next{
+	border: none;
+	background-color: none;
+	padding: 0.6em 1em;
+}
+
+.detail{
+  color: white;
+  background: #017300;
+  border: none;
+  cursor: pointer;
+  border-radius: 4px;
+}
+
+/*css for class added by js*/
+.selected{
+	background-color: #4c4caa;
+}
+
+.footer{
+  bottom: -12px !important;
+}
+.navbar-brand-me{
+  color: #33C4FF;
+  font-size: 1.5em;
+}
+.copyright {
+    position: absolute;
+    bottom: 0;
+    font-weight: bold;
+    color: #ffffff;
+    text-align: left;
+}

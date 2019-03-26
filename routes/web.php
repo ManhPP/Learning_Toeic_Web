@@ -79,3 +79,7 @@ Route::get("/reading/part6",function(){
 Route::get("/reading/part7",function(){
     return view("part7");
 });
+
+Route::get('/adlesson', function(){
+    return view('adminLesson');
+});
