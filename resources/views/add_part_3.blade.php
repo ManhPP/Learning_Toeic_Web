@@ -1,5 +1,8 @@
 @extends('layouts.master')
 @section('title','add part 3')
+@section("css")
+    <link rel="stylesheet" type="text/css" href="{{URL::asset("css/home_css_part3.css")}}">
+@endsection
 @section('navbar')
     @parent
 @endsection
@@ -8,15 +11,6 @@
     <br/>
     <br/>
     <br/>
-    <div class="body row">
-        <div class="row">
-            <div class="col-12 time-detail">
-                <button class="timer-btn">Timer</button>
-                <span class="clock">00:00:00</span>
-            </div>
-        </div>
-
-
 
         <div class="content-container col-12 col-sm-11 col-md-10 col-lg-9 col-xl-8">
             <div class="header-content">
