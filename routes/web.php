@@ -86,4 +86,11 @@ Route::get('/adlesson', function(){
 
 Route::get('/addiscuss', function(){
     return view('adminDiscuss');
+<<<<<<< HEAD
+=======
+});
+
+Route::get('/adacc', function(){
+    return view('adminAcc');
+>>>>>>> interface_admin_discuss
 });
