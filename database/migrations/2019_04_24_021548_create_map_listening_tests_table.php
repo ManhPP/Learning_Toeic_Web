@@ -14,7 +14,11 @@ class CreateMapListeningTestsTable extends Migration
     public function up()
     {
         Schema::create('map_listening_tests', function (Blueprint $table) {
-            $table->increments('id');
+            $table->integer('idBKT')->nullable(false);
+            $table->integer('idPartNghe')->nullable(fasle);
+
+            $table->primary(array('idBKT', 'idPartNghe'));
+            
             $table->timestamps();
         });
     }

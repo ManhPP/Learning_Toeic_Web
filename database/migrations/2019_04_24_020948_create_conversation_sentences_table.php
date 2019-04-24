@@ -15,6 +15,13 @@ class CreateConversationSentencesTable extends Migration
     {
         Schema::create('conversation_sentences', function (Blueprint $table) {
             $table->increments('id');
+            $table -> integer('idDoanHT');
+            $table -> text('cauHoi');
+            $table -> text('dAA');
+            $table -> text('dAB');
+            $table -> text('dAC');
+            $table -> text('dAD');
+            $table -> string('dADung', 2);
             $table->timestamps();
         });
     }

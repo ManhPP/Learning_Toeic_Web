@@ -14,8 +14,12 @@ class CreateMapPart6ParagraphsTable extends Migration
     public function up()
     {
         Schema::create('map_part6_paragraphs', function (Blueprint $table) {
-            $table->increments('id');
-            $table->timestamps();
+            $table->integer('idDoanVan')->nullable(false);
+            $table->integer('idPartDoc')->nullable(false);
+
+            $table->primary(array('idDoanVan', 'idPartDoc'));
+
+            $$table->timestamps();
         });
     }
 

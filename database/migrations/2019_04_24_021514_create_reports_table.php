@@ -15,6 +15,13 @@ class CreateReportsTable extends Migration
     {
         Schema::create('reports', function (Blueprint $table) {
             $table->increments('id');
+            $table -> text('noiDung');
+            $table -> string('loaiReport');
+            $table -> boolean('isProcessed');
+            $table -> integer('idAcc');
+            $table -> integer('idBtl');
+            $table -> integer('idCmt');
+            $table -> integer('idRepCmt');
             $table->timestamps();
         });
     }

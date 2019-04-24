@@ -14,7 +14,12 @@ class CreateMapUserTestsTable extends Migration
     public function up()
     {
         Schema::create('map_user_tests', function (Blueprint $table) {
-            $table->increments('id');
+            $table->integer('idAcc')->nullable(false);
+            $table->integer('idBKT')->nullable(false);
+            $table->date('ngayLam')->nullable(false);
+
+            $table->primary(array('idAcc', 'idBKT'));
+
             $table->timestamps();
         });
     }

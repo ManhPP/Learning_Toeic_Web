@@ -15,6 +15,8 @@ class CreatePart2sTable extends Migration
     {
         Schema::create('part2s', function (Blueprint $table) {
             $table->increments('id');
+            $table -> integer('idPartNghe');
+            $table -> string('dADung', 2);
             $table->timestamps();
         });
     }

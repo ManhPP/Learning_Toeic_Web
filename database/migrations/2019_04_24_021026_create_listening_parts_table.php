@@ -15,6 +15,11 @@ class CreateListeningPartsTable extends Migration
     {
         Schema::create('listening_parts', function (Blueprint $table) {
             $table->increments('id');
+            $table -> string('intro');
+            $table -> string('audio');
+            $table -> string('loaiPart', 128);
+            $table -> integer('acessCount');
+            $table -> string('title');
             $table->timestamps();
         });
     }

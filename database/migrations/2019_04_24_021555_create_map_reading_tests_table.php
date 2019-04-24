@@ -14,7 +14,11 @@ class CreateMapReadingTestsTable extends Migration
     public function up()
     {
         Schema::create('map_reading_tests', function (Blueprint $table) {
-            $table->increments('id');
+            $table->integer('idBKT')->nullable(false);
+            $table->integer('idPartDoc')->nullable(false);
+
+            $table->primary(array('idBKT', 'idPartDoc'));
+
             $table->timestamps();
         });
     }

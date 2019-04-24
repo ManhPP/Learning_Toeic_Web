@@ -14,7 +14,9 @@ class CreateMapPart5ReadingPartsTable extends Migration
     public function up()
     {
         Schema::create('map_part5_reading_parts', function (Blueprint $table) {
-            $table->increments('id');
+            $table->integer('idPartDoc');
+            $table->integer('idCau');
+            $table->primary(array('idPartDoc', 'idCau'));
             $table->timestamps();
         });
     }

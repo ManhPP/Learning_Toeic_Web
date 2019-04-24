@@ -15,6 +15,10 @@ class CreatePart7ParagraphsTable extends Migration
     {
         Schema::create('part7_paragraphs', function (Blueprint $table) {
             $table->increments('id');
+            $table->string('doanVan1', 512)->nullable(false);
+            $table->string('doanVan2', 512)->nullable(false);
+            $table->string('loaiPart7', 64)->nullable(false);
+
             $table->timestamps();
         });
     }

@@ -15,6 +15,11 @@ class CreateDiscussionsTable extends Migration
     {
         Schema::create('discussions', function (Blueprint $table) {
             $table->increments('id');
+            $table -> string('tieuDe');
+            $table -> text('noiDung');
+            $table -> integer('accessCount');
+            $table -> date('ngayDang');
+            $table -> integer('idAcc');
             $table->timestamps();
         });
     }

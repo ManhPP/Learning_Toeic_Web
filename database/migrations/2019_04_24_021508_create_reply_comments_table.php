@@ -15,6 +15,10 @@ class CreateReplyCommentsTable extends Migration
     {
         Schema::create('reply_comments', function (Blueprint $table) {
             $table->increments('id');
+            $table -> text('noiDung');
+            $table ->date('ngayDang');
+            $table -> integer('idCmt');
+            $table -> integer('idAcc');
             $table->timestamps();
         });
     }

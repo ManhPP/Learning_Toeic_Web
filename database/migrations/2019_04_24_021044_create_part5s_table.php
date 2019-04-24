@@ -15,6 +15,13 @@ class CreatePart5sTable extends Migration
     {
         Schema::create('part5s', function (Blueprint $table) {
             $table->increments('id');
+            $table->text('cauHoi')->nullable(false);
+            $table->text('daA')->nullable(false);
+            $table->text('daB')->nullable(false);
+            $table->text('daC')->nullable(false);
+            $table->text('daD')->nullable(false);
+            $table->string('dADung', 2)->nullable(false);
+
             $table->timestamps();
         });
     }

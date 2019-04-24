@@ -14,7 +14,13 @@ class CreateMapUserReadingsTable extends Migration
     public function up()
     {
         Schema::create('map_user_readings', function (Blueprint $table) {
-            $table->increments('id');
+            $table->integer('idAcc')->nullable(false);
+            $table->integer('idPartDoc')->nullable(false);
+            $table->date('ngayLam')->nullable(false);
+
+            $table->primary(array('idAcc', 'idPartDoc'));
+
+
             $table->timestamps();
         });
     }

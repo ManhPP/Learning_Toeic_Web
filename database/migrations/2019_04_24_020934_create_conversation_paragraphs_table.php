@@ -15,6 +15,8 @@ class CreateConversationParagraphsTable extends Migration
     {
         Schema::create('conversation_paragraphs', function (Blueprint $table) {
             $table->increments('id');
+            $table->integer('idPartNghe');
+            $table->string('loaiPart');
             $table->timestamps();
         });
     }
