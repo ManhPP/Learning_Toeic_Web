@@ -15,7 +15,7 @@ class CreateMapListeningTestsTable extends Migration
     {
         Schema::create('map_listening_tests', function (Blueprint $table) {
             $table->integer('idBKT')->nullable(false);
-            $table->integer('idPartNghe')->nullable(fasle);
+            $table->integer('idPartNghe')->nullable(false);
 
             $table->primary(array('idBKT', 'idPartNghe'));
             

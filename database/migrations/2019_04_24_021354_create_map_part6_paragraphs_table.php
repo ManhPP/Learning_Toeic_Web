@@ -19,7 +19,7 @@ class CreateMapPart6ParagraphsTable extends Migration
 
             $table->primary(array('idDoanVan', 'idPartDoc'));
 
-            $$table->timestamps();
+            $table->timestamps();
         });
     }
 

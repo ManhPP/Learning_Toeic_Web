@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateConversationParagraphsTable extends Migration
+class UpdateTestsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,8 @@ class CreateConversationParagraphsTable extends Migration
      */
     public function up()
     {
-        Schema::create('conversation_paragraphs', function (Blueprint $table) {
-            $table->increments('id');
-            $table->integer('idPartNghe',10);
-            $table->string('loaiPart');
-            $table->timestamps();
+        Schema::table('tests', function (Blueprint $table) {
+            //
         });
     }
 
@@ -28,6 +25,8 @@ class CreateConversationParagraphsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('conversation_paragraphs');
+        Schema::table('tests', function (Blueprint $table) {
+            //
+        });
     }
 }
