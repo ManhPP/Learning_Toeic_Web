@@ -17,7 +17,7 @@ class CreateTestsTable extends Migration
             $table->increments('id');
             $table->integer('accessCount')->nullable(false);
             $table->text('title');
-
+            $table -> string('audio');
             $table->timestamps();
         });
     }
