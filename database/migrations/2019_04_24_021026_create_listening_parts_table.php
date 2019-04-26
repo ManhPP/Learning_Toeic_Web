@@ -14,7 +14,7 @@ class CreateListeningPartsTable extends Migration
     public function up()
     {
         Schema::create('listening_parts', function (Blueprint $table) {
-            $table->increments('id');
+            $table->integer('id', true);
             $table -> string('intro');
             $table -> string('audio');
             $table -> string('loaiPart', 128);

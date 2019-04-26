@@ -14,7 +14,7 @@ class CreatePart1sTable extends Migration
     public function up()
     {
         Schema::create('part1s', function (Blueprint $table) {
-            $table->increments('id');
+            $table->integer('id', true);
             $table -> integer('idPartNghe');
             $table -> string('anh');
             $table -> string('dADung', 2);

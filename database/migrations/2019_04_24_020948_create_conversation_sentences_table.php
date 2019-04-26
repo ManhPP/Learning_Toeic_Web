@@ -14,7 +14,7 @@ class CreateConversationSentencesTable extends Migration
     public function up()
     {
         Schema::create('conversation_sentences', function (Blueprint $table) {
-            $table->increments('id');
+            $table->integer('id', true);
             $table -> integer('idDoanHT');
             $table -> text('cauHoi');
             $table -> text('dAA');

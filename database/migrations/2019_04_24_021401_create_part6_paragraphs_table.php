@@ -14,7 +14,7 @@ class CreatePart6ParagraphsTable extends Migration
     public function up()
     {
         Schema::create('part6_paragraphs', function (Blueprint $table) {
-            $table->increments('id');
+            $table->integer('id', true);
             $table->timestamps();
         });
     }

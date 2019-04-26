@@ -14,7 +14,7 @@ class CreatePart5sTable extends Migration
     public function up()
     {
         Schema::create('part5s', function (Blueprint $table) {
-            $table->increments('id');
+            $table->integer('id', true);
             $table->text('cauHoi')->nullable(false);
             $table->text('daA')->nullable(false);
             $table->text('daB')->nullable(false);

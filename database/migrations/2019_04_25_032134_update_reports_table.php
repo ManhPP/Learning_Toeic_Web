@@ -15,9 +15,9 @@ class UpdateReportsTable extends Migration
     {
         Schema::table('reports', function (Blueprint $table) {
             $table->foreign('idAcc')->references('id')->on('accounts');
-            $table->foreign('idBaiTL')->references('id')->on('discussions');
-            $table->foreign('idCMT')->references('id')->on('comments');
-            $table->foreign('idCMTReply')->references('id')->on('reply_comments');
+            $table->foreign('idBtl')->references('id')->on('discussions');
+            $table->foreign('idCmt')->references('id')->on('comments');
+            $table->foreign('idRepCmt')->references('id')->on('reply_comments');
         });
     }
 

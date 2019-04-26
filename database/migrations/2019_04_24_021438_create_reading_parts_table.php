@@ -14,7 +14,7 @@ class CreateReadingPartsTable extends Migration
     public function up()
     {
         Schema::create('reading_parts', function (Blueprint $table) {
-            $table->increments('id');
+            $table->integer('id', true);
             $table->string('loaiPart', 128)->nullable(false);
             $table->integer('accessCount')->nullable(false);
             $table->string('title')->nullable(false);

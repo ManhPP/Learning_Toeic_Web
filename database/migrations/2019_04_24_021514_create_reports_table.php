@@ -14,7 +14,7 @@ class CreateReportsTable extends Migration
     public function up()
     {
         Schema::create('reports', function (Blueprint $table) {
-            $table->increments('id');
+            $table->integer('id', true);
             $table -> text('noiDung');
             $table -> string('loaiReport');
             $table -> boolean('isProcessed');
