@@ -51,7 +51,6 @@ Route::get("/test-toeic", function(){
 Route::get("/forum/view-post", function(){
     return view("viewPost");
 });
-<<<<<<< HEAD
 Route::get('/add-part-1', function () {
     return view('add_part_1');
 });
@@ -72,8 +71,7 @@ Route::get('/add-part-6', function () {
 });
 Route::get('/add-part-7', function () {
     return view('add_part_7');
-=======
-
+});
 Route::get("/listening/part1",function(){
    return view("part1");
 });
@@ -112,5 +110,4 @@ Route::get('/addiscuss', function(){
 
 Route::get('/adacc', function(){
     return view('adminAcc');
->>>>>>> d67ffa16b81e9fd5c171d6534cb647dd975c580e
 });
