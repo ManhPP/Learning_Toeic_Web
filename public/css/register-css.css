@@ -1,0 +1,30 @@
+/*header*/
+.nav-background{
+	background-color: #010a29;
+}
+/*footer*/
+.footer{
+    height: 190px;
+    width: 100%;
+    background-color: #383C3F;
+    /* margin-top: 10em; */
+    color: white;
+    padding: 0 !important;
+    margin-right: 0 !important;
+    margin-left: 0 !important;
+}
+
+@media (min-width: 768px){
+	.footer{
+		padding: 12px 68px;
+	}
+}
+
+.footer img{
+	width: 24px;
+	height: 24px;
+}
+
+.line{
+	margin-top: 14px;
+}

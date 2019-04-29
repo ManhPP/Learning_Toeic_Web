@@ -1,0 +1,40 @@
+#submitPart2{
+	margin-left: 43%;
+	margin-top: 2%;
+	width: 14%;
+}
+
+.tick{
+	margin: 2% auto;
+	text-align: center;
+	border-bottom: 1px solid #dcdcdc;
+}
+
+.footer{
+	height: 190px;
+	width: 100%;
+	background-color: #383C3F;
+	margin-top: 1.5em;
+	color: white;
+}
+
+.line img:hover{
+	cursor: pointer;
+}
+
+.header-content div{
+	line-height: 40px;
+	height: 100%;
+	color: white;
+	margin-left: 1%;
+}
+
+.time-detail{
+	text-align: center;
+	padding: 20px;
+	position: fixed;
+    border: 1px solid;
+    margin: 2% 1%;
+    font-size: 1.5em;
+    z-index: 999999;
+}
