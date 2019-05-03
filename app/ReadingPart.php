@@ -14,7 +14,8 @@ class ReadingPart extends Model
 
 
     function users(){
-        return $this->belongsToMany('App\Account', 'map_user_readings', 'idPartDoc', 'idAcc');
+        return $this->belongsToMany('App\Account', 'map_user_readings', 'idPartDoc', 'idAcc')
+            ->withPivot('ngayLam');
     }
 
     function cauPart5s(){
