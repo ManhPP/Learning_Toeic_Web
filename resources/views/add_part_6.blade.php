@@ -1,10 +1,7 @@
 @extends('layouts.master')
 @section('title','add part 6')
 @section("css")
-    <link rel="stylesheet" type="text/css" href="{{ URL::asset("css/part2home-css.css") }}">
-    <link rel="stylesheet" type="text/css" href="{{ URL::asset("css/swiper.min.css") }}">
-    <link rel="stylesheet" type="text/css" href="{{ URL::asset("css/animate.css") }}">
-    {{--    <link rel="stylesheet" type="text/css" href="{{ URL::asset("css/part3.css") }}">--}}
+    <link rel="stylesheet" type="text/css" href="{{ URL::asset("css/home_css_part6.css") }}">
 @endsection
 @section('navbar')
     @parent
