@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Part7Paragraph;
+use App\ReadingPart;
 use Illuminate\Http\Request;
 
 class Part7ParagraphController extends Controller
@@ -81,5 +82,19 @@ class Part7ParagraphController extends Controller
     public function destroy(Part7Paragraph $part7Paragraph)
     {
         //
+    }
+
+    public function getPart7Paragraph(Request $request){
+        $str = '';
+        $part7Para = Part7Paragraph::find(1);
+        foreach ($part7Para->cauPart7 as $cau){
+            $str.=("-cau hoi-".($cau->cauHoi));
+        }
+
+        $readingPart = ReadingPart::find(1);
+        foreach ($readingPart->part7Paragraphs as $para){
+            $str.=("-para-".($para->doanVan1));
+        }
+        return $str;
     }
 }

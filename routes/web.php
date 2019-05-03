@@ -111,3 +111,6 @@ Route::get('/addiscuss', function(){
 Route::get('/adacc', function(){
     return view('adminAcc');
 });
+Route::get('/test-relationship', [
+    'uses' => 'Part7ParagraphController@getPart7Paragraph'
+]);
