@@ -15,7 +15,8 @@ class Test extends Model
     ];
 
     function users(){
-        return $this -> belongsToMany('App\Account', 'map_user_tests', 'idBKT', 'idAcc');
+        return $this -> belongsToMany('App\Account', 'map_user_tests', 'idBKT', 'idAcc')
+            ->withPivot('ngayLam');
     }
 
     function readingParts(){
