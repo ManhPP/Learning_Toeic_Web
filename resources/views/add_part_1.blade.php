@@ -26,14 +26,16 @@
                     <!-- audio -->
                     <div class="audio">
                         <span>Input audio here</span>
-                        <input type="file" name="#" accept="audio/*">
+                        <form id="form-upload-audio">
+                            <input type="file" name="audio" id="audio" accept="audio/*">
+                        </form>
                     </div>
                     <hr>
 
                     <!-- intro img-->
                     <div class="intro">
                         <span>Input image intro here</span>
-                        <input type="file" name="#" accept="image/*">
+                        <input type="file" name="intro" id="intro" accept="image/*">
                     </div>
                     <hr>
                     <!-- list cau hoi -->
@@ -198,6 +200,10 @@
                                 <label class="col-3"><input type="radio" name="choise">D</label>
                             </div>
                         </div>
+                        <!-- submit -->
+                        <div class="submit">
+                            <button type="button" class="btn btn-warning btnsubmit">Submit</button>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -208,7 +214,34 @@
 
 @endsection
 @section('js')
-    <script type="text/javascript" src="../js/home-js.js"></script>
+    <!-- <script type="text/javascript" src="../js/home-js.js"></script> -->
+   
+    <script type="text/javascript">
+        $(document).ready(function(){
+            $('.btnsubmit').click(function(){
+                var audio=$('#audio').val();
+                var intro=$('#intro').val();
+                var formData = $("#form-upload-audio").attr("data-path");
+                console.log(audio);
+                var loaiPart="part 1";
+                var acessCount=0;
+                var title="Sport";
+                $.ajax({
+                    url: "{{ url('addlisteningpart') }}",
+                    method: "POST",
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    },
+                    // contentType:"application/json; charset=utf-8",
+                    // dataType: 'json',
+                    data: {audio:audio,intro:intro,loaiPart:loaiPart,acessCount:acessCount,title:title},
+                    success: function(data){
+                        console.log(data);
+                    }
+                });
+            });
+        });
+    </script>
 @endsection
 @section('footer')
     @parent
