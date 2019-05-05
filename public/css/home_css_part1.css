@@ -2,6 +2,10 @@
 	font-family:  HelveticaNeueW01-45Ligh,Helvetica,Arial,sans-serif;
 }
 
+.submit{
+	margin-top: 10px;
+	margin-left: 40%;
+}
 .row{
 	width: 100%;
 	margin: 0;

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\ListeningPart;
 use Illuminate\Http\Request;
+use App\Http\Requests;
 
 class ListeningPartController extends Controller
 {
@@ -25,6 +26,21 @@ class ListeningPartController extends Controller
     public function create()
     {
         //
+    }
+
+    public function createpart1(Request $request)
+    {
+        //
+        $listeningPart=new ListeningPart;
+        $bodyContent = $request->getContent();
+        // $listeningPart->audio=INPUT::get('audio');
+        // $listeningPart->intro=INPUT::get('intro');
+        // $listeningPart->loaiPart=INPUT::get('loaiPart');
+        // $listeningPart->acessCount=INPUT::get('acessCount');
+        // $listeningPart->title=INPUT::get('title');
+        // $listeningPart->save();
+        return $bodyContent;
+
     }
 
     /**
