@@ -3,8 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Part7Paragraph;
-use App\ReadingPart;
 use Illuminate\Http\Request;
+use Carbon\Carbon;
+use Illuminate\Support\Facades\Input;
 
 class Part7ParagraphController extends Controller
 {
@@ -85,16 +86,30 @@ class Part7ParagraphController extends Controller
     }
 
     public function getPart7Paragraph(Request $request){
-        $str = '';
-        $part7Para = Part7Paragraph::find(1);
-        foreach ($part7Para->cauPart7 as $cau){
-            $str.=("-cau hoi-".($cau->cauHoi));
-        }
 
-        $readingPart = ReadingPart::find(1);
-        foreach ($readingPart->part7Paragraphs as $para){
-            $str.=("-para-".($para->doanVan1));
+        $arrDoan = Part7Paragraph::offset(0)->limit(20)->get();
+        $sum = Part7Paragraph::count();
+        return view('manager_para_part7')
+            ->with("arrDoan", $arrDoan)->with("sum", $sum);
+    }
+
+    public function uploadFile(Request $request){
+        $file = $request -> file('file-image');
+        $current = Carbon::now()->timestamp;
+        $fileName = rand().$current.".".$file->getClientOriginalExtension();
+        $file->move(public_path('images_upload'), $fileName);
+        return response(["pathFile"=>"images_upload"."/".$fileName], 200);
+    }
+
+    public function addPara(Request $request){
+        $paraString = $request["part7"];
+        $paraModel = json_decode($paraString);
+        $part7Para = new Part7Paragraph();
+        $part7Para -> fill(get_object_vars($paraModel));
+        $part7Para -> save();
+        foreach($part7Para->lisCauPart7 as $cau){
+            error_log(($cau -> daA)."-------------");
         }
-        return $str;
+        return response("ok", 200);
     }
 }

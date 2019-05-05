@@ -1,10 +1,10 @@
 @extends('layouts.master')
 @section('title','manager para part 7')
 @section("css")
-<link rel="stylesheet" type="text/css" href="{{URL::asset("css/manager_para_part7.css")}}">
+    <link rel="stylesheet" type="text/css" href="{{URL::asset("css/manager_para_part7.css")}}">
 @endsection
 @section('navbar')
-@parent
+    @parent
 @endsection
 
 @section('content')
@@ -17,24 +17,24 @@
             <table class="table table-bordered" style="min-width: 400px">
                 <thead class="thead-dark">
                 <tr class="d-flex">
-                    <th class="col-12">Câu hỏi(<span id="sum-ques">${fn:length(arrDoan) }</span>/<span
-                                id="total-ques">${sum }</span>)
+                    <th class="col-12">Câu hỏi(<span id="sum-ques">{{count($arrDoan)}}</span>/<span
+                                id="total-ques">{{$sum}}</span>)
                     </th>
                 </tr>
                 </thead>
                 <tbody>
-{{--                <c:set var="indexPara" value="0" />--}}
+                {{--                <c:set var="indexPara" value="0" />--}}
                 {{ $indexPara = 0  }}
-{{--                <c:forEach items="${arrDoan }" var="doan">--}}
+                {{--                <c:forEach items="${arrDoan }" var="doan">--}}
                 @foreach($arrDoan as $doan)
-                    <tr class="d-flex row" data-id="${doan.id }">
+                    <tr class="d-flex row" data-id="{{$doan->id }}">
                         <td class="col-12"><img class="ico-forward"
                                                 src="${pageContext.request.contextPath}/resources/img/forward-arrow.png">
-                            <span class="ques-content">Đoạn văn id ${doan.id } - <span
-                                        class="type-part">${doan.loaiPart7 }</span></span>
+                            <span class="ques-content">Đoạn văn id {{$doan->id }} - <span
+                                        class="type-part">{{$doan->loaiPart7 }}</span></span>
                             <div class="controll-ques">
-                                <span class="btn-update" data-id="${doan.id }">update</span> <span>•</span>
-                                <span class="btn-del" data-id="${doan.id }">delete</span>
+                                <span class="btn-update" data-id="{{$doan->id }}">update</span> <span>•</span>
+                                <span class="btn-del" data-id="{{$doan->id }}">delete</span>
                             </div> <img class="expand-ico"
                                         src="${pageContext.request.contextPath}/resources/img/next.png">
 
@@ -42,69 +42,87 @@
                             <div class="div-append-para hide">
                                 <div>
                                     <div class="paragrap">
-                                        <img src="${doan.doanVan1 }">
-{{--                                        <c:if test="${fn:length(doan.doanVan2) > 0}">--}}
-                                        @if(strlen(doan->doanVan2) > 0)
+                                        <img src="{{$doan->doanVan1 }}">
+                                        {{--                                        <c:if test="${fn:length(doan.doanVan2) > 0}">--}}
+                                        @if(strlen($doan->doanVan2) > 0)
                                             <br>
-                                            <img src="${doan.doanVan2 }">
-{{--                                        </c:if>--}}
+                                            <img src="{{$doan->doanVan2 }}">
+                                            {{--                                        </c:if>--}}
                                         @endif
                                     </div>
-                                    <div class="para" data-id="${doan.id }">
-                                        <c:set var="index" value="1" />
-                                        <c:forEach items="${doan.listCauPart7 }" var="cau">
+                                    <div class="para" data-id="{{$doan->id }}">
+                                    {{--                                        <c:set var="index" value="1" />--}}
+                                    {{ $index = 1  }}
+                                    {{--                                        <c:forEach items="${doan.listCauPart7 }" var="cau">--}}
+                                    @foreach($doan->cauPart7s as $cau)
+                                        {{--                                            <c:set var="checkA" value="" />--}}
+                                        {{--                                            <c:set var="checkB" value="" />--}}
+                                        {{--                                            <c:set var="checkC" value="" />--}}
+                                        {{--                                            <c:set var="checkD" value="" />--}}
+                                        {{$checkA = ""}}
+                                        {{$checkB = ""}}
+                                        {{$checkC = ""}}
+                                        {{$checkD = ""}}
+                                        {{--                                            <c:choose>--}}
+                                        {{--                                                <c:when test="${cau.daDung=='A' }">--}}
+                                        {{--                                                    <c:set var="checkA" value="checked='checked'" />--}}
+                                        {{--                                                </c:when>--}}
+                                        {{--                                                <c:when test="${cau.daDung=='B' }">--}}
+                                        {{--                                                    <c:set var="checkB" value="checked='checked'" />--}}
+                                        {{--                                                </c:when>--}}
+                                        {{--                                                <c:when test="${cau.daDung=='C' }">--}}
+                                        {{--                                                    <c:set var="checkC" value="checked='checked'" />--}}
+                                        {{--                                                </c:when>--}}
+                                        {{--                                                <c:when test="${cau.daDung=='D' }">--}}
+                                        {{--                                                    <c:set var="checkD" value="checked='checked'" />--}}
+                                        {{--                                                </c:when>--}}
+                                        {{--                                            </c:choose>--}}
 
-                                            <c:set var="checkA" value="" />
-                                            <c:set var="checkB" value="" />
-                                            <c:set var="checkC" value="" />
-                                            <c:set var="checkD" value="" />
-                                            <c:choose>
-                                                <c:when test="${cau.daDung=='A' }">
-                                                    <c:set var="checkA" value="checked='checked'" />
-                                                </c:when>
-                                                <c:when test="${cau.daDung=='B' }">
-                                                    <c:set var="checkB" value="checked='checked'" />
-                                                </c:when>
-                                                <c:when test="${cau.daDung=='C' }">
-                                                    <c:set var="checkC" value="checked='checked'" />
-                                                </c:when>
-                                                <c:when test="${cau.daDung=='D' }">
-                                                    <c:set var="checkD" value="checked='checked'" />
-                                                </c:when>
-                                            </c:choose>
-
-                                            <!-- mot cau -->
-                                            <div class="ques" data-id="${cau.id }" data-asw="${cau.daDung }">
+                                        @if($cau->daDung == 'A')
+                                            {{$checkA = "checked='checked'"}}
+                                        @endif
+                                        @if($cau->daDung == 'B')
+                                            {{$checkB = "checked='checked'"}}
+                                        @endif
+                                        @if($cau->daDung == 'C')
+                                            {{$checkC = "checked='checked'"}}
+                                        @endif
+                                        @if($cau->daDung == 'D')
+                                            {{$checkD = "checked='checked'"}}
+                                        @endif
+                                        <!-- mot cau -->
+                                            <div class="ques" data-id="{{$cau->id}}" data-asw="{{$cau->daDung}}">
                                                 <div>
-                                                    <span class="no-ques">Câu ${index }</span> <span
-                                                            class="ques-content">${cau.cauHoi }</span>
+                                                    <span class="no-ques">Câu {{$index }}</span> <span
+                                                            class="ques-content">{{$cau->cauHoi }}</span>
                                                 </div>
                                                 <div class="row">
                                                     <label class="col-12 col-md-6"><input type="radio"
-                                                                                          name="choise${index }" value="A" ${checkA } disabled="disabled"><span
-                                                                class="asw-content">${cau.daA }</span></label> <label
+                                                                                          name="choise{{$index }}" value="A" {{$checkA }} disabled="disabled"><span
+                                                                class="asw-content">{{$cau->daA }}</span></label> <label
                                                             class="col-12 col-md-6"><input type="radio"
-                                                                                           name="choise${index }" value="B" ${checkB } disabled="disabled"><span
-                                                                class="asw-content">${cau.daB }</span></label> <label
+                                                                                           name="choise{{$index }}" value="B" {{$checkB }} disabled="disabled"><span
+                                                                class="asw-content">{{$cau->daA }}</span></label> <label
                                                             class="col-12 col-md-6"><input type="radio"
-                                                                                           name="choise${index }" value="C" ${checkC } disabled="disabled"><span
-                                                                class="asw-content">${cau.daC }</span></label> <label
+                                                                                           name="choise{{$index }}" value="C" {{$checkC }} disabled="disabled"><span
+                                                                class="asw-content">{{$cau->daA }}</span></label> <label
                                                             class="col-12 col-md-6"><input type="radio"
-                                                                                           name="choise${index }" value="D" ${checkD } disabled="disabled"><span
-                                                                class="asw-content">${cau.daD }</span></label>
+                                                                                           name="choise{{$index }}" value="D" {{$checkD }} disabled="disabled"><span
+                                                                class="asw-content">{{$cau->daA }}`</span></label>
                                                 </div>
                                                 <hr>
                                             </div>
-                                            <c:set var="index" value="${index+1 }" />
-                                        </c:forEach>
+                                            {{--                                            <c:set var="index" value="${index+1 }" />--}}
+                                            {{$index++}}
+                                        @endforeach
 
                                     </div>
                                 </div>
                             </div>
                         </td>
                     </tr>
-{{--                </c:forEach>--}}
-                    @endforeach
+                    {{--                </c:forEach>--}}
+                @endforeach
                 </tbody>
             </table>
         </div>
@@ -136,7 +154,8 @@
                         <div class="input-para">
                             <div>
                                 <span>Đoạn văn 1: </span>
-                                <form id="form-up-img1">
+                                <form id="form-up-img1" method="post" enctype="multipart/form-data">
+                                    {{csrf_field()}}
                                     <input name="file-image" class="upload-para" type="file"
                                            accept="image/*">
                                 </form>
@@ -151,9 +170,9 @@
                             </div>
                             <div class="hide" id="form-upload2">
                                 <span>Đoạn văn 2: </span>
-                                <form id="form-up-img2">
-                                    <input name="file-image" class="upload-para" type="file"
-                                           accept="image/*">
+                                <form id="form-up-img2" method="post" enctype="multipart/form-data">
+                                    {{csrf_field()}}
+                                    <input name="file-image" class="upload-para" type="file" accept="image/*">
                                 </form>
                             </div>
                         </div>
@@ -459,12 +478,17 @@
         </div>
     </div>
 
+    <div style="display: none">
+        <div id="path-upload">{{route('part7paragraph.upload')}}</div>
+        <div id="path-add">{{route('part7paragraph.add')}}</div>
+    </div>
+
 @endsection
 
 @section('footer')
-@parent
+    @parent
 @endsection
 
 @section('js')
-<script type="text/javascript" src="{{ URL::asset("js/manager_para_part7.js") }}"></script>
+    <script type="text/javascript" src="{{ URL::asset("js/manager_para_part7.js") }}"></script>
 @endsection
