@@ -2,99 +2,91 @@
 
 namespace App\Http\Controllers;
 
+use App\Part7;
 use App\Part7Paragraph;
-use App\ReadingPart;
 use Illuminate\Http\Request;
+use Carbon\Carbon;
+use PhpParser\Node\Expr\Cast\Object_;
 
 class Part7ParagraphController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
-    {
-        //
-    }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Part7Paragraph  $part7Paragraph
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Part7Paragraph $part7Paragraph)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Part7Paragraph  $part7Paragraph
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Part7Paragraph $part7Paragraph)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Part7Paragraph  $part7Paragraph
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, Part7Paragraph $part7Paragraph)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Part7Paragraph  $part7Paragraph
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(Part7Paragraph $part7Paragraph)
-    {
-        //
-    }
 
     public function getPart7Paragraph(Request $request){
-        $str = '';
-        $part7Para = Part7Paragraph::find(1);
-        foreach ($part7Para->cauPart7 as $cau){
-            $str.=("-cau hoi-".($cau->cauHoi));
-        }
+//        $i=0;
+        $arrDoan = Part7Paragraph::offset(0)->limit(20)->get();
+//        foreach ($arrDoan[0]->cauPart7s as $cauPart7) {
+//            error_log($i);
+//            $i++;
+//        }
+        $sum = Part7Paragraph::count();
+        return view('manager_para_part7')
+            ->with("arrDoan", $arrDoan)->with("sum", $sum);
+    }
 
-        $readingPart = ReadingPart::find(1);
-        foreach ($readingPart->part7Paragraphs as $para){
-            $str.=("-para-".($para->doanVan1));
+    public function uploadFile(Request $request){
+        error_log("upppppp");
+        $file = $request -> file('file-image');
+        $current = Carbon::now()->timestamp;
+        $fileName = rand().$current.".".$file->getClientOriginalExtension();
+        $file->move(public_path('images_upload'), $fileName);
+        error_log("upppppp2");
+        return response(["pathFile"=>"images_upload"."/".$fileName], 200);
+    }
+
+    public function addPara(Request $request){
+        $paraString = $request["doanPart7"];
+        $listCauString = $request["listCau"];
+
+        $paraJson = json_decode($paraString, true);
+        try {
+            $part7Para = Part7Paragraph::create($paraJson);
+
+            $listCauJson = json_decode($listCauString, true);
+            foreach ($listCauJson as $cauJson) {
+                $part7Para->cauPart7s()->create($cauJson);
+            }
+
+            return "true";
+        }catch (Exception $e){
         }
-        return $str;
+        return "false";
+    }
+
+    public function updatePara(Request $request){
+        error_log("update");
+        $paraString = $request["doanPart7"];
+        $listCauString = $request["listCau"];
+
+        $paraJson = json_decode($paraString, true);
+//        error_log(((Object)$paraJson)->id);
+        try {
+//            $part7Para = new Part7Paragraph($paraJson);
+//            $part7Para->update();
+
+            Part7Paragraph::find(((Object)$paraJson)->id)->update($paraJson);
+
+            $listCauJson = json_decode($listCauString, true);
+            foreach ($listCauJson as $cauJson) {
+                Part7::find(((Object)$cauJson)->id)->update($cauJson);
+            }
+
+            return "true";
+        }catch (Exception $e){
+        }
+        return "false";
+    }
+
+    public function delPara(Request $request){
+        $id = $request["id"];
+        try {
+            $part7Para = Part7Paragraph::find($id);
+            $part7Para->cauPart7s()->delete();
+            $part7Para->delete();
+            return "true";
+        }catch (\Exception $e){
+
+        }
+        return "false";
     }
 }

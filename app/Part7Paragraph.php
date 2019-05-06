@@ -12,7 +12,7 @@ class Part7Paragraph extends Model
         'doanVan1', 'doanVan2', 'loaiPart7'
     ];
 
-    public function cauPart7(){
+    public function cauPart7s(){
         return $this -> hasMany('App\Part7', 'idDoan', 'id');
     }
 

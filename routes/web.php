@@ -73,7 +73,7 @@ Route::get('/add-part-7', function () {
     return view('add_part_7');
 });
 Route::get("/listening/part1",function(){
-   return view("part1");
+    return view("part1");
 });
 
 Route::get("/listening/part2",function(){
@@ -111,10 +111,30 @@ Route::get('/addiscuss', function(){
 Route::get('/adacc', function(){
     return view('adminAcc');
 });
-Route::get('/test-relationship', [
+// test
+Route::get('/manager-para-part7', [
     'uses' => 'Part7ParagraphController@getPart7Paragraph'
 ]);
 
 Route::post('/addlistening-part1', [
     'uses' => 'ListeningPartController@createpart1'
 ]);
+
+//upload file part 7
+Route::post("/manager-para-part7/upload",[
+    'uses' => 'Part7ParagraphController@uploadFile'
+])->name('part7paragraph.upload');
+
+//add para part 7
+Route::post("/manager-para-part7/add",[
+    "uses"=> 'Part7ParagraphController@addPara'
+]) -> name("part7paragraph.add");
+
+//update para part 7
+Route::post("/manager-para-part7/update",[
+    "uses"=>'Part7ParagraphController@updatePara'
+]) -> name("part7paragraph.update");
+
+Route::get("/manager-para-part7/del",[
+    "uses"=>"Part7ParagraphController@delPara"
+]) -> name("part7paragraph.delpara");
