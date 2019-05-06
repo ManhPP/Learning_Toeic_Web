@@ -33,72 +33,70 @@
 							your test screen.</span>
                     </div>
                     <div class="list-cau">
-                        <!--
-                                                mot cau
-                                                <p class="ques refer-ques">Questions 1-3 refer to the
-                                                    following conversation.</p>
-                                                <div class="ques">
-                                                    <div>
-                                                        <span class="no-ques">Câu 1</span> <span>Please let me
-                                                            take this opportunity to introduce myself as the
-                                                            newly.....(141).....sales agent for GK Trading Company. </span>
-                                                    </div>
-                                                    <div class="row">
-                                                        <label class="col-12 col-md-6"><input type="radio"
-                                                            name="choise">A: appointed</label> <label
-                                                            class="col-12 col-md-6"><input type="radio"
-                                                            name="choise">B: appointing</label> <label
-                                                            class="col-12 col-md-6"><input type="radio"
-                                                            name="choise">C: appoint</label> <label class="col-12 col-md-6"><input
-                                                            type="radio" name="choise">D: appointment</label>
-                                                    </div>
-                                                    <hr>
-                                                </div>
-                                                mot cau
-                                                <div class="ques">
-                                                    <div>
-                                                        <span class="no-ques">Câu 2</span> <span>As I have joined
-                                                            the company recently, I went.....(142).....our records and
-                                                            found that you are one of our most valuable customers.</span>
-                                                    </div>
-                                                    <div class="row">
-                                                        <label class="col-12 col-md-6"><input type="radio"
-                                                            name="choise">A: with</label> <label class="col-12 col-md-6"><input
-                                                            type="radio" name="choise">B: into</label> <label
-                                                            class="col-12 col-md-6"><input type="radio"
-                                                            name="choise">C: through</label> <label class="col-12 col-md-6"><input
-                                                            type="radio" name="choise">D: over</label>
-                                                    </div>
-                                                    <hr>
-                                                </div>
-                                                mot cau
-                                                <div class="ques">
-                                                    <div>
-                                                        <span class="no-ques">Câu 3</span> <span>As an initiative
-                                                            to a growing business relationship that will benefit both of
-                                                            us, I will be pleased to visit you in your office at your
-                                                            convenience in order to understand about your company and this
-                                                            will enable me to.....(143).....you with a better service. I
-                                                            could also introduce our new products to you.I wish to call in
-                                                            your office, and I want to make the appointment as I am looking
-                                                            forward to meeting you personally. Yours sincerely, Praveen
-                                                            Kumar.</span>
-                                                    </div>
-                                                    <div class="row">
-                                                        <label class="col-12 col-md-6"><input type="radio"
-                                                            name="choise">A: give</label> <label class="col-12 col-md-6"><input
-                                                            type="radio" name="choise">B: provide</label> <label
-                                                            class="col-12 col-md-6"><input type="radio"
-                                                            name="choise">C: award</label> <label class="col-12 col-md-6"><input
-                                                            type="radio" name="choise">D: deliver</label>
-                                                    </div>
-                                                    <hr>
-                                                </div> -->
+                        <p class="ques refer-ques">Questions 1-3 refer to the
+                            following conversation.</p>
+                        <div class="ques">
+                            <div>
+                                <span class="no-ques">Câu 1</span> <span>Please let me
+                                    take this opportunity to introduce myself as the
+                                    newly.....(141).....sales agent for GK Trading Company. </span>
+                            </div>
+                            <div class="row">
+                                <label class="col-12 col-md-6"><input type="radio"
+                                    name="choise">A: appointed</label> <label
+                                    class="col-12 col-md-6"><input type="radio"
+                                    name="choise">B: appointing</label> <label
+                                    class="col-12 col-md-6"><input type="radio"
+                                    name="choise">C: appoint</label> <label class="col-12 col-md-6"><input
+                                    type="radio" name="choise">D: appointment</label>
+                            </div>
+                            <hr>
+                        </div>
+
+                        <div class="ques">
+                            <div>
+                                <span class="no-ques">Câu 2</span> <span>As I have joined
+                                    the company recently, I went.....(142).....our records and
+                                    found that you are one of our most valuable customers.</span>
+                            </div>
+                            <div class="row">
+                                <label class="col-12 col-md-6"><input type="radio"
+                                    name="choise">A: with</label> <label class="col-12 col-md-6"><input
+                                    type="radio" name="choise">B: into</label> <label
+                                    class="col-12 col-md-6"><input type="radio"
+                                    name="choise">C: through</label> <label class="col-12 col-md-6"><input
+                                    type="radio" name="choise">D: over</label>
+                            </div>
+                            <hr>
+                        </div>
+
+                        <div class="ques">
+                            <div>
+                                <span class="no-ques">Câu 3</span> <span>As an initiative
+                                    to a growing business relationship that will benefit both of
+                                    us, I will be pleased to visit you in your office at your
+                                    convenience in order to understand about your company and this
+                                    will enable me to.....(143).....you with a better service. I
+                                    could also introduce our new products to you.I wish to call in
+                                    your office, and I want to make the appointment as I am looking
+                                    forward to meeting you personally. Yours sincerely, Praveen
+                                    Kumar.</span>
+                            </div>
+                            <div class="row">
+                                <label class="col-12 col-md-6"><input type="radio"
+                                    name="choise">A: give</label> <label class="col-12 col-md-6"><input
+                                    type="radio" name="choise">B: provide</label> <label
+                                    class="col-12 col-md-6"><input type="radio"
+                                    name="choise">C: award</label> <label class="col-12 col-md-6"><input
+                                    type="radio" name="choise">D: deliver</label>
+                            </div>
+                            <hr>
+                        </div>
                     </div>
                     <!-- them cau -->
                     <div class="div-choise-para">
                         <img alt="add" id="ico-add"
-                             src="${pageContext.request.contextPath}/resources/img/round-add.png">
+                             src="{{URL::asset("imgs/round-add.png")}}">
                     </div>
                     <div style="text-align: center;">
                         <button id="submit-add">Add part</button>
@@ -130,12 +128,28 @@
                         <table class="table table-bordered" style="min-width: 400px">
                             <thead class="thead-dark">
                             <tr class="d-flex">
-                                <th class="col-12">Câu hỏi(<span id="sum-ques">${fn:length(arrDoan) }</span>/<span
+                                <th class="col-12">Câu hỏi(<span id="sum-ques"><?php echo count((array)$listPart6Para); ?></span>/<span
                                             id="total-ques">${sum }</span>)
                                 </th>
                             </tr>
                             </thead>
                             <tbody>
+                            <?php
+                                $indexPara=0;
+                                foreach ($listPart6Para as $part6Para){
+                                    echo '<tr class="d-flex row" data-id="'.$part6Para->id.'">'
+                                    .'<td class="col-12">'
+                                    .'<input class="checkbox-choise" type="checkbox">'
+                                    .' <span class="ques-content">Đoạn văn id '.$part6Para->id .'</span>'
+                                    .'<img class="expand-ico" src="{{ URL::asset("imgs/next.png")}}">'
+                                    .'<img class="shorten-ico hide" src="{{ URL::asset("imgs/down-arrow.png")}}">'
+                                    .'<div class="content-para hide">';
+                                    $indexQuest = 1;
+//                                    foreach (\App\Part6Paragraph::find(1))
+
+                                }
+
+                            ?>
 {{--                            <c:set var="indexPara" value="0" />--}}
 {{--                            <c:forEach items="${arrDoan }" var="doan">--}}
 {{--                                <tr class="d-flex row" data-id="${doan.id }">--}}
@@ -213,6 +227,8 @@
 
 @endsection
 
+
 @section('footer')
     @parent
+    <script src="{{URL::asset("js/admin-add-part6/admin-them-part6.js")}}"></script>
 @endsection

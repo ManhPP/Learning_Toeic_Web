@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Part6Paragraph;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class Part6ParagraphController extends Controller
 {
@@ -47,6 +48,7 @@ class Part6ParagraphController extends Controller
     public function show(Part6Paragraph $part6Paragraph)
     {
         //
+
     }
 
     /**
@@ -55,6 +57,12 @@ class Part6ParagraphController extends Controller
      * @param  \App\Part6Paragraph  $part6Paragraph
      * @return \Illuminate\Http\Response
      */
+
+    public function listPart6(){
+        $data = DB::table('part6_paragraphs')->get();
+        return view('add_part_6',['listPart6Para'=>$data]);
+    }
+
     public function edit(Part6Paragraph $part6Paragraph)
     {
         //

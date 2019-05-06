@@ -66,8 +66,11 @@ Route::get('/add-part-4', function () {
 Route::get('/add-part-5', function () {
     return view('add_part_5');
 });
-Route::get('/add-part-6', function () {
-    return view('add_part_6');
+
+Route::get('/add-part-6','Part6ParagraphController@listPart6');
+
+Route::get('/add-part6Paragraph', function () {
+    return view('add_part6_paragraph');
 });
 Route::get('/add-part-7', function () {
     return view('add_part_7');
