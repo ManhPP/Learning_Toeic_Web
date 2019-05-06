@@ -138,3 +138,6 @@ Route::post("/manager-para-part7/update",[
 Route::get("/manager-para-part7/del",[
     "uses"=>"Part7ParagraphController@delPara"
 ]) -> name("part7paragraph.delpara");
+Route::get('/part5hehe',[
+    'uses' => 'ManagePart5SentenceController@index'
+]);

@@ -1,0 +1,250 @@
+@extends('layouts.master')
+@section('title','add part 5')
+@section("css")
+    <link rel="stylesheet" type="text/css" href="{{ URL::asset("css/admin_update_part5/admin_update_part5.css") }}">
+@endsection
+@section('navbar')
+    @parent
+@endsection
+
+@section('content')
+    
+<div style="position: relative; top: 6em">
+	
+    <div class="row col-12 col-sm-11 col-md-10 col-lg-9 col-xl-8 align-center no-padding">
+        <div class="label-style">**Update part 5</div>
+        <div class="col-12 time-detail">
+            <span>Tiêu đề: </span> <input id="tittle" value = "{{ $partDoc->tittle }}">
+        </div>
+    </div>
+
+    <!-- part 5 -->
+    <div
+        class="content-container col-12 col-sm-11 col-md-10 col-lg-9 col-xl-8">
+        <div class="header-content">
+            <div>Practic part 5 (40 sentences)</div>
+        </div>
+        <div class="content">
+            <div class="p1">
+                <div class="direct">
+                    <span class="red">Rerection </span> <span>: A word or phrase
+                        is missing in each of the sentences below. Four answer choices are
+                        given below each sentence. Select the best answer to complete the
+                        sentence. Then click on (A), (B), (C), or (D) on your test screen.</span>
+                </div>
+                <div class="list-cau">
+                    <div id="list-to-add">
+                        {{ $index = 0 }}
+                        @foreach($partDoc->listCauPart5 as $cau)
+                    
+                            {{ $checkA = "" }}
+                            {{ $checkB = "" }}
+                            {{ $checkC = "" }}
+                            {{ $checkD = "" }}
+
+                            @if($cau->daDung == 'A')
+                                {{ $checkA = "checked = 'checked'" }}
+                            @endif
+                            @if($cau->daDung == 'B')
+                                {{ $checkB = "checked = 'checked'" }}
+                            @endif
+                            @if($cau->daDung == 'C')
+                                {{ $checkC = "checked = 'checked'" }}
+                            @endif
+                            @if($cau->daDung == 'D')
+                                {{ $checkD = "checked = 'checked'" }}
+                            @endif		
+
+                            <!-- mot cau -->
+                            <div class="ques one-ques" data-asw="{{ $cau->daDung }}" data-id="{{ $cau->id }}">
+                                <div>
+                                    <span class="no-ques">Câu {{ $index+1 }}</span> <span
+                                        class="ques-content">${cau.cauHoi }</span>
+                                </div>
+                                <div class="row">
+                                    <label class="col-12 col-md-6"> <input type="radio" disabled="disabled"
+                                        name="choise{{ $index }}" value="A" {{ $checkA }}>{{ $cau->daA }}
+                                    </label> <label class="col-12 col-md-6"> <input type="radio" disabled="disabled"
+                                        name="choise{{ $index }}" value="B" {{ $checkB }}>{{ $cau->daB }}
+                                    </label> <label class="col-12 col-md-6"> <input type="radio" disabled="disabled"
+                                        name="choise{{ $index }}" value="C" {{ $checkC }}>{{ $cau->daC }}
+                                    </label> <label class="col-12 col-md-6"> <input type="radio" disabled="disabled"
+                                        name="choise{{ $index }}" value="D" {{ $checkD }}>{{ $cau->daD }}
+                                    </label>
+                                </div>
+                                <div class="align-right">
+                                    <img class="ico-modified ico-del" alt="minus"
+                                        src="${pageContext.request.contextPath}/resources/img/round-minus.png">
+                                </div>
+                                <hr>
+                            </div>
+                            {{ $index += 1 }}
+                        @endforeach
+                    </div>
+
+                    <div class="ques">
+                        <div class="align-right">
+                            <img class="ico-modified" id="ico-add" alt="add"
+                                src="${pageContext.request.contextPath}/resources/img/round-add.png">
+                        </div>
+                        <hr>
+                    </div>
+                    <div style="text-align: center;">
+                        <button id="submit">Update part 5</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<!-- chon cau -->
+<div class="modal fade" tabindex="-1" role="dialog"
+    aria-labelledby="mySmallModalLabel" aria-hidden="true"
+    id="model-choise-ques">
+    <button type="button" class="btn btn-default" id="btn-input-yes"
+        data-next="false">Ok</button>
+    <button type="button" class="btn btn-primary" id="btn-input-no">Cancel</button>
+    <div id="num-ques-choise">
+        <span id="num-cau-choise">0</span>/40
+    </div>
+    <div class="modal-dialog"
+        style="top: 2em; max-width: 100%; width: 65em;">
+        <div class="modal-content" id="modal-content-iques">
+            <div class="modal-header">
+                <h4 class="modal-title" id="myModalLabel">Chọn câu hỏi</h4>
+            </div>
+            <div class="modal-body">
+                <div class="justify-content-center col-12 main-table">
+                    <table class="table table-bordered" style="min-width: 400px">
+                        <thead class="thead-dark">
+                            <tr class="d-flex">
+                                <th class="col-12">Câu hỏi(<span id="sum-ques">{{ count($arrCau) }}</span>/<span
+                                    id="total-ques">{{ $sum }}</span>)
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {{ $index = 1 }}
+                            @foreach($arrCau as $cau)
+                                {{ $checkA = "" }}
+                                {{ $checkB = "" }}
+                                {{ $checkC = "" }}
+                                {{ $checkD = "" }}
+                                @if($cau->daDung == 'A')
+                                    {{ $checkA = "checked = 'checked'" }}
+                                @endif
+                                @if($cau->daDung == 'B')
+                                    {{ $checkB = "checked = 'checked'" }}
+                                @endif
+                                @if($cau->daDung == 'C')
+                                    {{ $checkC = "checked = 'checked'" }}
+                                @endif
+                                @if($cau->daDung == 'D')
+                                    {{ $checkD = "checked = 'checked'" }}
+                                @endif
+                                <tr class="d-flex" data-id="{{ $cau->id  }}">
+                                    <td class="col-12"><input type="checkbox"
+                                        class="choise-ques-add"> <span class="content-ques">{{ $cau->cauHoi }}</span>
+                                        <img class="expand-ico"
+                                        src="${pageContext.request.contextPath}/resources/img/next.png">
+                                        <img class="shorten-ico hide"
+                                        src="${pageContext.request.contextPath}/resources/img/down-arrow.png">
+                                        <div class="div-da hide">
+                                            <hr>
+                                            <div>
+                                                <b>Đáp án</b>
+                                            </div>
+                                            <div class="row">
+                                                <label class="col-12 col-md-6"> <input
+                                                    disabled="disabled" type="radio" name="choise-${index }"
+                                                    value="A" {{ $checkA }}> <span>{{ $cau->daA }}</span>
+                                                </label> <label class="col-12 col-md-6"> <input
+                                                    disabled="disabled" type="radio" name="choise-${index }"
+                                                    value="B" {{ $checkB }}> <span>{{ $cau->daB }}</span>
+                                                </label> <label class="col-12 col-md-6"> <input
+                                                    disabled="disabled" type="radio" name="choise-${index }"
+                                                    value="C" {{ $checkC }}> <span>{{ $cau->daC }}</span>
+                                                </label> <label class="col-12 col-md-6"> <input
+                                                    disabled="disabled" type="radio" name="choise-${index }"
+                                                    value="D" {{ $checkD }}> <span>{{ $cau->daD }}</span>
+                                                </label>
+                                            </div>
+                                        </div></td>
+                                </tr>
+                                {{ $index += 1 }}
+                            </c:forEach>
+                        </tbody>
+                    </table>
+                </div>
+
+            </div>
+            <!-- <div class="modal-footer">
+                <button type="button" class="btn btn-default" id="btn-input-yes"
+                    data-next="false">Ok</button>
+                <button type="button" class="btn btn-primary" id="btn-input-no">Cancel</button>
+            </div> -->
+        </div>
+    </div>
+</div>
+
+<!-- modal -->
+<div class="modal fade" id="myModal" style="padding: 0">
+    <div class="modal-dialog">
+        <div class="modal-content"
+            style="border-right: 18px; border-radius: 18px">
+            <div class="modal-header justify-content-center"
+                style="background-color: rgb(50, 63, 71); border-radius: 18px 18px 0 0;">
+                <h4 class="modal-title" style="color: white">LOGIN</h4>
+            </div>
+
+            <div class="modal-body"
+                style="background-color: rgba(46, 62, 72, 0.93); border-radius: 0 0 18px 18px">
+                <div class="container-fluid " class="row">
+                    <form>
+                        <div style="text-align: center; padding-top: 2em">
+                            <input class="col-11 login-input no-outline" type="text"
+                                name="user" placeholder="USERNAME" autocomplete="off">
+                        </div>
+                        <div style="text-align: center; padding-top: 2em">
+                            <input class="col-11 login-input no-outline" type="password"
+                                name="pass" placeholder="PASSWORD" autocomplete="off">
+                        </div>
+                        <div style="text-align: center; padding-top: 4em">
+                            <input class="col-6 no-outline" type="submit" value="LOGIN"
+                                style="height: 3em; background-color: rgb(36, 123, 179); border: none; margin-bottom: 25px; border-radius: 10px; color: white; cursor: pointer;">
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <!-- <div class="modal-footer">
+                <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+            </div> -->
+        </div>
+    </div>
+</div>
+<!-- Open modal -->
+<button id="my-button" style="display: none;" data-toggle="modal"
+    data-target="#myModal">Open modal</button>
+
+
+
+    <div style="display: none;">
+		<div id="csrf-name">{{ $_csrf->headerName }}</div>
+		<div id="csrf-value">{{ $_csrf->token }}</div>
+		<div id="root-path">{{ $pageContext->request->contextPath }}</div>
+        <div id="id-user">{{ $acc->id }}</div>
+        <div id="id-part">{{ $partDoc->id }}</div>
+	</div>
+
+
+@endsection
+
+@section('footer')
+    @parent
+@endsection
+
+@section('js')
+    <script type="text/javascript" src="{{ URL::asset("js/admin_update_part5/admin_update_part5.js") }}"></script>
+@endsection	
