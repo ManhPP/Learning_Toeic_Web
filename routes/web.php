@@ -116,12 +116,21 @@ Route::get('/manager-para-part7', [
     'uses' => 'Part7ParagraphController@getPart7Paragraph'
 ]);
 
-//upload file
+//upload file part 7
 Route::post("/manager-para-part7/upload",[
     'uses' => 'Part7ParagraphController@uploadFile'
 ])->name('part7paragraph.upload');
 
-//add para
+//add para part 7
 Route::post("/manager-para-part7/add",[
     "uses"=> 'Part7ParagraphController@addPara'
 ]) -> name("part7paragraph.add");
+
+//update para part 7
+Route::post("/manager-para-part7/update",[
+    "uses"=>'Part7ParagraphController@updatePara'
+]) -> name("part7paragraph.update");
+
+Route::get("/manager-para-part7/del",[
+    "uses"=>"Part7ParagraphController@delPara"
+]) -> name("part7paragraph.delpara");

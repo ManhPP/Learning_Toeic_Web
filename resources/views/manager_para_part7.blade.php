@@ -481,6 +481,8 @@
     <div style="display: none">
         <div id="path-upload">{{route('part7paragraph.upload')}}</div>
         <div id="path-add">{{route('part7paragraph.add')}}</div>
+        <div id="path-update">{{route('part7paragraph.update')}}</div>
+        <div id="path-del">{{route('part7paragraph.delpara')}}</div>
     </div>
 
 @endsection

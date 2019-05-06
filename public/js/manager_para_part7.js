@@ -102,12 +102,11 @@ modalConfirmInput(function(confirm) {
         listCauPart7+="]";
 
         doanPart7 = '{"id":"null", "doanVan1":"'+doanVan1+'", "doanVan2":"'
-            +doanVan2+'", "loaiPart7":"'+loaiPart7+'", "listCauPart7":'
-            +listCauPart7+'}';
+            +doanVan2+'", "loaiPart7":"'+loaiPart7+'"}';
 
-        json = JSON.parse(doanPart7);
+        // json = JSON.parse(doanPart7);
 
-        console.log(json);
+        console.log(doanPart7);
 
         if(ques=="" || daDung=="" || doanVan1=="" || typeof doanVan1 == "undefined" ){
             isFillAll = false;
@@ -118,10 +117,11 @@ modalConfirmInput(function(confirm) {
                 url: $("#path-add").html(),
                 method:"post",
                 data: {
-                    part7:doanPart7
+                    doanPart7:doanPart7,
+                    listCau: listCauPart7
                 },
                 success: function(data){
-                    console.log("111111111");
+                    console.log(data=="true");
                 }
             });
         }else{
@@ -159,22 +159,20 @@ var modalConfirmUpdate = function(callback) {
 
 modalConfirmUpdate(function(confirm) {
     if(confirm == true){
-        var doanVan = getDataUpdate();
-        if(doanVan == false){
+        var arrRet = getDataUpdate();
+        var doanVan = arrRet[0];
+        if(arrRet == false){
             alert("Hãy điền đầy đủ các trường!!");
         }else{
             $.ajax({
-                url: "manager-doan-part7/update",
+                url: $("#path-update").html(),
                 method:"POST",
-                contentType:"application/json; charset=utf-8",
-                dataType:"json",
-                beforeSend: function(xhr) {
-                    xhr.setRequestHeader(header, token);
+                data: {
+                    doanPart7:doanVan,
+                    listCau: arrRet[1]
                 },
-                data: doanVan,
                 success: function(data){
-                    if(data == true){
-                        console.log("reset");
+                    if(data == "true"){
                         json = JSON.parse(doanVan);
                         var numRow = $(".main-table tbody tr").length;
                         var insertAfter;
@@ -325,7 +323,10 @@ function getDataUpdate(){
     }
 
     if(isFillAll == true){
-        return doanPart7;
+        var arrRet = new Array();
+        arrRet[0] = doanPart7;
+        arrRet[1] = listCauPart7
+        return arrRet;
     }else{
         return false;
     }
@@ -592,16 +593,17 @@ function resetTable(doanVan, isPrepend, insertAfter){
 }
 
 $(document).on("click", ".btn-del", function(e){
+    console.log("asdassadas");
     e.stopPropagation();
     var id = $(this).attr("data-id");
     var tr = $(this).parent().parent().parent();
     $.ajax({
-        url: "manager-doan-part7/del",
+        url: $("#path-del").html(),
         data: {
             id: id,
         },
         success: function(data){
-            if(data==true){
+            if(data=="true"){
                 alert("Xóa thành công!!!");
                 tr.remove();
             }

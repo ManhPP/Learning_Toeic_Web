@@ -13,6 +13,6 @@ class Part7 extends Model
     ];
 
     function part7Paragraph(){
-        return $this -> belongsTo('App\Part7Paragraph', 'idDoan', 'id')->with("listCauPart7");
+        return $this -> belongsTo('App\Part7Paragraph', 'idDoan', 'id');
     }
 }
