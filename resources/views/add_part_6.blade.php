@@ -8,6 +8,7 @@
 @endsection
 
 @section('content')
+    <!-- body -->
     <div class="body row">
         <div
                 class="row col-12 col-sm-11 col-md-10 col-lg-9 col-xl-8 align-center no-padding">
@@ -52,7 +53,6 @@
                             </div>
                             <hr>
                         </div>
-
                         <div class="ques">
                             <div>
                                 <span class="no-ques">Câu 2</span> <span>As I have joined
@@ -69,7 +69,6 @@
                             </div>
                             <hr>
                         </div>
-
                         <div class="ques">
                             <div>
                                 <span class="no-ques">Câu 3</span> <span>As an initiative
@@ -96,7 +95,7 @@
                     <!-- them cau -->
                     <div class="div-choise-para">
                         <img alt="add" id="ico-add"
-                             src="{{URL::asset("imgs/round-add.png")}}">
+                             src="${pageContext.request.contextPath}/resources/img/round-add.png">
                     </div>
                     <div style="text-align: center;">
                         <button id="submit-add">Add part</button>
@@ -128,102 +127,84 @@
                         <table class="table table-bordered" style="min-width: 400px">
                             <thead class="thead-dark">
                             <tr class="d-flex">
-                                <th class="col-12">Câu hỏi(<span id="sum-ques"><?php echo count((array)$listPart6Para); ?></span>/<span
+                                <th class="col-12">Câu hỏi(<span id="sum-ques">${fn:length(arrDoan) }</span>/<span
                                             id="total-ques">${sum }</span>)
                                 </th>
                             </tr>
                             </thead>
                             <tbody>
-                            <?php
-                                $indexPara=0;
-                                foreach ($listPart6Para as $part6Para){
-                                    echo '<tr class="d-flex row" data-id="'.$part6Para->id.'">'
-                                    .'<td class="col-12">'
-                                    .'<input class="checkbox-choise" type="checkbox">'
-                                    .' <span class="ques-content">Đoạn văn id '.$part6Para->id .'</span>'
-                                    .'<img class="expand-ico" src="{{ URL::asset("imgs/next.png")}}">'
-                                    .'<img class="shorten-ico hide" src="{{ URL::asset("imgs/down-arrow.png")}}">'
-                                    .'<div class="content-para hide">';
-                                    $indexQuest = 1;
-//                                    foreach (\App\Part6Paragraph::find(1))
+                            {{ $indexPara = 0 }}
+                                @foreach( $arrDoan as $doan)
+                                <tr class="d-flex row" data-id="{{$doan->id }}">
+                                    <td class="col-12">
+                                        <input class="checkbox-choise" type="checkbox">
+                                        <span class="ques-content">Đoạn văn id {{$doan->id }}</span>
+                                        <img class="expand-ico"
+                                             src="{{URL::asset("imgs/next.png")}}">
+                                        <img class="shorten-ico hide"
+                                             src="{{URL::asset("imgs/down-arrow.png")}}">
 
-                                }
+                                        <div class="content-para hide">
+                                            {{ $indexQues = 0 }}
+                                            @foreach( $doan->part6() as $cau)
+                                                {{ $checkA ='' }}
+                                                {{ $checkB = '' }}
+                                                {{ $checkC = '' }}
+                                                {{ $checkD = '' }}
 
-                            ?>
-{{--                            <c:set var="indexPara" value="0" />--}}
-{{--                            <c:forEach items="${arrDoan }" var="doan">--}}
-{{--                                <tr class="d-flex row" data-id="${doan.id }">--}}
-{{--                                    <td class="col-12">--}}
-{{--                                        <input class="checkbox-choise" type="checkbox">--}}
-{{--                                        <span class="ques-content">Đoạn văn id ${doan.id }</span>--}}
-{{--                                        <img class="expand-ico"--}}
-{{--                                             src="${pageContext.request.contextPath}/resources/img/next.png">--}}
-{{--                                        <img class="shorten-ico hide"--}}
-{{--                                             src="${pageContext.request.contextPath}/resources/img/down-arrow.png">--}}
+                                                @if( $cau->daDung =='A')
+                                                    {{ $checkA = 'checked'}}
+                                                @endif
 
-{{--                                        <div class="content-para hide">--}}
-{{--                                            <c:set var="indexQues" value="0" />--}}
-{{--                                            <c:forEach items="${doan.listCauPart6 }" var="cau">--}}
-{{--                                                <c:set var="checkA" value="" />--}}
-{{--                                                <c:set var="checkB" value="" />--}}
-{{--                                                <c:set var="checkC" value="" />--}}
-{{--                                                <c:set var="checkD" value="" />--}}
-{{--                                                <c:choose>--}}
-{{--                                                    <c:when test="${cau.daDung=='A' }">--}}
-{{--                                                        <c:set var="checkA" value="checked='checked'" />--}}
-{{--                                                    </c:when>--}}
-{{--                                                    <c:when test="${cau.daDung=='B' }">--}}
-{{--                                                        <c:set var="checkB" value="checked='checked'" />--}}
-{{--                                                    </c:when>--}}
-{{--                                                    <c:when test="${cau.daDung=='C' }">--}}
-{{--                                                        <c:set var="checkC" value="checked='checked'" />--}}
-{{--                                                    </c:when>--}}
-{{--                                                    <c:when test="${cau.daDung=='D' }">--}}
-{{--                                                        <c:set var="checkD" value="checked='checked'" />--}}
-{{--                                                    </c:when>--}}
-{{--                                                </c:choose>--}}
+                                                @if($cau->daDung == 'B')
+                                                    {{ $checkB = 'checked' }}
+                                                @endif
 
-{{--                                                <div class="ques" data-asw="${cau.daDung }"--}}
-{{--                                                     data-id="${cau.id }">--}}
-{{--                                                    <div>--}}
-{{--                                                        <span class="no-ques">Câu ${indexQues+1 }</span> <span--}}
-{{--                                                                class="ques-content">${cau.cauHoi }</span>--}}
-{{--                                                    </div>--}}
-{{--                                                    <div class="row" data-idpara = "${doan.id }">--}}
-{{--                                                        <label class="col-12 col-md-6"><input--}}
-{{--                                                                    disabled="disabled" type="radio" name="choise${cau.id }"--}}
-{{--                                                                    ${checkA }><span class="asw-content">${cau.daA }</span></label>--}}
-{{--                                                        <label class="col-12 col-md-6"><input--}}
-{{--                                                                    disabled="disabled" type="radio" name="choise${cau.id }"--}}
-{{--                                                                    ${checkB }><span class="asw-content">${cau.daB }</span></label>--}}
-{{--                                                        <label class="col-12 col-md-6"><input--}}
-{{--                                                                    disabled="disabled" type="radio" name="choise${cau.id }"--}}
-{{--                                                                    ${checkC }><span class="asw-content">${cau.daC }</span></label>--}}
-{{--                                                        <label class="col-12 col-md-6"><input--}}
-{{--                                                                    disabled="disabled" type="radio" name="choise${cau.id }"--}}
-{{--                                                                    ${checkD }><span class="asw-content">${cau.daD }</span></label>--}}
-{{--                                                    </div>--}}
-{{--                                                    <hr>--}}
-{{--                                                </div>--}}
-{{--                                                <c:set var="indexQues" value="${indexQues+1 }" />--}}
-{{--                                            </c:forEach>--}}
-{{--                                        </div>--}}
-{{--                                    </td>--}}
-{{--                                </tr>--}}
-{{--                            </c:forEach>--}}
+                                                @if($cau->daDung == 'C')
+                                                    {{ $checkC = 'checked' }}
+                                                @endif
+
+                                                @if($cau->daDung == 'D')
+                                                    {{ $checkD  = 'checked'}}
+                                                @endif
+
+                                                <div class="ques" data-asw="{{$cau->daDung }}"
+                                                     data-id="{{$cau->id }}">
+                                                    <div>
+                                                        <span class="no-ques">Câu {{$indexQues+=1 }}</span> <span
+                                                                class="ques-content">{{$cau->cauHoi }}</span>
+                                                    </div>
+                                                    <div class="row" data-idpara = "{{$doan->id }}">
+                                                        <label class="col-12 col-md-6"><input
+                                                                    disabled="disabled" type="radio" name="choise{{$cau->id }}"
+                                                                    {{$checkA }}><span class="asw-content">{{$cau->daA }}</span></label>
+                                                        <label class="col-12 col-md-6"><input
+                                                                    disabled="disabled" type="radio" name="choise{{$cau->id }}"
+                                                                    {{$checkB}}><span class="asw-content">{{$cau->daB }}</span></label>
+                                                        <label class="col-12 col-md-6"><input
+                                                                    disabled="disabled" type="radio" name="choise{{$cau->id }}"
+                                                                    {{$checkC }}><span class="asw-content">{{$cau->daC }}</span></label>
+                                                        <label class="col-12 col-md-6"><input
+                                                                    disabled="disabled" type="radio" name="choise{{$cau->id }}"
+                                                                    {{$checkD }}><span class="asw-content">{{$cau->daD }}</span></label>
+                                                    </div>
+                                                    <hr>
+                                                </div>
+                                            {{ $indexQues +=1 }}
+                                            @endforeach
+                                        </div>
+                                    </td>
+                                </tr>
+                                    @endforeach
                             </tbody>
                         </table>
                     </div>
 
                 </div>
-                <!-- <div class="modal-footer">
-                    <button type="button" class="btn btn-default" id="btn-input-yes"
-                        data-next="false">Ok</button>
-                    <button type="button" class="btn btn-primary" id="btn-input-no">Cancel</button>
-                </div> -->
             </div>
         </div>
     </div>
+
 
 @endsection
 

@@ -69,9 +69,8 @@ Route::get('/add-part-5', function () {
 
 Route::get('/add-part-6','Part6ParagraphController@listPart6');
 
-Route::get('/add-part6Paragraph', function () {
-    return view('add_part6_paragraph');
-});
+Route::get('/add-part6Paragraph', 'Part6ParagraphController@listPart6Para');
+
 Route::get('/add-part-7', function () {
     return view('add_part_7');
 });
@@ -116,4 +115,8 @@ Route::get('/adacc', function(){
 });
 Route::get('/test-relationship', [
     'uses' => 'Part7ParagraphController@getPart7Paragraph'
+]);
+
+Route::post('/addlistening-part1', [
+    'uses' => 'ListeningPartController@createpart1'
 ]);

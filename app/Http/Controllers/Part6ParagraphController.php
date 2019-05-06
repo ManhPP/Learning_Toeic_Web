@@ -59,8 +59,14 @@ class Part6ParagraphController extends Controller
      */
 
     public function listPart6(){
-        $data = DB::table('part6_paragraphs')->get();
-        return view('add_part_6',['listPart6Para'=>$data]);
+        $data = Part6Paragraph::all();
+        return view('add_part_6',['arrDoan'=>$data]);
+    }
+
+    public function listPart6Para(){
+        $data = Part6Paragraph::all();
+        return view('add_part6_paragraph',['arrDoan'=>$data]);
+
     }
 
     public function edit(Part6Paragraph $part6Paragraph)
