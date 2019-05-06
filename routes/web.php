@@ -118,3 +118,7 @@ Route::get('/test-relationship', [
 Route::post('/addlistening-part1', [
     'uses' => 'ListeningPartController@createpart1'
 ]);
+
+Route::get('/part5hehe',[
+    'uses' => 'ManagePart5SentenceController@index'
+]);
