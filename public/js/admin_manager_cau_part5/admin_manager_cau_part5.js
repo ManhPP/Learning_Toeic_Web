@@ -3,9 +3,12 @@ var token;
 var loadAjax = true;
 
 $(document).ready(function(){
-    
-    header= $("#csrf-name").html();
-    token = $("#csrf-value").html();
+
+    $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+    });
 });
 
 
@@ -49,7 +52,7 @@ modalConfirmInput(function(confirm) {
 	        alert("Hãy điền hết giữ liệu!!!");
 	    }else{
 	        $.ajax({
-	            url: "manager-cau-part5/add",
+	            url: $("#path-add").html(),
 	            method: "POST",
 	            data: {
 	                cauHoi: cauHoi,
@@ -59,9 +62,7 @@ modalConfirmInput(function(confirm) {
 	                daD: "D: "+arrDa[3],
 	                daDung: daDung,
 	            },
-	            beforeSend: function(xhr) {
-	                xhr.setRequestHeader(header, token);
-	            },
+	            
 	            success: function(id){
 	                if(id != -1){
 	                    resetTable(id, cauHoi, daDung, arrDa);

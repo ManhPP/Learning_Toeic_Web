@@ -33,31 +33,31 @@
                     {{ $checkC = "" }}
                     {{ $checkD = "" }}
                     {{-- <c:choose>
-                        <c:when test="${cau.daDung=='A' }">
+                        <c:when test="${cau.dADung=='A' }">
                             <c:set var="checkA" value="checked='checked'"/>
                         </c:when>
-                        <c:when test="${cau.daDung=='B' }">
+                        <c:when test="${cau.dADung=='B' }">
                             <c:set var="checkB" value="checked='checked'"/>
                         </c:when>
-                        <c:when test="${cau.daDung=='C' }">
+                        <c:when test="${cau.dADung=='C' }">
                             <c:set var="checkC" value="checked='checked'"/>
                         </c:when>
-                        <c:when test="${cau.daDung=='D' }">
+                        <c:when test="${cau.dADung=='D' }">
                             <c:set var="checkD" value="checked='checked'"/>
                         </c:when>
                                 </c:choose>			 --}}
 
                     
-                    @if($cau->daDung == 'A')
+                    @if($cau->dADung == 'A')
                         {{ $checkA = "checked = 'checked'" }}
                     @endif
-                    @if($cau->daDung == 'B')
+                    @if($cau->dADung == 'B')
                         {{ $checkB = "checked = 'checked'" }}
                     @endif
-                    @if($cau->daDung == 'C')
+                    @if($cau->dADung == 'C')
                         {{ $checkC = "checked = 'checked'" }}
                     @endif
-                    @if($cau->daDung == 'D')
+                    @if($cau->dADung == 'D')
                         {{ $checkD = "checked = 'checked'" }}
                     @endif
 
@@ -84,15 +84,15 @@
                                         <span>{{ $cau->daA }}</span>
                                     </label>
                                     <label class="col-12 col-md-6">
-                                        <input disabled="disabled" type="radio" name="choise-{{ $index }}" value="B" {{ $checkA }}>
+                                        <input disabled="disabled" type="radio" name="choise-{{ $index }}" value="B" {{ $checkB }}>
                                         <span>{{ $cau->daB }}</span>
                                     </label>
                                     <label class="col-12 col-md-6">
-                                        <input disabled="disabled" type="radio" name="choise-{{ $index }}" value="C" {{ $checkA }}>
+                                        <input disabled="disabled" type="radio" name="choise-{{ $index }}" value="C" {{ $checkC }}>
                                         <span>{{ $cau->daC }}</span>
                                     </label>
                                     <label class="col-12 col-md-6">
-                                        <input disabled="disabled" type="radio" name="choise-{{ $index }}" value="D" {{ $checkA }}>
+                                        <input disabled="disabled" type="radio" name="choise-{{ $index }}" value="D" {{ $checkD }}>
                                         <span>{{ $cau->daD }}</span>
                                     </label>
                                 </div>
@@ -196,6 +196,11 @@
     </div>
 </div>
 
+<div style="display: None">
+    <div id='path-add'>
+        {{ Route('part5controller.add') }}
+    </div>
+</div>
 @endsection
 
 @section('footer')

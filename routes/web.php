@@ -119,6 +119,9 @@ Route::post('/addlistening-part1', [
     'uses' => 'ListeningPartController@createpart1'
 ]);
 
-Route::get('/part5hehe',[
-    'uses' => 'ManagePart5SentenceController@index'
+Route::get('/manage-sentence-part5',[
+    'uses' => 'Part5Controller@index'
 ]);
+Route::post('manage-sentence-part5/add',[
+    'uses' => 'Part5Controller@add'
+])->name("part5controller.add");
