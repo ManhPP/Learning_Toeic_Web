@@ -114,3 +114,7 @@ Route::get('/adacc', function(){
 Route::get('/test-relationship', [
     'uses' => 'Part7ParagraphController@getPart7Paragraph'
 ]);
+
+Route::get('/part5hehe',[
+    'uses' => 'ManagePart5SentenceController@index'
+]);
