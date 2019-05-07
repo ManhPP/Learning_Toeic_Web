@@ -3,8 +3,12 @@ var header;
 var token;
 
 $(document).ready(function(){
-    header= $("#csrf-name").html();
-    token = $("#csrf-value").html();
+
+    $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+    });
 });
 
  // mo modal cau hoi
@@ -285,47 +289,45 @@ $(document).on("click", "#submit", function(){
     console.log($("#tittle").val() + "-" + arrId.length);
     
     if($("#tittle").val().length > 0 && arrId.length == 40){
-        partDoc = '{"id":"'+$("#id-part").html()+'", "loaiPart":"Part 5", "tittle":"'+$("#tittle").val()+'", "listCauPart5":'+arrCau+'}';
+        partDoc = '{"id":"'+$("#id-part").html()+'", "loaiPart":"Part 5", "title":"'+$("#tittle").val()+'", "listCauPart5":'+arrCau+'}';
 
         console.log(i);
         console.log(arrId.length);
         if(arrId.length == 40){
-            $.ajax({
-               url: $("#root-path").html()+"/admin/bai-hoc-manager/add-part-doc/check-repeat",
-               method: "POST",
-               beforeSend: function(xhr) {
-                   xhr.setRequestHeader(header, token);
-               },
-               contentType:"application/json; charset=utf-8",
-               dataType:"json",
-               data: partDoc,
-               success: function(data){
-                   if(data == true){
+        //     $.ajax({
+        //        url: $("#root-path").html()+"/admin/bai-hoc-manager/add-part-doc/check-repeat",
+        //        method: "POST",
+        //        beforeSend: function(xhr) {
+        //            xhr.setRequestHeader(header, token);
+        //        },
+        //        contentType:"application/json; charset=utf-8",
+        //        dataType:"json",
+        //        data: partDoc,
+        //        success: function(data){
+        //            if(data == true){
                        $.ajax({
-                           url: $("#root-path").html()+"/admin/bai-hoc-manager/update-part-doc/update",
+                           url: $("#path-update").html(),
                            method: "POST",
-                           beforeSend: function(xhr) {
-                               xhr.setRequestHeader(header, token);
-                           },
-                           contentType:"application/json; charset=utf-8",
-                           dataType:"json",
-                           data: partDoc,
+                           data: {
+                               partDoc: partDoc,
+                               listCauPart5: arrCau
+                            },
                            success: function(data){
-                               if(data == true){
+                               if(data == "true"){
                                    alert("Thêm thành công!!!");
                                }else{
                                    alert("Thêm không thành công, kiểm tra lại!!!");
                                }
                            }
                         });
-                   }else{
-                       alert("Bài đọc bị trùng (hoặc bạn chưa thay đổi), hãy chọn các câu khác!!!");
-                   }
-               }
-            });
-        }
+    //                }else{
+    //                    alert("Bài đọc bị trùng (hoặc bạn chưa thay đổi), hãy chọn các câu khác!!!");
+    //                }
+    //            }
+    //         });
+         }
     }else{
-        alert("Hãy điền đầy đủ tiêu đề và số câu!!!");
+         alert("Hãy điền đầy đủ tiêu đề và số câu!!!");
     }
     
 });

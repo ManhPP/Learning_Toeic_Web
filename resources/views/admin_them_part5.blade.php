@@ -35,31 +35,13 @@
 						<!-- mot cau -->
 						<div class="ques">
 							<div class="align-right">
-								<img class="ico-modified" id="ico-add" alt="add" src="${pageContext.request.contextPath}/resources/img/round-add.png">
+								<img class="ico-modified" id="ico-add" alt="add" src="{{ URL::asset("imgs/round-add.png") }}">
 							</div>
 							<hr>
 						</div>
 						<div style="text-align: center;">
 							<button id="submit-add">Add part</button>
 						</div>
-						<%-- <!-- mot cau -->
-						<div class="ques">
-							<div>
-								<span class="no-ques">Câu 1</span>
-								<span>Jupiter has just under 70 documented moons, .............. four largest of which are the Galilean moons Io, Callisto, Ganymede and Europa.</span>
-							</div>
-							<div class="row">
-								<label class="col-12 col-md-6"><input type="radio" name="choose">A: a</label>
-								<label class="col-12 col-md-6"><input type="radio" name="choose">B:  an</label>
-								<label class="col-12 col-md-6"><input type="radio" name="choose">C: the</label>
-								<label class="col-12 col-md-6"><input type="radio" name="choose">D: Ø</label>
-							</div>
-							<div class="align-right">
-								<img class="ico-modified" alt="minus" src="${pageContext.request.contextPath}/resources/img/round-minus.png">
-								<img class="ico-modified" alt="add" src="${pageContext.request.contextPath}/resources/img/round-add.png">
-							</div>
-							<hr>
-						</div> --%>
 						
 					</div>
 				</div>
@@ -94,24 +76,24 @@
 									{{ $checkB = "" }}
 									{{ $checkC = "" }}
 									{{ $checkD = "" }}
-									@if($cau->daDung == 'A')
+									@if($cau->dADung == 'A')
 										{{ $checkA = "checked = 'checked'" }}
 									@endif
-									@if($cau->daDung == 'B')
+									@if($cau->dADung == 'B')
 										{{ $checkB = "checked = 'checked'" }}
 									@endif
-									@if($cau->daDung == 'C')
+									@if($cau->dADung == 'C')
 										{{ $checkC = "checked = 'checked'" }}
 									@endif
-									@if($cau->daDung == 'D')
+									@if($cau->dADung == 'D')
 										{{ $checkD = "checked = 'checked'" }}
 									@endif		
 									<tr class="d-flex" data-id="{{ $cau->id  }}">
 										<td class="col-12">
 											<input type="checkbox" class="choose-ques-add">
 											<span class="content-ques">{{ $cau->cauHoi }}</span>
-											<img class="expand-ico" src="${pageContext.request.contextPath}/resources/img/next.png">
-											<img class="shorten-ico hide" src="${pageContext.request.contextPath}/resources/img/down-arrow.png">
+											<img class="expand-ico" src="{{ URL::asset("imgs/next.png") }}">
+											<img class="shorten-ico hide" src="{{ URL::asset("imgs/down-arrow.png") }}">
 											<div class="div-da hide">
 												<hr>
 												<div>
@@ -195,10 +177,9 @@
 		
 	
 	<div style="display: none;">
-		<div id="csrf-name">{{ $_csrf->headerName }}</div>
-		<div id="csrf-value">{{ $_csrf->token }}</div>
-		<div id="root-path">{{ $pageContext->request->contextPath }}</div>
-		<div id="id-user">{{ $acc->id }}</div>
+		<div id='path-add'>
+			{{ Route('readingpartcontroller.add') }}
+		</div>
 	</div>
 
 @endsection

@@ -73,7 +73,7 @@ Route::get('/add-part-7', function () {
     return view('add_part_7');
 });
 Route::get("/listening/part1",function(){
-   return view("part1");
+    return view("part1");
 });
 
 Route::get("/listening/part2",function(){
@@ -111,7 +111,8 @@ Route::get('/addiscuss', function(){
 Route::get('/adacc', function(){
     return view('adminAcc');
 });
-Route::get('/test-relationship', [
+// test
+Route::get('/manager-para-part7', [
     'uses' => 'Part7ParagraphController@getPart7Paragraph'
 ]);
 
@@ -122,6 +123,52 @@ Route::post('/addlistening-part1', [
 Route::get('/manage-sentence-part5',[
     'uses' => 'Part5Controller@index'
 ]);
+//upload file part 7
+Route::post("/manager-para-part7/upload",[
+    'uses' => 'Part7ParagraphController@uploadFile'
+])->name('part7paragraph.upload');
+
+//add para part 7
+Route::post("/manager-para-part7/add",[
+    "uses"=> 'Part7ParagraphController@addPara'
+]) -> name("part7paragraph.add");
+
+//update para part 7
+Route::post("/manager-para-part7/update",[
+    "uses"=>'Part7ParagraphController@updatePara'
+]) -> name("part7paragraph.update");
+
+Route::get("/manager-para-part7/del",[
+    "uses"=>"Part7ParagraphController@delPara"
+]) -> name("part7paragraph.delpara");
+
 Route::post('manage-sentence-part5/add',[
     'uses' => 'Part5Controller@add'
 ])->name("part5controller.add");
+
+
+Route::post('manage-sentence-part5/update',[
+    'uses' => 'Part5Controller@update'
+])->name("part5controller.update");
+
+
+Route::post('manage-sentence-part5/delete',[
+    'uses' => 'Part5Controller@delete'
+])->name("part5controller.delete");
+
+Route::get('/manage-reading-part/part5/add',[
+    'uses' => 'ReadingPartController@indexAddPart5'
+]);
+
+Route::post('manage-part5/add',[
+    'uses' => 'ReadingPartController@addPart5'
+])->name("readingpartcontroller.add");
+
+Route::get('/manage-reading-part/part5/update',[
+    'uses' => 'ReadingPartController@indexUpdatePart5'
+]);
+
+Route::post('manage-part5/update',[
+    'uses' => 'ReadingPartController@updatePart5'
+])->name("readingpartcontroller.update");
+

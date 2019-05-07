@@ -64,15 +64,15 @@
                     {{-- <tr class="d-flex" data-id="${cau.id }"> --}}
                         <tr class="d-flex" data-id="{{ $cau->id  }}">
                         <td class="col-12"><img class="ico-forward"
-                            src="${pageContext.request.contextPath}/resources/img/forward-arrow.png">
+                            src="{{ URL::asset("imgs/forward-arrow.png") }}">
                             <span class="content-ques">{{ $cau->cauHoi }}</span>
                             <div class="controll-ques">
                                 <span class="btn-update" data-id="{{ $cau->id }}">update</span>
                                 <span>•</span>
                                 <span class="btn-del" data-id="{{ $cau->id }}">delete</span>
                             </div> 
-                            <img class="expand-ico" src="${pageContext.request.contextPath}/resources/img/next.png">
-                            <img class="shorten-ico hide" src="${pageContext.request.contextPath}/resources/img/down-arrow.png">
+                            <img class="expand-ico" src="{{ URL::asset("imgs/next.png") }}">
+                            <img class="shorten-ico hide" src="{{ URL::asset("imgs/down-arrow.png") }}">
                             <div class="div-da hide">
                                 <hr>
                                 <div>
@@ -107,7 +107,7 @@
         </table>
     </div>
 </div>
-<img src="${pageContext.request.contextPath}/resources/img/add.png"
+<img src="{{ URL::asset("imgs/add.png") }}"
     id="ico-add-ques">
 
 <!-- nhap noi dung cau -->
@@ -200,7 +200,14 @@
     <div id='path-add'>
         {{ Route('part5controller.add') }}
     </div>
+    <div id='path-update'>
+        {{ Route('part5controller.update') }}
+    </div>
+    <div id='path-delete'>
+        {{ Route('part5controller.delete') }}
+    </div>
 </div>
+
 @endsection
 
 @section('footer')

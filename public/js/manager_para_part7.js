@@ -1,62 +1,55 @@
-var header;
-var token;
 var loadAjax = true;
 
 $(document).ready(function(){
-    
-    header= $("#csrf-name").html();
-    token = $("#csrf-value").html();
+
+    $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+    });
 });
 
 
 //up load image
 $(".upload-para").change(function(event) {
-  // upload len server
-  var fileUpload = this;
-  var formParent = $(this).parent();
-//  var name = ((new Date().getTime()) + fileUpload.files[0].name);
-  var name = ((new Date().getTime()) + $("#id-user").html()+"."+fileUpload.files[0].type.split("/")[1]);
-  var formData = new FormData(formParent[0]);
-  formData.append("name", name);
+    var parent = $(this).parent();
+    var form = ($(this).parent())[0];
+    $.ajax({
+        url: $("#path-upload").html(),
+        method: "POST",
+        data: new FormData(form),
+        dataType: "json",
+        cache: false,
+        contentType: false,
+        processData: false,
+        success: function(data){
+            parent.attr("data-path", data.pathFile);
+        }
+    });
 
-  $.ajax({
-      url: $("#root-path").html()+"/admin/bai-hoc-manager/upload-image",
-      method: "post",
-      data:formData, // khong duoc dung { formData } ma phai bo {}
-      contentType: false,
-      processData: false,
-      beforeSend: function(xhr) {
-          xhr.setRequestHeader(header, token);
-      },
-      success: function(data){
-          if(data==true){
-              formParent.attr("data-path", $("#root-path").html()+"/img-listen/"+name);
-          }
-      }
-  });
 });
 
 $(document).on("click",".main-table tbody tr td",function(){
 });
 
- // them doan van
- var modalConfirmInput = function(callback) {
-	$("#ico-add-ques").on("click", function() {
-	    resetInput();
-		$("#model-input-ques").modal('show');
-	});
+// them doan van
+var modalConfirmInput = function(callback) {
+    $("#ico-add-ques").on("click", function() {
+        resetInput();
+        $("#model-input-ques").modal('show');
+    });
 
-	$("#btn-input-yes").on("click", function() {
-		callback(0);
-		
-	});
+    $("#btn-input-yes").on("click", function() {
+        callback(0);
+
+    });
 
 
-	$("#btn-input-no").on("click", function() {
-		callback(2);
-		$("#model-input-ques").modal('hide');
-	});
-	
+    $("#btn-input-no").on("click", function() {
+        callback(2);
+        $("#model-input-ques").modal('hide');
+    });
+
 
 };
 
@@ -70,9 +63,9 @@ modalConfirmInput(function(confirm) {
         var numQues = 5;
         var isFillAll = true;
         var arr = ["A: ", "B: ", "C: ", "D: "];
-        
+
         doanVan1 = $("#form-up-img1").attr("data-path");
-        
+
         if( $(".type-para input[type='radio']:checked").val() == 1 ){
             loaiPart7="Đoạn đơn";
             numQues=parseInt($("#select-num-ques").val());
@@ -81,7 +74,7 @@ modalConfirmInput(function(confirm) {
             doanVan2 = $("#form-up-img2").attr("data-path");
             if(doanVan2 == "" || typeof doanVan2 == "undefined") isFillAll = false;
         }
-        
+
         for(var i=0; i<numQues; i++){
             var ques="";
             var daDung="";
@@ -90,114 +83,96 @@ modalConfirmInput(function(confirm) {
             divQues.find(".input-asw").each(function(i){
                 arrAsw[i] = $(this).val();
                 if(arrAsw[i] == "") isFillAll = false;
-                arrAsw[i] = arr[i]+arrAsw[i]; 
+                arrAsw[i] = arr[i]+arrAsw[i];
             });
             ques=divQues.find(".ques1-input").val();
             daDung = divQues.find("input[type='radio']:checked").val();
-            
+
             if(listCauPart7.length == 1){
                 listCauPart7 += '{"id":"null", "cauHoi":"'+ques+'", "daA":"'
-                                +arrAsw[0]+'", "daB":"'+arrAsw[1]+'", "daC":"'+arrAsw[2]
-                                +'", "daD":"'+arrAsw[3]+'", "daDung":"'+daDung+'"}';
+                    +arrAsw[0]+'", "daB":"'+arrAsw[1]+'", "daC":"'+arrAsw[2]
+                    +'", "daD":"'+arrAsw[3]+'", "daDung":"'+daDung+'"}';
             }else{
                 listCauPart7 += ',{"id":"null", "cauHoi":"'+ques+'", "daA":"'
-                                +arrAsw[0]+'", "daB":"'+arrAsw[1]+'", "daC":"'+arrAsw[2]
-                                +'", "daD":"'+arrAsw[3]+'", "daDung":"'+daDung+'"}';
+                    +arrAsw[0]+'", "daB":"'+arrAsw[1]+'", "daC":"'+arrAsw[2]
+                    +'", "daD":"'+arrAsw[3]+'", "daDung":"'+daDung+'"}';
             }
-            
+
         }
         listCauPart7+="]";
-        
+
         doanPart7 = '{"id":"null", "doanVan1":"'+doanVan1+'", "doanVan2":"'
-                    +doanVan2+'", "loaiPart7":"'+loaiPart7+'", "listCauPart7":'
-                    +listCauPart7+'}';
-        
-        json = JSON.parse(doanPart7);
-        
-        console.log(json);
-        
+            +doanVan2+'", "loaiPart7":"'+loaiPart7+'"}';
+
+        // json = JSON.parse(doanPart7);
+
+        console.log(doanPart7);
+
         if(ques=="" || daDung=="" || doanVan1=="" || typeof doanVan1 == "undefined" ){
             isFillAll = false;
         }
-        
+
         if(isFillAll == true){
             $.ajax({
-                url: "manager-doan-part7/add",
-                method:"POST",
-                contentType:"application/json; charset=utf-8",
-                dataType:"json",
-                beforeSend: function(xhr) {
-                    xhr.setRequestHeader(header, token);
+                url: $("#path-add").html(),
+                method:"post",
+                data: {
+                    doanPart7:doanPart7,
+                    listCau: listCauPart7
                 },
-                data: doanPart7,
                 success: function(data){
-                    if(data.length>0){
-                        json.id = data[0];
-                        for(i = 0; i<json.listCauPart7.length; i++){
-                            json.listCauPart7[i].id = data[i+1];
-                        }
-                        if($("#sum-ques").html() == $("#total-ques").html()){
-                            resetTable(json);
-                            $("#sum-ques").html(parseInt($("#sum-ques").html())+1);
-                        }
-                        $("#total-ques").html(parseInt($("#total-ques").html())+1);
-                        console.log($("#sum-ques").html() +"=="+ $("#total-ques").html());
-                        $("#model-input-ques").modal('hide');
-                        alert("Thêm thành công!!!");
-                    }
+                    console.log(data=="true");
                 }
-             });
+            });
         }else{
             alert("Hãy điền đầy đủ thông tin!!!");
         }
-        
-        
+
+
     }
-	
+
 });
 
 //update cau hoi
- var modalConfirmUpdate = function(callback) {
+var modalConfirmUpdate = function(callback) {
     var id;
-	$(document).on("click", ".btn-update", function(e) {
-	    e.stopPropagation();
-	    var doanVan = loadDataForUpdate($(this).parent().parent().parent());
-	    json = JSON.parse(doanVan);
-	    updateToModal(json);
-	    $("#model-update-ques").modal("show");
-	});
+    $(document).on("click", ".btn-update", function(e) {
+        e.stopPropagation();
+        var doanVan = loadDataForUpdate($(this).parent().parent().parent());
+        json = JSON.parse(doanVan);
+        updateToModal(json);
+        $("#model-update-ques").modal("show");
+    });
 
-	$("#btn-update-yes").on("click", function() {
-		callback(true);
-		$("#model-update-ques").modal('hide');
-	});
+    $("#btn-update-yes").on("click", function() {
+        callback(true);
+        $("#model-update-ques").modal('hide');
+    });
 
-	$("#btn-update-no").on("click", function() {
-		callback(false);
-		$("#model-update-ques").modal('hide');
-	});
-	
+    $("#btn-update-no").on("click", function() {
+        callback(false);
+        $("#model-update-ques").modal('hide');
+    });
+
 
 };
 
 modalConfirmUpdate(function(confirm) {
     if(confirm == true){
-        var doanVan = getDataUpdate();
-        if(doanVan == false){
+        var arrRet = getDataUpdate();
+        var doanVan = arrRet[0];
+        if(arrRet == false){
             alert("Hãy điền đầy đủ các trường!!");
         }else{
             $.ajax({
-                url: "manager-doan-part7/update",
+                url: $("#path-update").html(),
                 method:"POST",
-                contentType:"application/json; charset=utf-8",
-                dataType:"json",
-                beforeSend: function(xhr) {
-                    xhr.setRequestHeader(header, token);
+                data: {
+                    doanPart7:doanVan,
+                    listCau: arrRet[1]
                 },
-                data: doanVan,
                 success: function(data){
-                    if(data == true){
-                        console.log("reset");
+                    if(data == "true"){
                         json = JSON.parse(doanVan);
                         var numRow = $(".main-table tbody tr").length;
                         var insertAfter;
@@ -215,17 +190,17 @@ modalConfirmUpdate(function(confirm) {
                                     console.log("mid");
                                     i=numRow;
                                 }
-                             }
-                             insertAfter = $($(".main-table tbody tr")[i]);
+                            }
+                            insertAfter = $($(".main-table tbody tr")[i]);
                         }
                         $("#model-input-ques").modal('hide');
                         alert("Update thành công!!!");
                     }
                 }
-             });
+            });
         }
     }
-       
+
 });
 
 function loadDataForUpdate(tr){
@@ -236,7 +211,7 @@ function loadDataForUpdate(tr){
     var loaiPart7="";
     var numQues = 5;
     var isFillAll = true;
-    
+
     tr.find(".paragrap img").each(function(i){
         if(i==0){
             doanVan1 = $(this).attr("src");
@@ -246,36 +221,36 @@ function loadDataForUpdate(tr){
             loaiPart7="Đoạn kép";
         }
     })
-    
-   tr.find(".para div.ques").each(function(i){
+
+    tr.find(".para div.ques").each(function(i){
         var ques="";
         var daDung="";
         var arrAsw = new Array();
-        
+
         ques = $(this).find(".ques-content").html();
         daDung = $(this).attr("data-asw");
         $(this).find(".asw-content").each(function(i){
             arrAsw[i] = $(this).html();
             arrAsw[i] = arrAsw[i].substr(3, arrAsw[i].length);
         });
-        
+
         if(listCauPart7.length == 1){
             listCauPart7 += '{"id":"'+$(this).attr("data-id")+'", "cauHoi":"'+ques+'", "daA":"'
-                            +arrAsw[0]+'", "daB":"'+arrAsw[1]+'", "daC":"'+arrAsw[2]
-                            +'", "daD":"'+arrAsw[3]+'", "daDung":"'+daDung+'"}';
+                +arrAsw[0]+'", "daB":"'+arrAsw[1]+'", "daC":"'+arrAsw[2]
+                +'", "daD":"'+arrAsw[3]+'", "daDung":"'+daDung+'"}';
         }else{
             listCauPart7 += ',{"id":"'+$(this).attr("data-id")+'", "cauHoi":"'+ques+'", "daA":"'
-                            +arrAsw[0]+'", "daB":"'+arrAsw[1]+'", "daC":"'+arrAsw[2]
-                            +'", "daD":"'+arrAsw[3]+'", "daDung":"'+daDung+'"}';
+                +arrAsw[0]+'", "daB":"'+arrAsw[1]+'", "daC":"'+arrAsw[2]
+                +'", "daD":"'+arrAsw[3]+'", "daDung":"'+daDung+'"}';
         }
     });
-    
+
     listCauPart7+="]";
-    
+
     doanPart7 = '{"id":"'+tr.attr("data-id")+'", "doanVan1":"'+doanVan1+'", "doanVan2":"'
-                +doanVan2+'", "loaiPart7":"'+loaiPart7+'", "listCauPart7":'
-                +listCauPart7+'}';
-    
+        +doanVan2+'", "loaiPart7":"'+loaiPart7+'", "listCauPart7":'
+        +listCauPart7+'}';
+
     return doanPart7;
 }
 
@@ -288,13 +263,13 @@ function getDataUpdate(){
     var numQues = 0;
     var isFillAll = true;
     var arr = ["A: ", "B: ", "C: ", "D: "];
-    
+
     $("#model-update-ques .pagination .page-item").each(function(){
         if($(this).hasClass("hide") == false){
             numQues++;
         }
     });
-    
+
     doanVan1 = $("#form-update-img1").attr("data-path");
     doanVan2 = $("#form-update-img2").attr("data-path");
     if( typeof doanVan2 == "undefined" || doanVan2.length==0 ){
@@ -303,7 +278,7 @@ function getDataUpdate(){
     }else{
         loaiPart7="Đoạn kép";
     }
-    
+
     for(var i=0; i<numQues; i++){
         var ques="";
         var daDung="";
@@ -311,7 +286,7 @@ function getDataUpdate(){
         var divQues = $("#model-update-ques .div-ques[data-index='"+(i+1)+"']");
         divQues.find(".input-asw").each(function(i){
             arrAsw[i] = $(this).val();
-            arrAsw[i] = arr[i]+arrAsw[i]; 
+            arrAsw[i] = arr[i]+arrAsw[i];
             if(arrAsw[i].length == 3) isFillAll = false;
         });
         ques=divQues.find(".ques1-input").val();
@@ -319,40 +294,43 @@ function getDataUpdate(){
             isFillAll = false;
         }
         daDung = divQues.find("input[type='radio']:checked").val();
-        
+
         if(daDung.length==0){
             isFillAll = false;
         }
-        
+
         if(listCauPart7.length == 1){
             listCauPart7 += '{"id":"'+divQues.attr("data-id")+'", "cauHoi":"'+ques+'", "daA":"'
-                            +arrAsw[0]+'", "daB":"'+arrAsw[1]+'", "daC":"'+arrAsw[2]
-                            +'", "daD":"'+arrAsw[3]+'", "daDung":"'+daDung+'"}';
+                +arrAsw[0]+'", "daB":"'+arrAsw[1]+'", "daC":"'+arrAsw[2]
+                +'", "daD":"'+arrAsw[3]+'", "daDung":"'+daDung+'"}';
         }else{
             listCauPart7 += ',{"id":"'+divQues.attr("data-id")+'", "cauHoi":"'+ques+'", "daA":"'
-                            +arrAsw[0]+'", "daB":"'+arrAsw[1]+'", "daC":"'+arrAsw[2]
-                            +'", "daD":"'+arrAsw[3]+'", "daDung":"'+daDung+'"}';
+                +arrAsw[0]+'", "daB":"'+arrAsw[1]+'", "daC":"'+arrAsw[2]
+                +'", "daD":"'+arrAsw[3]+'", "daDung":"'+daDung+'"}';
         }
-        
+
     }
     listCauPart7+="]";
-    
+
     doanPart7 = '{"id":"'+$("#model-update-ques .modal-body").attr("data-id")+'", "doanVan1":"'+doanVan1+'", "doanVan2":"'
-                +doanVan2+'", "loaiPart7":"'+loaiPart7+'", "listCauPart7":'
-                +listCauPart7+'}';
-    
+        +doanVan2+'", "loaiPart7":"'+loaiPart7+'", "listCauPart7":'
+        +listCauPart7+'}';
+
     json = JSON.parse(doanPart7);
-    
+
     if(doanVan1.length==0 || typeof doanVan1 == "undefined" ){
         isFillAll = false;
     }
-    
+
     if(isFillAll == true){
-        return doanPart7;
+        var arrRet = new Array();
+        arrRet[0] = doanPart7;
+        arrRet[1] = listCauPart7
+        return arrRet;
     }else{
         return false;
     }
-    
+
 }
 
 //load du lieu vao modal update
@@ -362,9 +340,9 @@ function updateToModal(doanVan){
     var numQues = doanVan.listCauPart7.length;
     for(i = 1; i<=5; i++){
         if(i<numQues+1){
-            $("#model-update-ques .pagination .page-item[data-page='"+i+"']").removeClass("hide");  
+            $("#model-update-ques .pagination .page-item[data-page='"+i+"']").removeClass("hide");
         }else{
-            $("#model-update-ques .pagination .page-item[data-page='"+i+"']").addClass("hide");   
+            $("#model-update-ques .pagination .page-item[data-page='"+i+"']").addClass("hide");
         }
     }
 
@@ -388,7 +366,7 @@ function updateToModal(doanVan){
             arrDa[2] = doanVan.listCauPart7[i].daC;
             arrDa[3] = doanVan.listCauPart7[i].daD;
             $(this).find(".input-asw").each(function(i){
-                    $(this).val(arrDa[i]);
+                $(this).val(arrDa[i]);
             });
             if(daDung=="A"){
                 $(this).find("input[type='radio'][value='A']").click();
@@ -399,7 +377,7 @@ function updateToModal(doanVan){
             }else{
                 $(this).find("input[type='radio'][value='D']").click();
             }
-            
+
         }
     });
 }
@@ -408,29 +386,29 @@ function updateToModal(doanVan){
 modalShowPara = function(callback){
     $(document).on("click",".main-table tbody tr td", function(){
         loadDataForPrev($(this));
-        $("#model-preview-ques").modal('show'); 
+        $("#model-preview-ques").modal('show');
     });
 }
 
 modalShowPara(function(){
-    
+
 });
 
 
 //reset page input
 function resetInput(){
     $(".div-ques").each(function(){
-       $(this).find(".ques1-input").val("");
-       $(this).find(".ques2-input").val("");
-       $(this).find("input[type='radio'][value='A']").click();
-       $(this).find(".input-asw").each(function(){
-           $(this).val("");
-       });
+        $(this).find(".ques1-input").val("");
+        $(this).find(".ques2-input").val("");
+        $(this).find("input[type='radio'][value='A']").click();
+        $(this).find(".input-asw").each(function(){
+            $(this).val("");
+        });
     });
-    
+
     $("#form-up-img1").removeAttr("data-path");
     $("#form-up-img2").removeAttr("data-path");
-    
+
     $(".pagination-input[data-page='1']").each(function(){
         $(this).click();
     });
@@ -549,12 +527,12 @@ function loadDataForPrev(tr){
 
 function resetTable(doanVan, isPrepend, insertAfter){
     var cau = "", morePara="";
-    
+
     for(i = 0; i<doanVan.listCauPart7.length; i++){
         var c = doanVan.listCauPart7[i];
         var daDung = c.daDung;
         var checkA='',checkB='',checkC='',checkD='';
-        
+
         if(daDung == "A"){
             checkA = 'checked="checked"';
         }else if(daDung == "B"){
@@ -564,45 +542,45 @@ function resetTable(doanVan, isPrepend, insertAfter){
         }else{
             checkD = 'checked="checked"';
         }
-        
+
         cau += '<div class="ques" data-id="'+c.id+'" data-asw="'+c.daDung+'">'
-                + '<div><span class="no-ques">Câu '+(i+1)+'</span><span'
-                + ' class="ques-content">'+c.cauHoi+'</span></div>'
-                + ' <div class="row"><label class="col-12 col-md-6"><input type="radio"'
-                + ' name="choise'+(i+1)+'" value="A" '+checkA+' disabled="disabled"><span'
-                + ' class="asw-content">'+c.daA+'</span></label> <label'
-                + ' class="col-12 col-md-6"><input type="radio"'
-                + ' name="choise'+(i+1)+'" value="B" '+checkB+' disabled="disabled"><span'
-                + ' class="asw-content">'+c.daB+'</span></label> <label'
-                + ' class="col-12 col-md-6"><input type="radio"'
-                + ' name="choise'+(i+1)+'" value="C" '+checkC+' disabled="disabled"><span'
-                + ' class="asw-content">'+c.daC+'</span></label> <label'
-                + ' class="col-12 col-md-6"><input type="radio"'
-                + ' name="choise'+(i+1)+'" value="D" '+checkD+' disabled="disabled"><span'
-                + ' class="asw-content">'+c.daD+'</span></label>'
-                + ' </div><hr></div>';
+            + '<div><span class="no-ques">Câu '+(i+1)+'</span><span'
+            + ' class="ques-content">'+c.cauHoi+'</span></div>'
+            + ' <div class="row"><label class="col-12 col-md-6"><input type="radio"'
+            + ' name="choise'+(i+1)+'" value="A" '+checkA+' disabled="disabled"><span'
+            + ' class="asw-content">'+c.daA+'</span></label> <label'
+            + ' class="col-12 col-md-6"><input type="radio"'
+            + ' name="choise'+(i+1)+'" value="B" '+checkB+' disabled="disabled"><span'
+            + ' class="asw-content">'+c.daB+'</span></label> <label'
+            + ' class="col-12 col-md-6"><input type="radio"'
+            + ' name="choise'+(i+1)+'" value="C" '+checkC+' disabled="disabled"><span'
+            + ' class="asw-content">'+c.daC+'</span></label> <label'
+            + ' class="col-12 col-md-6"><input type="radio"'
+            + ' name="choise'+(i+1)+'" value="D" '+checkD+' disabled="disabled"><span'
+            + ' class="asw-content">'+c.daD+'</span></label>'
+            + ' </div><hr></div>';
     }
-    
+
     if(doanVan.doanVan2.length>0){
         morePara = '<br><img src="'+doanVan.doanVan2+'">';
     }
-    
+
     var append = '<tr class="d-flex row" data-id="'+doanVan.id+'">'
-            + '<td class="col-12"><img class="ico-forward"'
-            + 'src="'+$("#root-path").html()+'/resources/img/forward-arrow.png">'
-            + '<span class="ques-content"> Đoạn văn id '+doanVan.id+' - <span'
-            + ' class="type-part">'+doanVan.loaiPart7+'</span></span>'
-            + '<div class="controll-ques">'
-            + '<span class="btn-update" data-id="'+doanVan.id+'">update</span><span> • </span>'
-            + '<span class="btn-del" data-id="'+doanVan.id+'">delete</span>'
-            + '</div> <img class="expand-ico"'
-            + 'src="'+$("#root-path").html()+'/resources/img/next.png">'
-            + '<div class="div-append-para hide"><div><div class="paragrap">'
-            + '<img src="'+doanVan.doanVan1+'">'
-            + morePara
-            + '</div><div class="para" data-id="'+doanVan.id+'">'
-            +cau
-            + '</div></div></div></td></tr>';
+        + '<td class="col-12"><img class="ico-forward"'
+        + 'src="'+$("#root-path").html()+'/resources/img/forward-arrow.png">'
+        + '<span class="ques-content"> Đoạn văn id '+doanVan.id+' - <span'
+        + ' class="type-part">'+doanVan.loaiPart7+'</span></span>'
+        + '<div class="controll-ques">'
+        + '<span class="btn-update" data-id="'+doanVan.id+'">update</span><span> • </span>'
+        + '<span class="btn-del" data-id="'+doanVan.id+'">delete</span>'
+        + '</div> <img class="expand-ico"'
+        + 'src="'+$("#root-path").html()+'/resources/img/next.png">'
+        + '<div class="div-append-para hide"><div><div class="paragrap">'
+        + '<img src="'+doanVan.doanVan1+'">'
+        + morePara
+        + '</div><div class="para" data-id="'+doanVan.id+'">'
+        +cau
+        + '</div></div></div></td></tr>';
     if(isPrepend == true){
         $(".main-table tbody").prepend(append);
     }else if(typeof insertAfter == "undefined"){
@@ -610,25 +588,26 @@ function resetTable(doanVan, isPrepend, insertAfter){
     }else{
         $($.parseHTML(append)).insertAfter(insertAfter);
     }
-    
-    
+
+
 }
 
 $(document).on("click", ".btn-del", function(e){
+    console.log("asdassadas");
     e.stopPropagation();
     var id = $(this).attr("data-id");
     var tr = $(this).parent().parent().parent();
     $.ajax({
-       url: "manager-doan-part7/del",
-       data: {
-           id: id, 
-       },
-       success: function(data){
-           if(data==true){
-               alert("Xóa thành công!!!");
-               tr.remove();
-           }
-       }
+        url: $("#path-del").html(),
+        data: {
+            id: id,
+        },
+        success: function(data){
+            if(data=="true"){
+                alert("Xóa thành công!!!");
+                tr.remove();
+            }
+        }
     });
 });
 
@@ -636,7 +615,7 @@ $(document).on("click", ".btn-del", function(e){
 $(document).on("scroll", function(){
     var sum = $("#sum-ques").html();
     var total = $("#total-ques").html();
-    
+
     if($("#sum-ques").html() != $("#total-ques").html()){
         if(sum!=total){
             var s = $(window).scrollTop(),
@@ -652,7 +631,7 @@ $(document).on("scroll", function(){
                     },
                     success: function(data){
                         $("#sum-ques").html(parseInt(sum)+data.length);
-                        
+
                         for(var i=0;i<data.length; i++){
                             resetTable(data[i]);
                         }

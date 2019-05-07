@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Part5;
 use Illuminate\Http\Request;
+use TheSeer\Tokenizer\Exception;
 
 class Part5Controller extends Controller
 {
@@ -26,7 +27,62 @@ class Part5Controller extends Controller
         $daC = $request['daC'];
         $daD = $request['daD'];
         $dADung = $request['daDung'];
-        error_log('hrhr');
-        return response()->json(["2"=>"w"],200);
+        
+        $part5 = new Part5();
+        $part5->cauHoi = $cauHoi;
+        $part5->daA = $daA;
+        $part5->daB = $daB;
+        $part5->daC = $daC;
+        $part5->daD = $daD;
+        $part5->dADung = $dADung;
+        try{
+            $part5 ->save();
+            return response()->json(["id"=>$part5->id],200);
+        }
+        catch(Exception $e){
+            
+        }
+        return response()->json(["id"=>-1],200);
+    }
+
+    public function update(Request $request){
+        $cauHoi = $request['cauHoi'];
+        $id = $request['id'];
+        $daA = $request['daA'];
+        $daB = $request['daB'];
+        $daC = $request['daC'];
+        $daD = $request['daD'];
+        $dADung = $request['daDung'];
+        
+        $part5 = new Part5();
+
+        $part5->id = $id;
+        $part5->cauHoi = $cauHoi;
+        $part5->daA = $daA;
+        $part5->daB = $daB;
+        $part5->daC = $daC;
+        $part5->daD = $daD;
+        $part5->dADung = $dADung;
+        try{
+            Part5::find($id)->update($part5->toArray());
+            return response()->json(["id"=>$part5->id],200);
+        }
+        catch(Exception $e){
+            
+        }
+        return response()->json(["id"=>-1],200);
+    }
+
+    public function delete(Request $request){
+        $id = $request['id'];
+
+        try{
+            Part5::find($id)->delete();
+            return "true";
+        }
+        catch(Exception $e){
+            
+        }
+        return "false";
     }
 }
