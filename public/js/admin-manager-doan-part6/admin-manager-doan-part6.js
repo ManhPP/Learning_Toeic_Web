@@ -3,9 +3,12 @@ var token;
 var loadAjax = true;
 
 $(document).ready(function(){
-    
-    header= $("#csrf-name").html();
-    token = $("#csrf-value").html();
+
+    $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+    });
 });
 
 
@@ -76,18 +79,17 @@ modalConfirmInput(function(confirm) {
 	        $.ajax({
 	            url: "manager-doan-part6/add",
 	            method:"POST",
-	            contentType:"application/json; charset=utf-8",
-	            dataType:"json",
-	            beforeSend: function(xhr) {
-	                xhr.setRequestHeader(header, token);
-	            },
-	            data: doanVan,
+
+	            data: {
+	                para:doanVan
+                },
 	            success: function(data){
 	                if(parseInt(data)>0){
 	                    if( parseInt($("#total-ques").html()) == parseInt($("#sum-ques").html()) ){
 	                        para["id"] = data;
 	                        $("#sum-ques").html(parseInt($("#sum-ques").html())+1);
 	                        console.log(para+"----");
+	                        alert("Thêm thành công!!!")
 	                        resetTable(para);
 	                    }
 	                    $("#total-ques").html(parseInt($("#total-ques").html())+1);
@@ -171,14 +173,11 @@ modalConfirmUpdate(function(confirm, id) {
             $.ajax({
                 url: "manager-doan-part6/update",
                 method:"POST",
-                contentType:"application/json; charset=utf-8",
-                dataType:"json",
-                beforeSend: function(xhr) {
-                    xhr.setRequestHeader(header, token);
+                data: {
+                    para : doanVan
                 },
-                data: doanVan,
                 success: function(data){
-                    if(data==true){
+                    if(data=='true'){
                         var temp;
                         $(".main-table tbody tr").each(function(i){
                             if($(this).attr("data-id") == id) {
@@ -255,7 +254,7 @@ $(document).on("click", ".btn-del", function(e){
         },
         method: "GET",
         success: function(data){
-            if(data==true){
+            if(data=='true'){
                 removeRow(id);
                 alert("Xóa thành công!!!");
             }else{

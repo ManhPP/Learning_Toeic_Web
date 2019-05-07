@@ -3,8 +3,12 @@ var token;
 var loadAjax = true;
 
 $(document).ready(function(){
-    header= $("#csrf-name").html();
-    token = $("#csrf-value").html();
+
+    $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+    });
 });
 
 
@@ -350,42 +354,22 @@ $(document).on("click", "#submit-add", function(){
         if(($("#tittle").val()).length > 0){
             part = '{"id":"null", "loaiPart":"Part 6", "tittle":"'
                     +$("#tittle").val()+'", "listDoanVanPart6":'+arrDoan+'}';
-            json = JSON.parse(part);
+            // json = JSON.parse(part);
 
             $.ajax({
-                url: $("#root-path").html()+"/admin/bai-hoc-manager/add-part-doc/check-repeat",
+                url: $("#root-path").html()+"/admin/bai-hoc-manager/add-part-doc/add",
                 method: "POST",
-                beforeSend: function(xhr) {
-                    xhr.setRequestHeader(header, token);
+                data: {
+                    part6 : part
                 },
-                contentType:"application/json; charset=utf-8",
-                dataType:"json",
-                data: part,
                 success: function(data){
-                    console.log(data);
-                    if(data == true){
-                        $.ajax({
-                            url: $("#root-path").html()+"/admin/bai-hoc-manager/add-part-doc/add",
-                            method: "POST",
-                            beforeSend: function(xhr) {
-                                xhr.setRequestHeader(header, token);
-                            },
-                            contentType:"application/json; charset=utf-8",
-                            dataType:"json",
-                            data: part,
-                            success: function(data){
-                                if(data == true){
-                                    alert("Thêm thành công!!!");
-                                }else{
-                                    alert("Thêm không thành công, kiểm tra lại!!!");
-                                }
-                            }
-                         });
+                    if(data == 'true'){
+                        alert("Thêm thành công!!!");
                     }else{
-                        alert("Bài đọc bị trùng, hãy chọn các câu khác!!!");
+                        alert("Thêm không thành công, kiểm tra lại!!!");
                     }
                 }
-             });
+            });
         }else{
             alert("Hãy điền tiêu đề!!!");
         }

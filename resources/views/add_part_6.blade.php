@@ -34,68 +34,13 @@
 							your test screen.</span>
                     </div>
                     <div class="list-cau">
-                        <p class="ques refer-ques">Questions 1-3 refer to the
-                            following conversation.</p>
-                        <div class="ques">
-                            <div>
-                                <span class="no-ques">Câu 1</span> <span>Please let me
-                                    take this opportunity to introduce myself as the
-                                    newly.....(141).....sales agent for GK Trading Company. </span>
-                            </div>
-                            <div class="row">
-                                <label class="col-12 col-md-6"><input type="radio"
-                                    name="choise">A: appointed</label> <label
-                                    class="col-12 col-md-6"><input type="radio"
-                                    name="choise">B: appointing</label> <label
-                                    class="col-12 col-md-6"><input type="radio"
-                                    name="choise">C: appoint</label> <label class="col-12 col-md-6"><input
-                                    type="radio" name="choise">D: appointment</label>
-                            </div>
-                            <hr>
-                        </div>
-                        <div class="ques">
-                            <div>
-                                <span class="no-ques">Câu 2</span> <span>As I have joined
-                                    the company recently, I went.....(142).....our records and
-                                    found that you are one of our most valuable customers.</span>
-                            </div>
-                            <div class="row">
-                                <label class="col-12 col-md-6"><input type="radio"
-                                    name="choise">A: with</label> <label class="col-12 col-md-6"><input
-                                    type="radio" name="choise">B: into</label> <label
-                                    class="col-12 col-md-6"><input type="radio"
-                                    name="choise">C: through</label> <label class="col-12 col-md-6"><input
-                                    type="radio" name="choise">D: over</label>
-                            </div>
-                            <hr>
-                        </div>
-                        <div class="ques">
-                            <div>
-                                <span class="no-ques">Câu 3</span> <span>As an initiative
-                                    to a growing business relationship that will benefit both of
-                                    us, I will be pleased to visit you in your office at your
-                                    convenience in order to understand about your company and this
-                                    will enable me to.....(143).....you with a better service. I
-                                    could also introduce our new products to you.I wish to call in
-                                    your office, and I want to make the appointment as I am looking
-                                    forward to meeting you personally. Yours sincerely, Praveen
-                                    Kumar.</span>
-                            </div>
-                            <div class="row">
-                                <label class="col-12 col-md-6"><input type="radio"
-                                    name="choise">A: give</label> <label class="col-12 col-md-6"><input
-                                    type="radio" name="choise">B: provide</label> <label
-                                    class="col-12 col-md-6"><input type="radio"
-                                    name="choise">C: award</label> <label class="col-12 col-md-6"><input
-                                    type="radio" name="choise">D: deliver</label>
-                            </div>
-                            <hr>
-                        </div>
+
+
                     </div>
                     <!-- them cau -->
                     <div class="div-choise-para">
                         <img alt="add" id="ico-add"
-                             src="${pageContext.request.contextPath}/resources/img/round-add.png">
+                             src="{{URL::asset("imgs/round-add.png")}}">
                     </div>
                     <div style="text-align: center;">
                         <button id="submit-add">Add part</button>
@@ -127,8 +72,8 @@
                         <table class="table table-bordered" style="min-width: 400px">
                             <thead class="thead-dark">
                             <tr class="d-flex">
-                                <th class="col-12">Câu hỏi(<span id="sum-ques">${fn:length(arrDoan) }</span>/<span
-                                            id="total-ques">${sum }</span>)
+                                <th class="col-12">Câu hỏi(<span id="sum-ques">{{count($arrDoan)}}</span>/<span
+                                            id="total-ques">{{$sum }}</span>)
                                 </th>
                             </tr>
                             </thead>
@@ -146,7 +91,7 @@
 
                                         <div class="content-para hide">
                                             {{ $indexQues = 0 }}
-                                            @foreach( $doan->part6() as $cau)
+                                            @foreach( $doan->part6 as $cau)
                                                 {{ $checkA ='' }}
                                                 {{ $checkB = '' }}
                                                 {{ $checkC = '' }}
@@ -171,7 +116,7 @@
                                                 <div class="ques" data-asw="{{$cau->daDung }}"
                                                      data-id="{{$cau->id }}">
                                                     <div>
-                                                        <span class="no-ques">Câu {{$indexQues+=1 }}</span> <span
+                                                        <span class="no-ques">Câu {{$indexQues +1 }}</span> <span
                                                                 class="ques-content">{{$cau->cauHoi }}</span>
                                                     </div>
                                                     <div class="row" data-idpara = "{{$doan->id }}">
@@ -205,7 +150,12 @@
         </div>
     </div>
 
-
+    <div style="display: none;">
+        <div id="csrf-name">${_csrf.headerName}</div>
+        <div id="csrf-value">${_csrf.token}</div>
+        <div id="root-path">{{URL("")}}</div>
+        <div id="id-user">${acc.id }</div>
+    </div>
 @endsection
 
 

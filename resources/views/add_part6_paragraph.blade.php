@@ -1,5 +1,5 @@
 @extends('layouts.master')
-@section('title','add part 6')
+@section('title','add part para 6')
 @section("css")
     <link rel="stylesheet" type="text/css" href="{{ URL::asset("css/home_css_part6.css") }}">
 @endsection
@@ -16,7 +16,7 @@
                 <thead class="thead-dark">
                 <tr class="d-flex">
                     <th class="col-12">Câu hỏi(<span id="sum-ques">{{count($arrDoan) }}</span>/<span
-                                id="total-ques">${sum }</span>)
+                                id="total-ques">{{$sum }}</span>)
                     </th>
                 </tr>
                 </thead>
@@ -40,26 +40,26 @@
                             <img class="shorten-ico hide" src="{{URL::asset("imgs/down-arrow.png")}}">
 
                             <div class="content-para hide">
-                                {{ $indexQues = 0 }}
-                                @foreach( $doan->part6() as $cau)
-                                    {{ $checkA ='' }}
+                                <?php $indexQues = 0 ?>
+                                @foreach( $doan->part6 as $cau)
+                                    <?php $checkA ='' ?>
                                     {{ $checkB = '' }}
                                     {{ $checkC = '' }}
                                     {{ $checkD = '' }}
                                     @if( $cau->daDung =='A')
-                                        {{ $checkA = 'checked'}}
+                                        <?php $checkA = 'checked'?>
                                     @endif
 
                                     @if($cau->daDung == 'B')
-                                        {{ $checkB = 'checked' }}
+                                            <?php $checkB = 'checked'?>
                                     @endif
 
                                         @if($cau->daDung == 'C')
-                                        {{ $checkC = 'checked' }}
+                                            <?php $checkC = 'checked'?>
                                         @endif
 
                                         @if($cau->daDung == 'D')
-                                        {{ $checkD  = 'checked'}}
+                                            <?php $checkD = 'checked'?>
                                         @endif
 
                                     <div class="ques" data-asw="{{$cau->daDung }}" data-id="{{$cau->id }}">
@@ -75,7 +75,7 @@
                                         </div>
                                         <hr>
                                     </div>
-                                    {{ $indexQues +=1 }}
+                                    <?php $indexQues +=1 ?>
                                 @endforeach
                             </div>
 
@@ -85,9 +85,10 @@
                 </tbody>
             </table>
         </div>
+        <img src="{{URL::asset("imgs/round-add.png")}}"
+             id="ico-add-ques">
     </div>
-    <img src="{{URL::asset("imgs/round-add.png")}}"
-         id="ico-add-ques">
+
 
     <!-- nhap noi dung cau -->
     <div class="modal fade" tabindex="-1" role="dialog"
