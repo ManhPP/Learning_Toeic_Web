@@ -49,7 +49,7 @@ $("#up-audio").change(function(event) {
         contentType: false, // khong cho trinh duyet tu dong them contentType text vao header
         processData: false,
         success: function(data){
-            // alert('a');
+            alert('a');
             if(data!="false"){
                 formParent.attr("data-path", data.pathFile); 
             }
@@ -119,25 +119,25 @@ $(document).on("click", "#add-part", function(){
    partNghe+="}"
   
    //upload
-   $.ajax({
-       url: $("#root-path").html()+"/add-part-1/add",
-       method: "POST",
-    //    contentType:"application/json; charset=utf-8",
-    //    dataType:"json",
-       headers: {
-        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+    $.ajax({
+        url: $("#root-path").html()+"/add-part-1/add",
+        method: "POST",
+        //    contentType:"application/json; charset=utf-8",
+        //    dataType:"json",
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
         },
         data: {
             part1:partNghe,
             listCau: arrCau
         },
-       success: function(data){
-           console.log(data);
-          if(data!=null){
-              alert("Thêm thành công!!");
-          }else{
-              alert("Thêm thất bại!!");
-          }
-       }
+        success: function(data){
+            console.log(data);
+            if(data==true){
+                alert("Thêm thành công!!");
+            }else{
+                alert("Thêm thất bại!!");
+            }
+        }
    });
 });

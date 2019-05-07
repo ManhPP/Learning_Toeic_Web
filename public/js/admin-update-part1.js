@@ -122,7 +122,7 @@ $(document).on("click", "#add-part", function(){
   
    //upload
    $.ajax({
-        url: $("#root-path").html()+"/update-part-1/update",
+        url: $("#root-path").html()+"/part1/update",
         method: "POST",
     //    contentType:"application/json; charset=utf-8",
     //    dataType:"json",

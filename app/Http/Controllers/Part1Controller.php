@@ -9,24 +9,8 @@ use PhpParser\Node\Expr\Cast\Object_;
 
 class Part1Controller extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
-    {
-        //
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-
     //lấy view update part1
-    public function getPart1(Request $request)
+    public function get(Request $request)
     {
         // $idPartNghe=$request["id"];
         $part1 = ListeningPart::find(1);
@@ -36,7 +20,7 @@ class Part1Controller extends Controller
     }
 
     // tạo câu part 1
-    public function createPart1(Request $request)
+    public function create(Request $request)
     {
         $listeningPart = $request["part1"];
         $listCauString = $request["listCau"];
@@ -54,7 +38,7 @@ class Part1Controller extends Controller
     }
 
     //update câu part 1
-    public function updatePart1(Request $request)
+    public function update(Request $request)
     {
         $listeningPart = $request["part1"];
         $listCauString = $request["listCau"];
@@ -73,7 +57,7 @@ class Part1Controller extends Controller
         return 2;
     }
 
-    public function deletePart1(Request $request){
+    public function delete(Request $request){
         // $id = $request["id"];
         try {
             $part1 = ListeningPart::find(1);
@@ -84,61 +68,5 @@ class Part1Controller extends Controller
 
         }
         return 2;
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Part1  $part1
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Part1 $part1)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Part1  $part1
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Part1 $part1)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Part1  $part1
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, Part1 $part1)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Part1  $part1
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(Part1 $part1)
-    {
-        //
     }
 }

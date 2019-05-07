@@ -127,21 +127,37 @@ Route::post('/upload-audio-listen', [
     'uses' => 'ListeningPartController@uploadaudio'
 ]);
 
-//thêm các câu part1
+//CRUD Part 1
 Route::post('/part1/add', [
-    'uses' => 'Part1Controller@createPart1'
+    'uses' => 'Part1Controller@create'
 ]);
 
-// lấy dữ liệu part1
 Route::get('/part1/get', [
-    'uses' => 'Part1Controller@getPart1'
+    'uses' => 'Part1Controller@get'
 ]);
 
-// update các câu part1
 Route::post('/part1/update', [
-    'uses' => 'Part1Controller@updatePart1'
+    'uses' => 'Part2Controller@update'
+]);
+Route::get('/part1/delete', [
+    'uses' => 'Part2Controller@delete'
 ]);
 
+//CRUD Part 2
+Route::post('/part2/add', [
+    'uses' => 'Part2Controller@create'
+]);
+
+Route::get('/part2/get', [
+    'uses' => 'Part2Controller@get'
+]);
+
+Route::post('/part2/update', [
+    'uses' => 'Part2Controller@update'
+]);
+Route::get('/part2/delete', [
+    'uses' => 'Part2Controller@delete'
+]);
 //upload file part 7
 Route::post("/manager-para-part7/upload",[
     'uses' => 'Part7ParagraphController@uploadFile'
@@ -160,8 +176,4 @@ Route::post("/manager-para-part7/update",[
 Route::get("/manager-para-part7/del",[
     "uses"=>"Part7ParagraphController@delPara"
 ]) -> name("part7paragraph.delpara");
-
-Route::get('/part1/delete', [
-    'uses' => 'Part1Controller@DeletePart1'
-]);
 

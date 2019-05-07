@@ -1,7 +1,7 @@
 @extends('layouts.master')
 @section('title','add part 2')
 @section("css")
-    <link rel="stylesheet" type="text/css" href="{{URL::asset("css/home_css_part2.css")}}">
+    <link rel="stylesheet" type="text/css" href="{{URL::asset("css/admin_add_part2.css")}}">
 @endsection
 @section('navbar')
     @parent
@@ -10,6 +10,12 @@
 @section('content')
     <!-- body -->
     <div class="body row">
+        <div class="row">
+            <div class="col-12 time-detail">
+                <span>Tiêu đề: </span>
+                <input id="tittle">
+            </div>
+        </div>
         <div class="content-container col-12 col-sm-11 col-md-10 col-lg-9 col-xl-8">
             <div class="header-content">
                 <div>Practic part 2 (30 sentences), *(Admin phải upload tất cả các file và chọn đáp án đúng cho từng
@@ -21,128 +27,34 @@
                     <!-- audio -->
                     <div class="audio">
                         <span>Input audio here</span>
-                        <input type="file" name="#" accept="audio/*">
+                        <form id="form-upload-audio">
+                            <input id="up-audio" type="file" name="audio" accept="audio/*">
+                        </form>
                     </div>
-                    <hr>
-
                     <!-- intro img-->
                     <div class="intro">
                         <span>Input image intro here</span>
-                        <input type="file" name="#" accept="image/*">
+                        <form class="form-upload-img">
+                            <input id="up-img" type="file" name="file-image" accept="image/*">
+                        </form>
                     </div>
-                    <hr>
                     <!-- list cau hoi -->
+                    @for($index=0;$index<30;$index++)
                     <div class="list-cau">
-                        <!-- cau1 -->
                         <div class="ques">
                             <div class="no-ques">
-                                Câu 1
+                                Câu {{$index+1}}
                             </div>
                             <div class="tick col-12 col-sm-10 row">
-                                <label class="col-4"><input type="radio" name="choise">A</label>
-                                <label class="col-4"><input type="radio" name="choise">B</label>
-                                <label class="col-4"><input type="radio" name="choise">C</label>
+                                <label class="col-4"><input type="radio" name="choise{{$index}}" checked="checked" value="A">A</label>
+                                <label class="col-4"><input type="radio" name="choise{{$index}}" value="B">B</label>
+                                <label class="col-4"><input type="radio" name="choise{{$index}}" value="C">C</label>
                             </div>
                         </div>
-                        <!-- cau2 -->
-                        <div class="ques">
-                            <div class="no-ques">
-                                Câu 2
-                            </div>
-                            <div class="tick col-12 col-sm-10 row">
-                                <label class="col-4"><input type="radio" name="choise">A</label>
-                                <label class="col-4"><input type="radio" name="choise">B</label>
-                                <label class="col-4"><input type="radio" name="choise">C</label>
-                            </div>
-                        </div>
-                        <!-- cau3 -->
-                        <div class="ques">
-                            <div class="no-ques">
-                                Câu 3
-                            </div>
-                            <div class="tick col-12 col-sm-10 row">
-                                <label class="col-4"><input type="radio" name="choise">A</label>
-                                <label class="col-4"><input type="radio" name="choise">B</label>
-                                <label class="col-4"><input type="radio" name="choise">C</label>
-                            </div>
-                        </div>
-                        <!-- cau4 -->
-                        <div class="ques">
-                            <div class="no-ques">
-                                Câu 4
-                            </div>
-                            <div class="tick col-12 col-sm-10 row">
-                                <label class="col-4"><input type="radio" name="choise">A</label>
-                                <label class="col-4"><input type="radio" name="choise">B</label>
-                                <label class="col-4"><input type="radio" name="choise">C</label>
-                            </div>
-                        </div>
-                        <!-- cau5 -->
-                        <div class="ques">
-                            <div class="no-ques">
-                                Câu 5
-                            </div>
-                            <div class="tick col-12 col-sm-10 row">
-                                <label class="col-4"><input type="radio" name="choise">A</label>
-                                <label class="col-4"><input type="radio" name="choise">B</label>
-                                <label class="col-4"><input type="radio" name="choise">C</label>
-                            </div>
-                        </div>
-                        <!-- cau6 -->
-                        <div class="ques">
-                            <div class="no-ques">
-                                Câu 6
-                            </div>
-                            <div class="tick col-12 col-sm-10 row">
-                                <label class="col-4"><input type="radio" name="choise">A</label>
-                                <label class="col-4"><input type="radio" name="choise">B</label>
-                                <label class="col-4"><input type="radio" name="choise">C</label>
-                            </div>
-                        </div>
-                        <!-- cau7 -->
-                        <div class="ques">
-                            <div class="no-ques">
-                                Câu 7
-                            </div>
-                            <div class="tick col-12 col-sm-10 row">
-                                <label class="col-4"><input type="radio" name="choise">A</label>
-                                <label class="col-4"><input type="radio" name="choise">B</label>
-                                <label class="col-4"><input type="radio" name="choise">C</label>
-                            </div>
-                        </div>
-                        <!-- cau8 -->
-                        <div class="ques">
-                            <div class="no-ques">
-                                Câu 8
-                            </div>
-                            <div class="tick col-12 col-sm-10 row">
-                                <label class="col-4"><input type="radio" name="choise">A</label>
-                                <label class="col-4"><input type="radio" name="choise">B</label>
-                                <label class="col-4"><input type="radio" name="choise">C</label>
-                            </div>
-                        </div>
-                        <!-- cau9 -->
-                        <div class="ques">
-                            <div class="no-ques">
-                                Câu 9
-                            </div>
-                            <div class="tick col-12 col-sm-10 row">
-                                <label class="col-4"><input type="radio" name="choise">A</label>
-                                <label class="col-4"><input type="radio" name="choise">B</label>
-                                <label class="col-4"><input type="radio" name="choise">C</label>
-                            </div>
-                        </div>
-                        <!-- cau10 -->
-                        <div class="ques">
-                            <div class="no-ques">
-                                Câu 10
-                            </div>
-                            <div class="tick col-12 col-sm-10 row">
-                                <label class="col-4"><input type="radio" name="choise">A</label>
-                                <label class="col-4"><input type="radio" name="choise">B</label>
-                                <label class="col-4"><input type="radio" name="choise">C</label>
-                            </div>
-                        </div>
+                    </div>
+                    @endfor
+                    <div style="text-align: center;margin-top: 2em;">
+                        <input style="width: 5em;" type="button" value="Add" id="add-part">
                     </div>
                 </div>
             </div>
@@ -154,3 +66,20 @@
 @section('footer')
     @parent
 @endsection
+<div style="display: none;">
+    <div id="csrf-name">${_csrf.headerName}</div>
+    <div id="csrf-value">${_csrf.token}</div>
+    <div id="root-path">{{URL("")}}</div>
+    <div id="id-user">1</div>
+</div>
+<!-- Open modal -->
+<button id="my-button" style="display: none;" data-toggle="modal"
+        data-target="#myModal">Open modal</button>
+<script type="text/javascript"
+        src="{{ URL::asset("js/jquery-3.3.1.min.js") }}"></script>
+<script
+        src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+<script type="text/javascript"
+        src="{{URL::asset("js/bootstrap.min.js")}}"></script>
+<script type="text/javascript"
+        src="{{URL::asset("js/admin_add_part2.js")}}"></script>
