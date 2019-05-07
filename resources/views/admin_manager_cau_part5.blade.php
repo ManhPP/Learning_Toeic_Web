@@ -1,5 +1,5 @@
 @extends('layouts.master')
-@section('title','add part 5')
+@section('title','manage sentence in part 5')
 @section("css")
     <link rel="stylesheet" type="text/css" href="{{ URL::asset("css/admin_manager_cau_part5/admin_manager_cau_part5.css") }}">
 @endsection
@@ -33,46 +33,46 @@
                     {{ $checkC = "" }}
                     {{ $checkD = "" }}
                     {{-- <c:choose>
-                        <c:when test="${cau.daDung=='A' }">
+                        <c:when test="${cau.dADung=='A' }">
                             <c:set var="checkA" value="checked='checked'"/>
                         </c:when>
-                        <c:when test="${cau.daDung=='B' }">
+                        <c:when test="${cau.dADung=='B' }">
                             <c:set var="checkB" value="checked='checked'"/>
                         </c:when>
-                        <c:when test="${cau.daDung=='C' }">
+                        <c:when test="${cau.dADung=='C' }">
                             <c:set var="checkC" value="checked='checked'"/>
                         </c:when>
-                        <c:when test="${cau.daDung=='D' }">
+                        <c:when test="${cau.dADung=='D' }">
                             <c:set var="checkD" value="checked='checked'"/>
                         </c:when>
                                 </c:choose>			 --}}
 
                     
-                    @if($cau->daDung == 'A')
+                    @if($cau->dADung == 'A')
                         {{ $checkA = "checked = 'checked'" }}
                     @endif
-                    @if($cau->daDung == 'B')
+                    @if($cau->dADung == 'B')
                         {{ $checkB = "checked = 'checked'" }}
                     @endif
-                    @if($cau->daDung == 'C')
+                    @if($cau->dADung == 'C')
                         {{ $checkC = "checked = 'checked'" }}
                     @endif
-                    @if($cau->daDung == 'D')
+                    @if($cau->dADung == 'D')
                         {{ $checkD = "checked = 'checked'" }}
                     @endif
 
                     {{-- <tr class="d-flex" data-id="${cau.id }"> --}}
                         <tr class="d-flex" data-id="{{ $cau->id  }}">
                         <td class="col-12"><img class="ico-forward"
-                            src="${pageContext.request.contextPath}/resources/img/forward-arrow.png">
+                            src="{{ URL::asset("imgs/forward-arrow.png") }}">
                             <span class="content-ques">{{ $cau->cauHoi }}</span>
                             <div class="controll-ques">
                                 <span class="btn-update" data-id="{{ $cau->id }}">update</span>
                                 <span>•</span>
                                 <span class="btn-del" data-id="{{ $cau->id }}">delete</span>
                             </div> 
-                            <img class="expand-ico" src="${pageContext.request.contextPath}/resources/img/next.png">
-                            <img class="shorten-ico hide" src="${pageContext.request.contextPath}/resources/img/down-arrow.png">
+                            <img class="expand-ico" src="{{ URL::asset("imgs/next.png") }}">
+                            <img class="shorten-ico hide" src="{{ URL::asset("imgs/down-arrow.png") }}">
                             <div class="div-da hide">
                                 <hr>
                                 <div>
@@ -84,15 +84,15 @@
                                         <span>{{ $cau->daA }}</span>
                                     </label>
                                     <label class="col-12 col-md-6">
-                                        <input disabled="disabled" type="radio" name="choise-{{ $index }}" value="B" {{ $checkA }}>
+                                        <input disabled="disabled" type="radio" name="choise-{{ $index }}" value="B" {{ $checkB }}>
                                         <span>{{ $cau->daB }}</span>
                                     </label>
                                     <label class="col-12 col-md-6">
-                                        <input disabled="disabled" type="radio" name="choise-{{ $index }}" value="C" {{ $checkA }}>
+                                        <input disabled="disabled" type="radio" name="choise-{{ $index }}" value="C" {{ $checkC }}>
                                         <span>{{ $cau->daC }}</span>
                                     </label>
                                     <label class="col-12 col-md-6">
-                                        <input disabled="disabled" type="radio" name="choise-{{ $index }}" value="D" {{ $checkA }}>
+                                        <input disabled="disabled" type="radio" name="choise-{{ $index }}" value="D" {{ $checkD }}>
                                         <span>{{ $cau->daD }}</span>
                                     </label>
                                 </div>
@@ -107,7 +107,7 @@
         </table>
     </div>
 </div>
-<img src="${pageContext.request.contextPath}/resources/img/add.png"
+<img src="{{ URL::asset("imgs/add.png") }}"
     id="ico-add-ques">
 
 <!-- nhap noi dung cau -->
@@ -193,6 +193,18 @@
                 <button type="button" class="btn btn-primary" id="btn-update-no">Cancel</button>
             </div>
         </div>
+    </div>
+</div>
+
+<div style="display: None">
+    <div id='path-add'>
+        {{ Route('part5controller.add') }}
+    </div>
+    <div id='path-update'>
+        {{ Route('part5controller.update') }}
+    </div>
+    <div id='path-delete'>
+        {{ Route('part5controller.delete') }}
     </div>
 </div>
 

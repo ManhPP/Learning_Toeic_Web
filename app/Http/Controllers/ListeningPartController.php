@@ -63,6 +63,25 @@ class ListeningPartController extends Controller
         return false;
     }
 
+
+    public function indexGuestPart1(Request $request){
+        $partNghe = ListeningPart::find($request["id"]);
+        return view("guest_part1_view")->with("partNghe", $partNghe);
+    }
+
+    public function indexGuestPart2(Request $request){
+        $partNghe = ListeningPart::find($request["id"]);
+        return view("guest_part2_view")->with("partNghe", $partNghe);
+    }
+
+    public function indexGuestPart3(Request $request){
+        $partNghe = ListeningPart::find($request["id"]);
+        return view("guest_part3_view")->with("partNghe", $partNghe);
+    }
+    public function indexGuestPart4(Request $request){
+        $partNghe = ListeningPart::find($request["id"]);
+        return view("guest_part4_view")->with("partNghe", $partNghe);
+    }
     /**
      * Store a newly created resource in storage.
      *
