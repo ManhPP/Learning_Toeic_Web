@@ -3,10 +3,37 @@
 namespace App\Http\Controllers;
 
 use App\ConversationParagraph;
+use App\ListeningPart;
 use Illuminate\Http\Request;
 
 class ConversationParagraphController extends Controller
 {
+    public function createCPPart3(Request $request)
+    {
+
+        $listeningPart = $request["part3"];
+
+        $listHoiThoai = $request["listHoiThoai"];
+        $arrListCau = $request["arrListCau"];
+
+        $paraJson = json_decode($listeningPart, true);
+        $listeningPart = ListeningPart::create($paraJson);
+
+        $listHoiThoaiJson = json_decode($listHoiThoai, true);
+        $arrListCauJson = json_decode($arrListCau, true);
+
+        $i=0;
+        foreach ($listHoiThoaiJson as $doanHoiThoai) {
+            $doanHTmodel = $listeningPart->conversation_paragraph()->create($doanHoiThoai);
+            
+                foreach ($arrListCauJson[$i] as $cauPart3) {
+                    $doanHTmodel->conversationSentence()->create($cauPart3);
+                }
+            $i++;
+        }
+        
+        return Response($paraJson, 200);
+    }
     /**
      * Display a listing of the resource.
      *

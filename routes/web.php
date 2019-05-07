@@ -182,8 +182,10 @@ Route::post('manage-part5/add',[
 Route::get('/manage-reading-part/part5/update',[
     'uses' => 'ReadingPartController@indexUpdatePart5'
 ]);
+
+//Xóa part 1
 Route::get('/part1/delete', [
-    'uses' => 'Part1Controller@DeletePart1'
+    'uses' => 'Part1Controller@deletePart1'
 ]);
 Route::post('manage-part5/update',[
     'uses' => 'ReadingPartController@updatePart5'
@@ -209,3 +211,9 @@ Route::get('/part4/practice', [
 Route::get("/admin/manager-baihoc-pd","ReadingPartController@getListPartDoc");
 
 Route::get("/admin/bai-hoc-manager/update-part-doc",'ReadingPartController@updatePart6');
+// Thêm part 3
+Route::post('/part3/add', [
+    'uses' => 'ConversationParagraphController@createCPPart3'
+]);
+
+
