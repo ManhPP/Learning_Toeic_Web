@@ -201,3 +201,19 @@ Route::post('manage-part5/update',[
 Route::get('/part5/practice', [
     'uses' => 'ReadingPartController@indexGuestPart5'
 ]);
+
+Route::get('/part1/practice', [
+    'uses' => 'ListeningPartController@indexGuestPart1'
+]);
+
+Route::get('/part2/practice', [
+    'uses' => 'ListeningPartController@indexGuestPart2'
+]);
+
+Route::get('/part3/practice', [
+    'uses' => 'ListeningPartController@indexGuestPart3'
+]);
+
+Route::get('/part4/practice', [
+    'uses' => 'ListeningPartController@indexGuestPart4'
+]);

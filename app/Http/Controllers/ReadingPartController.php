@@ -61,7 +61,9 @@ class ReadingPartController extends Controller
         try {
             error_log(((Object)$paraJson)->id);
             $partdoc = ReadingPart::find(((Object)$paraJson)->id);
-            
+            $title = ((Object)$paraJson)->title;
+            $partdoc->title = $title;
+            $partdoc->save();
             $listCauJson = json_decode($listCauString, true);
             $arrID = array();
             foreach ($listCauJson as $cauJson) {

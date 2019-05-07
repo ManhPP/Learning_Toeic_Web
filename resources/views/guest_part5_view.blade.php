@@ -1,5 +1,5 @@
 @extends('layouts.master')
-@section('title','add part 5')
+@section('title','practice part 5')
 @section("css")
     <link rel="stylesheet" type="text/css" href="{{ URL::asset("css/guest_part5_view/guest_part5_view.css") }}">
 @endsection

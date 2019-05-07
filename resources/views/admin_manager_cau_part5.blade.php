@@ -1,5 +1,5 @@
 @extends('layouts.master')
-@section('title','add part 5')
+@section('title','manage sentence in part 5')
 @section("css")
     <link rel="stylesheet" type="text/css" href="{{ URL::asset("css/admin_manager_cau_part5/admin_manager_cau_part5.css") }}">
 @endsection
