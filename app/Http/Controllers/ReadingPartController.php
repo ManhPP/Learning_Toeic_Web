@@ -73,4 +73,13 @@ class ReadingPartController extends Controller
         }
         return "false";
     }
+
+    public function indexGuestPart5(Request $request)
+    {
+        //
+        // $arrCau = Part5::offset(0)->limit(20)->get();
+        $partDoc = ReadingPart::find($request["id"]);
+        return view('guest_part5_view')
+            ->with("partDoc", $partDoc);
+    }
 }

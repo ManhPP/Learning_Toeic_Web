@@ -25,9 +25,9 @@
             </div>
             <div class="list-cau">
                 {{ $index = 0 }}
-                @foreach( $partDoc->listCauPart5 as $cau)
+                @foreach( $partDoc->cauPart5s as $cau)
                     <!-- mot cau -->
-                    <div class="ques" data-asw="{{ $cau->daDung }}" data-id="{{ $cau->id }}">
+                    <div class="ques" data-asw="{{ $cau->dADung }}" data-id="{{ $cau->id }}">
                         <div>
                             <span class="no-ques">Câu {{ $index+1 }}</span>
                             <span class="ques-content">{{ $cau->cauHoi }}</span>
@@ -50,45 +50,12 @@
                         <hr>
                     </div>
                     {{ $index += 1 }}
-                </c:forEach>
+                @endforeach
                 <div class="noti"></div>
                 <div style="text-align: center;">
                     <button id="submit">Nộp bài</button>
                 </div>
             </div>
-        </div>
-    </div>
-    </div>
-
-
-    <!-- footer -->
-    <div class="footer row">
-    <div class="col-8">
-        <div class="line">ABOUT US</div>
-        <div class="line">
-            <img
-                src="${pageContext.request.contextPath}/resources/img/locate.png"><span>Địa
-                chỉ:Số 1, Đại Cồ Việt, Bách Khoa, Hà Nội</span>
-        </div>
-        <div class="line">
-            <img
-                src="${pageContext.request.contextPath}/resources/img/contact.png"><span>SDT:+84
-                327201345</span>
-        </div>
-        <div class="line">
-            <img
-                src="${pageContext.request.contextPath}/resources/img/email.png"><span>Email:
-                bktoiec@gmail.com</span>
-        </div>
-    </div>
-    <div class="col-4">
-        <div class="line">CONTACT</div>
-        <div class="line">
-            <img style="margin-right: 3px; width: 32px; height: 32px"
-                src="${pageContext.request.contextPath}/resources/img/fb.png">
-            <img
-                src="${pageContext.request.contextPath}/resources/img/twitter.png"
-                style="width: 32px; height: 32px">
         </div>
     </div>
     </div>
@@ -131,15 +98,6 @@
     <!-- Open modal -->
     <button id="my-button" style="display: none;" data-toggle="modal"
     data-target="#myModal">Open modal</button>
-
-
-
-    <div style="display: none;">
-        <div id="csrf-name">{{ $_csrf->headerName }}</div>
-		<div id="csrf-value">{{ $_csrf->token }}</div>
-		<div id="root-path">{{ $pageContext->request->contextPath }}</div>
-		<div id="id-user">{{ $acc->id }}</div>
-    </div>
 
 
 @endsection

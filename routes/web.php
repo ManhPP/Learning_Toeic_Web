@@ -198,3 +198,6 @@ Route::post('manage-part5/update',[
     'uses' => 'ReadingPartController@updatePart5'
 ])->name("readingpartcontroller.update");
 
+Route::get('/part5/practice', [
+    'uses' => 'ReadingPartController@indexGuestPart5'
+]);
