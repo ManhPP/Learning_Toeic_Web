@@ -8,6 +8,7 @@ class ListeningPart extends Model
 {
     protected $primaryKey = 'id';
     protected $table = 'listening_parts';
+    protected $fillable=['intro','audio','loaiPart','acessCount','title'];
 
     public function part1(){
         return $this->hasMany('App\Part1','idPartNghe','id');
