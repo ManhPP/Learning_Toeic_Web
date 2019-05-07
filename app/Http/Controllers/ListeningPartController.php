@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\ListeningPart;
 use Illuminate\Http\Request;
 use App\Http\Requests;
+use Illuminate\Http\UploadedFile;
 
 class ListeningPartController extends Controller
 {
@@ -28,21 +29,59 @@ class ListeningPartController extends Controller
         //
     }
 
-    public function createpart1(Request $request)
-    {
-        //
-        $listeningPart=new ListeningPart;
-        $bodyContent = $request->getContent();
-        // $listeningPart->audio=INPUT::get('audio');
-        // $listeningPart->intro=INPUT::get('intro');
-        // $listeningPart->loaiPart=INPUT::get('loaiPart');
-        // $listeningPart->acessCount=INPUT::get('acessCount');
-        // $listeningPart->title=INPUT::get('title');
-        // $listeningPart->save();
-        return $bodyContent;
+    //upload ảnh lên server
+    public function uploadimage(Request $request){
+        try{
+        $file = $request->file("file-image");
+         $fileName = time().'.'.$file->getClientOriginalExtension();
+         $des=public_path('/images_upload');
+         $file->move($des,$fileName);
+         return response()->json(["pathFile"=>"images_upload"."/".$fileName], 200);
+        }catch(Exception $e){
+
+        }
+        return false;
 
     }
 
+    //updload audio lên server
+    public function uploadaudio(Request $request){
+        error_log("a");
+        try{
+            $file = $request->file("audio");
+            // $size=$request->file('audio')->getSize();
+            // error_log($size);
+            // error_log();
+            $fileName = time().'.'.$file->getClientOriginalExtension();
+            error_log($fileName);
+            $des=public_path('/audio_upload');
+            $file->move($des,$fileName);
+            return response()->json(["pathFile"=>"audio_upload"."/".$fileName], 200);
+        }catch(Exception $e){
+
+        }
+        return false;
+    }
+
+
+    public function indexGuestPart1(Request $request){
+        $partNghe = ListeningPart::find($request["id"]);
+        return view("guest_part1_view")->with("partNghe", $partNghe);
+    }
+
+    public function indexGuestPart2(Request $request){
+        $partNghe = ListeningPart::find($request["id"]);
+        return view("guest_part2_view")->with("partNghe", $partNghe);
+    }
+
+    public function indexGuestPart3(Request $request){
+        $partNghe = ListeningPart::find($request["id"]);
+        return view("guest_part3_view")->with("partNghe", $partNghe);
+    }
+    public function indexGuestPart4(Request $request){
+        $partNghe = ListeningPart::find($request["id"]);
+        return view("guest_part4_view")->with("partNghe", $partNghe);
+    }
     /**
      * Store a newly created resource in storage.
      *

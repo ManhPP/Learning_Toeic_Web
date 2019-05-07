@@ -1,5 +1,5 @@
 @extends('layouts.master')
-@section('title','add part 5')
+@section('title','update part 5')
 @section("css")
     <link rel="stylesheet" type="text/css" href="{{ URL::asset("css/admin_update_part5/admin_update_part5.css") }}">
 @endsection
@@ -14,7 +14,7 @@
     <div class="row col-12 col-sm-11 col-md-10 col-lg-9 col-xl-8 align-center no-padding">
         <div class="label-style">**Update part 5</div>
         <div class="col-12 time-detail">
-            <span>Tiêu đề: </span> <input id="tittle" value = "{{ $partDoc->tittle }}">
+            <span>Tiêu đề: </span> <input id="tittle" value = "{{ $partDoc->title }}">
         </div>
     </div>
 
@@ -35,31 +35,31 @@
                 <div class="list-cau">
                     <div id="list-to-add">
                         {{ $index = 0 }}
-                        @foreach($partDoc->listCauPart5 as $cau)
+                        @foreach($partDoc->cauPart5s as $cau)
                     
                             {{ $checkA = "" }}
                             {{ $checkB = "" }}
                             {{ $checkC = "" }}
                             {{ $checkD = "" }}
 
-                            @if($cau->daDung == 'A')
+                            @if($cau->dADung == 'A')
                                 {{ $checkA = "checked = 'checked'" }}
                             @endif
-                            @if($cau->daDung == 'B')
+                            @if($cau->dADung == 'B')
                                 {{ $checkB = "checked = 'checked'" }}
                             @endif
-                            @if($cau->daDung == 'C')
+                            @if($cau->dADung == 'C')
                                 {{ $checkC = "checked = 'checked'" }}
                             @endif
-                            @if($cau->daDung == 'D')
+                            @if($cau->dADung == 'D')
                                 {{ $checkD = "checked = 'checked'" }}
                             @endif		
 
                             <!-- mot cau -->
-                            <div class="ques one-ques" data-asw="{{ $cau->daDung }}" data-id="{{ $cau->id }}">
+                            <div class="ques one-ques" data-asw="{{ $cau->dADung }}" data-id="{{ $cau->id }}">
                                 <div>
                                     <span class="no-ques">Câu {{ $index+1 }}</span> <span
-                                        class="ques-content">${cau.cauHoi }</span>
+                                        class="ques-content">{{ $cau->cauHoi }}</span>
                                 </div>
                                 <div class="row">
                                     <label class="col-12 col-md-6"> <input type="radio" disabled="disabled"
@@ -74,7 +74,7 @@
                                 </div>
                                 <div class="align-right">
                                     <img class="ico-modified ico-del" alt="minus"
-                                        src="${pageContext.request.contextPath}/resources/img/round-minus.png">
+                                        src="{{ URL::asset("imgs/round-minus.png") }}">
                                 </div>
                                 <hr>
                             </div>
@@ -85,7 +85,7 @@
                     <div class="ques">
                         <div class="align-right">
                             <img class="ico-modified" id="ico-add" alt="add"
-                                src="${pageContext.request.contextPath}/resources/img/round-add.png">
+                                src="{{ URL::asset("imgs/round-add.png") }}">
                         </div>
                         <hr>
                     </div>
@@ -132,25 +132,25 @@
                                 {{ $checkB = "" }}
                                 {{ $checkC = "" }}
                                 {{ $checkD = "" }}
-                                @if($cau->daDung == 'A')
+                                @if($cau->dADung == 'A')
                                     {{ $checkA = "checked = 'checked'" }}
                                 @endif
-                                @if($cau->daDung == 'B')
+                                @if($cau->dADung == 'B')
                                     {{ $checkB = "checked = 'checked'" }}
                                 @endif
-                                @if($cau->daDung == 'C')
+                                @if($cau->dADung == 'C')
                                     {{ $checkC = "checked = 'checked'" }}
                                 @endif
-                                @if($cau->daDung == 'D')
+                                @if($cau->dADung == 'D')
                                     {{ $checkD = "checked = 'checked'" }}
                                 @endif
                                 <tr class="d-flex" data-id="{{ $cau->id  }}">
                                     <td class="col-12"><input type="checkbox"
                                         class="choise-ques-add"> <span class="content-ques">{{ $cau->cauHoi }}</span>
                                         <img class="expand-ico"
-                                        src="${pageContext.request.contextPath}/resources/img/next.png">
+                                        src="{{ URL::asset("imgs/next.png") }}next.png">
                                         <img class="shorten-ico hide"
-                                        src="${pageContext.request.contextPath}/resources/img/down-arrow.png">
+                                        src="{{ URL::asset("imgs/down-arrow.png") }}">
                                         <div class="div-da hide">
                                             <hr>
                                             <div>
@@ -174,7 +174,7 @@
                                         </div></td>
                                 </tr>
                                 {{ $index += 1 }}
-                            </c:forEach>
+                            @endforeach
                         </tbody>
                     </table>
                 </div>
@@ -231,10 +231,9 @@
 
 
     <div style="display: none;">
-		<div id="csrf-name">{{ $_csrf->headerName }}</div>
-		<div id="csrf-value">{{ $_csrf->token }}</div>
-		<div id="root-path">{{ $pageContext->request->contextPath }}</div>
-        <div id="id-user">{{ $acc->id }}</div>
+		<div id='path-update'>
+			{{ Route('readingpartcontroller.update') }}
+        </div>
         <div id="id-part">{{ $partDoc->id }}</div>
 	</div>
 
