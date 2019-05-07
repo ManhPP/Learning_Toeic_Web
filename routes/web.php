@@ -52,7 +52,7 @@ Route::get("/forum/view-post", function(){
     return view("viewPost");
 });
 Route::get('/add-part-1', function () {
-    return view('add_part_1');
+    return view('add_part_1_new');
 });
 Route::get('/add-part-2', function () {
     return view('add_part_2');
@@ -116,8 +116,30 @@ Route::get('/manager-para-part7', [
     'uses' => 'Part7ParagraphController@getPart7Paragraph'
 ]);
 
-Route::post('/addlistening-part1', [
-    'uses' => 'ListeningPartController@createpart1'
+
+//thêm/update ảnh phần nghe
+Route::post('/upload-image-listen', [
+    'uses' => 'ListeningPartController@uploadimage'
+]);
+
+//thêm/update audio phần nghe
+Route::post('/upload-audio-listen', [
+    'uses' => 'ListeningPartController@uploadaudio'
+]);
+
+//thêm các câu part1
+Route::post('/part1/add', [
+    'uses' => 'Part1Controller@createPart1'
+]);
+
+// lấy dữ liệu part1
+Route::get('/part1/get', [
+    'uses' => 'Part1Controller@getPart1'
+]);
+
+// update các câu part1
+Route::post('/part1/update', [
+    'uses' => 'Part1Controller@updatePart1'
 ]);
 
 //upload file part 7
@@ -138,6 +160,8 @@ Route::post("/manager-para-part7/update",[
 Route::get("/manager-para-part7/del",[
     "uses"=>"Part7ParagraphController@delPara"
 ]) -> name("part7paragraph.delpara");
-Route::get('/part5hehe',[
-    'uses' => 'ManagePart5SentenceController@index'
+
+Route::get('/part1/delete', [
+    'uses' => 'Part1Controller@DeletePart1'
 ]);
+
