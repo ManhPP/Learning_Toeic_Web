@@ -4,82 +4,85 @@ namespace App\Http\Controllers;
 
 use App\Part5;
 use Illuminate\Http\Request;
+use TheSeer\Tokenizer\Exception;
 
 class Part5Controller extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
-    {
-        //
+    public function index(Request $request){
+        //        $i=0;
+        $arrCau = Part5::offset(0)->limit(20)->get();
+//        foreach ($arrDoan[0]->cauPart7s as $cauPart7) {
+//            error_log($i);
+//            $i++;
+//        }
+        $sum = Part5::count();
+        return view('admin_manager_cau_part5')
+            ->with("arrCau", $arrCau)->with("sum", $sum);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
+    public function add(Request $request){
+        $cauHoi = $request['cauHoi'];
+        $daA = $request['daA'];
+        $daB = $request['daB'];
+        $daC = $request['daC'];
+        $daD = $request['daD'];
+        $dADung = $request['daDung'];
+        
+        $part5 = new Part5();
+        $part5->cauHoi = $cauHoi;
+        $part5->daA = $daA;
+        $part5->daB = $daB;
+        $part5->daC = $daC;
+        $part5->daD = $daD;
+        $part5->dADung = $dADung;
+        try{
+            $part5 ->save();
+            return response()->json(["id"=>$part5->id],200);
+        }
+        catch(Exception $e){
+            
+        }
+        return response()->json(["id"=>-1],200);
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
+    public function update(Request $request){
+        $cauHoi = $request['cauHoi'];
+        $id = $request['id'];
+        $daA = $request['daA'];
+        $daB = $request['daB'];
+        $daC = $request['daC'];
+        $daD = $request['daD'];
+        $dADung = $request['daDung'];
+        
+        $part5 = new Part5();
+
+        $part5->id = $id;
+        $part5->cauHoi = $cauHoi;
+        $part5->daA = $daA;
+        $part5->daB = $daB;
+        $part5->daC = $daC;
+        $part5->daD = $daD;
+        $part5->dADung = $dADung;
+        try{
+            Part5::find($id)->update($part5->toArray());
+            return response()->json(["id"=>$part5->id],200);
+        }
+        catch(Exception $e){
+            
+        }
+        return response()->json(["id"=>-1],200);
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Part5  $part5
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Part5 $part5)
-    {
-        //
-    }
+    public function delete(Request $request){
+        $id = $request['id'];
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Part5  $part5
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Part5 $part5)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Part5  $part5
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, Part5 $part5)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Part5  $part5
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(Part5 $part5)
-    {
-        //
+        try{
+            Part5::find($id)->delete();
+            return "true";
+        }
+        catch(Exception $e){
+            
+        }
+        return "false";
     }
 }

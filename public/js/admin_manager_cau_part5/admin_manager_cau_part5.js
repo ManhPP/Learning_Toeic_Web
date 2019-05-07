@@ -3,9 +3,12 @@ var token;
 var loadAjax = true;
 
 $(document).ready(function(){
-    
-    header= $("#csrf-name").html();
-    token = $("#csrf-value").html();
+
+    $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+    });
 });
 
 
@@ -49,7 +52,7 @@ modalConfirmInput(function(confirm) {
 	        alert("Hãy điền hết giữ liệu!!!");
 	    }else{
 	        $.ajax({
-	            url: "manager-cau-part5/add",
+	            url: $("#path-add").html(),
 	            method: "POST",
 	            data: {
 	                cauHoi: cauHoi,
@@ -59,10 +62,9 @@ modalConfirmInput(function(confirm) {
 	                daD: "D: "+arrDa[3],
 	                daDung: daDung,
 	            },
-	            beforeSend: function(xhr) {
-	                xhr.setRequestHeader(header, token);
-	            },
-	            success: function(id){
+	            
+	            success: function(data){
+                    id = data.id;
 	                if(id != -1){
 	                    resetTable(id, cauHoi, daDung, arrDa);
 	                    resetModalInput();
@@ -125,7 +127,7 @@ modalConfirmUpdate(function(confirm, id) {
             alert("Hãy điền hết giữ liệu!!!");
         }else{
             $.ajax({
-                url: "manager-cau-part5/update",
+                url: $("#path-update").html(),
                 method: "POST",
                 data: {
                     cauHoi: cauHoi,
@@ -135,9 +137,6 @@ modalConfirmUpdate(function(confirm, id) {
                     daC: "C: "+arrDa[2],
                     daD: "D: "+arrDa[3],
                     daDung: daDung,
-                },
-                beforeSend: function(xhr) {
-                    xhr.setRequestHeader(header, token);
                 },
                 success: function(data){
                     if(data==true){
@@ -228,16 +227,13 @@ $(document).on("click", ".btn-del", function(e){
     e.stopPropagation();
     var id = $(this).attr("data-id");
     $.ajax({
-        url: "manager-cau-part5/del",
+        url: $("#path-delete").html(),
         method: "POST",
         data: {
             id: id,
         },
-        beforeSend: function(xhr) {
-            xhr.setRequestHeader(header, token);
-        },
         success: function(data){
-            if(data==true){
+            if(data=="true"){
                 $(".main-table tbody tr[data-id='"+id+"']").remove();
                 $("#sum-ques").html(parseInt( $("#sum-ques").html())-1);
                 $("#total-ques").html(parseInt( $("#total-ques").html())-1);

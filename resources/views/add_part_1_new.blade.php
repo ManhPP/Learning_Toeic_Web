@@ -3,6 +3,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+<meta name="csrf-token" content="{{ csrf_token() }}">
 <title>part1</title>
 <link rel="stylesheet" type="text/css"
 	href="{{URL::asset("css/bootstrap.min.css")}}">
@@ -259,17 +260,17 @@
 			<div class="line">ABOUT US</div>
 			<div class="line">
 				<img
-					src="${pageContext.request.contextPath}/resources/img/locate.png"><span>Địa
+					src="{{URL::asset("imgs/locate.png")}}"><span>Địa
 					chỉ:Số 1, Đại Cồ Việt, Bách Khoa, Hà Nội</span>
 			</div>
 			<div class="line">
 				<img
-					src="${pageContext.request.contextPath}/resources/img/contact.png"><span>SDT:+84
+					src="{{URL::asset("imgs/contact.png")}}"><span>SDT:+84
 					327201345</span>
 			</div>
 			<div class="line">
 				<img
-					src="${pageContext.request.contextPath}/resources/img/email.png"><span>Email:
+					src="{{URL::asset("imgs/email.png")}}"><span>Email:
 					bktoiec@gmail.com</span>
 			</div>
 		</div>
@@ -277,9 +278,9 @@
 			<div class="line">CONTACT</div>
 			<div class="line">
 				<img style="margin-right: 3px; width: 32px; height: 32px"
-					src="${pageContext.request.contextPath}/resources/img/fb.png">
+					src="{{URL::asset("imgs/fb.png")}}">
 				<img
-					src="${pageContext.request.contextPath}/resources/img/twitter.png"
+					src="{{URL::asset("imgs/twitter.png")}}"
 					style="width: 32px; height: 32px">
 			</div>
 		</div>
@@ -326,17 +327,18 @@
 	<div style="display: none;">
 		<div id="csrf-name">${_csrf.headerName}</div>
 		<div id="csrf-value">${_csrf.token}</div>
-		<div id="root-path">${pageContext.request.contextPath }</div>
-		<div id="id-user">${acc.id }</div>
+		<div id="root-path">{{URL("")}}</div>
+		<div id="id-user">1</div>
 	</div>
+	<div></div>
 
 	<script type="text/javascript"
-		src="${pageContext.request.contextPath}/resources/js/jquery-3.3.1.min.js"></script>
+		src="{{ URL::asset("js/jquery-3.3.1.min.js") }}"></script>
 	<script
 		src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
 	<script type="text/javascript"
-		src="${pageContext.request.contextPath}/resources/js/bootstrap.min.js"></script>
+		src="{{URL::asset("js/bootstrap.min.js")}}"></script>
 	<script type="text/javascript"
-		src="${pageContext.request.contextPath}/resources/js/admin-them-part1/admin-them-part1.js"></script>
+		src="{{URL::asset("js/admin-them-part1.js")}}"></script>
 </body>
 </html>

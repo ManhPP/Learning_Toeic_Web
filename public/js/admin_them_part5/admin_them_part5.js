@@ -3,8 +3,12 @@ var header;
 var token;
 
 $(document).ready(function(){
-    header= $("#csrf-name").html();
-    token = $("#csrf-value").html();
+
+    $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+    });
 });
 
  // mo modal cau hoi
@@ -228,7 +232,7 @@ $(document).on("click", "#submit-add", function(){
                         +$(this).find(".ques-content").html()
                         +'", "daA":"'+arrDa[0]+'", "daB": "'
                         +arrDa[1]+'", "daC":"'+arrDa[2]+'", "daD":"'
-                        +arrDa[3]+'","daDung":"'
+                        +arrDa[3]+'","dADung":"'
                         +$(this).attr("data-asw")+'"}';   
         }else{
             arrCau+=',{"id":"'
@@ -237,7 +241,7 @@ $(document).on("click", "#submit-add", function(){
                         +$(this).find(".ques-content").html()
                         +'", "daA":"'+arrDa[0]+'", "daB": "'
                         +arrDa[1]+'", "daC":"'+arrDa[2]+'", "daD":"'
-                        +arrDa[3]+'","daDung":"'
+                        +arrDa[3]+'","dADung":"'
                         +$(this).attr("data-asw")+'"}';   
         }
     });
@@ -246,78 +250,46 @@ $(document).on("click", "#submit-add", function(){
     console.log($("#tittle").val() + "-" + arrId.length);
     console.log($("#tittle").val().length+"--"+arrId.length);
     if($("#tittle").val().length > 0 && arrId.length == 40){
-        partDoc = '{"id":"null", "loaiPart":"Part 5", "tittle":"'+$("#tittle").val()+'", "listCauPart5":'+arrCau+'}';
+        partDoc = '{"id":"null","accessCount":"0", "loaiPart":"Part 5", "title":"'+$("#tittle").val()+'", "listCauPart5":'+arrCau+'}';
 
         console.log(i);
         console.log(arrId.length);
-        if(arrId.length == 40){
-            $.ajax({
-               url: $("#root-path").html()+"/admin/bai-hoc-manager/add-part-doc/check-repeat",
-               method: "POST",
-               beforeSend: function(xhr) {
-                   xhr.setRequestHeader(header, token);
-               },
-               contentType:"application/json; charset=utf-8",
-               dataType:"json",
-               data: partDoc,
-               success: function(data){
-                   if(data == true){
+        // if(arrId.length == 40){
+        //     $.ajax({
+        //        url: $("#root-path").html()+"/admin/bai-hoc-manager/add-part-doc/check-repeat",
+        //        method: "POST",
+        //        beforeSend: function(xhr) {
+        //            xhr.setRequestHeader(header, token);
+        //        },
+        //        contentType:"application/json; charset=utf-8",
+        //        dataType:"json",
+        //        data: partDoc,
+        //        success: function(data){
+        //            if(data == true){
                        $.ajax({
-                           url: $("#root-path").html()+"/admin/bai-hoc-manager/add-part-doc/add",
+                           url: $("#path-add").html(),
                            method: "POST",
-                           beforeSend: function(xhr) {
-                               xhr.setRequestHeader(header, token);
+                           data: {
+                               partDoc: partDoc,
+                               listCauPart5: arrCau
                            },
-                           contentType:"application/json; charset=utf-8",
-                           dataType:"json",
-                           data: partDoc,
                            success: function(data){
-                               if(data == true){
+                               if(data == "true"){
                                    alert("Thêm thành công!!!");
                                }else{
                                    alert("Thêm không thành công, kiểm tra lại!!!");
                                }
                            }
                         });
-                   }else{
-                       alert("Bài đọc bị trùng, hãy chọn các câu khác!!!");
-                   }
-               }
-            });
+            //        }else{
+            //            alert("Bài đọc bị trùng, hãy chọn các câu khác!!!");
+            //        }
+            //    }
+            // });
         }
-    }else{
-        alert("Hãy điền đầy đủ tiêu đề và số câu!!!");
-    }
-    
-//    var arrId = new Array();
-//    var i =0;
-//    $("#list-to-add .ques").each(function(){
-//      var id = $(this).attr("data-id");
-//      if(arrId.indexOf(""+id) == -1){
-//          arrId[i] = id;
-//          i++;
-//      }
-//    });
-//    $.ajax({
-//      url: $("#root-path").html()+"/admin/bai-hoc-manager/add-part-doc/add",
-//      method: "POST",
-//      beforeSend: function(xhr) {
-//          xhr.setRequestHeader(header, token);
-//      },
-//      data: {
-//          loaiPart: "Part 5",
-//          tittle: $("#tittle").val(),
-//          arrId: arrId
-//          
-//      },
-//      success: function(data){
-//          if(data == true){
-//              alert("Thêm thành công!!!");
-//          }else{
-//              alert("Thêm không thành công, kiểm tra lại!!!");
-//          }
-//      }
-//   });
+    // }else{
+    //     alert("Hãy điền đầy đủ tiêu đề và số câu!!!");
+    // }
     
 });
 
