@@ -2,84 +2,83 @@
 
 namespace App\Http\Controllers;
 
+use App\Part7Paragraph;
 use App\ReadingPart;
 use Illuminate\Http\Request;
+use PhpParser\Node\Expr\Cast\Object_;
 
 class ReadingPartController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
-    {
-        //
-    }
+    public function getPart7(Request $request){
+//       $arrDoanDon = Part7Paragraph::where('loaiPart7','=', 'Đoạn đơn')->offset(0)->limit(20)->get();
+//       $arrDoanKep = Part7Paragraph::where('loaiPart7','=', 'Đoạn kép')->offset(0)->limit(20)->get();
+        $arrDoanDon = Part7Paragraph::all()->where('loaiPart7','=', 'Đoạn đơn');
+        $arrDoanKep = Part7Paragraph::all()->where('loaiPart7','=', 'Đoạn kép');
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
+       $sumDoanDon = Part7Paragraph::where('loaiPart7','=', 'Đoạn đơn')->count();
+       $sumDoanKep = Part7Paragraph::where('loaiPart7','=', 'Đoạn kép')->count();
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
-    }
+       return view("add_part_7")
+           ->with("arrDoanDon", $arrDoanDon)->with("sumDoanDon", $sumDoanDon)
+           ->with("arrDoanKep", $arrDoanKep)->with("sumDoanKep", $sumDoanKep);
+   }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\ReadingPart  $readingPart
-     * @return \Illuminate\Http\Response
-     */
-    public function show(ReadingPart $readingPart)
-    {
-        //
-    }
+   public function addPart7(Request $request){
+       $part7String = $request["part7"];
+       $listDoanString = $request["listDoanVan"];
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\ReadingPart  $readingPart
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(ReadingPart $readingPart)
-    {
-        //
-    }
+       $part7Json = json_decode($part7String, true);
+       $listDoanJson = json_decode($listDoanString, true);
+       try {
+           $part7 = ReadingPart::create($part7Json);
+           foreach ($listDoanJson as $doanJson) {
+               $part7->part7Paragraphs()->attach(((Object) $doanJson)->id);
+           }
+           return "true";
+       }catch (Exception $e){
+       }
+       return "false";
+   }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\ReadingPart  $readingPart
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, ReadingPart $readingPart)
-    {
-        //
-    }
+   public function indexUpdatePart7(Request $request)
+   {
+       $id = $request["id"];
+       $partDoc = ReadingPart::find($id);
+       $arrDoanDon = Part7Paragraph::all()->where('loaiPart7','=', 'Đoạn đơn');
+       $arrDoanKep = Part7Paragraph::all()->where('loaiPart7','=', 'Đoạn kép');
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\ReadingPart  $readingPart
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(ReadingPart $readingPart)
-    {
-        //
-    }
+       $sumDoanDon = Part7Paragraph::where('loaiPart7','=', 'Đoạn đơn')->count();
+       $sumDoanKep = Part7Paragraph::where('loaiPart7','=', 'Đoạn kép')->count();
+
+       return view("admin_update_part7")
+           ->with("partDoc", $partDoc)
+           ->with("arrDoanDon", $arrDoanDon)->with("sumDoanDon", $sumDoanDon)
+           ->with("arrDoanKep", $arrDoanKep)->with("sumDoanKep", $sumDoanKep);
+   }
+
+   public function updatePart7(Request $request){
+       $arrId = array();
+
+       $part7String = $request["part7"];
+       error_log($part7String);
+       $listDoanPart7String = $request["listDoanPart7"];
+
+       $part7Json = json_decode($part7String, true);
+       $listDoanPart7Json = json_decode($listDoanPart7String, true);
+
+       for ($i=0;$i<count($listDoanPart7Json);$i++){
+           array_push($arrId, ((Object) $listDoanPart7Json[$i])->id);
+       }
+
+       try {
+           $part7 = ReadingPart::find(((Object)$part7Json)->id);
+           $part7->title= ((Object)$part7Json)->title;
+           $part7->save();
+           $part7->part7Paragraphs()->sync($arrId);
+
+           return "true";
+       }catch (Exception $e){
+       }
+       return "false";
+   }
 }

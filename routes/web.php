@@ -111,13 +111,17 @@ Route::get('/addiscuss', function(){
 Route::get('/adacc', function(){
     return view('adminAcc');
 });
-// test
-Route::get('/manager-para-part7', [
-    'uses' => 'Part7ParagraphController@getPart7Paragraph'
-]);
+
 
 Route::post('/addlistening-part1', [
     'uses' => 'ListeningPartController@createpart1'
+]);
+
+
+
+// para part 7 admin
+Route::get('/manager-para-part7', [
+    'uses' => 'Part7ParagraphController@getPart7Paragraph'
 ]);
 
 //upload file part 7
@@ -141,3 +145,19 @@ Route::get("/manager-para-part7/del",[
 Route::get('/part5hehe',[
     'uses' => 'ManagePart5SentenceController@index'
 ]);
+
+// part 7 admin
+Route::get('/manager-reading-part/add-part7', [
+   'uses' => 'ReadingPartController@getPart7'
+]);
+Route::post('/manager-reading-part/add-part7/add', [
+   'uses' => 'ReadingPartController@addPart7'
+])->name("readingpartcontroller.addpart7");
+
+Route::get('manager-reading-part/update-part7', [
+   'uses'=> 'ReadingPartController@indexUpdatePart7'
+]);
+
+Route::post('manager-reading-part/update-part7', [
+    'uses'=> 'ReadingPartController@updatePart7'
+])->name("readingpartcontroller.updatepart7");
