@@ -221,6 +221,7 @@ Route::get('/part3/get', [
     'uses' => 'ConversationParagraphController@getPart3'
 ]);
 
+// Update part 3
 Route::post('/part3/update', [
     'uses' => 'ConversationParagraphController@updatePart3'
 ]);
