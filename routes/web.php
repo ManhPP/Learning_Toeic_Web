@@ -211,22 +211,23 @@ Route::get('/part4/practice', [
 Route::get("/admin/manager-baihoc-pd","ReadingPartController@getListPartDoc");
 
 Route::get("/admin/bai-hoc-manager/update-part-doc",'ReadingPartController@updatePart6');
-// Thêm part 3
+
+// Thêm part 3,4
 Route::post('/part3/add', [
     'uses' => 'ConversationParagraphController@createCPPart3'
 ]);
 
-// Lấy dữ liệu part 3
+// Lấy dữ liệu part 3,4
 Route::get('/part3/get', [
     'uses' => 'ConversationParagraphController@getPart3'
 ]);
 
-// Update part 3
+// Update part 3,4
 Route::post('/part3/update', [
     'uses' => 'ConversationParagraphController@updatePart3'
 ]);
 
-// Xóa  part 3
+// Xóa  part 3,4
 Route::get('/part3/delete', [
     'uses' => 'ConversationParagraphController@deletePart3'
 ]);

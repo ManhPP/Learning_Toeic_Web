@@ -9,6 +9,7 @@ use App\ConversationSentence;
 
 class ConversationParagraphController extends Controller
 {
+    //tạo part 3,4
     public function createCPPart3(Request $request)
     {
 
@@ -36,15 +37,17 @@ class ConversationParagraphController extends Controller
         return Response($paraJson, 200);
     }
 
+    // Lấy dữ liệu part3,4 cho view update
     public function getPart3(Request $request)
     {
         // $idPartNghe=$request["id"];
-        $part3 = ListeningPart::find(41);
+        $part3 = ListeningPart::find(42);
         // print_r("1111");
         return view('update_part_3')
             ->with("partNghe", $part3);
     }
 
+    // Cập nhật dữ liệu part3,4
     public function updatePart3(Request $request)
     {
         $listeningPart = $request["part3"];
@@ -52,14 +55,11 @@ class ConversationParagraphController extends Controller
         $listHoiThoai = $request["listHoiThoai"];
         $arrListCau = $request["arrListCau"];
 
-
         $paraJson = json_decode($listeningPart, true);
         $listHoiThoaiJson = json_decode($listHoiThoai, true);
         $arrListCauJson = json_decode($arrListCau, true);
         \Log::info($arrListCauJson[1]);
-
         try {
-
             ListeningPart::find(((Object)$paraJson)->id)->update($paraJson);
 
             $i=0;
@@ -76,11 +76,12 @@ class ConversationParagraphController extends Controller
         return 2;
     }
 
+    //Xóa part3,4
     public function deletePart3(Request $request){
         // $id = $request["id"];
         try {
             $part3 = ListeningPart::find(41);
-            
+
             $doanHTmodel=ConversationParagraph::where('idPartNghe',41)->get();
                 \Log::info($doanHTmodel);
                 foreach($doanHTmodel->conversationSentence as $cau){
@@ -91,7 +92,6 @@ class ConversationParagraphController extends Controller
                 }
                 $doanHTmodel->delete();
                 $part3->delete();
-            
     
             return 1;
         }catch (\Exception $e){
