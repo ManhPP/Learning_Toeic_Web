@@ -216,4 +216,18 @@ Route::post('/part3/add', [
     'uses' => 'ConversationParagraphController@createCPPart3'
 ]);
 
+// Lấy dữ liệu part 3
+Route::get('/part3/get', [
+    'uses' => 'ConversationParagraphController@getPart3'
+]);
+
+Route::post('/part3/update', [
+    'uses' => 'ConversationParagraphController@updatePart3'
+]);
+
+// Xóa  part 3
+Route::get('/part3/delete', [
+    'uses' => 'ConversationParagraphController@deletePart3'
+]);
+
 

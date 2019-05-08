@@ -15,6 +15,6 @@ class ConversationParagraph extends Model
     }
 
     function listeningPart(){
-        return $this -> belongsTo('App\ListeningPart','idPartnghe');
+        return $this -> belongsTo('App\ListeningPart','idPartnghe','id');
     }
 }
