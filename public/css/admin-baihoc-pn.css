@@ -1,0 +1,150 @@
+* {
+	font-size: 0.97em;
+}
+
+body, html {
+	height: 100%;
+	overflow-x: hidden;
+}
+
+.container-fluid {
+	padding: 0;
+	margin: 0;
+	height: 100%;
+}
+
+.sidebar-nav {
+	position: fixed;
+	top: 0;
+	height: 100%;
+	width: 15em;
+	margin: 0;
+	padding: 0;
+	background-color: #212529;
+	list-style: none;
+	z-index: 1;
+}
+
+.choice {
+	color: white !important;
+}
+
+.sidebar-nav li {
+	text-indent: 2em;
+	line-height: 3.5em;
+}
+
+.sidebar-nav li a {
+	display: block;
+	text-decoration: none;
+	color: #999999;
+}
+
+.sidebar-nav li a:hover {
+	text-decoration: none;
+	color: #fff;
+	background: rgba(255, 255, 255, 0.2);
+}
+
+.sidebar-nav li a:active, .sidebar-nav li a:focus {
+	text-decoration: none;
+}
+
+.ico-manag {
+	width: 1.5em;
+	margin-right: 0.5em;
+}
+
+.ico-header {
+	width: 1.3em;
+}
+
+/*bang*/
+#table-thaoluan {
+	height: auto;
+}
+
+.ico-filter {
+	width: 18px;
+	padding: 3px;
+}
+
+th, td {
+	text-align: center;
+	overflow-x: auto;
+	height: 3.8em;
+	overflow-y: hidden;
+}
+
+.main-table {
+	overflow-x: auto;
+}
+
+.pre-next {
+	border: none;
+	background-color: none;
+	padding: 0.6em 1em;
+}
+
+.detail {
+	color: white;
+	background: #504a41;
+	border: none;
+	cursor: pointer;
+	border-radius: 4px;
+	height: 2em;
+	line-height: 2em;
+}
+
+.btn-mana {
+	padding: 0.8em 1em;
+	color: white;
+	border: none;
+	margin: 0 15px;
+	border-radius: 8px;
+	cursor: pointer;
+}
+
+.view {
+	text-decoration: none;
+	color: #f9f9f9;
+}
+
+.update {
+	text-decoration: none;
+	color: #bed413;
+}
+
+.view:hover, .update:hover{
+	color: #18f54a;
+	text-decoration: none;
+}
+
+/* filter */
+.filter-text {
+	margin: 0;
+	color: red;
+	font-size: 0.8em;
+}
+
+#table-thaoluan thead th {
+	height: auto;
+}
+
+/*css for class added by js*/
+.selected {
+	background-color: #4c4caa;
+}
+
+/* input page */
+#input-number, #filter-val {
+	width: 100%;
+	border: 1px solid #c3b6b6;
+	border-radius: 5px;
+	height: 2.3em;
+	padding-left: 5px;
+}
+
+.footer {
+	bottom: -12px !important;
+}

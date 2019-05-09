@@ -2,14 +2,123 @@
 
 namespace App\Http\Controllers;
 
+
+use App\MapPart6Paragraph;
+use App\Part6Paragraph;
+
 use App\Part7Paragraph;
+
 use App\ReadingPart;
 use Illuminate\Http\Request;
 use App\Part5;
-use PhpParser\Node\Expr\Cast\Object_;
 
 class ReadingPartController extends Controller
 {
+
+
+    public function getPartDoc($id){
+        $partDoc = ReadingPart::find($id);
+        $arrDoan = array();
+        $sum = 0;
+        if($partDoc->loaiPart == "Part 6"){
+            $arrDoan = Part6Paragraph::all();
+            $sum = Part6Paragraph::count();
+            return view('admin_update_part_6',['partDoc'=>$partDoc,'arrDoan'=>$arrDoan,'sum'=>$sum]);
+        }
+        else if($partDoc->loaiPart == "Part 7"){
+            $partDoc = ReadingPart::find($id);
+            $arrDoanDon = Part7Paragraph::all()->where('loaiPart7','=', 'Đoạn đơn');
+            $arrDoanKep = Part7Paragraph::all()->where('loaiPart7','=', 'Đoạn kép');
+
+            $sumDoanDon = Part7Paragraph::where('loaiPart7','=', 'Đoạn đơn')->count();
+            $sumDoanKep = Part7Paragraph::where('loaiPart7','=', 'Đoạn kép')->count();
+
+            return view("admin_update_part7")
+                ->with("partDoc", $partDoc)
+                ->with("arrDoanDon", $arrDoanDon)->with("sumDoanDon", $sumDoanDon)
+                ->with("arrDoanKep", $arrDoanKep)->with("sumDoanKep", $sumDoanKep);
+        }else if($partDoc->loaiPart == "Part 5"){
+            $arrCau = Part5::all();
+            $sum = Part5::count();
+            return view('admin_update_part5')
+                ->with("arrCau",$arrCau)->with("sum",$sum)->with("partDoc", $partDoc);
+        }
+
+    }
+
+
+    public function getListPartDoc(){
+        $arrBaiHoc = ReadingPart::all();
+        $numBaiHoc = count($arrBaiHoc);
+        $numPage = $numBaiHoc /10;
+        return view('admin-baihoc-pd',['arrBaiHoc' => $arrBaiHoc,'numBaiHoc'=>$numBaiHoc,'numPage'=>$numPage]);
+    }
+
+    public function addPart6(Request $request){
+        try{
+            //parse string to part6
+            $part6 = json_decode($request->part6);
+
+            $addPart6 = new ReadingPart();
+            $addPart6->loaiPart = $part6->loaiPart;
+            $addPart6->title = $part6->tittle;
+            $addPart6->accessCount = 0;
+            $row = $addPart6->save();
+            if($row>0){
+                foreach ($part6->listDoanVanPart6 as $doanPart6){
+                    $mapPart6Paragraph = new MapPart6Paragraph();
+                    $mapPart6Paragraph->idDoanVan = $doanPart6->id;
+                    $mapPart6Paragraph->idPartDoc = ReadingPart::max('id');
+                    $mapPart6Paragraph->save();
+                }
+            }
+            return 'true';
+        }catch (\Exception $e){
+            error_log($e->getMessage());
+        }
+        return 'false';
+    }
+
+    public function updatePart6(Request $request){
+        try{
+            $data = $request->part;
+            $partDoc_Obj = json_decode($data);
+            $partDoc = ReadingPart::find($partDoc_Obj->id);
+            $partDoc->title = $partDoc_Obj->tittle;
+
+            $arrId = array();
+            foreach ($partDoc_Obj->listDoanVanPart6 as $doanvan){
+                array_push($arrId ,$doanvan->id);
+            }
+
+            $partDoc->part6Paragraphs()->sync($arrId);
+            $partDoc->save();
+            return 'true';
+        }catch(\Exception $ex){
+            error_log($ex->getMessage());
+        }
+        return 'false';
+    }
+
+    public function updatePartDoc(Request $request){
+        error_log('id'.$request['id']);
+    }
+
+
+
+    public function practicePartDoc($id)
+    {
+        $partDoc = ReadingPart::find($id);
+        if($partDoc->loaiPart == "Part 6"){
+            return view("part6", ['partDoc' => $partDoc]);
+        }else if($partDoc->loaiPart == "Part 7"){
+            return view("part7", ['partDoc' => $partDoc]);
+        }else if($partDoc->loaiPart == "Part 5"){
+           return view("guest_part5_view", ['partDoc' => $partDoc]);
+        }
+
+    }
+
     public function getPart7(Request $request){
 //       $arrDoanDon = Part7Paragraph::where('loaiPart7','=', 'Đoạn đơn')->offset(0)->limit(20)->get();
 //       $arrDoanKep = Part7Paragraph::where('loaiPart7','=', 'Đoạn kép')->offset(0)->limit(20)->get();
@@ -148,6 +257,9 @@ class ReadingPartController extends Controller
         }
         return "false";
     }
+
+
+
 
     public function indexGuestPart5(Request $request)
     {

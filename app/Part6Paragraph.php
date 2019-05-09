@@ -8,7 +8,12 @@ class Part6Paragraph extends Model
 {
     protected $primaryKey='id';
     protected $table='part6_paragraphs';
+
     function readingPart(){
-        $this->belongsToMany('App/ReadingPart','MapPart6Paragraph')->withPivot('idPartDoc');
+        return $this->belongsToMany('App\ReadingPart','map_part6_paragraphs','idDoanVan','idPartDoc');
+    }
+
+    function part6(){
+        return $this->hasMany('App\Part6','idDoan','id');
     }
 }

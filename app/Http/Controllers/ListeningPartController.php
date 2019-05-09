@@ -82,6 +82,19 @@ class ListeningPartController extends Controller
         $partNghe = ListeningPart::find($request["id"]);
         return view("guest_part4_view")->with("partNghe", $partNghe);
     }
+    //lấy dữ liệu cho view admin quản lý phần nghe
+    public function get(Request $request){
+        $arrBaiHoc=ListeningPart::all();
+        $numBaiHoc=$arrBaiHoc->count();
+        return view('admin_baihoc_pn')->with("arrBaiHoc",$arrBaiHoc)->with("numBaiHoc",$numBaiHoc);
+    }
+
+    // public function get(Request $request){
+    //     $arrBaiHoc=ListeningPart::all();
+    //     $numBaiHoc=$arrBaiHoc->count();
+    //     return view('admin_baihoc_pn')->with("arrBaiHoc",$arrBaiHoc)->with("numBaiHoc",$numBaiHoc);
+    // }
+
     /**
      * Store a newly created resource in storage.
      *
