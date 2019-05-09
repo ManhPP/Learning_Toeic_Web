@@ -12,6 +12,6 @@ class Part6 extends Model
         'cauHoi', 'daA', 'daB', 'daC', 'daD', 'daDung'
     ];
     function part6Paragraph(){
-        $this->belongsTo('App/Part6Paragraph','idDoan','id');
+        $this->belongsTo('App\Part6Paragraph','idDoan','id');
     }
 }

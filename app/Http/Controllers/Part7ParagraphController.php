@@ -79,14 +79,27 @@ class Part7ParagraphController extends Controller
 
     public function delPara(Request $request){
         $id = $request["id"];
-        try {
+//        try {
             $part7Para = Part7Paragraph::find($id);
-            $part7Para->cauPart7s()->delete();
-            $part7Para->delete();
-            return "true";
-        }catch (\Exception $e){
+//        error_log("aaa");
+            foreach ($part7Para->cauPart7s as $cau){
+                $part7 = Part7::find($cau->id);
+                error_log("aaa");
+                error_log($part7->delete());
+            }
+            foreach ($part7Para->readingParts as $partDoc){
+                $partDoc->part7Paragraphs()->detach();
+                $partDoc->delete();
+            }
 
-        }
+            $deleted = $part7Para->delete();
+            error_log($deleted);
+            if($deleted>0) {
+                return 'true';
+            }
+//        }catch (\Exception $e){
+//
+//        }
         return "false";
     }
 }

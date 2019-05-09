@@ -16,7 +16,8 @@ class ReadingPartController extends Controller
 {
 
 
-    public function getPartDoc($id){
+    public function getPartDoc(Request $request){
+        $id = $request["id"];
         $partDoc = ReadingPart::find($id);
         $arrDoan = array();
         $sum = 0;
@@ -42,6 +43,10 @@ class ReadingPartController extends Controller
             $sum = Part5::count();
             return view('admin_update_part5')
                 ->with("arrCau",$arrCau)->with("sum",$sum)->with("partDoc", $partDoc);
+            $arrCau = Part5::all();
+            $sum = Part5::count();
+            return view('admin_update_part5')
+                ->with("arrCau",$arrCau)->with("sum",$sum)->with("partDoc", $partDoc);
         }
 
     }
@@ -50,8 +55,35 @@ class ReadingPartController extends Controller
     public function getListPartDoc(){
         $arrBaiHoc = ReadingPart::all();
         $numBaiHoc = count($arrBaiHoc);
-        $numPage = $numBaiHoc /10;
+        $numPage = round($numBaiHoc / 10,0,PHP_ROUND_HALF_DOWN)+1;
         return view('admin-baihoc-pd',['arrBaiHoc' => $arrBaiHoc,'numBaiHoc'=>$numBaiHoc,'numPage'=>$numPage]);
+    }
+
+    public function delPartDoc(Request $request)
+    {
+        $arrId = $request->arrId;
+        foreach ($arrId as $id) {
+            $checked = $this->delPhanDoc($id);
+            if(!$checked){
+                return 'false';
+            }
+        }
+        return 'true';
+    }
+
+    //su dung moi khi muon xoa partDoc rieng
+    public function delPhanDoc($id){
+        $partDoc = ReadingPart::find($id);
+
+        if($partDoc->loaiPart == "Part 6"){
+            $partDoc->part6Paragraphs()->detach();
+        }else if($partDoc->loaiPart == "Part 7"){
+            $partDoc->part7Paragraphs()->detach();
+        }else if($partDoc->loaiPart == "Part 5"){
+            $partDoc->cauPart5s()->detach();
+        }
+        $deleted = $partDoc->delete();
+        return $deleted;
     }
 
     public function addPart6(Request $request){
@@ -109,6 +141,9 @@ class ReadingPartController extends Controller
     public function practicePartDoc($id)
     {
         $partDoc = ReadingPart::find($id);
+        $view = $partDoc->accessCount;
+        $partDoc->accessCount = $view +1;
+        $partDoc->save();
         if($partDoc->loaiPart == "Part 6"){
             return view("part6", ['partDoc' => $partDoc]);
         }else if($partDoc->loaiPart == "Part 7"){
