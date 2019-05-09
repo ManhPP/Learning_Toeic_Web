@@ -100,9 +100,11 @@ Route::get("/reading/part5",function(){
 
 Route::get("/guest/luyen-doc/{id}","ReadingPartController@practicePartDoc");
 
-Route::get('/adlesson', function(){
-    return view('adminLesson');
-});
+Route::get('/adlesson', [
+    'uses' => 'ListeningPartController@get'
+]);
+
+
 Route::get('/addiscuss', function(){
     return view('adminDiscuss');
 });
@@ -231,5 +233,7 @@ Route::post('/part3/update', [
 Route::get('/part3/delete', [
     'uses' => 'ConversationParagraphController@deletePart3'
 ]);
+
+
 
 
