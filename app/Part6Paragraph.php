@@ -10,7 +10,7 @@ class Part6Paragraph extends Model
     protected $table='part6_paragraphs';
 
     function readingPart(){
-        return $this->belongsToMany('App/ReadingPart','map_part6_paragraphs')->withPivot('idPartDoc');
+        return $this->belongsToMany('App\ReadingPart','map_part6_paragraphs','idDoanVan','idPartDoc');
     }
 
     function part6(){

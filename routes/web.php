@@ -72,7 +72,7 @@ Route::get('/add-part-6','Part6ParagraphController@listPart6');
 Route::post('/admin/bai-hoc-manager/add-part-doc/add','ReadingPartController@addPart6');
 
 
-Route::get('/admin/bai-hoc-manager/update-part-doc/{id}','ReadingPartController@getPart6');
+Route::get('/admin/bai-hoc-manager/update-part-doc/{id}','ReadingPartController@getPartDoc');
 Route::post('/admin/bai-hoc-manager/update-part-doc/update','ReadingPartController@updatePart6');
 
 
@@ -109,9 +109,13 @@ Route::get("/reading/part5",function(){
     return view("part5");
 });
 
-Route::get("/reading/part6/{id}",'ReadingPartController@practicePart6');
+Route::get("/guest/luyen-doc/{id}","ReadingPartController@practicePartDoc");
 
-Route::get("/reading/part7/{id}",'ReadingPartController@practicePart7');
+
+//Route::get("/reading/part6/{id}",'ReadingPartController@practicePart6');
+//
+//Route::get("/reading/part7/{id}",'ReadingPartController@practicePart7');
+
 
 Route::get('/adlesson', function(){
     return view('adminLesson');
@@ -154,3 +158,9 @@ Route::get("/manager-para-part7/del",[
 Route::get('/part5hehe',[
     'uses' => 'ManagePart5SentenceController@index'
 ]);
+
+//manage bai hoc admin
+
+Route::get("/admin/manager-baihoc-pd","ReadingPartController@getListPartDoc");
+
+Route::get("/admin/bai-hoc-manager/update-part-doc",'ReadingPartController@updatePart6');

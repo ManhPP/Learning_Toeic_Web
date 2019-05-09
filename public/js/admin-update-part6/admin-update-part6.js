@@ -334,7 +334,7 @@ $(document).on("click", "#submit", function(){
                             url: "update",
                             method: "POST",
                             data: {
-                                part6 : part
+                                part : part
                             },
                             success: function(data){
                                 if(data == 'true'){

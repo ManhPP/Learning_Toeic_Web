@@ -252,7 +252,7 @@ $(document).on("click", ".btn-del", function(e){
         data: {
             id:id
         },
-        method: "GET",
+        method: "get",
         success: function(data){
             if(data=='true'){
                 removeRow(id);

@@ -16,11 +16,42 @@ class ReadingPartController extends Controller
 {
 
 
-    public function getPart6($id){
+    public function getPartDoc($id){
         $partDoc = ReadingPart::find($id);
-        $arrDoan = Part6Paragraph::all();
-        $sum = Part6Paragraph::count();
-        return view('update_part_6',['partDoc'=>$partDoc,'arrDoan'=>$arrDoan,'sum'=>$sum]);
+        $arrDoan = array();
+        $sum = 0;
+        if($partDoc->loaiPart == "Part 6"){
+            $arrDoan = Part6Paragraph::all();
+            $sum = Part6Paragraph::count();
+            return view('admin_update_part_6',['partDoc'=>$partDoc,'arrDoan'=>$arrDoan,'sum'=>$sum]);
+        }
+        else if($partDoc->loaiPart == "Part 7"){
+            $partDoc = ReadingPart::find($id);
+            $arrDoanDon = Part7Paragraph::all()->where('loaiPart7','=', 'Đoạn đơn');
+            $arrDoanKep = Part7Paragraph::all()->where('loaiPart7','=', 'Đoạn kép');
+
+            $sumDoanDon = Part7Paragraph::where('loaiPart7','=', 'Đoạn đơn')->count();
+            $sumDoanKep = Part7Paragraph::where('loaiPart7','=', 'Đoạn kép')->count();
+
+            return view("admin_update_part7")
+                ->with("partDoc", $partDoc)
+                ->with("arrDoanDon", $arrDoanDon)->with("sumDoanDon", $sumDoanDon)
+                ->with("arrDoanKep", $arrDoanKep)->with("sumDoanKep", $sumDoanKep);
+        }else if($partDoc->loaiPart == "Part 5"){
+            $arrCau = Part5::all();
+            $sum = Part5::count();
+            return view('admin_update_part5')
+                ->with("arrCau",$arrCau)->with("sum",$sum)->with("partDoc", $partDoc);
+        }
+
+    }
+
+
+    public function getListPartDoc(){
+        $arrBaiHoc = ReadingPart::all();
+        $numBaiHoc = count($arrBaiHoc);
+        $numPage = $numBaiHoc /10;
+        return view('admin-baihoc-pd',['arrBaiHoc' => $arrBaiHoc,'numBaiHoc'=>$numBaiHoc,'numPage'=>$numPage]);
     }
 
     public function addPart6(Request $request){
@@ -50,7 +81,7 @@ class ReadingPartController extends Controller
 
     public function updatePart6(Request $request){
         try{
-            $data = $request->part6;
+            $data = $request->part;
             $partDoc_Obj = json_decode($data);
             $partDoc = ReadingPart::find($partDoc_Obj->id);
             $partDoc->title = $partDoc_Obj->tittle;
@@ -68,10 +99,24 @@ class ReadingPartController extends Controller
         }
         return 'false';
     }
-    public function practicePart6($id)
+
+    public function updatePartDoc(Request $request){
+        error_log('id'.$request['id']);
+    }
+
+
+
+    public function practicePartDoc($id)
     {
-        $part6 = ReadingPart::find($id);
-        return view("part6", ['partDoc' => $part6]);
+        $partDoc = ReadingPart::find($id);
+        if($partDoc->loaiPart == "Part 6"){
+            return view("part6", ['partDoc' => $partDoc]);
+        }else if($partDoc->loaiPart == "Part 7"){
+            return view("part7", ['partDoc' => $partDoc]);
+        }else if($partDoc->loaiPart == "Part 5"){
+           return view("guest_part5_view", ['partDoc' => $partDoc]);
+        }
+
     }
 
     public function getPart7(Request $request){
@@ -213,11 +258,7 @@ class ReadingPartController extends Controller
         return "false";
     }
 
-    public function practicePart7($id)
-        {
-            $part7 = ReadingPart::find($id);
-            return view("part7", ['partDoc' => $part7]);
-        }
+
 
 
     public function indexGuestPart5(Request $request)
