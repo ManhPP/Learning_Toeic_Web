@@ -1,4 +1,6 @@
 <?php
+use Illuminate\Support\Facades\Route;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -121,3 +123,22 @@ Route::post('manager-reading-part/update-part7/update', [
 
 
 
+
+
+
+
+
+
+
+
+Route::get('/test',[
+    'uses' => 'TestController@index'
+]);
+
+Route::get('/test/add',[
+    'uses' => 'TestController@addIndex'
+]);
+
+Route::get('/test/do',[
+    'uses' => 'TestController@doTest'
+]);
