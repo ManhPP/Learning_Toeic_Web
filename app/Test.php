@@ -20,11 +20,11 @@ class Test extends Model
     }
 
     function readingParts(){
-        return $this -> $this->belongsToMany('App\ReadingPart', 'map_reading_tests', 'idBKT', 'idPartDoc');
+        return $this ->belongsToMany('App\ReadingPart', 'map_reading_tests', 'idBKT', 'idPartDoc');
     }
 
     function listeningParts(){
-        return $this -> $this->belongsToMany('App\ListeningPart', 'map_listening_tests', 'idBKT', 'idPartNghe');
+        return $this ->belongsToMany('App\ListeningPart', 'map_listening_tests', 'idBKT', 'idPartNghe');
     }
 
 }

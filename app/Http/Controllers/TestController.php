@@ -95,7 +95,7 @@ class TestController extends Controller
 
     public function doTest(Request $request){
         $id = $request["id"];
-
+        
         $bkt = Test::find($id);
 
         return view('user_bkt_view')->with('bkt', $bkt);

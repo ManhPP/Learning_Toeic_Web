@@ -34,7 +34,7 @@
                 {{ $numQues = 1 }}
             </div>
             
-            @foreach($bkt->listPartNghe as $partNghe)
+            @foreach($bkt->listeningParts as $partNghe)
                 @if($partNghe->loaiPart == 'Part 1')
                     <div style="display:none">
                         {{ $part1 = $partNghe }}
@@ -62,7 +62,7 @@
             @endforeach
     
     
-            @foreach($bkt->listPartDoc as $partDoc)
+            @foreach($bkt->readingParts as $partDoc)
                 
                 @if($partDoc->loaiPart == 'Part 5')
                     <div style="display:none">
@@ -104,7 +104,7 @@
                                 {{ $index = 1 }}
                             </div>
                             
-                            @foreach($part1->listCauPart1 as $cauPart1)
+                            @foreach($part1->part1 as $cauPart1)
                             
                                 <div class="ques" id="q{{ $index }}" data-asw="{{ $cauPart1->dADung }}" data-ques="{{ $numQues }}">
                                     <div class="no-ques">Câu {{ $numQues }}</div>
@@ -159,7 +159,7 @@
                             <div style="display:none">
                                     {{ $index = 1 }}
                             </div>
-                            @foreach($part2->listCauPart2 as $cau)
+                            @foreach($part2->part2 as $cau)
                             
                                 <div class="ques" data-asw="{{ $cau->dADung }}" data-ques="{{ $numQues }}">
                                     <div class="no-ques" data-id="{{ $cau->id }}">Câu {{ $numQues }}</div>
@@ -208,8 +208,8 @@
                             <div style="display:none">
                                     {{ $index = 0 }}
                             </div>
-                            @foreach($part3->listDoanHoiThoai as $dht)
-                                @foreach($dht->listCauHoiThoai as $cht)
+                            @foreach($part3->conversation_paragraph as $dht)
+                                @foreach($dht->conversationSentence as $cht)
 
                                     @if( $index%3 == 0 )
 									<div class="block" data-index="{{ $index }}">
@@ -274,8 +274,8 @@
                             <div style="display:none">
                                 {{ $index = 0 }}
                             </div>
-                            @foreach($part4->listDoanHoiThoai as $dht)
-                                @foreach($dht->listCauHoiThoai as $cht)
+                            @foreach($part4->conversation_paragraph as $dht)
+                                @foreach($dht->conversationSentence as $cht)
                                         @if( $index%3 == 0 )
                                         <div class="block" data-index="{{ $index }}">
                                             <p class="ques refer-ques">Questions {{ $index + 1}}-{{ $index + 3}}
@@ -337,7 +337,7 @@
                             <div style="display:none">
                                 {{ $index = 0 }}
                             </div>
-                            @foreach($part5->listCauPart5 as $cau)
+                            @foreach($part5->cauPart5s as $cau)
                            
                                 <!-- mot cau -->
                                 <div class="ques" data-asw="{{ $cau->dADung }}" data-id="{{ $cau->id }}">
@@ -394,9 +394,9 @@
                                 <div style="display:none">
                                     {{ $index = 1 }}
                                 </div>
-                            @foreach($part6->listDoanVanPart6 as $doanVan)
+                            @foreach($part6->part6Paragraphs as $doanVan)
                                 <p class="ques refer-ques">Questions {{ $index }}-{{ $index+2 }} refer to the following conversation.</p>
-                                @foreach($doanVan->listCauPart6 as $cau)
+                                @foreach($doanVan->part6 as $cau)
                                 
                                     <div class="ques" data-asw="{{$cau->daDung }}">
                                             <div>
@@ -455,7 +455,7 @@
                             <div style="display:none">
                                 {{ $index = 1 }}
                             </div>
-                            @foreach($part7->listDoanVanPart7 as $doan)
+                            @foreach($part7->part7Paragraphs as $doan)
                                 @if(count($doan->doanVan2) == 0)
                                 
                                     <div data-id="{{ $doan->id }}">
@@ -464,7 +464,7 @@
                                         <div class="paragrap">
                                             <img src="{{ $doan->doanVan1 }}">
                                         </div>
-                                        @foreach($doan->listCauPart7 as $cau)
+                                        @foreach($doan->cauPart7s as $cau)
                                         
                                             <div class="ques" data-asw="{{ $cau->daDung }}" data-ques="{{ $numQues }}">
                                                 <div>
@@ -489,7 +489,7 @@
                                 @endif
                             @endforeach
                             <!-- cho doan kep -->
-                            @foreach($part7->listDoanVanPart7 as $doan)
+                            @foreach($part7->part7Paragraphs as $doan)
                                 @if(count($doan->doanVan2) > 0)
                                     <div>
                                         <p class="ques refer-ques">Questions {{ $index }}-{{ $index + count($doan->listCauPart7) -1 }} refer to the
@@ -498,7 +498,7 @@
                                             <img src="{{ $doan->doanVan1 }}">
                                             <img src="{{ $doan->doanVan2 }}">
                                         </div>
-                                        @foreach($doan->listCauPart7 as $cau)
+                                        @foreach($doan->cauPart7s as $cau)
                                         
                                             <div class="ques" data-asw="{{ $cau->daDung }}" data-ques="{{ $numQues }}">
                                                 <div>
