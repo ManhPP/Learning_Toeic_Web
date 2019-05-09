@@ -23,9 +23,7 @@
                 </tr>
                 </thead>
                 <tbody>
-                {{--                <c:set var="indexPara" value="0" />--}}
-                {{ $indexPara = 0  }}
-                {{--                <c:forEach items="${arrDoan }" var="doan">--}}
+                <?php $indexPara = 0  ?>
                 @foreach($arrDoan as $doan)
                     <tr class="d-flex row" data-id="{{$doan->id }}">
                         <td class="col-12"><img class="ico-forward"
@@ -43,52 +41,29 @@
                                 <div>
                                     <div class="paragrap">
                                         <img src="{{$doan->doanVan1 }}">
-                                        {{--                                        <c:if test="${fn:length(doan.doanVan2) > 0}">--}}
                                         @if(strlen($doan->doanVan2) > 0)
                                             <br>
                                             <img src="{{$doan->doanVan2 }}">
-                                            {{--                                        </c:if>--}}
                                         @endif
                                     </div>
                                     <div class="para" data-id="{{$doan->id }}">
-                                    {{--                                        <c:set var="index" value="1" />--}}
-                                    {{ $index = 1  }}
-                                    {{--                                        <c:forEach items="${doan.listCauPart7 }" var="cau">--}}
+                                    <?php $index = 1  ?>
                                     @foreach($doan->cauPart7s as $cau)
-                                        {{--                                            <c:set var="checkA" value="" />--}}
-                                        {{--                                            <c:set var="checkB" value="" />--}}
-                                        {{--                                            <c:set var="checkC" value="" />--}}
-                                        {{--                                            <c:set var="checkD" value="" />--}}
-                                        {{$checkA = ""}}
-                                        {{$checkB = ""}}
-                                        {{$checkC = ""}}
-                                        {{$checkD = ""}}
-                                        {{--                                            <c:choose>--}}
-                                        {{--                                                <c:when test="${cau.daDung=='A' }">--}}
-                                        {{--                                                    <c:set var="checkA" value="checked='checked'" />--}}
-                                        {{--                                                </c:when>--}}
-                                        {{--                                                <c:when test="${cau.daDung=='B' }">--}}
-                                        {{--                                                    <c:set var="checkB" value="checked='checked'" />--}}
-                                        {{--                                                </c:when>--}}
-                                        {{--                                                <c:when test="${cau.daDung=='C' }">--}}
-                                        {{--                                                    <c:set var="checkC" value="checked='checked'" />--}}
-                                        {{--                                                </c:when>--}}
-                                        {{--                                                <c:when test="${cau.daDung=='D' }">--}}
-                                        {{--                                                    <c:set var="checkD" value="checked='checked'" />--}}
-                                        {{--                                                </c:when>--}}
-                                        {{--                                            </c:choose>--}}
-
+                                        <?php $checkA = ""?>
+                                        <?php $checkB = ""?>
+                                        <?php $checkC = ""?>
+                                        <?php $checkD = ""?>
                                         @if($cau->daDung == 'A')
-                                            {{$checkA = "checked='checked'"}}
+                                            <?php $checkA = "checked='checked'"?>
                                         @endif
                                         @if($cau->daDung == 'B')
-                                            {{$checkB = "checked='checked'"}}
+                                            <?php $checkB = "checked='checked'"?>
                                         @endif
                                         @if($cau->daDung == 'C')
-                                            {{$checkC = "checked='checked'"}}
+                                            <?php $checkC = "checked='checked'"?>
                                         @endif
                                         @if($cau->daDung == 'D')
-                                            {{$checkD = "checked='checked'"}}
+                                            <?php $checkD = "checked='checked'"?>
                                         @endif
                                         <!-- mot cau -->
                                             <div class="ques" data-id="{{$cau->id}}" data-asw="{{$cau->daDung}}">
@@ -112,8 +87,7 @@
                                                 </div>
                                                 <hr>
                                             </div>
-                                            {{--                                            <c:set var="index" value="${index+1 }" />--}}
-                                            {{$index++}}
+                                            <?php $index++?>
                                         @endforeach
 
                                     </div>
@@ -121,7 +95,6 @@
                             </div>
                         </td>
                     </tr>
-                    {{--                </c:forEach>--}}
                 @endforeach
                 </tbody>
             </table>

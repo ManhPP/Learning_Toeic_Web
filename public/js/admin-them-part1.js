@@ -119,13 +119,13 @@ $(document).on("click", "#add-part", function(){
    partNghe+="}"
   
    //upload
-    $.ajax({
-        url: $("#root-path").html()+"/add-part-1/add",
-        method: "POST",
-        //    contentType:"application/json; charset=utf-8",
-        //    dataType:"json",
-        headers: {
-            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+   $.ajax({
+       url: $("#path-add").html(),
+       method: "POST",
+    //    contentType:"application/json; charset=utf-8",
+    //    dataType:"json",
+       headers: {
+        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
         },
         data: {
             part1:partNghe,
@@ -133,7 +133,7 @@ $(document).on("click", "#add-part", function(){
         },
         success: function(data){
             console.log(data);
-            if(data==true){
+            if(data=="true"){
                 alert("Thêm thành công!!");
             }else{
                 alert("Thêm thất bại!!");

@@ -1,5 +1,5 @@
 @extends('layouts.master')
-@section('title','add part 6')
+@section('title','add part 6 practice')
 @section("css")
     <link rel="stylesheet" type="text/css" href="{{ URL::asset("css/home_css_part6.css") }}">
 @endsection
@@ -78,7 +78,7 @@
                             </tr>
                             </thead>
                             <tbody>
-                            {{ $indexPara = 0 }}
+                            <?php $indexPara = 0 ?>
                                 @foreach( $arrDoan as $doan)
                                 <tr class="d-flex row" data-id="{{$doan->id }}">
                                     <td class="col-12">
@@ -90,27 +90,27 @@
                                              src="{{URL::asset("imgs/down-arrow.png")}}">
 
                                         <div class="content-para hide">
-                                            {{ $indexQues = 0 }}
+                                            <?php $indexQues = 0 ?>
                                             @foreach( $doan->part6 as $cau)
-                                                {{ $checkA ='' }}
-                                                {{ $checkB = '' }}
-                                                {{ $checkC = '' }}
-                                                {{ $checkD = '' }}
+                                                <?php $checkA ='' ?>
+                                                <?php $checkB = '' ?>
+                                                <?php $checkC = '' ?>
+                                                <?php $checkD = '' ?>
 
                                                 @if( $cau->daDung =='A')
-                                                    {{ $checkA = 'checked'}}
+                                                    <?php $checkA = 'checked'?>
                                                 @endif
 
                                                 @if($cau->daDung == 'B')
-                                                    {{ $checkB = 'checked' }}
+                                                    <?php $checkB = 'checked' ?>
                                                 @endif
 
                                                 @if($cau->daDung == 'C')
-                                                    {{ $checkC = 'checked' }}
+                                                    <?php $checkC = 'checked' ?>
                                                 @endif
 
                                                 @if($cau->daDung == 'D')
-                                                    {{ $checkD  = 'checked'}}
+                                                    <?php $checkD  = 'checked'?>
                                                 @endif
 
                                                 <div class="ques" data-asw="{{$cau->daDung }}"
@@ -151,8 +151,7 @@
     </div>
 
     <div style="display: none;">
-        <div id="csrf-name">${_csrf.headerName}</div>
-        <div id="csrf-value">${_csrf.token}</div>
+        <div id="path-add">{{Route("readingpartcontroller.addpart6")}}</div>
         <div id="root-path">{{URL("")}}</div>
         <div id="id-user">${acc.id }</div>
     </div>

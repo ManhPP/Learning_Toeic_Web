@@ -22,7 +22,7 @@
                 </thead>
                 <tbody>
 
-                {{ $indexPara = 0 }}
+                <?php $indexPara = 0 ?>
                 @foreach($arrDoan as $doan)
 
                     <tr class="d-flex row" data-id="{{$doan->id }}">
@@ -43,9 +43,9 @@
                                 <?php $indexQues = 0 ?>
                                 @foreach( $doan->part6 as $cau)
                                     <?php $checkA ='' ?>
-                                    {{ $checkB = '' }}
-                                    {{ $checkC = '' }}
-                                    {{ $checkD = '' }}
+                                    <?php $checkB = '' ?>
+                                    <?php $checkC = '' ?>
+                                    <?php $checkD = '' ?>
                                     @if( $cau->daDung =='A')
                                         <?php $checkA = 'checked'?>
                                     @endif
@@ -68,10 +68,10 @@
                                             <span class="ques-content">{{$cau->cauHoi }}</span>
                                         </div>
                                         <div class="row">
-                                            <label class="col-12 col-md-6"><input disabled="disabled" type="radio" name="choise{{$cau->id }}" {{$checkA }}><span class="asw-content">${{$cau->daA }}</span></label>
-                                            <label class="col-12 col-md-6"><input disabled="disabled" type="radio" name="choise{{$cau->id }}" {{$checkB }}><span class="asw-content">${{$cau->daB }}</span></label>
-                                            <label class="col-12 col-md-6"><input disabled="disabled" type="radio" name="choise{{$cau->id }}" {{$checkC }}><span class="asw-content">${{$cau->daC }}</span></label>
-                                            <label class="col-12 col-md-6"><input disabled="disabled" type="radio" name="choise{{$cau->id }}" {{$checkD }}><span class="asw-content">${{$cau->daD }}</span></label>
+                                            <label class="col-12 col-md-6"><input disabled="disabled" type="radio" name="choise{{$cau->id }}" {{$checkA }}><span class="asw-content">{{$cau->daA }}</span></label>
+                                            <label class="col-12 col-md-6"><input disabled="disabled" type="radio" name="choise{{$cau->id }}" {{$checkB }}><span class="asw-content">{{$cau->daB }}</span></label>
+                                            <label class="col-12 col-md-6"><input disabled="disabled" type="radio" name="choise{{$cau->id }}" {{$checkC }}><span class="asw-content">{{$cau->daC }}</span></label>
+                                            <label class="col-12 col-md-6"><input disabled="disabled" type="radio" name="choise{{$cau->id }}" {{$checkD }}><span class="asw-content">{{$cau->daD }}</span></label>
                                         </div>
                                         <hr>
                                     </div>
@@ -294,6 +294,11 @@
                 </div>
             </div>
         </div>
+    </div>
+    <div style="display: none">
+        <div id="path-add">{{Route("part6paragraphcontroller.add")}}</div>
+        <div id="path-delete">{{Route("part6paragraphcontroller.delete")}}</div>
+        <div id="path-update">{{Route("part6paragraphcontroller.update")}}</div>
     </div>
 @endsection
 

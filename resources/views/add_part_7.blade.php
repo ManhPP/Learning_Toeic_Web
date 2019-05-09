@@ -94,9 +94,7 @@
                             </tr>
                             </thead>
                             <tbody>
-{{--                            <c:set var="indexPara" value="0" />--}}
-                            {{$indexPara=0}}
-{{--                            <c:forEach items="${arrDoanDon }" var="doan">--}}
+                            <?php $indexPara=0?>
                             @foreach($arrDoanDon as $doan)
                                 <tr class="d-flex row" data-id="{{$doan->id}}">
                                     <td class="col-12">
@@ -111,32 +109,30 @@
                                             <div class="boundary-para" data-id={{$doan->id}} data-num-ques="{{count($doan->cauPart7s)}}">
                                                 <div class="paragrap">
                                                     <img src="{{$doan->doanVan1}}">
-{{--                                                    <c:if test="${fn:length(doan.doanVan2) > 0}">--}}
                                                     @if(strlen($doan->doanVan2)>0)
                                                         <br>
                                                         <img src="{{$doan->doanVan2}}">
-{{--                                                    </c:if>--}}
                                                     @endif
                                                 </div>
-                                                <div class="para" data-id="${doan.id }">
-                                                    {{$index = 1}}
+                                                <div class="para" data-id="{{$doan->id}}">
+                                                    <?php $index = 1?>
                                                     @foreach($doan->cauPart7s as $cau)
-                                                            {{$checkA = ""}}
-                                                            {{$checkB = ""}}
-                                                            {{$checkC = ""}}
-                                                            {{$checkD = ""}}
+                                                        <?php $checkA = ""?>
+                                                        <?php $checkB = ""?>
+                                                        <?php $checkC = ""?>
+                                                        <?php $checkD = ""?>
 
                                                             @if($cau->daDung == "A")
-                                                                {{$checkA="checked='checked'"}}
+                                                                <?php $checkA="checked='checked'"?>
                                                             @endif
                                                             @if($cau->daDung == "B")
-                                                                {{$checkB="checked='checked'"}}
+                                                                <?php $checkB="checked='checked'"?>
                                                             @endif
                                                             @if($cau->daDung == "C")
-                                                                {{$checkC="checked='checked'"}}
+                                                                <?php $checkC="checked='checked'"?>
                                                             @endif
                                                             @if($cau->daDung == "D")
-                                                                {{$checkD="checked='checked'"}}
+                                                                <?php $checkD="checked='checked'"?>
                                                             @endif
 
 
@@ -157,21 +153,18 @@
                                                                                                        name="choose{{$index}}" value="C" {{$checkC}} disabled="disabled"><span
                                                                             class="asw-content">{{$cau->daC}}</span></label> <label
                                                                         class="col-12 col-md-6"><input type="radio"
-                                                                                                       name="choose${{$index}}" value="D" {{$checkD}} disabled="disabled"><span
+                                                                                                       name="choose{{$index}}" value="D" {{$checkD}} disabled="disabled"><span
                                                                             class="asw-content">{{$cau->daD}}</span></label>
                                                             </div>
                                                             <hr>
                                                         </div>
-{{--                                                        <c:set var="index" value="${index+1 }" />--}}
-                                                        {{$index++}}
-{{--                                                    </c:forEach>--}}
+                                                        <?php $index++?>
                                                         @endforeach
                                                 </div>
                                             </div>
                                         </div>
                                     </td>
                                 </tr>
-{{--                            </c:forEach>--}}
                                 @endforeach
                             </tbody>
                         </table>
@@ -208,9 +201,7 @@
                             </tr>
                             </thead>
                             <tbody>
-{{--                            <c:set var="indexPara" value="0" />--}}
                             {{$indexPara=0}}
-{{--                            <c:forEach items="${arrDoanKep }" var="doan">--}}
                             @foreach($arrDoanKep as $doan)
                                 <tr class="d-flex row" data-id="{{$doan->id}}">
                                     <td class="col-12">
@@ -223,53 +214,30 @@
                                             <div class="boundary-para" data-num-ques="5" data-id="{{$doan->id}}">
                                                 <div class="paragrap">
                                                     <img src="{{$doan->doanVan1}}">
-{{--                                                    <c:if test="${fn:length(doan.doanVan2) > 0}">--}}
                                                     @if(strlen($doan))
                                                         <br>
                                                         <img src="{{$doan->doanVan2}}">
-{{--                                                    </c:if>--}}
                                                     @endif
                                                 </div>
                                                 <div class="para" data-id="{{$doan->id}}">
-{{--                                                    <c:set var="index" value="1" />--}}
-                                                    {{$index=1}}
-{{--                                                    <c:forEach items="${doan.listCauPart7 }" var="cau">--}}
+                                                    <?php $index=1?>
                                                     @foreach($doan->cauPart7s as $cau)
-
-{{--                                                        <c:set var="checkA" value="" />--}}
-{{--                                                        <c:set var="checkB" value="" />--}}
-{{--                                                        <c:set var="checkC" value="" />--}}
-{{--                                                        <c:set var="checkD" value="" />--}}
-{{--                                                        <c:choose>--}}
-{{--                                                            <c:when test="${cau.daDung=='A' }">--}}
-{{--                                                                <c:set var="checkA" value="checked='checked'" />--}}
-{{--                                                            </c:when>--}}
-{{--                                                            <c:when test="${cau.daDung=='B' }">--}}
-{{--                                                                <c:set var="checkB" value="checked='checked'" />--}}
-{{--                                                            </c:when>--}}
-{{--                                                            <c:when test="${cau.daDung=='C' }">--}}
-{{--                                                                <c:set var="checkC" value="checked='checked'" />--}}
-{{--                                                            </c:when>--}}
-{{--                                                            <c:when test="${cau.daDung=='D' }">--}}
-{{--                                                                <c:set var="checkD" value="checked='checked'" />--}}
-{{--                                                            </c:when>--}}
-{{--                                                        </c:choose>--}}
-                                                        {{$checkA = ""}}
-                                                        {{$checkB = ""}}
-                                                        {{$checkC = ""}}
-                                                        {{$checkD = ""}}
+                                                        <?php $checkA = ""?>
+                                                        <?php $checkB = ""?>
+                                                        <?php $checkC = ""?>
+                                                        <?php $checkD = ""?>
 
                                                         @if($cau->daDung == "A")
-                                                            {{$checkA="checked='checked'"}}
+                                                            <?php $checkA="checked='checked'"?>
                                                         @endif
                                                         @if($cau->daDung == "B")
-                                                            {{$checkB="checked='checked'"}}
+                                                            <?php $checkB="checked='checked'"?>
                                                         @endif
                                                         @if($cau->daDung == "C")
-                                                            {{$checkC="checked='checked'"}}
+                                                            <?php $checkC="checked='checked'"?>
                                                         @endif
                                                         @if($cau->daDung == "D")
-                                                            {{$checkD="checked='checked'"}}
+                                                            <?php $checkD="checked='checked'"?>
                                                         @endif
 
                                                         <!-- mot cau -->
@@ -281,22 +249,20 @@
                                                             <div class="row">
                                                                 <label class="col-12 col-md-6"><input type="radio"
                                                                                                       name="choose{{$index}}" value="A" {{$checkA}} disabled="disabled"><span
-                                                                            class="asw-content">${cau.daA }</span></label> <label
+                                                                            class="asw-content">{{$cau->daA}}</span></label> <label
                                                                         class="col-12 col-md-6"><input type="radio"
                                                                                                        name="choose{{$index}}" value="B" {{$checkB}} disabled="disabled"><span
-                                                                            class="asw-content">${cau.daB }</span></label> <label
+                                                                            class="asw-content">{{$cau->daB}}</span></label> <label
                                                                         class="col-12 col-md-6"><input type="radio"
                                                                                                        name="choose{{$index}}" value="C" {{$checkC}} disabled="disabled"><span
-                                                                            class="asw-content">${cau.daC }</span></label> <label
+                                                                            class="asw-content">{{$cau->daC}}</span></label> <label
                                                                         class="col-12 col-md-6"><input type="radio"
                                                                                                        name="choose{{$index}}" value="D" {{$checkD}} disabled="disabled"><span
-                                                                            class="asw-content">${cau.daD }</span></label>
+                                                                            class="asw-content">{{$cau->daD}}</span></label>
                                                             </div>
                                                             <hr>
                                                         </div>
-{{--                                                        <c:set var="index" value="${index+1 }" />--}}
-                                                        {{$index++}}
-{{--                                                    </c:forEach>--}}
+                                                        <?php $index++?>
                                                     @endforeach
                                                 </div>
                                             </div>
@@ -304,7 +270,6 @@
                                     </td>
                                 </tr>
                             @endforeach
-{{--                            </c:forEach>--}}
                             </tbody>
                         </table>
                     </div>
@@ -314,10 +279,6 @@
     </div>
 
     <div style="display: none;">
-        <div id="csrf-name">${_csrf.headerName}</div>
-        <div id="csrf-value">${_csrf.token}</div>
-        <div id="root-path">${pageContext.request.contextPath }</div>
-        <div id="id-user">${acc.id }</div>
         <div id="style-for-prev">
             <style>
                 .paragrap {
@@ -354,8 +315,8 @@
 
     <div style="display: none">
         <div id="path-add">{{route('readingpartcontroller.addpart7')}}</div>
-        <div id="path-update">{{route('part7paragraph.update')}}</div>
-        <div id="path-del">{{route('part7paragraph.delpara')}}</div>
+        <div id="path-update">{{route('readingpartcontroller.updatepart7')}}</div>
+{{--        <div id="path-del">{{route('part7paragraph.delpara')}}</div>--}}
     </div>
 @endsection
 

@@ -357,7 +357,7 @@ $(document).on("click", "#submit-add", function(){
             // json = JSON.parse(part);
 
             $.ajax({
-                url: $("#root-path").html()+"/admin/bai-hoc-manager/add-part-doc/add",
+                url: $("#path-add").html(),
                 method: "POST",
                 data: {
                     part6 : part

@@ -1,0 +1,115 @@
+.navbar {
+	padding-left: 0;
+}
+
+.btn-expand {
+	height: 100%;
+	margin: 0 8px;
+	cursor: pointer;
+}
+
+.sidebar-nav {
+	position: fixed;
+	top: 0;
+	height: 100%;
+	width: 15em;
+	margin: 0;
+	padding: 0;
+	background-color: #212529;
+	list-style: none;
+	z-index: 1;
+}
+
+.group-rp {
+	border-bottom: 1px solid #dccece !important;
+	padding-bottom: 1em;
+}
+
+li.nav-item{
+	cursor: pointer;
+	position: relative;
+}
+
+.sum-notice {
+	position: absolute;
+	top: 0;
+	background: red;
+	color: white;
+	border-radius: 1em;
+	min-width: 1.5em;
+	min-height: 1.5em;
+	line-height: 1.5em;
+	text-align: center;
+	right: 1.3em;
+	padding: 2px;
+	font-size: 0.9em;
+}
+
+.one-rp {
+	padding-bottom: 1em;
+	background: #f7f7f7c2;
+}
+
+.acc-rp {
+	font-size: 1.2em;
+	font-weight: bold;
+}
+
+.content-rp {
+	font-size: 1.2em;
+}
+
+.div-proc-rp {
+	text-align: right;
+	margin-top: 1.3em;
+}
+
+.proc-rp {
+	color: white;
+}
+
+#skip-rp {
+	background: #ff3d00;
+}
+
+#view-rp {
+	background: #0b5a0e;
+}
+
+.choice {
+	color: white !important;
+}
+
+.sidebar-nav li {
+	text-indent: 2em;
+	line-height: 3.5em;
+}
+
+.sidebar-nav li a {
+	display: block;
+	text-decoration: none;
+	color: #999999;
+}
+
+.sidebar-nav li a:hover {
+	text-decoration: none;
+	color: #fff;
+	background: rgba(255, 255, 255, 0.2);
+}
+
+.sidebar-nav li a:active, .sidebar-nav li a:focus {
+	text-decoration: none;
+}
+
+.ico-manag {
+	width: 1.5em;
+	margin-right: 0.5em;
+}
+
+.ico-header {
+	width: 1.3em;
+}
+
+.hide {
+	display: none;
+}
