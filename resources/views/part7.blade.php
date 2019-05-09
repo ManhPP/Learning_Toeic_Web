@@ -32,9 +32,9 @@
                                 <p class="ques refer-ques">Questions {{$index }}-{{$index+count($doan->part7)-1 }} refer to the
                                     following conversation.</p>
                                 <div class="paragrap">
-                                    <img src="{{$doan->doanVan1 }}">
+                                    <img src="{{URL::asset($doan->doanVan1) }}">
                                 </div>
-                                    @foreach($doan->part7 as $cau)
+                                    @foreach($doan->cauPart7s as $cau)
                                     <div class="ques" data-asw="{{$cau->daDung }}">
                                         <div>
                                             <span class="no-ques">Câu {{$index }}</span> <span>{{$cau->cauHoi }}</span>
@@ -63,11 +63,11 @@
                                 <p class="ques refer-ques">Questions {{$index }} - {{$index + count($doan->part7) -1}} refer to the
                                     following conversation.</p>
                                 <div class="paragrap">
-                                    <img src="{{$doan->doanVan1 }}">
-                                    <img src="{{$doan->doanVan2 }}">
+                                    <img src="{{URL::asset(''.$doan->doanVan1.'') }}">
+                                    <img src="{{URL::asset(''.$doan->doanVan2.'') }}">
                                 </div>
 
-                                @foreach($doan->part7 as $cau)
+                                @foreach($doan->cauPart7s as $cau)
                                     <div class="ques" data-asw="{{$cau->daDung }}">
                                         <div>
                                             <span class="no-ques">Câu {{$index }}</span> <span>{{$cau->cauHoi }}</span>

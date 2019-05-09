@@ -34,26 +34,24 @@
                 </div>
                 <div class="list-cau">
                     <div id="list-to-add">
-                        {{ $index = 0 }}
+                        <?php $index = 0 ?>
                         @foreach($partDoc->cauPart5s as $cau)
-                    
-                            {{ $checkA = "" }}
-                            {{ $checkB = "" }}
-                            {{ $checkC = "" }}
-                            {{ $checkD = "" }}
-
-                            @if($cau->dADung == 'A')
-                                {{ $checkA = "checked = 'checked'" }}
+                            <?php $checkA = "";?>
+                            <?php $checkB = "";?>
+                            <?php $checkC = "";?>
+                            <?php $checkD = "";?>
+                            @if($cau->daDung == "A")
+                                <?php $checkA="checked='checked'";?>
                             @endif
-                            @if($cau->dADung == 'B')
-                                {{ $checkB = "checked = 'checked'" }}
+                            @if($cau->daDung == "B")
+                                <?php $checkB="checked='checked'";?>
                             @endif
-                            @if($cau->dADung == 'C')
-                                {{ $checkC = "checked = 'checked'" }}
+                            @if($cau->daDung == "C")
+                                <?php $checkC="checked='checked'";?>
                             @endif
-                            @if($cau->dADung == 'D')
-                                {{ $checkD = "checked = 'checked'" }}
-                            @endif		
+                            @if($cau->daDung == "D")
+                                <?php $checkD="checked='checked'";?>
+                            @endif
 
                             <!-- mot cau -->
                             <div class="ques one-ques" data-asw="{{ $cau->dADung }}" data-id="{{ $cau->id }}">
@@ -126,12 +124,12 @@
                             </tr>
                         </thead>
                         <tbody>
-                            {{ $index = 1 }}
+                            <?php $index = 1 ?>
                             @foreach($arrCau as $cau)
-                                {{ $checkA = "" }}
-                                {{ $checkB = "" }}
-                                {{ $checkC = "" }}
-                                {{ $checkD = "" }}
+                                <?php $checkA = "" ?>
+                                <?php $checkB = "" ?>
+                                <?php $checkC = "" ?>
+                                <?php $checkD = "" ?>
                                 @if($cau->dADung == 'A')
                                     {{ $checkA = "checked = 'checked'" }}
                                 @endif

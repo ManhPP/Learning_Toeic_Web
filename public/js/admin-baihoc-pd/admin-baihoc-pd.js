@@ -2,8 +2,11 @@ var header;
 var token;
 
 $(document).ready(function () {
-    header= $("#csrf-name").html();
-    token = $("#csrf-value").html();
+    $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+    });
 });
 
 $(document).on("click", "tbody tr", function () {
@@ -329,50 +332,43 @@ function resetPagination(indexReset) {
 }
 
 // xoa bai thao luan
-$(document)
-        .on(
-                "click",
-                "#delete",
-                function () {
-                    var arrId = new Array();
-                    var i = 0;
-                    $("#table-thaoluan tbody .selected").each(function () {
-                        arrId[i] = $(this).find("td:first").html();
-                        i++;
-                    });
-                    console.log(arrId);
-                    if (i == 0) {
-                        alert("Hãy chọn ít nhất một bài thảo luận để xóa!!!");
-                    } else {
-                        $
-                                .ajax({
-                                    url : "part-doc/del-part-doc",
-                                    dataType : "json",
-                                    data : {
-                                        arrId : arrId
-                                    },
-                                    method: "POST",
-                                    beforeSend: function(xhr) {
-                                        xhr.setRequestHeader(header, token);
-                                    },
-                                    success : function (data) {
-                                        if (data == true) {
-                                            $("#noti").html("");
-                                            $("#noti")
-                                                    .append(
-                                                            '<span style="color: green">Xóa thành công.</span>');
-                                        } else {
-                                            $("#noti").html("");
-                                            $("#noti")
-                                                    .append(
-                                                            '<span style="color: red">Xóa không thành công.</span>');
-                                        }
-                                        resetPagination($(".page-num.active")
-                                                .attr("data-page"));
-                                    }
-                                });
-                    }
-                });
+$(document).on("click","#delete",function () {
+    var arrId = [];
+    var i = 0;
+    $("#table-thaoluan tbody .selected").each(function () {
+        arrId.push($(this).find("td:first").html());
+        i++;
+    });
+    console.log(arrId);
+    if (i == 0) {
+        alert("Hãy chọn ít nhất một bài thảo luận để xóa!!!");
+    } else {
+        $.ajax({
+            url : "part-doc/del-part-doc",
+            method: "POST",
+            data : {
+                arrId : arrId
+            },
+            success : function (data) {
+                if (data == 'true') {
+                    $("#noti").html("");
+                    // $("#noti")
+                    //         .append(
+                    //                 '<span style="color: green">Xóa thành công.</span>');
+                    alert("Xóa thành công.")
+                    location.reload();
+                } else {
+                    $("#noti").html("");
+                    $("#noti")
+                            .append(
+                                    '<span style="color: red">Xóa không thành công.</span>');
+                }
+                // resetPagination($(".page-num.active")
+                //         .attr("data-page"));
+            }
+        });
+    }
+});
 
 $(document).on("click", "input[name='choose-type']", function(){
     $("#filter-val").val($(this).val());

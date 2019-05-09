@@ -1,7 +1,8 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title></title>
+	<title>Quan ly phan doc</title>
+	<meta name="csrf-token" content="{{ csrf_token() }}">
 	<link rel="stylesheet" type="text/css"
 		  href="{{ URL::asset("css/bootstrap.min.css") }}"/>
 	<link rel="stylesheet" type="text/css"
@@ -54,7 +55,7 @@
 							@foreach( $arrBaiHoc as $baiHoc )
 								<tr class="d-flex">
 									<td class="col-sm-1 col-md-1">{{$baiHoc->id }}</td>
-									<td class="col-sm-4 col-md-4">{{$baiHoc->tittle }}</td>
+									<td class="col-sm-4 col-md-4">{{$baiHoc->title }}</td>
 									@if($baiHoc->loaiPart == null)
 										<td class="col-sm-3 col-md-3">Bài kiểm tra</td>
 									@endif
@@ -115,7 +116,7 @@
 									<? $hi = 'hide'?>
 								@endif
 								<li class="page-num page-item {{$cls }} {{$hi}}" data-page="{{$i }}"><span
-									class="page-link">{{i }}</span></li>
+									class="page-link">{{$i }}</span></li>
 							@endfor
 							<li class="page-item" id="ne"><span class="page-link">></span></li>
 						</ul>
@@ -185,7 +186,7 @@
 	<!-- lay icon de append cho de -->
 	<div id="ico-append" style="display: none;">
 		<img class="ico-ext-filter" alt="ico-append"
-			src="${pageContext.request.contextPath}/resources/img/cross.png"
+			src="{{URL::asset("imgs/cross.png")}}"
 			style="height: 13px" data-toggle="tooltip" title="Remove filter">
 	</div>
 	<div style="display: none;">
@@ -208,7 +209,7 @@
 	<script type="text/javascript"
 			src="{{URL::asset("js/header-admin.js")}}"></script>
 	<script type="text/javascript"
-			src="{{URL::asset("js/bootstrap.min.js")}}js/bootstrap.min.js"></script>
+			src="{{URL::asset("js/bootstrap.min.js")}}"></script>
 </body>
 </html>
 	{{--@endsection--}}
