@@ -44,17 +44,12 @@
 					<hr>
 					<!-- list cau hoi -->
 					<div class="list-cau">
-						<!-- <c:set var="index" value="0"/> -->
 						@php $index = 0; @endphp
-						<!-- <c:forEach items="${partNghe.listDoanHoiThoai }" var="dht"> -->
 						@foreach($partNghe->conversation_paragraph as $doanHoiThoai)
-							<!-- <c:forEach items="${dht.listCauHoiThoai }" var="cht"> -->
 							@foreach($doanHoiThoai->conversationSentence as $cauHoiThoai)
-								<!-- <c:if test="${index%3==0 }"> -->
 									@if($index%3==0)
 									<div class="block" data-index="{{$index}}" data-id="{{$doanHoiThoai->id}}">
 									<p class="ques refer-ques">Questions {{$index+1}}-{{$index+3}} refer to the following conversation.</p>
-								<!-- </c:if> -->
 									@endif
 								<div class="ques" data-index="{{$index}}" data-id="{{$cauHoiThoai->id}}">
 									<div>
@@ -62,28 +57,10 @@
 										<div class="ques-content">{{$cauHoiThoai->cauHoi}}</div>
 										<span><img class="ico-edit" data-index="{{$index}}" src="{{URL::asset("/imgs/edit.png")}}"></span>
 									</div>
-									<!-- <c:set var="checkA" value=""/>
-									<c:set var="checkB" value=""/>
-									<c:set var="checkC" value=""/>
-									<c:set var="checkD" value=""/> -->
-									{{$checkA = ""}}
-									{{$checkB = ""}}
-									{{$checkC = ""}}
-									{{$checkD = ""}}
-									<!-- <c:choose>
-										<c:when test="${cht.daDung=='A' }">
-											<c:set var="checkA" value="checked='checked'"/>
-										</c:when>
-										<c:when test="${cht.daDung=='B' }">
-											<c:set var="checkB" value="checked='checked'"/>
-										</c:when>
-										<c:when test="${cht.daDung=='C' }">
-											<c:set var="checkC" value="checked='checked'"/>
-										</c:when>
-										<c:when test="${cht.daDung=='D' }">
-											<c:set var="checkD" value="checked='checked'"/>
-										</c:when>
-									</c:choose> -->
+									<?php $checkA = ""?>
+									<?php $checkB = ""?>
+									<?php $checkC = ""?>
+									<?php $checkD = ""?>
 									@if($cauHoiThoai->dADung == 'A')
 										@php $checkA = "checked='checked'" @endphp
 									@endif
@@ -104,16 +81,11 @@
 									</div>
 									<hr>
 								</div>
-								<!-- <c:if test="${index%3==2 }"> -->
 									@if($index%3==2)
 									</div>
-								<!-- </c:if> -->
 									@endif
-								<!-- <c:set var="index" value="${index+1 }"/> -->
 									@php $index++ @endphp
-							<!-- </c:forEach> -->
 							@endforeach
-						<!-- </c:forEach> -->
 						@endforeach
 						<div style="text-align: center;margin-top: 2em;">
 							<input style="width: 5em;" type="button" value="Update" id="add-part">
@@ -172,8 +144,7 @@
 <button id="my-button" style="display: none;" data-toggle="modal"
 		data-target="#myModal">Open modal</button>
 	<div style="display: none;">
-		<div id="csrf-name">${_csrf.headerName}</div>
-		<div id="csrf-value">${_csrf.token}</div>
+		<div id="path-update">{{Route("conversationparagraphcontroller.updatepart3")}}</div>
 		<div id="root-path">{{URL("")}}</div>
 		<div id="id-user">${acc.id }</div>
 		<div id="id-pn">{{$partNghe->id}}</div>

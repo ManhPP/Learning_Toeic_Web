@@ -172,7 +172,7 @@ $(document).on("click","#add-part", function(){
                 +'" }';
     
     $.ajax({
-        url: $("#root-path").html()+"/part3/add",
+        url: $("#path-add").html(),
         method: "POST",
         //    contentType:"application/json; charset=utf-8",
         //    dataType:"json",

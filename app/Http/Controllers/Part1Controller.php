@@ -26,15 +26,19 @@ class Part1Controller extends Controller
         $listCauString = $request["listCau"];
 
         $paraJson = json_decode($listeningPart, true);
+        try{
+            $listeningPart = ListeningPart::create($paraJson);
 
-        $listeningPart = ListeningPart::create($paraJson);
+            $listCauJson = json_decode($listCauString, true);
+            foreach ($listCauJson as $cauJson) {
+                \error_log("7");
+                $listeningPart->part1()->create($cauJson);
+            }
+            return "true";
+        } catch (\Exception $e){
 
-        $listCauJson = json_decode($listCauString, true);
-        foreach ($listCauJson as $cauJson) {
-            \error_log("7");
-            $listeningPart->part1()->create($cauJson);
         }
-        return Response($paraJson, 200);
+        return "false";
     }
 
     //update câu part 1

@@ -129,8 +129,7 @@
 <button id="my-button" style="display: none;" data-toggle="modal"
 		data-target="#myModal">Open modal</button>
 	<div style="display: none;">
-		<div id="csrf-name">${_csrf.headerName}</div>
-		<div id="csrf-value">${_csrf.token}</div>
+        <div id="path-add">{{Route("conversationparagraphcontroller.createcppart3")}}</div>
 		<div id="root-path">{{URL("")}}</div>
 		<div id="id-user">${acc.id }</div>
 	</div>

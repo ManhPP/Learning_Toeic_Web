@@ -331,7 +331,7 @@ $(document).on("click", "#submit", function(){
             console.log(json);
 
                         $.ajax({
-                            url: "update",
+                            url: $("#path-update").html(),
                             method: "POST",
                             data: {
                                 part : part

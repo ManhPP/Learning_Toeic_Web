@@ -106,8 +106,10 @@ class ReadingPartController extends Controller
 
 
 
-    public function practicePartDoc($id)
+    public function practicePartDoc(Request $request)
     {
+        $id = $request["id"];
+        error_log($id);
         $partDoc = ReadingPart::find($id);
         if($partDoc->loaiPart == "Part 6"){
             return view("part6", ['partDoc' => $partDoc]);

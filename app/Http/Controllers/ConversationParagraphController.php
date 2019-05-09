@@ -14,27 +14,31 @@ class ConversationParagraphController extends Controller
     {
 
         $listeningPart = $request["part3"];
-
+        error_log($listeningPart);
         $listHoiThoai = $request["listHoiThoai"];
         $arrListCau = $request["arrListCau"];
+        try {
+            $paraJson = json_decode($listeningPart, true);
+            $listeningPart = ListeningPart::create($paraJson);
 
-        $paraJson = json_decode($listeningPart, true);
-        $listeningPart = ListeningPart::create($paraJson);
+            $listHoiThoaiJson = json_decode($listHoiThoai, true);
+            $arrListCauJson = json_decode($arrListCau, true);
 
-        $listHoiThoaiJson = json_decode($listHoiThoai, true);
-        $arrListCauJson = json_decode($arrListCau, true);
+            $i = 0;
+            foreach ($listHoiThoaiJson as $doanHoiThoai) {
+                $doanHTmodel = $listeningPart->conversation_paragraph()->create($doanHoiThoai);
 
-        $i=0;
-        foreach ($listHoiThoaiJson as $doanHoiThoai) {
-            $doanHTmodel = $listeningPart->conversation_paragraph()->create($doanHoiThoai);
-            
                 foreach ($arrListCauJson[$i] as $cauPart3) {
                     $doanHTmodel->conversationSentence()->create($cauPart3);
                 }
-            $i++;
+                $i++;
+            }
+
+            return "true";
+        }catch (\Exception $e){
+
         }
-        
-        return Response($paraJson, 200);
+        return "false";
     }
 
     // Lấy dữ liệu part3,4 cho view update

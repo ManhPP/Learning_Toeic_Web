@@ -77,7 +77,7 @@ modalConfirmInput(function(confirm) {
 	    
 	    if(checkData(para) == true){
 	        $.ajax({
-	            url: "manager-doan-part6/add",
+	            url: $("#path-add").html(),
 	            method:"POST",
 
 	            data: {
@@ -171,7 +171,7 @@ modalConfirmUpdate(function(confirm, id) {
         
         if(checkData(para) ==true){
             $.ajax({
-                url: "manager-doan-part6/update",
+                url: $("#path-update").html(),
                 method:"POST",
                 data: {
                     para : doanVan
@@ -248,11 +248,11 @@ $(document).on("click", ".btn-del", function(e){
     e.stopPropagation();
     var id = $(this).attr("data-id");
     $.ajax({
-        url: "manager-doan-part6/del",
+        url: $("#path-delete").html(),
         data: {
             id:id
         },
-        method: "get",
+        method: "post",
         success: function(data){
             if(data=='true'){
                 removeRow(id);

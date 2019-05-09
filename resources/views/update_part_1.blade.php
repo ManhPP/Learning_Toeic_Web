@@ -47,45 +47,23 @@
 					<hr>
 					<!-- list cau hoi -->
 					<div class="list-cau">
-						<!-- <c:set var="index" value="1"/> -->
-						
-						<!-- <c:forEach items="${partNghe.listCauPart1 }" var="cauPart1"> -->
-						{{ $index = 1  }}
+						<?php $index = 1  ?>
 						@foreach($part1->part1 as $cauPart1)
-						
-							<!-- <c:set var="ckA" value=""/>
-							<c:set var="ckB" value=""/>
-							<c:set var="ckC" value=""/>
-							<c:set var="ckD" value=""/> -->
-							{{$checkA = ""}}
-							{{$checkB = ""}}
-							{{$checkC = ""}}
-							{{$checkD = ""}}
-							<!-- <c:choose>
-								<c:when test="${cauPart1.daDung=='A' }">
-									<c:set var="ckA" value="checked='checked'"/>
-								</c:when>
-								<c:when test="${cauPart1.daDung=='B' }">
-									<c:set var="ckB" value="checked='checked'"/>
-								</c:when>
-								<c:when test="${cauPart1.daDung=='C' }">
-									<c:set var="ckC" value="checked='checked'"/>
-								</c:when>
-								<c:when test="${cauPart1.daDung=='D' }">
-									<c:set var="ckD" value="checked='checked'"/>
-								</c:when>
-							</c:choose> -->
+							<?php $checkA = ""?>
+							<?php $checkB = ""?>
+							<?php $checkC = ""?>
+							<?php $checkD = ""?>
 							@if($cauPart1->dADung == 'A')
-								{{$checkA = "checked='checked'"}}
+								<?php $checkA = "checked='checked'"?>
 							@endif
 							@if($cauPart1->dADung == 'B')
-								{{$checkB = "checked='checked'"}}
+								<?php $checkB = "checked='checked'"?>
 							@endif
 							@if($cauPart1->dADung == 'C')
-								{{$checkC = "checked='checked'"}}
+								<?php $checkC = "checked='checked'"?>
 							@endif
 							@if($cauPart1->dADung == 'D')
-								{{$checkD = "checked='checked'"}}
+								<?php $checkD = "checked='checked'"?>
 							@endif
 							<div class="ques" data-asw="{{$cauPart1->dADung}}" data-id="{{$cauPart1->id}}" id="q{{$index}}">
 								<div class="no-ques">Câu {{$index }}</div>
@@ -121,8 +99,7 @@
 <button id="my-button" style="display: none;" data-toggle="modal"
 		data-target="#myModal">Open modal</button>
 	<div style="display: none;">
-		<div id="csrf-name">${_csrf.headerName}</div>
-		<div id="csrf-value">${_csrf.token}</div>
+		<div id="path-update">{{Route("part1controller.update")}}</div>
 		<div id="root-path">{{URL("")}}</div>
 		<div id="id-user">${acc.id }</div>
 		<div id="id-part">{{$part1->id}}</div>

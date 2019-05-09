@@ -64,24 +64,41 @@ class ListeningPartController extends Controller
     }
 
 
-    public function indexGuestPart1(Request $request){
-        $partNghe = ListeningPart::find($request["id"]);
-        return view("guest_part1_view")->with("partNghe", $partNghe);
+//    public function indexGuestPart1(Request $request){
+//        $partNghe = ListeningPart::find($request["id"]);
+//        return view("guest_part1_view")->with("partNghe", $partNghe);
+//    }
+//
+//    public function indexGuestPart2(Request $request){
+//        $partNghe = ListeningPart::find($request["id"]);
+//        return view("guest_part2_view")->with("partNghe", $partNghe);
+//    }
+//
+//    public function indexGuestPart3(Request $request){
+//        $partNghe = ListeningPart::find($request["id"]);
+//        return view("guest_part3_view")->with("partNghe", $partNghe);
+//    }
+//    public function indexGuestPart4(Request $request){
+//        $partNghe = ListeningPart::find($request["id"]);
+//        return view("guest_part4_view")->with("partNghe", $partNghe);
+//    }
+
+    public function practicePartNghe(Request $request)
+    {
+        $id = $request["id"];
+        $partNghe = ListeningPart::find($id);
+        if($partNghe->loaiPart == "Part 1"){
+            return view("guest_part1_view", ['partNghe' => $partNghe]);
+        }else if($partNghe->loaiPart == "Part 7"){
+            return view("guest_part2_view", ['partNghe' => $partNghe]);
+        }else if($partNghe->loaiPart == "Part 5"){
+            return view("guest_part3_view", ['partNghe' => $partNghe]);
+        }else{
+            return view("guest_part4_view")->with("partNghe", $partNghe);
+        }
+
     }
 
-    public function indexGuestPart2(Request $request){
-        $partNghe = ListeningPart::find($request["id"]);
-        return view("guest_part2_view")->with("partNghe", $partNghe);
-    }
-
-    public function indexGuestPart3(Request $request){
-        $partNghe = ListeningPart::find($request["id"]);
-        return view("guest_part3_view")->with("partNghe", $partNghe);
-    }
-    public function indexGuestPart4(Request $request){
-        $partNghe = ListeningPart::find($request["id"]);
-        return view("guest_part4_view")->with("partNghe", $partNghe);
-    }
     //lấy dữ liệu cho view admin quản lý phần nghe
     public function get(Request $request){
         $arrBaiHoc=ListeningPart::all();

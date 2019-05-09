@@ -143,7 +143,6 @@
         <div id="root-path">{{URL("")}}</div>
         {{--<div id="id-user">{{$acc.id }}</div>--}}
     </div>
-
 @endsection
 
 @section('footer')
