@@ -17,7 +17,7 @@ class Part7Paragraph extends Model
     }
 
     public function readingParts(){
-        return $this -> belongsToMany('App\ReadingPart');
+        return $this -> belongsToMany('App\ReadingPart','map_part7_paragraphs','idDoanVan','idPartDoc');
     }
 
 }

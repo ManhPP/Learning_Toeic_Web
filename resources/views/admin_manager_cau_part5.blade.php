@@ -21,17 +21,17 @@
             </thead>
             <tbody>
                 {{-- <c:set var="index" value="1"/> --}}
-                {{$index = 1 }}
+                <?php $index = 1 ?>
                 {{-- <c:forEach items="${arrCau }" var="cau"> --}}
                     @foreach($arrCau as $cau)
                     {{-- <c:set var="checkA" value=""/>
                     <c:set var="checkB" value=""/>
                     <c:set var="checkC" value=""/>
                     <c:set var="checkD" value=""/> --}}
-                    {{ $checkA = "" }}
-                    {{ $checkB = "" }}
-                    {{ $checkC = "" }}
-                    {{ $checkD = "" }}
+                    <?php $checkA = "" ?>
+                    <?php $checkB = "" ?>
+                    <?php $checkC = "" ?>
+                    <?php $checkD = "" ?>
                     {{-- <c:choose>
                         <c:when test="${cau.dADung=='A' }">
                             <c:set var="checkA" value="checked='checked'"/>
@@ -49,16 +49,16 @@
 
                     
                     @if($cau->dADung == 'A')
-                        {{ $checkA = "checked = 'checked'" }}
+                        <?php $checkA = "checked = 'checked'" ?>
                     @endif
                     @if($cau->dADung == 'B')
-                        {{ $checkB = "checked = 'checked'" }}
+                        <?php $checkB = "checked = 'checked'" ?>
                     @endif
                     @if($cau->dADung == 'C')
-                        {{ $checkC = "checked = 'checked'" }}
+                        <?php $checkC = "checked = 'checked'" ?>
                     @endif
                     @if($cau->dADung == 'D')
-                        {{ $checkD = "checked = 'checked'" }}
+                        <?php $checkD = "checked = 'checked'" ?>
                     @endif
 
                     {{-- <tr class="d-flex" data-id="${cau.id }"> --}}
@@ -100,7 +100,7 @@
                         </td>
                     </tr>
                     {{-- <c:set var="index" value="${index+1 }"/> --}}
-                    {{ $index += 1 }}
+                    <?php $index += 1 ?>
                 @endforeach
 
             </tbody>

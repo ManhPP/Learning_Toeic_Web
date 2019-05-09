@@ -44,7 +44,7 @@
                                         <p class="ques refer-ques">Questions {{$index}}-{{$index+ count($doan->cauPart7s)-1}} refer to the
                                             following conversation.</p>
                                         <div class="paragrap">
-                                            <img src="{{$doan->doanVan1}}">
+                                            <img src="{{URL::asset($doan->doanVan1)}}">
                                         </div>
                                         @foreach($doan->cauPart7s as $cau)
 
@@ -82,7 +82,7 @@
                                             <?php $index++;?>
                                             @endforeach
                                         <div class="align-right" style="width: 65%; margin: 0 auto">
-                                            <img class="ico-modified ico-del" alt="minus" data-idpara="{{$doan->id}}" src="/BKTOEIC/resources/img/round-minus.png">
+                                            <img class="ico-modified ico-del" alt="minus" data-idpara="{{$doan->id}}" src="{{ URL::asset("imgs/round-minus.png") }}">
                                         </div>
                                     </div>
 
@@ -90,7 +90,7 @@
                             @endforeach
                         </div>
                         <div class="align-right" style="margin: 0 auto; margin-right: 2em; margin-top: 2em">
-                            <img class="ico-modified" id="ico-add1" data-idpara="{{$doan->id}}" alt="add" src="/BKTOEIC/resources/img/round-add.png">
+                            <img class="ico-modified" id="ico-add1" data-idpara="{{$doan->id}}" alt="add" src="{{URL::asset("imgs/round-add.png")}}">
                         </div>
 
                         <div class="split">
@@ -106,8 +106,8 @@
                                         <p class="ques refer-ques">Questions <span class='begin'>{{$index}}</span>-<span class='end'>{{$index + count($doan->cauPart7s) -1}}</span> refer to the
                                             following conversation.</p>
                                         <div class="paragrap">
-                                            <img src="{{$doan->doanVan1}}">
-                                            <img src="{{$doan->doanVan2}}">
+                                            <img src="{{URL::asset($doan->doanVan1)}}">
+                                            <img src="{{URL::asset($doan->doanVan2)}}">
                                         </div>
 
                                         @foreach($doan->cauPart7s as $cau)
@@ -152,7 +152,7 @@
 {{--                                        </c:forEach>--}}
                                         @endforeach
                                         <div class="align-right" style="width: 65%; margin: 0 auto">
-                                            <img class="ico-modified ico-del" dara-idpara="{{$doan->id}}" alt="minus" data-idpara="{{$doan->id}}" src="/BKTOEIC/resources/img/round-minus.png">
+                                            <img class="ico-modified ico-del" dara-idpara="{{$doan->id}}" alt="minus" data-idpara="{{$doan->id}}" src="{{URL::asset("imgs/round-minus.png")}}">
                                         </div>
                                     </div>
 {{--                                </c:if>--}}
@@ -161,7 +161,7 @@
                             @endforeach
                         </div>
                         <div class="align-right" style="margin: 0 auto; margin-right: 2em; margin-top: 2em">
-                            <img class="ico-modified" id="ico-add2" alt="add" src="/BKTOEIC/resources/img/round-add.png">
+                            <img class="ico-modified" id="ico-add2" alt="add" src="{{URL::asset("imgs/round-add.png")}}">
                         </div>
 
                         <div style="text-align: center;">
@@ -213,14 +213,14 @@
                                                         class="num-ques">{{$doan->cauPart7s}}</span> câu)</span>
 											</span>
                                         <img class="expand-ico"
-                                             src="${pageContext.request.contextPath}/resources/img/next.png">
+                                             src="{{URL::asset("imgs/next.png")}}">
                                         <div class="div-append-para hide">
                                             <div class="boundary-para" data-id={{$doan->id}} data-num-ques="{{count($doan->cauPart7s)}}">
                                                 <div class="paragrap">
-                                                    <img src="{{$doan->doanVan1}}">
+                                                    <img src="{{URL::asset($doan->doanVan1)}}">
                                                     @if(strlen($doan->doanVan2)>0)
                                                         <br>
-                                                        <img src="{{$doan->doanVan2}}">
+                                                        <img src="{{URL::asset($doan->doanVan2)}}">
                                                     @endif
                                                 </div>
                                                 <div class="para" data-id="{{$doan->id}}">
@@ -318,14 +318,14 @@
                                         <span class="ques-content">Đoạn văn id {{$doan->id}} - <span
                                                     class="type-part">{{$doan->loaiPart7}}</span></span>
                                         <img class="expand-ico"
-                                             src="${pageContext.request.contextPath}/resources/img/next.png">
+                                             src="{{URL::asset("imgs/next.png")}}">
                                         <div class="div-append-para hide">
                                             <div class="boundary-para" data-num-ques="5" data-id="{{$doan->id}}">
                                                 <div class="paragrap">
-                                                    <img src="{{$doan->doanVan1}}">
+                                                    <img src="{{URL::asset($doan->doanVan1)}}">
                                                     @if(strlen($doan->doanVan2)>0)
                                                         <br>
-                                                        <img src="{{$doan->doanVan2}}">
+                                                        <img src="{{URL::asset($doan->doanVan2)}}">
 {{--                                                    </c:if>--}}
                                                     @endif
                                                 </div>

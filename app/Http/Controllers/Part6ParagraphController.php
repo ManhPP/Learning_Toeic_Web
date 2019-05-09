@@ -89,8 +89,6 @@ class Part6ParagraphController extends Controller
                 $part6 = Part6::find($cau->id);
                 error_log($part6->delete());
             }
-            error_log("ASDASD");
-            error_log("".count($part6Para->readingPart()));
             foreach ($part6Para->readingPart as $partDoc){
                 $partDoc->part6Paragraphs()->detach();
                 $partDoc->delete();

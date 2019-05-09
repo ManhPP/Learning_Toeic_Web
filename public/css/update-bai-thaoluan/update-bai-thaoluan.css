@@ -1,0 +1,117 @@
+*{
+	font-family:  HelveticaNeueW01-45Ligh,Helvetica,Arial,sans-serif;
+}
+
+.row{
+	width: 100%;
+	margin: 0;
+}
+
+html, body{
+	height: 97%;
+	width: 100%;
+}
+
+/*header*/
+.nav-background{
+	background-color: #010a29;
+}
+
+.head-bar li a{
+	margin: 0 15px 0 0 !important;
+	color: white !important;
+}
+
+#services div {
+	background: #efefef33 ;
+	border: none;
+	padding: 0;
+}
+
+@media (min-width: 767px){
+	#services div {
+		position: absolute;
+		top: 52px;
+	}
+}
+
+#services div a{
+	color: #4a4242 !important;
+	padding: 8px;
+}
+
+
+@media (max-width: 767px){
+	.for-dark{
+		background-color: #b7b7b7db !important;
+	}
+}
+
+@media (min-width: 767px){
+	.for-dark{
+		background: #efefef33 !important;
+	}
+}
+
+/*body*/
+#container-body{
+	padding: 0 25px;
+}
+
+#tittle-discus{
+	width: 56%;
+	margin-left: 10px;
+	border-top: none;
+	border-left: none;
+	border-right: none;
+	border-bottom: 1px solid #7d7979;
+}
+
+#tittle-discus:focus{
+	outline: none;
+}
+
+
+/*footer*/
+.footer{
+	height: 190px;
+	width: 100%;
+	background-color: #383C3F;
+	margin-top: 60px;
+	color: white;
+}
+
+@media (min-width: 768px){
+	.footer{
+		padding: 12px 68px;
+	}
+}
+
+.footer img{
+	width: 24px;
+	height: 24px;
+}
+
+.line{
+	margin-top: 14px;
+}
+
+/*login*/
+.login-input{
+	height: 3em;
+	color: white;
+	background-color: rgb(29, 40, 47);
+	border-top: none;
+	border-left: none;
+	border-right: none;
+	border-bottom: 1px solid;
+	border-radius: 6px;
+}
+
+.no-outline:focus{
+	outline: 0 !important;
+}
+
+#myModal{
+	top: 140px;
+}

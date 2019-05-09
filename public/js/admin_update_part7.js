@@ -466,7 +466,7 @@ $(document).on("click", "#submit", function(){
                             listDoanPart7: listDoanVanPart7
                         },
                         success: function(data){
-                            if(data == true){
+                            if(data == 'true'){
                                 alert("Update thành công!!!");
                             }else{
                                 alert("Update không thành công, kiểm tra lại!!!");

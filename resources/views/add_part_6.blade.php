@@ -1,5 +1,5 @@
 @extends('layouts.master')
-@section('title','add part 6 practice')
+@section('title','add part 6 phan doc')
 @section("css")
     <link rel="stylesheet" type="text/css" href="{{ URL::asset("css/home_css_part6.css") }}">
 @endsection
