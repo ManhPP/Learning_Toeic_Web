@@ -182,6 +182,11 @@ Route::get('/test',[
 
 Route::get('/test/add',[
     'uses' => 'TestController@addIndex'
+]);
+
+
+Route::post('/test/addTest', [
+    'uses' => 'TestController@addTest'
 ])->name("testcontroller.add");
 
 Route::get('/test/do',[

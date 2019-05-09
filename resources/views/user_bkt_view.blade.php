@@ -39,6 +39,9 @@
                     <div style="display:none">
                         {{ $part1 = $partNghe }}
                     </div>
+                    @php
+                        error_log($part1);   
+                    @endphp
                 @endif
 
                 @if($partNghe->loaiPart == 'Part 2')
@@ -83,7 +86,7 @@
                 @endif
             @endforeach
     
-            <!-- part 1 -->
+            {{-- <!-- part 1 -->
             <div
                 class="content-container col-12 col-sm-11 col-md-10 col-lg-9 col-xl-8 show"
                 data-part="1">
@@ -315,7 +318,7 @@
                     </div>
                 </div>
             </div>
-            </div>
+            </div> --}}
         
             <!-- part 5 -->
             <div
@@ -374,7 +377,7 @@
                     </div>
                 </div>
             </div>
-    
+{{--     
             <!-- part 6 -->
             <div
                 class="content-container col-12 col-sm-11 col-md-10 col-lg-9 col-xl-8 hide"
@@ -531,7 +534,7 @@
                 </div>
             </div>
             
-        </div>
+        </div> --}}
     
         <ul class="pagination" style="justify-content: center; margin-top: 2em">
             <li class="page-item page-num active" data-item="1"><span class="page-link">1</span></li>				
