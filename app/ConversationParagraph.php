@@ -8,11 +8,13 @@ class ConversationParagraph extends Model
 {
     //
     protected $primaryKey = 'id';
+    protected $table='conversation_paragraphs';
+    protected $fillable=['idPartNghe','loaiPart'];
     function conversationSentence(){
-        return $this -> hasMany('App\ConversationSentence','idDoanHT');
+        return $this -> hasMany('App\ConversationSentence','idDoanHT','id');
     }
 
     function listeningPart(){
-        return $this -> belongsTo('App\ListeningPart','idPartnghe');
+        return $this -> belongsTo('App\ListeningPart','idPartnghe','id');
     }
 }

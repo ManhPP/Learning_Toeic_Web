@@ -18,237 +18,182 @@ Route::get('/login', function(){
 Route::get('/register', function(){
     return view('register');
 });
-Route::get('/reading', function(){
-    return view('prHome');
-});
-Route::get('/listening', function(){
-    return view('plHome');
-});
-Route::get('/testing', function(){
-    return view('testHome');
-});
-Route::get("/forum", function(){
-    return view("forumHome");
-});
-Route::get("/forum/add-discuss", function(){
-    return view("addDiscuss");
-});
-Route::get("/test-toeic", function(){
-    return view("testToeic");
-});
-Route::get("/forum/view-post", function(){
-    return view("viewPost");
-});
-Route::get('/add-part-1', function () {
-    return view('add_part_1_new');
-});
-Route::get('/add-part-2', function () {
-    return view('add_part_2');
-});
-Route::get('/add-part-3', function () {
-    return view('add_part_3');
-});
-Route::get('/add-part-4', function () {
-    return view('add_part_4');
-});
-Route::get('/add-part-5', function () {
-    return view('add_part_5');
-});
 
-// part6 an part6Paragraph
-Route::get('/add-part-6','Part6ParagraphController@listPart6');
-Route::post('/admin/bai-hoc-manager/add-part-doc/add','ReadingPartController@addPart6');
+// cho guest va user
+//Route::get('/part1/practice', [
+//    'uses' => 'ListeningPartController@indexGuestPart1'
+//]);
+//Route::get('/part2/practice', [
+//    'uses' => 'ListeningPartController@indexGuestPart2'
+//]);
+//Route::get('/part3/practice', [
+//    'uses' => 'ListeningPartController@indexGuestPart3'
+//]);
+//Route::get('/part4/practice', [
+//    'uses' => 'ListeningPartController@indexGuestPart4'
+//]);
+//Route::get('/part5/practice', [
+//    'uses' => 'ReadingPartController@indexGuestPart5'
+//]);
+//manage bai hoc admin
+//cho admin===========================================================================
+//trang chu admin quan ly phan nghe
+Route::get('/admin/manager-listening-part', [
+    'uses' => 'ListeningPartController@get'
+]);
+//trang chu admin quan ly phan doc
+Route::get("/admin/manager-reading-part","ReadingPartController@getListPartDoc");
+
+Route::post("/admin/part-doc/del-part-doc","ReadingPartController@delPartDoc");
 
 
-Route::get('/admin/bai-hoc-manager/update-part-doc/{id}','ReadingPartController@getPartDoc');
-Route::post('/admin/bai-hoc-manager/update-part-doc/update','ReadingPartController@updatePart6');
-
-
-Route::get('/manage-part6Paragraph', 'Part6ParagraphController@listPart6Para');
-Route::post('manager-doan-part6/add', 'Part6ParagraphController@add');
-
-Route::post('manager-doan-part6/update', 'Part6ParagraphController@update');
-
-Route::get('/manager-doan-part6/del', 'Part6ParagraphController@delete');
-
-
-// part 7 and part7 paragraph
-
-
-//Route::get('/add-part-6', function () {
-//    return view('add_part_6');
-//});
-
-Route::get('/add-part-7', function () {
-    return view('add_part_7');
-});
-Route::get("/listening/part1",function(){
-    return view("part1");
-});
-Route::get("/listening/part2",function(){
-    return view("part2");
-});
-Route::get("/listening/part3",function(){
-    return view("part3");
-});
-Route::get("/listening/part4",function(){
-    return view("part4");
-});
-
-
-
-Route::get("/guest/luyen-doc/{id}","ReadingPartController@practicePartDoc");
-
-Route::get('/adlesson', function(){
-    return view('adminLesson');
-});
-Route::get('/addiscuss', function(){
-    return view('adminDiscuss');
-});
-Route::get('/adacc', function(){
-    return view('adminAcc');
-});
 //thêm/update ảnh phần nghe
 Route::post('/upload-image-listen', [
     'uses' => 'ListeningPartController@uploadimage'
-]);
+])->name("listeningpartcontroller.uploadimage");
 //thêm/update audio phần nghe
 Route::post('/upload-audio-listen', [
     'uses' => 'ListeningPartController@uploadaudio'
-]);
+])->name("listeningpartcontroller.uploadaudio");
 //thêm các câu part1
-Route::post('/part1/add', [
-    'uses' => 'Part1Controller@createPart1'
-]);
-// lấy dữ liệu part1
-Route::get('/part1/get', [
-    'uses' => 'Part1Controller@getPart1'
-]);
+//================= part 1 ===========================
+Route::get('/admin/manager-listening-part/add-part1', function () {
+    return view('add_part_1_new');
+});
+Route::post('/admin/manager-listening-part/add-part1/do-add', [
+    'uses' => 'Part1Controller@create'
+])->name("part1controller.create");
 // update các câu part1
-Route::post('/part1/update', [
-    'uses' => 'Part1Controller@updatePart1'
-]);
-// para part 7 admin
-Route::get('/manager-para-part7', [
-    'uses' => 'Part7ParagraphController@getPart7Paragraph'
-]);
-Route::get('/manage-sentence-part5',[
+Route::post('/admin/manager-listening-part/update-part1/do-update', [
+    'uses' => 'Part1Controller@update'
+])->name("part1controller.update");
+//================= end part 1 ===========================
+//================= part 2 ===========================
+//================= end part 2 ===========================
+//================= part 3, 4 ===========================
+// Thêm part 3,4
+Route::get('/admin/manager-listening-part/add-part3', function () {
+    return view('add_part_3');
+});
+Route::get('/admin/manager-listening-part/add-part4', function () {
+    return view('add_part_4');
+});
+Route::post('/admin/manager-listening-part/add-part3/do-add', [
+    'uses' => 'ConversationParagraphController@createCPPart3'
+])->name("conversationparagraphcontroller.createcppart3");
+// Update part 3,4
+Route::post('/admin/manager-listening-part/update-part3/do-update', [
+    'uses' => 'ConversationParagraphController@updatePart3'
+])->name('conversationparagraphcontroller.updatepart3');
+//================= end part 3,4===========================
+//================= part 5 ===========================
+//them cau part 5
+Route::get('admin/manager-sentence-part5',[
     'uses' => 'Part5Controller@index'
 ]);
+Route::post('admin/manager-sentence-part5/add',[
+    'uses' => 'Part5Controller@add'
+])->name("part5controller.add");
+// update cau part 5
+Route::post('admin/manager-sentence-part5/update',[
+    'uses' => 'Part5Controller@update'
+])->name("part5controller.update");
+// delete cau part 5
+Route::post('admin/manager-sentence-part5/delete',[
+    'uses' => 'Part5Controller@delete'
+])->name("part5controller.delete");
+//add part 5 index
+Route::get('admin/manager-reading-part/add-part5',[
+    'uses' => 'ReadingPartController@indexAddPart5'
+]);
+Route::post('admin/manager-reading-part/add-part5/do-add',[
+    'uses' => 'ReadingPartController@addPart5'
+])->name("readingpartcontroller.add");
+//// update part 5
+//Route::get('admin/manage-reading-part/updatepart5/update',[
+//    'uses' => 'ReadingPartController@indexUpdatePart5'
+//]);
+Route::post('/admin/manager-reading-part/update-part5/do-update',[
+    'uses' => 'ReadingPartController@updatePart5'
+])->name("readingpartcontroller.update");
+//================= end part 5 ===========================
+//================= part 6 ===========================
+// manager doan part 6
+Route::get('admin/manager-para-part6', 'Part6ParagraphController@listPart6Para');
+Route::post('/admin/manager-para-part6/delete', 'Part6ParagraphController@delete')
+    ->name("part6paragraphcontroller.delete");
+Route::post('admin/manager-para-part6/add', 'Part6ParagraphController@add')
+    ->name("part6paragraphcontroller.add");
+Route::post('admin/manager-para-part6/update', 'Part6ParagraphController@update')
+    ->name("part6paragraphcontroller.update");
+// magager part 6
+//add part 6
+Route::get('/admin/manager-reading-part/add-part6','Part6ParagraphController@listPart6');
+Route::post('/admin/manager-reading-part/add-part6/do-add','ReadingPartController@addPart6')
+    ->name("readingpartcontroller.addpart6");
+// index update part doc
+//Route::get('/admin/bai-hoc-manager/update-part-doc/{id}','ReadingPartController@getPartDoc');
+Route::post('/admin/manager-reading-part/update-part6/do-update','ReadingPartController@updatePart6')
+    ->name("readingpartcontroller.updatepart6");
+//================= end part 6 ===========================
+//================= part 7 ===========================
+// para part 7 admin
+Route::get('admin/manager-para-part7', [
+    'uses' => 'Part7ParagraphController@getPart7Paragraph'
+]);
+//add para part 7
+Route::post("admin/manager-para-part7/add",[
+    "uses"=> 'Part7ParagraphController@addPara'
+]) -> name("part7paragraph.add");
+//update para part 7
+Route::post("admin/manager-para-part7/update",[
+    "uses"=>'Part7ParagraphController@updatePara'
+]) -> name("part7paragraph.update");
+Route::get("admin/manager-para-part7/delete",[
+    "uses"=>"Part7ParagraphController@delPara"
+]) -> name("part7paragraph.delpara");
+
 //upload file part 7
 Route::post("/manager-para-part7/upload",[
     'uses' => 'Part7ParagraphController@uploadFile'
 ])->name('part7paragraph.upload');
-//add para part 7
-Route::post("/manager-para-part7/add",[
-    "uses"=> 'Part7ParagraphController@addPara'
-]) -> name("part7paragraph.add");
-//update para part 7
-Route::post("/manager-para-part7/update",[
-    "uses"=>'Part7ParagraphController@updatePara'
-]) -> name("part7paragraph.update");
-Route::get("/manager-para-part7/del",[
-    "uses"=>"Part7ParagraphController@delPara"
-]) -> name("part7paragraph.delpara");
 
-Route::post('manage-sentence-part5/add',[
-    'uses' => 'Part5Controller@add'
-])->name("part5controller.add");
-Route::post('manage-sentence-part5/update',[
-    'uses' => 'Part5Controller@update'
-])->name("part5controller.update");
-Route::post('manage-sentence-part5/delete',[
-    'uses' => 'Part5Controller@delete'
-])->name("part5controller.delete");
-Route::get('/manage-reading-part/part5/add',[
-    'uses' => 'ReadingPartController@indexAddPart5'
-]);
 // part 7 admin
-Route::get('/manager-reading-part/add-part7', [
-   'uses' => 'ReadingPartController@getPart7'
+Route::get('/admin/manager-reading-part/add-part7', [
+    'uses' => 'ReadingPartController@getPart7'
 ]);
-Route::post('/manager-reading-part/add-part7/add', [
-   'uses' => 'ReadingPartController@addPart7'
-])->name("readingpartcontroller.addpart7");
-Route::get('manager-reading-part/update-part7', [
-   'uses'=> 'ReadingPartController@indexUpdatePart7'
-]);
-Route::post('manager-reading-part/update-part7/update', [
-    'uses'=> 'ReadingPartController@updatePart7'
-])->name("readingpartcontroller.updatepart7");
-Route::post('manage-part5/add',[
-    'uses' => 'ReadingPartController@addPart5'
-])->name("readingpartcontroller.add");
-Route::get('/manage-reading-part/part5/update',[
-    'uses' => 'ReadingPartController@indexUpdatePart5'
-]);
-Route::get('/part1/delete', [
-    'uses' => 'Part1Controller@DeletePart1'
-]);
-Route::post('manage-part5/update',[
-    'uses' => 'ReadingPartController@updatePart5'
-])->name("readingpartcontroller.update");
-Route::get('/part5/practice', [
-    'uses' => 'ReadingPartController@indexGuestPart5'
-]);
-Route::get('/part1/practice', [
-    'uses' => 'ListeningPartController@indexGuestPart1'
-]);
-Route::get('/part2/practice', [
-    'uses' => 'ListeningPartController@indexGuestPart2'
-]);
-Route::get('/part3/practice', [
-    'uses' => 'ListeningPartController@indexGuestPart3'
-]);
-Route::get('/part4/practice', [
-    'uses' => 'ListeningPartController@indexGuestPart4'
-
-]);
-Route::post('/manager-reading-part/add-part7/add', [
+Route::post('/admin/manager-reading-part/add-part7/do-add', [
     'uses' => 'ReadingPartController@addPart7'
 ])->name("readingpartcontroller.addpart7");
-Route::get('manager-reading-part/update-part7', [
-    'uses'=> 'ReadingPartController@indexUpdatePart7'
-]);
-Route::post('manager-reading-part/update-part7/update', [
+//Route::get('manager-reading-part/update-part7', [
+//    'uses'=> 'ReadingPartController@indexUpdatePart7'
+//]);
+Route::post('/admin/manager-reading-part/update-part7/do-update', [
     'uses'=> 'ReadingPartController@updatePart7'
 ])->name("readingpartcontroller.updatepart7");
 
+//================= end part 7 ===========================
+//cho user va guest =================================================================================================
+//luyen nghe
+Route::get("/guest/luyen-nghe","ReadingPartController@practicePartDoc");
+// luyen doc
+Route::get("/guest/luyen-doc","ReadingPartController@practicePartDoc");
 
+//test
 
-//part 5
-Route::get('/manage-sentence-part5',[
-    'uses' => 'Part5Controller@index'
+Route::get('/test',[
+    'uses' => 'TestController@index'
 ]);
 
-Route::post('manage-sentence-part5/add',[
-    'uses' => 'Part5Controller@add'
-])->name("part5controller.add");
-Route::post('manage-sentence-part5/update',[
-    'uses' => 'Part5Controller@update'
-])->name("part5controller.update");
-Route::post('manage-sentence-part5/delete',[
-    'uses' => 'Part5Controller@delete'
-])->name("part5controller.delete");
-Route::get('/manage-reading-part/part5/add',[
-    'uses' => 'ReadingPartController@indexAddPart5'
-]);
+Route::get('/test/add',[
+    'uses' => 'TestController@addIndex'
+])->name("testcontroller.add");
 
-Route::post('manage-part5/update',[
-    'uses' => 'ReadingPartController@updatePart5'
-])->name("readingpartcontroller.update");
-Route::post('manage-part5/add',[
-    'uses' => 'ReadingPartController@addPart5'
-])->name("readingpartcontroller.add");
-Route::get('/manage-reading-part/part5/update',[
-    'uses' => 'ReadingPartController@indexUpdatePart5'
+Route::get('/test/do',[
+    'uses' => 'TestController@doTest'
 ]);
 
 
-//manage bai hoc admin
-
-Route::get("/admin/manager-baihoc-pd","ReadingPartController@getListPartDoc");
-
-Route::post("/admin/part-doc/del-part-doc","ReadingPartController@delPartDoc");
+// discussion
 
 Route::get("/user/discussion/view","DiscussionController@accessDiscussion");

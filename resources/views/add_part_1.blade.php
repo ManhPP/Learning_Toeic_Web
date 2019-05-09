@@ -210,7 +210,9 @@
         </div>
     </div>
 
-
+    <div style="display: none">
+        <div id="path-add">{{Route("part1controller.creratepart1")}}</div>
+    </div>
 
 @endsection
 @section('js')

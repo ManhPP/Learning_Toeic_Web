@@ -20,6 +20,7 @@
                 </tr>
             </thead>
             <tbody>
+<<<<<<< HEAD
                 {{-- <c:set var="index" value="1"/> --}}
                 <?php $index = 1 ?>
                 {{-- <c:forEach items="${arrCau }" var="cau"> --}}
@@ -53,6 +54,19 @@
                     @endif
                     @if($cau->dADung == 'B')
                         <?php $checkB = "checked = 'checked'" ?>
+=======
+                <?php $index = 1 ?>
+                    @foreach($arrCau as $cau)
+                        <?php $checkA = "" ?>
+                        <?php $checkB = "" ?>
+                        <?php $checkC = "" ?>
+                        <?php $checkD = "" ?>
+                    @if($cau->dADung == 'A')
+                        <?php  $checkA = "checked = 'checked'" ?>
+                    @endif
+                    @if($cau->dADung == 'B')
+                        <?php  $checkB = "checked = 'checked'" ?>
+>>>>>>> c940334a2b78988c18bf0635418bde593876d46a
                     @endif
                     @if($cau->dADung == 'C')
                         <?php $checkC = "checked = 'checked'" ?>
@@ -61,7 +75,6 @@
                         <?php $checkD = "checked = 'checked'" ?>
                     @endif
 
-                    {{-- <tr class="d-flex" data-id="${cau.id }"> --}}
                         <tr class="d-flex" data-id="{{ $cau->id  }}">
                         <td class="col-12"><img class="ico-forward"
                             src="{{ URL::asset("imgs/forward-arrow.png") }}">
@@ -99,7 +112,7 @@
                             </div>
                         </td>
                     </tr>
-                    {{-- <c:set var="index" value="${index+1 }"/> --}}
+
                     <?php $index += 1 ?>
                 @endforeach
 

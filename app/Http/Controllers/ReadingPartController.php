@@ -138,8 +138,10 @@ class ReadingPartController extends Controller
 
 
 
-    public function practicePartDoc($id)
+    public function practicePartDoc(Request $request)
     {
+        $id = $request["id"];
+        error_log($id);
         $partDoc = ReadingPart::find($id);
         $view = $partDoc->accessCount;
         $partDoc->accessCount = $view +1;

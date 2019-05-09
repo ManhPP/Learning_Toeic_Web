@@ -27,6 +27,7 @@
         <input id="file-up" type="file" accept="image/*"
             style="display: none" name="file-image" />
     </form>
+
     <span>Width: </span><input type="number" id="w-img" style="width: 4em">px
     <span>Height: </span><input type="number" id="h-img"
         style="width: 4em">px <span style="color: red">(img's

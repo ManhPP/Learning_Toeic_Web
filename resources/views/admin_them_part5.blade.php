@@ -70,23 +70,23 @@
 								</tr>
 							</thead>
 							<tbody>
-								{{$index = 1 }}
+								<?php $index = 1 ?>
 								@foreach($arrCau as $cau)
-									{{ $checkA = "" }}
-									{{ $checkB = "" }}
-									{{ $checkC = "" }}
-									{{ $checkD = "" }}
+									<?php $checkA = "" ?>
+									<?php $checkB = "" ?>
+									<?php $checkC = "" ?>
+									<?php $checkD = "" ?>
 									@if($cau->dADung == 'A')
-										{{ $checkA = "checked = 'checked'" }}
+										<?php $checkA = "checked = 'checked'" ?>
 									@endif
 									@if($cau->dADung == 'B')
-										{{ $checkB = "checked = 'checked'" }}
+										<?php $checkB = "checked = 'checked'" ?>
 									@endif
 									@if($cau->dADung == 'C')
-										{{ $checkC = "checked = 'checked'" }}
+										<?php $checkC = "checked = 'checked'" ?>
 									@endif
 									@if($cau->dADung == 'D')
-										{{ $checkD = "checked = 'checked'" }}
+										<?php $checkD = "checked = 'checked'" ?>
 									@endif		
 									<tr class="d-flex" data-id="{{ $cau->id  }}">
 										<td class="col-12">
@@ -120,7 +120,7 @@
 											</div>
 										</td>
 									</tr>
-									{{ $index += 1 }}
+									<?php $index += 1 ?>
 								@endforeach
 							</tbody>
 						</table>

@@ -45,7 +45,7 @@
                                 <hr>
                             </div>
                             <?php $index +=1 ?>
-                        </c:forEach>
+
                         @endforeach
                     @endforeach
 

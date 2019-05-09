@@ -122,11 +122,8 @@ $(document).on("click", "#add-part", function(){
   
    //upload
    $.ajax({
-        url: $("#root-path").html()+"/part1/update",
+        url: $("#path-update").html(),
         method: "POST",
-    //    contentType:"application/json; charset=utf-8",
-    //    dataType:"json",
-   
         headers: {
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
         },

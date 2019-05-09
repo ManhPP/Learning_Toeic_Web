@@ -14,11 +14,8 @@ class Part7ParagraphController extends Controller
 
     public function getPart7Paragraph(Request $request){
 //        $i=0;
-        $arrDoan = Part7Paragraph::offset(0)->limit(20)->get();
-//        foreach ($arrDoan[0]->cauPart7s as $cauPart7) {
-//            error_log($i);
-//            $i++;
-//        }
+//        $arrDoan = Part7Paragraph::offset(0)->limit(20)->get();
+        $arrDoan = Part7Paragraph::all();
         $sum = Part7Paragraph::count();
         return view('manager_para_part7')
             ->with("arrDoan", $arrDoan)->with("sum", $sum);
@@ -31,15 +28,15 @@ class Part7ParagraphController extends Controller
         $fileName = rand().$current.".".$file->getClientOriginalExtension();
         $file->move(public_path('images_upload'), $fileName);
         error_log("upppppp2");
-        return response(["pathFile"=>"images_upload"."/".$fileName], 200);
+        return response(["pathFile"=>"/images_upload"."/".$fileName], 200);
     }
 
     public function addPara(Request $request){
         $paraString = $request["doanPart7"];
         $listCauString = $request["listCau"];
-
+        error_log($paraString);
         $paraJson = json_decode($paraString, true);
-        try {
+//        try {
             $part7Para = Part7Paragraph::create($paraJson);
 
             $listCauJson = json_decode($listCauString, true);
@@ -48,9 +45,9 @@ class Part7ParagraphController extends Controller
             }
 
             return "true";
-        }catch (Exception $e){
-        }
-        return "false";
+//        }catch (Exception $e){
+//        }
+//        return "false";
     }
 
     public function updatePara(Request $request){

@@ -41,10 +41,10 @@
                                     refer to the following conversation.</p>
 
                                     @foreach($doanVan->part6 as $cau)
-                                        {{ $checkA ='' }}
-                                        {{ $checkB = '' }}
-                                        {{ $checkC = '' }}
-                                        {{ $checkD = '' }}
+                                        <?php $checkA ='' ?>
+                                        <?php $checkB = '' ?>
+                                        <?php $checkC = '' ?>
+                                        <?php $checkD = '' ?>
                                     @if( $cau->daDung =='A')
                                         <?php $checkA = 'checked'?>
                                     @endif
@@ -192,28 +192,28 @@
                                         <div class="content-para hide">
                                             <?php $indexQues = 0?>
                                             @foreach($doan->part6 as $cau)
-                                                    {{ $checkA ='' }}
-                                                    {{ $checkB = '' }}
-                                                    {{ $checkC = '' }}
-                                                    {{ $checkD = '' }}
+                                                <?php $checkA ='' ?>
+                                                <?php $checkB = '' ?>
+                                                <?php $checkC = '' ?>
+                                                <?php $checkD = '' ?>
 
-                                                    @if( $cau->daDung =='A')
-                                                        {{ $checkA = 'checked'}}
-                                                    @endif
+                                                @if( $cau->daDung =='A')
+                                                    <?php $checkA = 'checked'?>
+                                                @endif
 
-                                                    @if($cau->daDung == 'B')
-                                                        {{ $checkB = 'checked' }}
-                                                    @endif
+                                                @if($cau->daDung == 'B')
+                                                    <?php $checkB = 'checked' ?>
+                                                @endif
 
-                                                    @if($cau->daDung == 'C')
-                                                        {{ $checkC = 'checked' }}
-                                                    @endif
+                                                @if($cau->daDung == 'C')
+                                                    <?php $checkC = 'checked' ?>
+                                                @endif
 
-                                                    @if($cau->daDung == 'D')
-                                                        {{ $checkD  = 'checked'}}
-                                                    @endif
+                                                @if($cau->daDung == 'D')
+                                                    <?php $checkD  = 'checked'?>
+                                                @endif
 
-                                                    <div class="ques" data-asw="{{$cau->daDung }}"
+                                                <div class="ques" data-asw="{{$cau->daDung }}"
                                                          data-id="{{$cau->id }}">
                                                         <div>
                                                             <span class="no-ques">Câu {{$indexQues +1 }}</span> <span
@@ -259,6 +259,7 @@
         <div id="root-path">{{URL("")}}</div>
         <div id="id-user">${acc.id }</div>
         <div id="id-part">{{$partDoc->id }}</div>
+        <div id="path-update">{{Route("readingpartcontroller.updatepart6")}}</div>
     </div>
 
 @endsection
