@@ -24,7 +24,7 @@
                     sentence. Then click on (A), (B), (C), or (D) on your test screen.</span>
             </div>
             <div class="list-cau">
-                {{ $index = 0 }}
+                <?php $index = 0 ?>
                 @foreach( $partDoc->cauPart5s as $cau)
                     <!-- mot cau -->
                     <div class="ques" data-asw="{{ $cau->dADung }}" data-id="{{ $cau->id }}">
@@ -49,7 +49,7 @@
                         </div>
                         <hr>
                     </div>
-                    {{ $index += 1 }}
+                    <?php $index += 1 ?>
                 @endforeach
                 <div class="noti"></div>
                 <div style="text-align: center;">

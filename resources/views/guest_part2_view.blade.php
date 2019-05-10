@@ -42,7 +42,7 @@
 					<!-- list cau hoi -->
 					<div class="list-cau">
 						<!-- cau1 -->
-                        {{ $index = 1 }}
+                        <?php $index = 1 ?>
                         @foreach( $partNghe->part2 as $cau)
 							<div class="ques" data-asw="{{ $cau->dADung }}">
 								<div class="no-ques" data-id="{{ $cau->id }}">
@@ -54,7 +54,7 @@
 									<label class="col-4"><input type="radio" name="choise{{ $index }}" value="C">C</label>
 								</div>
 							</div>
-							{{ $index += 1 }}
+							<?php $index += 1 ?>
                     @endforeach
 					</div>
 					

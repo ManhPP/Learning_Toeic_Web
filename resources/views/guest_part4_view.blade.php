@@ -40,7 +40,7 @@
                         <hr>
                         <!-- list cau hoi -->
                         <div class="list-cau">
-                                {{ $index = 0 }}
+                                <?php $index = 0 ?>
                                 @foreach( $partNghe->conversation_paragraph as $dht)
                                 @foreach( $dht->conversationSentence as $cht)
 
@@ -70,7 +70,7 @@
                                     @if( $index%3 == 2 )
                         </div>
                         @endif
-					{{ $index += 1 }}
+					<?php $index += 1 ?>
 					@endforeach
 					@endforeach
                             <div style="text-align: center;margin-top: 2em;">
