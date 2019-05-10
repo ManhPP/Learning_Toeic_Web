@@ -121,7 +121,9 @@ modalConfirmInput(function(confirm) {
                     listCau: listCauPart7
                 },
                 success: function(data){
-                    console.log(data=="true");
+                    if(data=='true'){
+                        location.reload();
+                    }
                 }
             });
         }else{

@@ -29,20 +29,20 @@
 					<!-- audio -->
 					<div class="audio">
 						<audio controls="controls">
-							<source src="{{ $partNghe->audio }}"/>
+							<source src="{{URL::asset("$partNghe->audio")}}"/>
 						</audio>
 					</div>
 					<hr>
 					
 					<!-- intro img-->
 					<div class="intro">
-						<img src="{{ $partNghe->intro }}">
+						<img src="{{URL::asset("$partNghe->intro")}}" alt="profile Pic" height="400" width="400">
 					</div>
 					<hr>
 					<!-- list cau hoi -->
 					<div class="list-cau">
 						<!-- cau1 -->
-                        {{ $index = 1 }}
+                        <?php $index = 1 ?>
                         @foreach( $partNghe->part2 as $cau)
 							<div class="ques" data-asw="{{ $cau->dADung }}">
 								<div class="no-ques" data-id="{{ $cau->id }}">
@@ -54,7 +54,8 @@
 									<label class="col-4"><input type="radio" name="choise{{ $index }}" value="C">C</label>
 								</div>
 							</div>
-							{{ $index += 1 }}
+							@php $index += 1 @endphp
+
                     @endforeach
 					</div>
 					

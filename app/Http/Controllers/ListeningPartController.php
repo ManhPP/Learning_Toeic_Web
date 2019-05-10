@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\ListeningPart;
+use App\ConversationParagraph;
 use Illuminate\Http\Request;
 use App\Http\Requests;
 use Illuminate\Http\UploadedFile;
@@ -106,11 +107,85 @@ class ListeningPartController extends Controller
         return view('admin_baihoc_pn')->with("arrBaiHoc",$arrBaiHoc)->with("numBaiHoc",$numBaiHoc);
     }
 
-    // public function get(Request $request){
-    //     $arrBaiHoc=ListeningPart::all();
-    //     $numBaiHoc=$arrBaiHoc->count();
-    //     return view('admin_baihoc_pn')->with("arrBaiHoc",$arrBaiHoc)->with("numBaiHoc",$numBaiHoc);
-    // }
+    //return view udpate các part phần nghe
+    public function redirectViewUpdate($id){
+        $listeningPart=ListeningPart::find($id);
+        if($listeningPart->loaiPart=="Part 1"){
+            $part1=$listeningPart;
+            return view('update_part_1')->with("part1", $part1);
+        }else if($listeningPart->loaiPart=="Part 2"){
+            $part2=$listeningPart;
+            return view('update_part_2')->with("part2",$part2);
+        }else if($listeningPart->loaiPart=="Part 3"){
+            $part3=$listeningPart;
+            return view('update_part_3')->with("partNghe",$part3);
+        }
+        else if($listeningPart->loaiPart=="Part 4"){
+            $part4=$listeningPart;
+            return view('update_part_4')->with("partNghe",$part4);
+        }
+    }
+
+    //return view  các part phần nghe
+    public function redirectView($id){
+        $listeningPart=ListeningPart::find($id);
+        if($listeningPart->loaiPart=="Part 1"){
+            $partNghe=$listeningPart;
+            return view("guest_part1_view")->with("partNghe", $partNghe);
+        }else if($listeningPart->loaiPart=="Part 2"){
+            $partNghe=$listeningPart;
+            return view("guest_part2_view")->with("partNghe", $partNghe);
+        }else if($listeningPart->loaiPart=="Part 3"){
+            $partNghe=$listeningPart;
+            return view("guest_part3_view")->with("partNghe", $partNghe);
+        }
+        else if($listeningPart->loaiPart=="Part 4"){
+            $partNghe=$listeningPart;
+            return view("guest_part4_view")->with("partNghe", $partNghe);
+        }
+    }
+
+    ////// xóa part nghe
+    public function delete(Request $request){
+        $arrID = $request["arrId"];
+        \Log::info($arrID);
+        foreach($arrID as $id){
+            $check=$this->deletePart($id);
+            if($check==0) return 0;
+        }
+        return 1;
+    }
+
+    // hàm con xử lý xóa
+    public function deletePart($id){
+        $listeningPart=ListeningPart::find($id);
+        if($listeningPart->loaiPart=="Part 1"){
+            $listeningPart->part1()->delete();
+
+        }else if($listeningPart->loaiPart=="Part 2"){
+            $listeningPart->part2()->delete();
+
+        }else if($listeningPart->loaiPart=="Part 3"){
+            $arrDoanHTmodel=ConversationParagraph::where('idPartNghe',$id)->get();
+                foreach($arrDoanHTmodel as $doanHTmodel){
+                    $doanHTmodel->conversationSentence()->delete();
+                   $doanHTmodel->delete();
+                }
+        }
+        else if($listeningPart->loaiPart=="Part 4"){
+            $arrDoanHTmodel=ConversationParagraph::where('idPartNghe',$id)->get();
+            foreach($arrDoanHTmodel as $doanHTmodel){
+                $doanHTmodel->conversationSentence()->delete();
+               $doanHTmodel->delete();
+            }
+        }
+        return $listeningPart->delete();
+    }
+
+
+
+
+
 
     /**
      * Store a newly created resource in storage.

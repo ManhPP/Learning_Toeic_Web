@@ -49,7 +49,7 @@
                         </div>
                         <hr>
                     </div>
-                    {{ $index += 1 }}
+                    <?php $index += 1 ?>
                 @endforeach
                 <div class="noti"></div>
                 <div style="text-align: center;">

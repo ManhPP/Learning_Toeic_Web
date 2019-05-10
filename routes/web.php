@@ -44,9 +44,15 @@ Route::get('/admin/manager-listening-part', [
 //trang chu admin quan ly phan doc
 Route::get("/admin/manager-reading-part","ReadingPartController@getListPartDoc");
 Route::post("/admin/part-doc/del-part-doc","ReadingPartController@delPartDoc");
-// index update part doc
 Route::get('/admin/bai-hoc-manager/update-part-doc','ReadingPartController@getPartDoc');
-
+//trang chu admin quan ly bkt
+Route::get("/admin/manager-testing",[
+    'uses'=>'TestController@indexForAdminHome'
+]);
+//trang chu admin quan ly bai thao luan
+Route::get("/admin/manager-discussion",[
+   'uses'=> 'DiscussionController@indexAdminManager'
+]);
 
 //thêm/update ảnh phần nghe
 Route::post('/upload-image-listen', [
@@ -175,30 +181,46 @@ Route::post('/admin/manager-reading-part/update-part7/do-update', [
 //================= end part 7 ===========================
 //cho user va guest =================================================================================================
 //luyen nghe
-Route::get("/guest/luyen-nghe","ReadingPartController@practicePartDoc");
+Route::get("/guest/luyen-nghe","ListeningPartController@practicePartNghe");
 // luyen doc
 Route::get("/guest/luyen-doc","ReadingPartController@practicePartDoc");
 
-//test
 
-Route::get('/test',[
+
+//================= testing ==================================
+//test
+//testing home
+Route::get('user/testing-home',[
     'uses' => 'TestController@index'
 ]);
 
-Route::get('/test/add',[
+Route::get('admin/manager-testing/add',[
     'uses' => 'TestController@addIndex'
 ]);
 
-
-Route::post('/test/addTest', [
+Route::post('admin/manager-testing/add/do-add', [
     'uses' => 'TestController@addTest'
 ])->name("testcontroller.add");
 
-Route::get('/test/do',[
+Route::get('user/testing-home/test',[
     'uses' => 'TestController@doTest'
 ]);
+Route::post('admin/manager-testing/delete',[
+    'uses'=>'TestController@delete'
+])->name("testcontroller.delete");
 
+// index update
+Route::get("admin/manager-testing/update",[
+   'uses'=> "TestController@indexUpdate"
+]);
 
+//do update testing
+Route::post("admin/manager-testing/update/do-update", [
+   "uses"=> "TestController@update"
+])->name("testcontroller.update");
+//================= endtesting ==================================
+
+//================= discussion =====================================
 // discussion
 Route::get("/discussion/home","DiscussionController@home")
     ->name('discussionController.home');
@@ -212,8 +234,13 @@ Route::post("/user/discussion/upload-img","DiscussionController@upload_Img")
 Route::get("/user/discussion/viewAdd","DiscussionController@indexAdd")
 ->name("discussionController.indexAdd");
 
+
 Route::post('/user/discussion/add','DiscussionController@addDiscussion')
     ->name('discussionController.add');
+
+Route::post("/admin/manager-discussion/delete",[
+    "uses"=>"DiscussionController@delete"
+])->name("discussioncontroller.delete");
 
 Route::get("/user/discussion/viewUpdate","DiscussionController@indexUpdate")
     ->name('discussionController.indexUpdate');
@@ -237,3 +264,33 @@ Route::get("/discussion/reply-comment-view","ReplyCommentController@getListReply
 
 Route::get("/discussion/get-sum-reply-comment","ReplyCommentController@getSumReply")
     ->name('replyCommentController.sumReply');
+
+//================= end discussion =======================================
+// view quản lý phần nghe của admin
+Route::get('/admin/quanly/baihoc/phannghe', [
+    'uses' => 'ListeningPartController@get'
+]);
+
+// admin lấy view update bài học phần nghe
+Route::get('/admin/bai-hoc-manager/update-part-nghe/{id}',[
+    'uses'=>'ListeningPartController@redirectViewUpdate'
+    ]);
+
+// admin lấy view bài học phần nghe
+Route::get('guest/luyen-nghe/{id}',[
+    'uses'=>'ListeningPartController@redirectView'
+    ]);
+
+// admin xóa phần nghe
+Route::post('/admin/bai-hoc-manager/delete-part-nghe',[
+    'uses'=>'ListeningPartController@delete'
+    ]);
+
+// view quản lý tài khoản của admin
+Route::get('/admin/quanly/account', [
+    'uses' => 'AccountController@get'
+]);
+
+Route::post('/admin/account-manager/ban',['uses'=>'AccountController@ban']);
+
+

@@ -9,6 +9,8 @@ class Account extends Model
 {
     //
     protected $primaryKey = 'id';
+    protected $table='accounts';
+    protected $filable=['hoTen','ngaySinh','username','pass','email','gioiTinh','hasRole','active'];
     function discussion(){
         return $this -> hasMany('App\Discussion','idAcc');
     }

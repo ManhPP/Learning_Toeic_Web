@@ -1,16 +1,13 @@
 var loadAjax = true;
-var header;
-var token;
-
 
 $(document).ready(function(){
-
     $.ajaxSetup({
         headers: {
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
         }
     });
 });
+
 
 $(document).on("click","#btn-login",function(){
 	$("#my-button").click();
@@ -68,16 +65,14 @@ modalConfirmInput(function(confirm, modalChoose, divChoose) {
 });
 
 
-$(document).on("click", ".choose-ques-add", function(event){
-    console.log(event);
-   event.stopPropagation();
-   var tr = $(this).parent().parent().parent();
+$(document).on("click", ".choose-ques-add", function(e){
+   var tr = $(this).parent().parent().parent(); 
    var tbody = tr.parent();
    if(tr.hasClass("choose-this-part") == true){
        tr.removeClass("choose-this-part");
    }else{
        if(tbody.find(".choose-this-part").length > 0 ){
-           event.preventDefault();
+           e.preventDefault();
            alert("Không được chọn quá 1 part");
        }else{
            tr.addClass("choose-this-part");
@@ -102,10 +97,10 @@ $(".modal-choose-part").on("scroll", function(){
    var loaiPart = parseInt($(this).attr("data-part"));
    var url="",typeUrl="";
    if(loaiPart<=4){
-       url="add-bkt/get-list-part-nghe";
+       url="update-bkt/get-list-part-nghe";
        typeUrl = "luyen-nghe";
    }else{
-       url="add-bkt/get-list-part-doc";
+       url="update-bkt/get-list-part-doc";
        typeUrl = "luyen-doc";
    }
    if(loadAjax==true){
@@ -133,6 +128,7 @@ $(".modal-choose-part").on("scroll", function(){
 
 $(document).on("click", "#submit-add", function(){
     var title = $("#tittle").val();
+    var idBKT = $("#id-bkt").html();
     var ids = new Array();
     var audio = $("#form-upload-audio").attr("data-path");
     $(".btn-remove").each(function(i){
@@ -144,21 +140,22 @@ $(document).on("click", "#submit-add", function(){
     }else if(ids.length < 7){
         alert("Hãy chọn đủ 7 part!!");
     } else if(typeof audio == "undefined"){
-        alert("Hãy upload file audio!!!");
+        alert("Hãy upload file audio cho bkt!!!");
     } else{
         $.ajax({
-            url: $("#path-add").html(),
+            url: $("#path-update").html(),
+            method: "post",
             data:{
                 ids: ids,
                 title: title,
+                idBKT: idBKT,
                 audio: audio
             },
-            method: 'POST',
             success: function(data){
                 if(data == "true"){
-                    alert("Thêm thành công!!!");
+                    alert("Update thành công!!!");
                 }else {
-                    alert("Thêm không thành công!!!");
+                    alert("Update không thành công!!!");
                 }
             }
         });
@@ -219,37 +216,29 @@ function removeChoosePart(modal){
     });
 }
 
-// up load audio
-$("#up-audio")
-        .change(
-                function (event) {
-                    // upload len server
-                    var fileUpload = this;
-                    var formParent = $(this).parent();
-                    // var name = ((new Date().getTime()) +
-                    // fileUpload.files[0].name);
-                    var name = ((new Date().getTime()) + $("#id-user").html()
-                            + "." + fileUpload.files[0].type.split("/")[1]);
-                    var formData = new FormData($("#form-upload-audio")[0]);
-                    formData.append("name", name);
+//up load audio
+$("#up-audio").change(function(event) {
+  // upload len server
+  var fileUpload = this;
+  var formParent = $(this).parent();
+//  var name = ((new Date().getTime()) + fileUpload.files[0].name);
+  var name = ((new Date().getTime()) + $("#id-user").html()+"."+fileUpload.files[0].type.split("/")[1]);
+  var formData = new FormData($("#form-upload-audio")[0]);
+  formData.append("name", name);
 
-                    $.ajax({
-                        url : $("#root-path").html()
-                                + "/admin/bai-hoc-manager/audio-upload",
-                        method : "post",
-                        data : formData, // khong duoc dung { formData } ma
-                                            // phai bo {}
-                        contentType : false,
-                        processData : false,
-                        beforeSend : function (xhr) {
-                            xhr.setRequestHeader(header, token);
-                        },
-                        success : function (data) {
-                            if (data == true) {
-                                formParent.attr("data-path", $("#root-path")
-                                        .html()
-                                        + "/audio-upload/" + name);
-                            }
-                        }
-                    });
-                });
+  $.ajax({
+      url: $("#root-path").html()+"/admin/bai-hoc-manager/audio-upload",
+      method: "post",
+      data:formData, // khong duoc dung { formData } ma phai bo {}
+      contentType: false,
+      processData: false,
+      beforeSend: function(xhr) {
+          xhr.setRequestHeader(header, token);
+      },
+      success: function(data){
+          if(data==true){
+              formParent.attr("data-path", $("#root-path").html()+"/audio-upload/"+name);
+          }
+      }
+  });
+});

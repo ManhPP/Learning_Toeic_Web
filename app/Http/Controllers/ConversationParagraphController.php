@@ -41,15 +41,7 @@ class ConversationParagraphController extends Controller
         return "false";
     }
 
-    // Lấy dữ liệu part3,4 cho view update
-    public function getPart3(Request $request)
-    {
-        // $idPartNghe=$request["id"];
-        $part3 = ListeningPart::find(42);
-        // print_r("1111");
-        return view('update_part_3')
-            ->with("partNghe", $part3);
-    }
+    
 
     // Cập nhật dữ liệu part3,4
     public function updatePart3(Request $request)

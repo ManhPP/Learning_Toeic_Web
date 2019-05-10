@@ -76,13 +76,13 @@ class TestController extends Controller
             $test->audio = $audio;
 
             $test->save();
-            $partdoc = array();
-            for($i=0; $i<4; $i++){
-                array_push($partdoc, $ids[$i]);
-            }
             $partnghe = array();
-            for($i=4; $i<7; $i++){
+            for($i=0; $i<4; $i++){
                 array_push($partnghe, $ids[$i]);
+            }
+            $partdoc = array();
+            for($i=4; $i<7; $i++){
+                array_push($partdoc, $ids[$i]);
             }
             $test->readingParts()->attach($partdoc);
             $test->listeningParts()->attach($partnghe);
@@ -143,6 +143,30 @@ class TestController extends Controller
         //
     }
 
+    public function indexUpdate(Request $request){
+        $id = $request["id"];
+        $bkt = Test::find($id);
+        $listPart1 = ListeningPart::where('loaiPart','=','Part 1')->get();
+
+        $listPart2 = ListeningPart::where('loaiPart','=','Part 2')->get();
+
+        $listPart3 = ListeningPart::where('loaiPart','=','Part 3')->get();
+
+        $listPart4 = ListeningPart::where('loaiPart','=','Part 4')->get();
+
+        $listPart5 = ReadingPart::where("loaiPart",'=','Part 5')->get();
+
+        $listPart6 = ReadingPart::where("loaiPart",'=','Part 6')->get();
+
+        $listPart7 = ReadingPart::where("loaiPart",'=','Part 7')->get();
+
+        return view('admin_update_bkt')
+            ->with('listPart1',$listPart1)->with('listPart2',$listPart2)
+            ->with('listPart3',$listPart3)->with('listPart4',$listPart4)
+            ->with('listPart5',$listPart5)->with('listPart6',$listPart6)
+            ->with('listPart7',$listPart7)->with("bkt",$bkt);
+    }
+
     /**
      * Update the specified resource in storage.
      *
@@ -150,10 +174,40 @@ class TestController extends Controller
      * @param  \App\Test  $test
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Test $test)
+    public function update(Request $request)
     {
-        //
+        $arrPartDoc = array();
+        $arrPartNghe = array();
+        $ids = $request["ids"];
+
+        for($i=0;$i<4;$i++){
+            array_push($arrPartNghe, $ids[$i]);
+        }
+        for($i=4;$i<7;$i++){
+            array_push($arrPartDoc, $ids[$i]);
+        }
+
+        $title = $request["title"];
+        $idBKT = $request["idBKT"];
+        $audio = $request["audio"];
+
+        try{
+            $bkt = Test::find($idBKT);
+            $bkt->title=$title;
+            $bkt->audio = $audio;
+            $bkt->save();
+            $bkt->listeningParts()->sync($arrPartNghe);
+            $bkt->readingParts()->sync($arrPartDoc);
+            return "true";
+        }catch (\Exception $e){
+        }
+        return "false";
+
+
+
     }
+
+
 
     /**
      * Remove the specified resource from storage.
@@ -164,5 +218,26 @@ class TestController extends Controller
     public function destroy(Test $test)
     {
         //
+    }
+
+    public function indexForAdminHome(){
+        $arrBaiHoc = Test::all();
+        return View("admin_baihoc_bkt")->with("arrBaiHoc",$arrBaiHoc);
+    }
+
+    public function delete(Request $request){
+        error_log("asdasd");
+//        try{
+            $arrTest = Test::findMany($request["arrId"]);
+            foreach ($arrTest as $test) {
+                $test->readingParts()->detach();
+                $test->listeningParts()->detach();
+                $test->delete();
+            }
+            return "true";
+//        }catch (\Exception $e){
+//
+//        }
+//        return "false";
     }
 }
