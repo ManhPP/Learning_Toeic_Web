@@ -445,7 +445,10 @@ inputPage(function(confirm) {
 
 // submit add
 $(document).on("click", "#submit-add-btn", function() {
-	$("#form-them").submit();
+	
+	if($('.isright').length==4){
+	$("#form-them").submit();}
+	else alert("Kiểm tra lại username và email");
 });
 
 // submit update
@@ -553,32 +556,43 @@ function delAcc() {
 }
 
 // ajax cho check username
-// $(".username").change(function() {
-// 	var objr = $(this).parent().find("img.right");
-// 	var objw = $(this).parent().find("img.wrong");
-// 	if ($(this).val() == "") {
-// 		objr.addClass("hide");
-// 		objw.addClass("hide");
-// 	} else {
-// 		$.ajax({
-// 			method : "GET",
-// 			url : "account-manager/check-username",
-// 			data : {
-// 				username : $(this).val()
-// 			},
-// 			success : function(data) {
-
-// 				if (data == true) {
-// 					objr.removeClass("hide");
-// 					objw.addClass("hide");
-// 				} else {
-// 					objw.removeClass("hide");
-// 					objr.addClass("hide");
-// 				}
-// 			}
-// 		});
-// 	}
-// });
+$(".username").change(function() {
+	
+	var objr = $(this).parent().find("img.right");
+	var objw = $(this).parent().find("img.wrong");
+	if ($(this).val() == "") {
+		objr.addClass("hide");
+		objw.addClass("hide");
+	} else {
+		$.ajax({
+			url : $("#root-path").html()+"/account-manager/check-username",
+			data : {
+				username : $(this).val()
+			},
+			method: "POST",
+			headers: {
+			'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+			},
+			success : function(data) {
+				console.log(data);
+				if (data.length==0) {
+					objr.removeClass("hide");
+					objw.addClass("hide");
+					$('.username').addClass('isright');
+					console.log('usernamerigt');
+					console.log($('.isright').length);
+					
+				} else {
+					objw.removeClass("hide");
+					objr.addClass("hide");
+					$('.username').removeClass('isright');
+					console.log('usernamerfalse');
+					console.log($('.isright').length);
+				}
+			}
+		});
+	}
+});
 
 // ajax cho check email
 $(".email").change(function() {
@@ -589,19 +603,28 @@ $(".email").change(function() {
 		objw.addClass("hide");
 	} else {
 		$.ajax({
-			method : "GET",
-			url : "account-manager/check-email",
+			url :  $("#root-path").html()+"/account-manager/check-email",
 			data : {
 				email : $(this).val()
 			},
+			method: "POST",
+			headers: {
+			'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+			},
 			success : function(data) {
 
-				if (data == true) {
+				if (data.length == 0) {
 					objr.removeClass("hide");
 					objw.addClass("hide");
+					$('.email').addClass('isright');
+					console.log('emailrigt');
+					console.log($('.isright').length);
 				} else {
 					objw.removeClass("hide");
 					objr.addClass("hide");
+					$('.email').removeClass('isright');
+					console.log('emailfalse');
+					console.log($('.isright').length);
 				}
 			}
 		});

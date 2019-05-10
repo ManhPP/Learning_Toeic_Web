@@ -317,3 +317,12 @@ Route::post('/admin/account-manager/add',[
 Route::post('/admin/account-manager/update',[
     'uses'=>'AccountController@update'
     ]);
+Route::post('/account-manager/check-username',[
+    'uses'=>'AccountController@checkuser'
+    ]);
+
+Route::post('/account-manager/check-email',[
+    'uses'=>'AccountController@checkemail'
+    ]);
+
+

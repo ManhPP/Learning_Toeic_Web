@@ -57,12 +57,25 @@ class AccountController extends Controller
         $check=Account::create(['hoTen'=>$hoTen,'ngaySinh'=>$ngaySinh,'gioiTinh'=>$gioiTinh,'username'=>$username
         ,'pass'=>$pass,'email'=>$email,'hasRole'=>$hasRole,'active'=>1]);
        
-        return $check;
+        return Redirect::route('login');
         }catch(Exception $e){
              echo $e;
         }
+    }
 
+    public function checkuser(Request $request){
+        $username=$request['username'];
+        $check=Account::where('username',$username)->get();
+        \Log::info($check);
+        return $check;
+    }
 
+    
+    public function checkemail(Request $request){
+        $email=$request['email'];
+        $check=Account::where('email',$email)->get();
+        \Log::info($check);
+        return $check;
     }
 
     /**

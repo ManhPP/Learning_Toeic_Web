@@ -287,12 +287,12 @@
 							</select>
 						</div>
 						<div class="input-modal row">
-							<span class="col-3" style="line-height: 35px">Username</span> <input
-								type="text" name="username" class="username" /> 
+							<span class="col-3" style="line-height: 35px">Username</span> <input 
+								type="text" name="username" class="username"  /> 
 								<img class="ico-noti-usr hide right" alt="tick"
-								src="{{URL::asset("imgs/tick.png")}}" > 
+								src="{{URL::asset("imgs/tick.png")}}"  /> 
 								<img class="ico-noti-usr hide wrong" alt="tick"
-								src="{{URL::asset("imgs/cross.png")}}" >
+								src="{{URL::asset("imgs/cross.png")}}"  />
 						</div>
 						<div class="input-modal row">
 							<span class="col-3" style="line-height: 35px">Password</span> <input
@@ -300,11 +300,11 @@
 						</div>
 						<div class="input-modal row">
 							<span class="col-3" style="line-height: 35px">Email</span> <input
-								type="text" name="email" class="email"> <img
+								type="text" name="email" class="email" > <img
 								class="ico-noti-em hide right" alt="tick"
-								src="{{URL::asset("imgs/tick.png")}}"> <img
+								src="{{URL::asset("imgs/tick.png")}}" value="emailyes"/> <img
 								class="ico-noti-em hide wrong" alt="tick"
-								src="{{URL::asset("imgs/cross.png")}}">
+								src="{{URL::asset("imgs/cross.png")}}" value="emailno"/>
 						</div>
 						<div class="input-modal row">
 							<span class="col-3" style="line-height: 35px">Type account</span>
@@ -402,6 +402,11 @@
 			data-toggle="tooltip" title="Remove filter">
 	</div>
 
+	<div style="display: none;">
+		<div id="csrf-name">${_csrf.headerName}</div>
+		<div id="csrf-value">${_csrf.token}</div>
+		<div id="root-path">{{URL("")}}</div>
+	</div>
 	
 	<script type="text/javascript"
         src="{{URL::asset("js/jquery-3.3.1.min.js")}}"></script>
