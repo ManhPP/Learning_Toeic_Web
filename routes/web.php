@@ -200,14 +200,40 @@ Route::get('/test/do',[
 
 
 // discussion
-Route::get("/user/discussion/home","DiscussionController@home")
+Route::get("/discussion/home","DiscussionController@home")
     ->name('discussionController.home');
 
-Route::get("/user/discussion/view","DiscussionController@accessDiscussion");
+Route::get("/discussion/view","DiscussionController@accessDiscussion")
+->name('dicussionController.view');
 
-Route::get("/user/discussion/viewAdd","DiscussionController@indexAddDiscussion")
-->name("discussionController.add");
+Route::post("/user/discussion/upload-img","DiscussionController@upload_Img")
+    ->name("discussionController.uploadImg");
 
-Route::get("/user/discussion/viewUpdate","DiscussionController@indexUpdateDiscussion");
+Route::get("/user/discussion/viewAdd","DiscussionController@indexAdd")
+->name("discussionController.indexAdd");
 
+Route::post('/user/discussion/add','DiscussionController@addDiscussion')
+    ->name('discussionController.add');
 
+Route::get("/user/discussion/viewUpdate","DiscussionController@indexUpdate")
+    ->name('discussionController.indexUpdate');
+
+Route::post("/user/discussion/update","DiscussionController@update")
+    ->name('discussionController.update');
+
+// comment
+Route::get("/discussion/comment","CommentController@comment")
+    ->name('commentController.comment');
+
+Route::get("/discussion/get-sum-comment","CommentController@getSumComment")
+    ->name('commentController.sumComment');
+
+//reply comment
+Route::get("/discussion/reply-comment","ReplyCommentController@reply")
+    ->name('replyCommentController.reply');
+
+Route::get("/discussion/reply-comment-view","ReplyCommentController@getListReply")
+    ->name('replyCommentController.listReply');
+
+Route::get("/discussion/get-sum-reply-comment","ReplyCommentController@getSumReply")
+    ->name('replyCommentController.sumReply');

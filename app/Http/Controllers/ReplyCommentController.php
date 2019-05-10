@@ -3,83 +3,67 @@
 namespace App\Http\Controllers;
 
 use App\ReplyComment;
+use App\Account;
 use Illuminate\Http\Request;
+use Carbon\Carbon;
 
 class ReplyCommentController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
-    {
-        //
+    public function reply(Request $request){
+        $noiDung = $request->noiDung;
+        $idCMT = $request->idCMT;
+        $reply = new ReplyComment();
+        $reply->noiDung = $noiDung;
+        $reply->idCmt = $idCMT;
+        $now = Carbon::now('GMT+7');
+//        error_log(."adasas");
+        $reply->ngayDang = $now->toDateTimeString();
+
+        //get acc in session
+        $acc=Account::find(1);
+
+        $reply->idAcc = $acc->id;
+        $check = $reply->saveOrFail();
+        if($check >0){
+            return 'true';
+        }
+        return 'false';
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
+    public function getListReply(Request $request){
+        $id = $request['id'];
+        error_log($id);
+        $begin = $request['begin'];
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
-    }
+        $arr = array();
+        $arrReply = ReplyComment::where('idCmt',$id)->limit(10)->offset($begin)->get();
+        error_log(count($arrReply));
+        if(count($arrReply) >0){
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\ReplyComment  $replyComment
-     * @return \Illuminate\Http\Response
-     */
-    public function show(ReplyComment $replyComment)
-    {
-        //
-    }
+            foreach ($arrReply as $reply){
+                $reply->idAcc = Account::find($reply->idAcc);
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\ReplyComment  $replyComment
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(ReplyComment $replyComment)
-    {
-        //
-    }
+            }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\ReplyComment  $replyComment
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, ReplyComment $replyComment)
-    {
-        //
-    }
+            array_push($arr,$arrReply);
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\ReplyComment  $replyComment
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(ReplyComment $replyComment)
-    {
-        //
+            //get acc from session
+            $acc = Account::find(1);
+
+            array_push($arr,$acc);
+
+            return $arr;
+        }
+        return 'false';
+    }
+    public function getSumReply(Request $request){
+        $idCmt = $request['idCMT'];
+
+        $arrReply = ReplyComment::where('idCmt',$idCmt)->get();
+        error_log(count($arrReply));
+        if(count($arrReply) >0){
+            return count($arrReply);
+        }
+        return 0;
     }
 }
