@@ -190,9 +190,8 @@
 			style="height: 13px" data-toggle="tooltip" title="Remove filter">
 	</div>
 	<div style="display: none;">
-		<div id="csrf-name">${_csrf.headerName}</div>
-		<div id="csrf-value">${_csrf.token}</div>
 		<div id="root-path">{{URL("")}}</div>
+		{{--<div id="id-user">{{$acc->id }}</div>--}}
 	</div>
 
 	{{--<!-- footer -->--}}

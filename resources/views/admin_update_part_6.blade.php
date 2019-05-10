@@ -257,7 +257,7 @@
 
     <div style="display: none;">
         <div id="root-path">{{URL("")}}</div>
-        <div id="id-user">${acc.id }</div>
+        <div id="id-user">{{$acc->id }}</div>
         <div id="id-part">{{$partDoc->id }}</div>
         <div id="path-update">{{Route("readingpartcontroller.updatepart6")}}</div>
     </div>
