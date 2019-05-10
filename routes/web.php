@@ -208,6 +208,16 @@ Route::get('user/testing-home/test',[
 Route::post('admin/manager-testing/delete',[
     'uses'=>'TestController@delete'
 ])->name("testcontroller.delete");
+
+// index update
+Route::get("admin/manager-testing/update",[
+   'uses'=> "TestController@indexUpdate"
+]);
+
+//do update testing
+Route::post("admin/manager-testing/update/do-update", [
+   "uses"=> "TestController@update"
+])->name("testcontroller.update");
 //================= endtesting ==================================
 
 //================= discussion =====================================
