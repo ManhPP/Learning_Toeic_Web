@@ -68,14 +68,16 @@ modalConfirmInput(function(confirm, modalChoose, divChoose) {
 });
 
 
-$(document).on("click", ".choose-ques-add", function(e){
-   var tr = $(this).parent().parent().parent(); 
+$(document).on("click", ".choose-ques-add", function(event){
+    console.log(event);
+   event.stopPropagation();
+   var tr = $(this).parent().parent().parent();
    var tbody = tr.parent();
    if(tr.hasClass("choose-this-part") == true){
        tr.removeClass("choose-this-part");
    }else{
        if(tbody.find(".choose-this-part").length > 0 ){
-           e.preventDefault();
+           event.preventDefault();
            alert("Không được chọn quá 1 part");
        }else{
            tr.addClass("choose-this-part");

@@ -44,8 +44,11 @@ Route::get('/admin/manager-listening-part', [
 //trang chu admin quan ly phan doc
 Route::get("/admin/manager-reading-part","ReadingPartController@getListPartDoc");
 Route::post("/admin/part-doc/del-part-doc","ReadingPartController@delPartDoc");
-// index update part doc
 Route::get('/admin/bai-hoc-manager/update-part-doc','ReadingPartController@getPartDoc');
+//trang chu admin quan ly bkt
+Route::get("/admin/manager-testing",[
+    'uses'=>'TestController@indexForAdminHome'
+]);
 
 
 //thêm/update ảnh phần nghe
@@ -175,29 +178,34 @@ Route::post('/admin/manager-reading-part/update-part7/do-update', [
 //================= end part 7 ===========================
 //cho user va guest =================================================================================================
 //luyen nghe
-Route::get("/guest/luyen-nghe","ReadingPartController@practicePartDoc");
+Route::get("/guest/luyen-nghe","ListeningPartController@practicePartNghe");
 // luyen doc
 Route::get("/guest/luyen-doc","ReadingPartController@practicePartDoc");
 
-//test
 
-Route::get('/test',[
+
+//================= testing ==================================
+//test
+//testing home
+Route::get('user/testing-home',[
     'uses' => 'TestController@index'
 ]);
 
-Route::get('/test/add',[
+Route::get('admin/manager-testing/add',[
     'uses' => 'TestController@addIndex'
 ]);
 
-
-Route::post('/test/addTest', [
+Route::post('admin/manager-testing/add/do-add', [
     'uses' => 'TestController@addTest'
 ])->name("testcontroller.add");
 
-Route::get('/test/do',[
+Route::get('user/testing-home/test',[
     'uses' => 'TestController@doTest'
 ]);
-
+Route::post('admin/manager-testing/delete',[
+    'uses'=>'TestController@delete'
+])->name("testcontroller.delete");
+//================= endtesting ==================================
 
 // discussion
 Route::get("/user/discussion/home","DiscussionController@home")

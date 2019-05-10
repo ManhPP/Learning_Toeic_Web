@@ -36,12 +36,12 @@
                 
                 <!-- intro img-->
                 <div class="intro">
-                    <img src="{{URL::asset("$partNghe->intro")}}" alt="profile Pic" height="400" width="400"">
+                    <img src="{{URL::asset("$partNghe->intro")}}" alt="profile Pic" height="400" width="400">
                 </div>
                 <hr>
                 <!-- list cau hoi -->
                 <div class="list-cau">
-                    {{ $index = 1 }}
+                    <?php $index = 1 ?>
                     @foreach( $partNghe->part1 as $cauPart1)
                         <div class="ques" id="q{{ $index }}" data-asw="{{ $cauPart1->dADung }}">
                             <div class="no-ques">
@@ -58,7 +58,9 @@
                                 <label class="col-3"><input type="radio" name="choise{{ $index }}" value="D">D</label>
                             </div>
                         </div>
+
                         @php $index += 1 @endphp
+
                     @endforeach
                 </div>
             </div>

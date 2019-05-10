@@ -81,7 +81,7 @@
                                             <td class="col-12">
                                                 <a href="${pageContext.request.contextPath}/guest/luyen-nghe?id={{ $part1->id }}" target="_blank">
                                                     <input type="checkbox" class="choose-ques-add">
-                                                    <span class="content-ques">{{ $part1->tittle }} (id {{ $part1->id }})</span>
+                                                    <span class="content-ques">{{ $part1->title }} (id {{ $part1->id }})</span>
                                                     <img class="expand-ico" src="{{ URL::asset("imgs/next.png") }}">
                                                 </a>
                                             </td>
@@ -124,7 +124,7 @@
                                             <td class="col-12">
                                                 <a href="${pageContext.request.contextPath}/guest/luyen-nghe?id={{ $part2->id }}" target="_blank">
                                                     <input type="checkbox" class="choose-ques-add">
-                                                    <span class="content-ques">{{ $part2->tittle }} (id {{ $part2->id }})</span>
+                                                    <span class="content-ques">{{ $part2->title }} (id {{ $part2->id }})</span>
                                                     <img class="expand-ico" src="{{ URL::asset("imgs/next.png") }}">
                                                 </a>
                                             </td>
@@ -168,7 +168,7 @@
                                             <td class="col-12">
                                                 <a href="${pageContext.request.contextPath}/guest/luyen-nghe?id={{ $part3->id }}" target="_blank">
                                                     <input type="checkbox" class="choose-ques-add">
-                                                    <span class="content-ques">{{ $part3->tittle }} (id {{ $part3->id }})</span>
+                                                    <span class="content-ques">{{ $part3->title }} (id {{ $part3->id }})</span>
                                                     <img class="expand-ico" src="{{ URL::asset("imgs/next.png") }}">
                                                 </a>
                                             </td>
@@ -213,7 +213,7 @@
                                             <td class="col-12">
                                                 <a href="${pageContext.request.contextPath}/guest/luyen-nghe?id={{ $part4->id }}" target="_blank">
                                                     <input type="checkbox" class="choose-ques-add">
-                                                    <span class="content-ques">{{ $part4->tittle }} (id {{ $part4->id }})</span>
+                                                    <span class="content-ques">{{ $part4->title }} (id {{ $part4->id }})</span>
                                                     <img class="expand-ico" src="{{ URL::asset("imgs/next.png") }}">
                                                 </a>
                                             </td>
@@ -257,7 +257,7 @@
                                             <td class="col-12">
                                                 <a href="${pageContext.request.contextPath}/guest/luyen-doc?id={{ $part5->id }}" target="_blank">
                                                     <input type="checkbox" class="choose-ques-add">
-                                                    <span class="content-ques">{{ $part5->tittle }} (id {{ $part5->id }})</span>
+                                                    <span class="content-ques">{{ $part5->title }} (id {{ $part5->id }})</span>
                                                     <img class="expand-ico" src="{{ URL::asset("imgs/next.png") }}">
                                                 </a>
                                             </td>
@@ -301,7 +301,7 @@
                                             <td class="col-12">
                                                 <a href="${pageContext.request.contextPath}/guest/luyen-doc?id={{ $part6->id }}" target="_blank">
                                                     <input type="checkbox" class="choose-ques-add">
-                                                    <span class="content-ques">{{ $part6->tittle }} (id {{ $part6->id }})</span>
+                                                    <span class="content-ques">{{ $part6->title }} (id {{ $part6->id }})</span>
                                                     <img class="expand-ico" src="{{ URL::asset("imgs/next.png") }}">
                                                 </a>
                                             </td>
@@ -345,7 +345,7 @@
                                             <td class="col-12">
                                                 <a href="${pageContext.request.contextPath}/guest/luyen-doc?id={{ $part7->id }}" target="_blank">
                                                     <input type="checkbox" class="choose-ques-add">
-                                                    <span class="content-ques">{{ $part7->tittle }} (id {{ $part7->id }})</span>
+                                                    <span class="content-ques">{{ $part7->title }} (id {{ $part7->id }})</span>
                                                     <img class="expand-ico" src="{{ URL::asset("imgs/next.png") }}">
                                                 </a>
                                             </td>

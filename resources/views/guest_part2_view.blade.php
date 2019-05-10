@@ -36,13 +36,13 @@
 					
 					<!-- intro img-->
 					<div class="intro">
-						<img src="{{URL::asset("$partNghe->intro")}}" alt="profile Pic" height="400" width="400"">
+						<img src="{{URL::asset("$partNghe->intro")}}" alt="profile Pic" height="400" width="400">
 					</div>
 					<hr>
 					<!-- list cau hoi -->
 					<div class="list-cau">
 						<!-- cau1 -->
-                        {{ $index = 1 }}
+                        <?php $index = 1 ?>
                         @foreach( $partNghe->part2 as $cau)
 							<div class="ques" data-asw="{{ $cau->dADung }}">
 								<div class="no-ques" data-id="{{ $cau->id }}">
@@ -55,6 +55,7 @@
 								</div>
 							</div>
 							@php $index += 1 @endphp
+
                     @endforeach
 					</div>
 					

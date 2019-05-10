@@ -165,4 +165,25 @@ class TestController extends Controller
     {
         //
     }
+
+    public function indexForAdminHome(){
+        $arrBaiHoc = Test::all();
+        return View("admin_baihoc_bkt")->with("arrBaiHoc",$arrBaiHoc);
+    }
+
+    public function delete(Request $request){
+        error_log("asdasd");
+//        try{
+            $arrTest = Test::findMany($request["arrId"]);
+            foreach ($arrTest as $test) {
+                $test->readingParts()->detach();
+                $test->listeningParts()->detach();
+                $test->delete();
+            }
+            return "true";
+//        }catch (\Exception $e){
+//
+//        }
+//        return "false";
+    }
 }

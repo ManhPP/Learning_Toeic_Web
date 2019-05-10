@@ -35,12 +35,12 @@
                         
                         <!-- intro img-->
                         <div class="intro">
-                            <img src="{{URL::asset("$partNghe->intro")}}" alt="profile Pic" height="400" width="400"">
+                            <img src="{{URL::asset("$partNghe->intro")}}" alt="profile Pic" height="400" width="400">
                         </div>
                         <hr>
                         <!-- list cau hoi -->
                         <div class="list-cau">
-                                {{ $index = 0 }}
+                                <?php $index = 0 ?>
                                 @foreach( $partNghe->conversation_paragraph as $dht)
                                 @foreach( $dht->conversationSentence as $cht)
 
@@ -70,7 +70,9 @@
                                     @if( $index%3 == 2 )
                         </div>
                         @endif
+
 					@php $index += 1 @endphp
+
 					@endforeach
 					@endforeach
                             <div style="text-align: center;margin-top: 2em;">
