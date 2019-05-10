@@ -49,7 +49,10 @@ Route::get('/admin/bai-hoc-manager/update-part-doc','ReadingPartController@getPa
 Route::get("/admin/manager-testing",[
     'uses'=>'TestController@indexForAdminHome'
 ]);
-
+//trang chu admin quan ly bai thao luan
+Route::get("/admin/manager-discussion",[
+   'uses'=> 'DiscussionController@indexAdminManager'
+]);
 
 //thêm/update ảnh phần nghe
 Route::post('/upload-image-listen', [
@@ -207,6 +210,7 @@ Route::post('admin/manager-testing/delete',[
 ])->name("testcontroller.delete");
 //================= endtesting ==================================
 
+//================= discussion =====================================
 // discussion
 Route::get("/user/discussion/home","DiscussionController@home")
     ->name('discussionController.home');
@@ -218,6 +222,10 @@ Route::get("/user/discussion/viewAdd","DiscussionController@indexAddDiscussion")
 
 Route::get("/user/discussion/viewUpdate","DiscussionController@indexUpdateDiscussion");
 
+Route::post("/admin/manager-discussion/delete",[
+    "uses"=>"DiscussionController@delete"
+])->name("discussioncontroller.delete");
+//================= end discussion =======================================
 // view quản lý phần nghe của admin
 Route::get('/admin/quanly/baihoc/phannghe', [
     'uses' => 'ListeningPartController@get'

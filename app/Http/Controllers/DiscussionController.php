@@ -44,4 +44,39 @@ class DiscussionController extends Controller
        $acc = Account::find(1);
         return view('update_bai_thaoluan',['acc'=>$acc,'btl'=>$btl]);
    }
+
+   public function indexAdminManager(){
+        $arrNumCmt = array();
+        $arrBtl = Discussion::all();
+        foreach($arrBtl as $btl){
+            $arrCmt = $btl->comment;
+            $num = count($arrCmt);
+            foreach ($arrCmt as $cmt){
+                $num+= $cmt->replyComment()->count();
+            }
+            array_push($arrNumCmt,$num);
+        }
+        return View("admin_thaoluan")->with("arrBtl", $arrBtl)->with("arrNumCmt", $arrNumCmt);
+   }
+
+   public function delete(Request $request){
+        $arrId = $request["arrId"];
+        try{
+            $arrDiscuss = Discussion::findMany($arrId);
+            foreach($arrDiscuss as $discuss){
+                $arrCmt = $discuss->comment;
+                foreach ($arrCmt as $cmt) {
+                    $cmt->report()->delete();
+                    $cmt->replyComment()->delete();
+                }
+                $discuss->comment()->delete();
+                $discuss->report()->delete();
+                $discuss->delete();
+            }
+            return "true";
+        }catch (\Exception $e){
+
+        }
+        return "false";
+   }
 }

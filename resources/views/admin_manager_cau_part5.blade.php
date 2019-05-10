@@ -20,53 +20,14 @@
                 </tr>
             </thead>
             <tbody>
-<<<<<<< HEAD
-                {{-- <c:set var="index" value="1"/> --}}
-                <?php $index = 1 ?>
-                {{-- <c:forEach items="${arrCau }" var="cau"> --}}
+                    <?php $index = 1 ?>
                     @foreach($arrCau as $cau)
-                    {{-- <c:set var="checkA" value=""/>
-                    <c:set var="checkB" value=""/>
-                    <c:set var="checkC" value=""/>
-                    <c:set var="checkD" value=""/> --}}
-                    <?php $checkA = "" ?>
-                    <?php $checkB = "" ?>
-                    <?php $checkC = "" ?>
-                    <?php $checkD = "" ?>
-                    {{-- <c:choose>
-                        <c:when test="${cau.dADung=='A' }">
-                            <c:set var="checkA" value="checked='checked'"/>
-                        </c:when>
-                        <c:when test="${cau.dADung=='B' }">
-                            <c:set var="checkB" value="checked='checked'"/>
-                        </c:when>
-                        <c:when test="${cau.dADung=='C' }">
-                            <c:set var="checkC" value="checked='checked'"/>
-                        </c:when>
-                        <c:when test="${cau.dADung=='D' }">
-                            <c:set var="checkD" value="checked='checked'"/>
-                        </c:when>
-                                </c:choose>			 --}}
 
-                    
-                    @if($cau->dADung == 'A')
-                        <?php $checkA = "checked = 'checked'" ?>
-                    @endif
-                    @if($cau->dADung == 'B')
-                        <?php $checkB = "checked = 'checked'" ?>
-=======
-                <?php $index = 1 ?>
-                    @foreach($arrCau as $cau)
-                        <?php $checkA = "" ?>
-                        <?php $checkB = "" ?>
-                        <?php $checkC = "" ?>
-                        <?php $checkD = "" ?>
                     @if($cau->dADung == 'A')
                         <?php  $checkA = "checked = 'checked'" ?>
                     @endif
                     @if($cau->dADung == 'B')
                         <?php  $checkB = "checked = 'checked'" ?>
->>>>>>> c940334a2b78988c18bf0635418bde593876d46a
                     @endif
                     @if($cau->dADung == 'C')
                         <?php $checkC = "checked = 'checked'" ?>
