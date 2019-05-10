@@ -4,9 +4,42 @@ namespace App\Http\Controllers;
 
 use App\Account;
 use Illuminate\Http\Request;
+use PHPUnit\Framework\Exception;
 
 class AccountController extends Controller
 {
+    public function get(){
+        $arrUser=Account::all();
+        return view('admin_account')->with("arrUser",$arrUser);
+
+    }
+
+    //ban tài khoản
+    public function ban(Request $request){
+        $arrUser=$request["arrId"];
+       try{ foreach($arrUser as $acc){
+            Account::find($acc->id)->update(['active'=>0]);
+            }
+            return 1;
+        }catch(Exception $e){
+
+        }
+        return 2;
+    }
+
+    //unban tài khoản
+    public function unban(Request $request){
+        $arrUser=$request["arrId"];
+       try{ foreach($arrUser as $acc){
+            Account::find($acc->id)->update(['active'=>1]);
+            }
+            return 1;
+        }catch(Exception $e){
+
+        }
+        return 2;
+    }
+
     /**
      * Display a listing of the resource.
      *

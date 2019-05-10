@@ -346,29 +346,31 @@ $(document)
                     } else {
                         $
                                 .ajax({
-                                    url : "part-nghe/del-part-nghe",
-                                    dataType : "json",
+                                    url : $("#root-path").html()+"/admin/bai-hoc-manager/delete-part-nghe",
                                     data : {
                                         arrId : arrId
                                     },
                                     method: "POST",
-                                    beforeSend: function(xhr) {
-                                        xhr.setRequestHeader(header, token);
+                                    headers: {
+                                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                                     },
+                                    
                                     success : function (data) {
-                                        if (data == true) {
+                                        if (data == 1) {
                                             $("#noti").html("");
                                             $("#noti")
                                                     .append(
                                                             '<span style="color: green">Xóa thành công.</span>');
+                                            $("tr.selected").each(function () {
+                                                $(this).remove();
+                                              });
                                         } else {
                                             $("#noti").html("");
                                             $("#noti")
                                                     .append(
                                                             '<span style="color: red">Xóa không thành công.</span>');
                                         }
-                                        resetPagination($(".page-num.active")
-                                                .attr("data-page"));
+                                        
                                     }
                                 });
                     }

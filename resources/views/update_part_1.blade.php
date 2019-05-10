@@ -82,7 +82,7 @@
 								</div>
 							</div>
 							<!-- <c:set var="index" value="${index+1 }"/> -->
-							{{$index++ }}
+							@php $index++ @endphp
 						<!-- </c:forEach> -->
 						@endforeach
 						

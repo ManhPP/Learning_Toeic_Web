@@ -2,7 +2,8 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title></title>
+<title>Quản lý bài học phần nghe</title>
+<meta name="csrf-token" content="{{ csrf_token() }}">
 <link rel="stylesheet" type="text/css"
     href="{{URL::asset("css/bootstrap.min.css")}}">
 <link rel="stylesheet" type="text/css"
@@ -73,7 +74,7 @@
                                     @endif
 									<td class="col-sm-3 col-md-3">{{$baihoc->acessCount}}</td>
 									<td class="col-sm-1 col-md-1"><div class="detail">
-									<a target="_blank" class="view" href="${pageContext.request.contextPath }/guest/luyen-nghe?id=${baiHoc.id}">View</a>/<a target="_blank" class="update" href="{{url('admin/bai-hoc-manager/update-part-nghe',$baihoc->id)}} ">Update</a>
+									<a target="_blank" class="view" href="{{url('guest/luyen-nghe',$baihoc->id)}}">View</a>/<a target="_blank" class="update" href="{{url('admin/bai-hoc-manager/update-part-nghe',$baihoc->id)}} ">Update</a>
 									</div></td>
 								</tr>
                                 <!-- <c:set var="index" value="${index+1 }" /> -->
@@ -85,7 +86,7 @@
 				</div>
 
 				<!-- pagination -->
-				<div class="col-12 row"
+				{{--<div class="col-12 row"
 					style="padding-top: 1em; padding-bottom: 1em">
 					<!-- <fmt:formatNumber var="numPage" value="${numBaiHoc/10}"
                         maxFractionDigits="0" /> -->
@@ -150,7 +151,7 @@
 							<li class="page-item" id="ne"><span class="page-link">></span></li>
 						</ul>
 					</span>
-				</div>
+				</div> --}}
 			</div>
 
 			<!-- btn delete -->
@@ -162,6 +163,11 @@
 					value="Xóa bài học" style="background-color: #F70000;">
 			</div>
 		</div>
+		<!-- footer -->
+	<div class="container-fluid row justify-content-center footer"
+		style="height: 5em; line-height: 5em; padding-left: 5em;  bottom: 0; background-color: #E8E8E8; z-index: 0">
+		<span>Copyright © BKTOEIC 2019</span>
+	</div>
 
 	</div>
 
@@ -206,6 +212,7 @@
 				</div>
 			</div>
 		</div>
+		
 	</div>
 
 	<!-- container them de lay cho de -->
@@ -225,19 +232,15 @@
 		<div id="root-path">{{URL("")}}</div>
 	</div>
 
-	<!-- footer -->
-	<!-- <div class="container-fluid row justify-content-center footer"
-		style="height: 5em; line-height: 5em; padding-left: 15em; position: fixed; bottom: 0; background-color: #E8E8E8; z-index: 0">
-		<span>Copyright © BKTOEIC 2019</span>
-	</div> -->
+	
 	<script type="text/javascript"
 		src="{{URL::asset("js/jquery-3.3.1.min.js")}}"></script>
 	<script type="text/javascript"
-    src="{{URL::asset("js/admin-baihoc-pn.js")}}"></script>
+    	src="{{URL::asset("js/admin-baihoc-pn.js")}}"></script>
 	<script
 		src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
 	<script type="text/javascript"
-		<!-- src="{{URL::asset("js/header-admin.js")}}"></script> -->
+		src="{{URL::asset("js/header-admin.js")}}"></script>
 	<script type="text/javascript"
 		src="{{URL::asset("js/bootstrap.min.js")}}"></script>
 </body>

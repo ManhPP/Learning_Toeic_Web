@@ -1,0 +1,122 @@
+* {
+	font-size: 0.97em;
+}
+
+body, html {
+	height: 100%;
+	overflow-x: hidden;
+	min-width: 300px;
+}
+
+@media ( max-width : 300px) {
+	body, html {
+		overflow-x: scroll;
+	}
+}
+
+.container-fluid {
+	padding: 0;
+	margin: 0;
+	height: 100%;
+}
+
+/*bang*/
+th, td {
+	text-align: center;
+	overflow-x: auto;
+	height: 3.8em;
+	overflow-y: hidden;
+}
+
+.main-table {
+	overflow-x: auto;
+}
+
+.ico-filter {
+	width: 18px;
+	padding: 3px;
+}
+
+#my-table thead th {
+	height: auto;
+}
+
+.pre-next {
+	border: none;
+	background-color: none;
+	padding: 0.6em 1em;
+}
+
+[data-activ="false"] {
+	color: red !important;
+}
+
+/*css for class added by js*/
+.selected {
+	background-color: #4c4caa;
+}
+
+.btn-func {
+	margin: 0 15px;
+	border-radius: 8px;
+	cursor: pointer;
+}
+
+.btn-func:focus {
+	outline: none;
+}
+
+.footer {
+	bottom: -12px !important;
+}
+
+/* css for model add */
+.input-modal {
+	height: 50px;
+	width: 100%;
+	margin: 0 auto;
+}
+
+.input-modal input {
+	height: 80%;
+	width: 70%;
+}
+
+.input-modal select {
+	height: 80%;
+	width: 70%;
+}
+
+.ico-noti-usr {
+	width: 20px;
+	height: 20px;
+	position: absolute;
+	right: 45px;
+	top: 175px;
+}
+
+.ico-noti-em {
+	width: 20px;
+	height: 20px;
+	position: absolute;
+	right: 45px;
+	top: 275px;
+}
+
+.hide {
+	display: none;
+}
+
+#input-number, #filter-val {
+	width: 100%;
+	border: 1px solid #c3b6b6;
+	border-radius: 5px;
+	height: 2.3em;
+	padding-left: 5px;
+}
+
+.filter-text {
+	margin: 0;
+	color: red;
+	font-size: 0.8em;
+}
