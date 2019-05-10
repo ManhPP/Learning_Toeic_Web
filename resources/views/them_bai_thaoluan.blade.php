@@ -39,8 +39,8 @@
 </div>
 
 <div style="display: none;" id="div-submit"></div>
-<div id="path-upload" style="display: none;">${pageContext.request.contextPath}/img-btl/</div>
-<div id="id-user">{{ $acc->id }}</div>
+<div id="path-upload" style="display: none;">{{URL("")}}/</div>
+<div id="id-user" style="display: none;">{{ $acc->id }}</div>
 <!-- end body -->
 
 <!-- modal -->
@@ -92,4 +92,6 @@
 
 @section('js')
     <script type="text/javascript" src="{{ URL::asset("js/them_bai_thaoluan/them_bai_thaoluan.js") }}"></script>
-@endsection	
+    <script type="text/javascript"
+            src="{{URL::asset("ckeditor/ckeditor.js")}}"></script>
+@endsection

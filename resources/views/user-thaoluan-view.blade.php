@@ -1,5 +1,5 @@
 @extends('layouts.master')
-@section('title','add part 4')
+@section('title',"View discussion")
 @section("css")
     <link rel="stylesheet" type="text/css" href="{{ URL::asset("css/user-thaoluan-view/user-thaoluan-view.css") }}">
 @endsection
@@ -16,7 +16,7 @@
             <div id="tittle">{{$btl->tieuDe }}</div>
             <hr>
             <div class="cont">
-                <div class="ques" id="noi-dung-btl">{{$btl->noiDung }}</div>
+                <div class="ques" id="noi-dung-btl">{!! $btl->noiDung !!}</div>
                 <div class="own-ques">
                     <p>
                         @if($btl->account->id != $acc->id)
@@ -239,11 +239,11 @@
         </div>
     </div>
     <div style="display: none;" id="root-path">{{URL("")}}</div>
-    <form action="{{URL("")}}/user/bai-thao-luan/get-view-update-btl" id="req-form-update">
+    <form action="{{route('discussionController.indexUpdate')}}" id="req-form-update" method="get">
         <div style="display: none;">
             <input name="id" value='{{$btl->id }}'>
-            <input name="noiDung" value='{{$btl->noiDung }}'>
-            <input name="tieuDe" value='{{$btl->tieuDe }}'>
+            {{--<input name="noiDung" value='{{$btl->noiDung }}'>--}}
+            {{--<input name="tieuDe" value='{{$btl->tieuDe }}'>--}}
         </div>
     </form>
     <!-- Open modal -->
@@ -262,4 +262,5 @@
     <script type="text/javascript"
             src="{{URL::asset("js/wow.min.js")}}"></script>
     <script type="text/javascript" src="{{URL::asset("js/user-thaoluan-view/user-thaoluan-view.js")}}"></script>
+
 @endsection

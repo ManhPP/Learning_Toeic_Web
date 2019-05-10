@@ -38,46 +38,53 @@ $("#file-up").change(function(event) {
 //	var boundary = '--'+Math.random().toString().substr(2);
 	console.log($("#form-up-image")[0]);
 	$.ajax({
-		url: "them-bai-thao-luan/file-upload",
+		url: "upload-img",
 		method: "post",
 		data:formData, // khong duoc dung { formData } ma phai bo {}
 		contentType: false,
         processData: false,
-		beforeSend: function(xhr) {
-            xhr.setRequestHeader(header, token);
-        },
+
 		success: function(data){
-			if(data==true){
-				readURL(name);	
-			}
+				// alert(data.pathFile);
+				if(data!='false'){
+					// formParent.attr("data-path", data.pathFile);
+					var size = "width:" + $("#w-img").val() + "px; height:" + $("#h-img").val()
+						+ "px; ";
+					var img = "<img style='vertical-align: bottom;" + size
+						+ "; max-width: 100%' src='"+$('#path-upload').html()+data.pathFile+"'/>";
+					$("iframe").contents().find("body").find("br:last").remove();
+					$("iframe").contents().find("body").find("p:last").append(img);
+					$("#file-up").val('');
+				};
+
 		}
 	});
 });
 
-function readURL(fileName) {
-	var size = "width:" + $("#w-img").val() + "px; height:" + $("#h-img").val()
-			+ "px; ";
-	var img = "<img style='vertical-align: bottom;" + size
-			+ "; max-width: 100%' src='"+$('#path-upload').html()+fileName+"'/>";
-	$("iframe").contents().find("body").find("br:last").remove();
-	$("iframe").contents().find("body").find("p:last").append(img);
-	$("#file-up").val('');
-}
+// function readURL(fileName) {
+// 	var size = "width:" + $("#w-img").val() + "px; height:" + $("#h-img").val()
+// 			+ "px; ";
+// 	var img = "<img style='vertical-align: bottom;" + size
+// 			+ "; max-width: 100%' src='"+$('#path-upload').html()+fileName+"'/>";
+// 	$("iframe").contents().find("body").find("br:last").remove();
+// 	$("iframe").contents().find("body").find("p:last").append(img);
+// 	$("#file-up").val('');
+// }
 
 $(document).on("click", "#btn-submit", function() {
 	$.ajax({
-		url: "them-bai-thao-luan/add",
+		url: "/user/discussion/add",
 		method: "post",
 		data:{
 			tieuDe: $("#tittle-discus").val(),
 			noiDung: $("iframe").contents().find("body").html()
 		},
-		beforeSend: function(xhr) {
-            xhr.setRequestHeader(header, token);
-        },
+
 		success: function(data){
-			if(data==true){
-			    window.location.replace($("#root-path").html()+"/user/thaoluan-home");
+			if(data=='true'){
+			    window.location.replace($("#root-path").html()+"/discussion/home");
+			}else{
+				alert("Thêm không thành công!!!")
 			}
 		}
 	});

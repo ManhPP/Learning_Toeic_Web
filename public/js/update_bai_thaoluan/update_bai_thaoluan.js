@@ -43,9 +43,7 @@ $("#file-up").change(function(event) {
 		data:formData, // khong duoc dung { formData } ma phai bo {}
 		contentType: false, // bat buoc
         processData: false, // bat buoc
-		beforeSend: function(xhr) { // bat buoc (csrf)
-            xhr.setRequestHeader(header, token);
-        },
+
 		success: function(data){
 			if(data==true){
 				readURL(name);	
@@ -66,21 +64,17 @@ function readURL(fileName) {
 
 $(document).on("click", "#btn-submit", function() {
     $.ajax({
-        url: $("#root-path").html()+"/user/bai-thao-luan/update-btl",
+        url: $("#root-path").html()+"/user/discussion/update",
         method: "post",
         data:{
             id: $("#id-btl").html(),
             tieuDe: $("#tittle-discus").val(),
             noiDung: $("iframe").contents().find("body").html()
         },
-        beforeSend: function(xhr) {
-            xhr.setRequestHeader(header, token);
-        },
         success: function(data){
-            console.log(data == true);
-            console.log(data == true);
-            if( data == true ){
-                $("#noti-update").html("<p>Update thành công!!!</p><p><a href='"+$("#root-path").html()+"/user/bai-thao-luan?id="+$("#id-btl").html()+"'>Xem bài viết</a></p>");
+            console.log(data );
+            if( data == 'true' ){
+                $("#noti-update").html("<p>Update thành công!!!</p><p><a href='"+$("#root-path").html()+"/discussion/view?id="+$("#id-btl").html()+"'>Xem bài viết</a></p>");
                 $("#model-noti-update").modal('show');
             }else{
                 $("#noti-update").html("<p>Update không thành công!!!</p>");

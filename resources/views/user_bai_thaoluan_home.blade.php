@@ -40,7 +40,7 @@
                                             <tr class="d-flex">
                                                 <td class="col-12 col-md-10">
                                                     <div class="tittle" data-toggle="tooltip"
-                                                        data-placement="top" title="{{ $btl->tieuDe }}"><a class="color-tittle no-decoration" href="{{URL("")}}/user/discussion/view?id={{$btl->id}}">{{ $btl->tieuDe }}</a></div>
+                                                        data-placement="top" title="{{ $btl->tieuDe }}"><a class="color-tittle no-decoration" href="{{route('dicussionController.view',['id'=>$btl->id])}}">{{ $btl->tieuDe }}</a></div>
                                                     <div>
                                                         <span class="user">{{ $btl->account->hoTen }}, </span><span
                                                             class="date">
@@ -60,61 +60,61 @@
 
                             </div>
                             <!-- pagination -->
-                            <div id="cur-page" style="display: none">1</div>
-                            <div style="display: none">
-                                {{ $numPage = number_format($numBtl/10) }}
-                            </div>
-                            @if($numBtl > ($numPage*10))
-                                {{ $numPage += 1 }}
-                            @endif
-                            <div style="display:none">
-                                {{ $curPage = 0 }}
-                            </div>
+                            {{--<div id="cur-page" style="display: none">1</div>--}}
+                            {{--<div style="display: none">--}}
+                                {{--{{ $numPage = number_format($numBtl/10) }}--}}
+                            {{--</div>--}}
+                            {{--@if($numBtl > ($numPage*10))--}}
+                                {{--{{ $numPage += 1 }}--}}
+                            {{--@endif--}}
+                            {{--<div style="display:none">--}}
+                                {{--{{ $curPage = 0 }}--}}
+                            {{--</div>--}}
 
-                            @if($numUser > 0)
-                            <div style="display:none">
-                                {{ $curPage = 1 }}
-                            </div>
-                            @endif
+                            {{--@if($numUser > 0)--}}
+                            {{--<div style="display:none">--}}
+                                {{--{{ $curPage = 1 }}--}}
+                            {{--</div>--}}
+                            {{--@endif--}}
 
-                            <ul class="pagination" style="justify-content: center;"
-                                data-max-page="{{ $numPage }}">
-                                <li class="page-item" id="pre"><span class="page-link"><</span></li>
+                            {{--<ul class="pagination" style="justify-content: center;"--}}
+                                {{--data-max-page="{{ $numPage }}">--}}
+                                {{--<li class="page-item" id="pre"><span class="page-link"><</span></li>--}}
 
-                                @for($i = 1; $i <= $numPage; $i++)
-                                    <!-- add class active cho pagation day tien -->
-                                    <div style="display:none">
-                                        {{ $cls = "" }}
-                                    </div>
-                                    @if($i == 1)
-                                        <div style="display:none">
-                                                {{ $cls = "active" }}
-                                        </div>
-                                    @endif
-                                    <!-- them dau 3... -->
+                                {{--@for($i = 1; $i <= $numPage; $i++)--}}
+                                    {{--<!-- add class active cho pagation day tien -->--}}
+                                    {{--<div style="display:none">--}}
+                                        {{--{{ $cls = "" }}--}}
+                                    {{--</div>--}}
+                                    {{--@if($i == 1)--}}
+                                        {{--<div style="display:none">--}}
+                                                {{--{{ $cls = "active" }}--}}
+                                        {{--</div>--}}
+                                    {{--@endif--}}
+                                    {{--<!-- them dau 3... -->--}}
 
-                                    @if($i == 2)
-                                        <li class="page-item hide more" id="first"><span
-                                            class="page-link">...</span></li>
-                                    @endif
-                                    @if($i == $numPage && $numPage > 6)
-                                        <li class="page-item more" id="last"><span
-                                            class="page-link">...</span></li>
-                                    @endif
-                                    <!-- an ca pagation phai sau -->
-                                    <div style="display:none">
-                                            {{ $hi = "" }}
-                                    </div>
-                                    @if($i != $numPage && $i > 5)
-                                    <div style="display:none">
-                                            {{ $hi = "hide" }}
-                                    </div>
-                                    @endif
-                                    <li class="page-num page-item {{ $cls }} {{ $hi }}" data-page="{{ $i }}"><span
-                                        class="page-link">{{ $i }}</span></li>
-                                @endfor
-                                <li class="page-item" id="ne"><span class="page-link">></span></li>
-                            </ul>
+                                    {{--@if($i == 2)--}}
+                                        {{--<li class="page-item hide more" id="first"><span--}}
+                                            {{--class="page-link">...</span></li>--}}
+                                    {{--@endif--}}
+                                    {{--@if($i == $numPage && $numPage > 6)--}}
+                                        {{--<li class="page-item more" id="last"><span--}}
+                                            {{--class="page-link">...</span></li>--}}
+                                    {{--@endif--}}
+                                    {{--<!-- an ca pagation phai sau -->--}}
+                                    {{--<div style="display:none">--}}
+                                            {{--{{ $hi = "" }}--}}
+                                    {{--</div>--}}
+                                    {{--@if($i != $numPage && $i > 5)--}}
+                                    {{--<div style="display:none">--}}
+                                            {{--{{ $hi = "hide" }}--}}
+                                    {{--</div>--}}
+                                    {{--@endif--}}
+                                    {{--<li class="page-num page-item {{ $cls }} {{ $hi }}" data-page="{{ $i }}"><span--}}
+                                        {{--class="page-link">{{ $i }}</span></li>--}}
+                                {{--@endfor--}}
+                                {{--<li class="page-item" id="ne"><span class="page-link">></span></li>--}}
+                            {{--</ul>--}}
                         </div>
                     </div>
                 </div>
@@ -129,7 +129,7 @@
                     {{--<p>Số bài đăng trong ngày: {{ $btlPerDay }}</p>--}}
                     {{--<p>Số bài đăng trong tháng: {{ $btlPerMonth }}</p>--}}
             </div>
-            <a class="no-decoration" style="color: white" href="{{URL("")}}/user/discussion/viewAddDiscussion">
+            <a class="no-decoration" style="color: white" href="{{route('discussionController.indexAdd')}}">
                 <button id="add-discus">Đăng bài thảo luận</button>
             </a>
         </div>

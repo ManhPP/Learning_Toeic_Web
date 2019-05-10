@@ -101,7 +101,7 @@
     </div>
 </div>
 <div style="display: none;" id="id-btl">{{ $btl->id }}</div>
-<div id="id-user">{{ $acc->id }}</div>
+<div id="id-user" style="display: none;" >{{ $acc->id }}</div>
 
 @endsection
 
@@ -111,4 +111,6 @@
 
 @section('js')
     <script type="text/javascript" src="{{ URL::asset("js/update_bai_thaoluan/update_bai_thaoluan.js") }}"></script>
-@endsection	
+    <script type="text/javascript"
+            src="{{URL::asset("ckeditor/ckeditor.js")}}"></script>
+@endsection

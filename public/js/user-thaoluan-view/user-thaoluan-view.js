@@ -242,9 +242,10 @@ $(document)
                     }
                     var id = $(this).attr("data-cmt");
                     var begin = $(".rep-cmt[data-cmt='" + id + "']").length;
+                    console.log("begin"+begin);
                     $
                             .ajax({
-                                url : "bai-thao-luan/reply-comment-view",
+                                url : "reply-comment-view",
                                 method : "get",
                                 dataType : "json",
                                 data : {
@@ -252,16 +253,17 @@ $(document)
                                     begin : begin,
                                 },
                                 success : function (data) {
+                                    console.log(data);
                                     if (data[0] == null)
                                         return;
                                     for (var i = 0; i < data[0].length; i++) {
                                         var add = "";
-                                        if (data[1].id == data[0][i].user.id) {
+                                        if (data[1].id == data[0][i].idAcc.id) {
                                             add = '<span class="more-action">··· <span '
                                                     + 'class="span-list-action hide"> <img class="triangle" '
                                                     + 'src="'
                                                     + $("#root-path").html()
-                                                    + '/resources/img/triangle.png" /> '
+                                                    + '/imgs/triangle.png" /> '
                                                     + '<div class="action-choise" data-reply-cmt="'
                                                     + data[0][i].id
                                                     + '" data-cmt-lev="lev2"> '
@@ -286,7 +288,7 @@ $(document)
                                                                 + '" data-cmt="'
                                                                 + id
                                                                 + '"><div class="asw-info">'
-                                                                + data[0][i].user.hoTen
+                                                                + data[0][i].idAcc.username
                                                                 + ' · <span class="reply-comment-color btn-report pointer" data-id="'+data[0][i].id+'" data-type="rprepcmt">Report</span>'
                                                                 + add
                                                                 + '</div><div class="asw-content" data-reply-cmt="'
@@ -301,7 +303,7 @@ $(document)
                                                     + "']").removeClass("hide");
                                     $
                                             .ajax({
-                                                url : "bai-thao-luan/get-sum-reply-comment",
+                                                url : "get-sum-reply-comment",
                                                 data : {
                                                     idCMT : id
                                                 },
@@ -350,7 +352,7 @@ $(document).on(
             $(".show-more[data-cmt='" + id + "'][data-show-lev='lev2']")
                     .addClass("hide");
             $.ajax({
-                url : "bai-thao-luan/get-sum-reply-comment",
+                url : "get-sum-reply-comment",
                 data : {
                     idCMT : id
                 },
@@ -385,29 +387,30 @@ $(document)
                         } else {
                             if ($(this).attr("data-lev") == 'lev1') {
                                 $.ajax({
-                                    url : "bai-thao-luan/add-cmt",
+                                    url : "comment",
                                     data : {
                                         noiDung : $(this).val(),
                                         idBTL : $(this).attr("data-btl"),
                                     },
                                     success : function (data) {
-                                        if (data == true) {
+                                        if (data == 'true') {
                                             input.val("");
                                         }
-                                        resetPagination();
+                                        // resetPagination();
+                                        location.reload();
                                     }
                                 });
                             } else if ($(this).attr("data-lev") == 'lev2') {
                                 var idCMT = $(this).attr("data-cmt");
                                 $
                                         .ajax({
-                                            url : "bai-thao-luan/add-reply-cmt",
+                                            url : "reply-comment",
                                             data : {
                                                 noiDung : $(this).val(),
                                                 idCMT : idCMT,
                                             },
                                             success : function (data) {
-                                                if (data == true) {
+                                                if (data == 'true') {
                                                     var numRep = $(".num-rep[data-cmt='"
                                                             + input
                                                                     .attr("data-cmt")
@@ -638,7 +641,7 @@ function resetPagination(indexReset) {
 
     $
             .ajax({
-                url : "bai-thao-luan/get-sum-comment",
+                url : "get-sum-comment",
                 data : {
                     idBTL : $("#data-id-btl").html(),
                 },
