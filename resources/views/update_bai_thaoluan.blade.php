@@ -40,7 +40,7 @@
 </div>
 
 <div style="display: none;" id="div-submit"></div>
-<div id="path-upload" style="display: none;">${pageContext.request.contextPath}/img-btl/</div>
+<div id="path-upload" style="display: none;">{{URL("")}}/img-btl/</div>
 <div id="root-path" style="display: none;">{{ URL("") }}</div>
 <!-- end body -->
 

@@ -35,21 +35,25 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                    {{ $index = 0 }}
+                                    <?php $index = 0 ?>
                                         @foreach($arrBtl as $btl)
                                             <tr class="d-flex">
                                                 <td class="col-12 col-md-10">
                                                     <div class="tittle" data-toggle="tooltip"
-                                                        data-placement="top" title="{{ $btl->tieuDe }}"><a class="color-tittle no-decoration" href="${pageContext.request.contextPath }/guest/bai-thao-luan?id=${btl.id}">{{ $btl->tieuDe }}</a></div>
+                                                        data-placement="top" title="{{ $btl->tieuDe }}"><a class="color-tittle no-decoration" href="{{URL("")}}/user/discussion/view?id={{$btl->id}}">{{ $btl->tieuDe }}</a></div>
                                                     <div>
-                                                        <span class="user">{{ $btl->user->hoTen }}, </span><span
-                                                            class="date"><fmt:formatDate
-                                                                value="{{ $btl->ngayDang }}" pattern="dd/MM/yyyy" /></span>
+                                                        <span class="user">{{ $btl->account->hoTen }}, </span><span
+                                                            class="date">
+                                                            <?php $date = date_create( $btl->ngayDang );?>
+                                                            {{date_format($date,'M d, y')}}
+                                                        </span>
+                                                                {{--<fmt:formatDate--}}
+                                                                {{--value="{{ $btl->ngayDang }}" pattern="dd/MM/yyyy" /></span>--}}
                                                     </div>
                                                 </td>
                                                 <td class="col-md-2 hide-md"><p class="count">{{ $btl->accessCount }}/{{ $arrNumCmt[$index] }}</p></td>
                                             </tr>
-                                            {{ $index += 1 }}
+                                            <?php $index += 1 ?>
                                         @endforeach
                                     </tbody>
                                 </table>
@@ -66,17 +70,17 @@
                             <div style="display:none">
                                 {{ $curPage = 0 }}
                             </div>
-                            
+
                             @if($numUser > 0)
                             <div style="display:none">
                                 {{ $curPage = 1 }}
                             </div>
                             @endif
-                             
+
                             <ul class="pagination" style="justify-content: center;"
                                 data-max-page="{{ $numPage }}">
                                 <li class="page-item" id="pre"><span class="page-link"><</span></li>
-                                
+
                                 @for($i = 1; $i <= $numPage; $i++)
                                     <!-- add class active cho pagation day tien -->
                                     <div style="display:none">
@@ -85,10 +89,10 @@
                                     @if($i == 1)
                                         <div style="display:none">
                                                 {{ $cls = "active" }}
-                                        </div>                                        
+                                        </div>
                                     @endif
                                     <!-- them dau 3... -->
-                                    
+
                                     @if($i == 2)
                                         <li class="page-item hide more" id="first"><span
                                             class="page-link">...</span></li>
@@ -100,13 +104,13 @@
                                     <!-- an ca pagation phai sau -->
                                     <div style="display:none">
                                             {{ $hi = "" }}
-                                    </div> 
-                                    @if($i != $numPage && $i > 5)                                    
+                                    </div>
+                                    @if($i != $numPage && $i > 5)
                                     <div style="display:none">
                                             {{ $hi = "hide" }}
-                                    </div> 
+                                    </div>
                                     @endif
-                                    <li class="page-num page-item {{ $cls }} {{ $hi }}" data-page={{ $i }}"><span
+                                    <li class="page-num page-item {{ $cls }} {{ $hi }}" data-page="{{ $i }}"><span
                                         class="page-link">{{ $i }}</span></li>
                                 @endfor
                                 <li class="page-item" id="ne"><span class="page-link">></span></li>
@@ -122,10 +126,10 @@
             <div class="content-tk">
                 <p>Số lượng thành viên: {{ $numUser }}</p>
                 <p>Số bài thảo luận trên diễn đàn: {{ $numBtl }}</p>
-                <p>Số bài đăng trong ngày: {{ $btlPerDay }}</p>
-                <p>Số bài đăng trong tháng: {{ $btlPerMonth }}</p>
+                    {{--<p>Số bài đăng trong ngày: {{ $btlPerDay }}</p>--}}
+                    {{--<p>Số bài đăng trong tháng: {{ $btlPerMonth }}</p>--}}
             </div>
-            <a class="no-decoration" style="color: white" href="${pageContext.request.contextPath }/user/them-bai-thao-luan">
+            <a class="no-decoration" style="color: white" href="{{URL("")}}/user/discussion/viewAddDiscussion">
                 <button id="add-discus">Đăng bài thảo luận</button>
             </a>
         </div>

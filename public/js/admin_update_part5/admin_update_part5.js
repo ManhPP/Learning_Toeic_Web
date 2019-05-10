@@ -314,9 +314,9 @@ $(document).on("click", "#submit", function(){
                             },
                            success: function(data){
                                if(data == "true"){
-                                   alert("Thêm thành công!!!");
+                                   alert("Update thành công!!!");
                                }else{
-                                   alert("Thêm không thành công, kiểm tra lại!!!");
+                                   alert("Update không thành công, kiểm tra lại!!!");
                                }
                            }
                         });

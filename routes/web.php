@@ -43,8 +43,9 @@ Route::get('/admin/manager-listening-part', [
 ]);
 //trang chu admin quan ly phan doc
 Route::get("/admin/manager-reading-part","ReadingPartController@getListPartDoc");
-
 Route::post("/admin/part-doc/del-part-doc","ReadingPartController@delPartDoc");
+// index update part doc
+Route::get('/admin/bai-hoc-manager/update-part-doc','ReadingPartController@getPartDoc');
 
 
 //thêm/update ảnh phần nghe
@@ -131,8 +132,7 @@ Route::post('admin/manager-para-part6/update', 'Part6ParagraphController@update'
 Route::get('/admin/manager-reading-part/add-part6','Part6ParagraphController@listPart6');
 Route::post('/admin/manager-reading-part/add-part6/do-add','ReadingPartController@addPart6')
     ->name("readingpartcontroller.addpart6");
-// index update part doc
-//Route::get('/admin/bai-hoc-manager/update-part-doc/{id}','ReadingPartController@getPartDoc');
+
 Route::post('/admin/manager-reading-part/update-part6/do-update','ReadingPartController@updatePart6')
     ->name("readingpartcontroller.updatepart6");
 //================= end part 6 ===========================
@@ -195,5 +195,14 @@ Route::get('/test/do',[
 
 
 // discussion
+Route::get("/user/discussion/home","DiscussionController@home")
+    ->name('discussionController.home');
 
 Route::get("/user/discussion/view","DiscussionController@accessDiscussion");
+
+Route::get("/user/discussion/viewAdd","DiscussionController@indexAddDiscussion")
+->name("discussionController.add");
+
+Route::get("/user/discussion/viewUpdate","DiscussionController@indexUpdateDiscussion");
+
+

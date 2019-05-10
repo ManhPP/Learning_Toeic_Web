@@ -2,8 +2,11 @@ var header;
 var token;
 
 $(document).ready(function() {
-	header= $("#csrf-name").html();
-	token = $("#csrf-value").html();
+	$.ajaxSetup({
+		headers: {
+			'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+		}
+	});
 });
 
 /* preview */
