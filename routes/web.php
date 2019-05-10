@@ -302,6 +302,18 @@ Route::get('/admin/quanly/account', [
     'uses' => 'AccountController@get'
 ]);
 
-Route::post('/admin/account-manager/ban',['uses'=>'AccountController@ban']);
+Route::post('/admin/account-manager/ban',[
+    'uses'=>'AccountController@ban'
+    ]);
 
 
+Route::post('/admin/account-manager/unban',[
+    'uses'=>'AccountController@unban'
+    ]);
+Route::post('/admin/account-manager/add',[
+    'uses'=>'AccountController@add'
+    ]);
+
+Route::post('/admin/account-manager/update',[
+    'uses'=>'AccountController@update'
+    ]);

@@ -155,8 +155,9 @@ function ban() {
 		headers: {
 		'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
 		},
-		success : function() {
-			resetPagination($(".page-num.active").attr("data-page"));
+		success : function(data) {
+			console.log(data);
+			// resetPagination($(".page-num.active").attr("data-page"));
 			$("#noti span").remove();
 			$("#noti").append(
 					"<span style='color: #ff6508'>Đã ban tài khoản</span>");
@@ -184,7 +185,7 @@ function unBan() {
 		'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
 		},
 		success : function() {
-			resetPagination($(".page-num.active").attr("data-page"));
+			// resetPagination($(".page-num.active").attr("data-page"));
 			$("#noti span").remove();
 			$("#noti").append(
 					"<span style='color: #ff6508'>Đã unban tài khoản</span>");
@@ -468,8 +469,9 @@ $(document)
 		.on(
 				"click",
 				"#submit-update-btn",
-				function() {
+				function(e) {
 					var param = $("#form-update").serialize();
+
 					if (typeof ($("#id-submit-update").val()) != "undefined") {
 						$
 								.ajax({

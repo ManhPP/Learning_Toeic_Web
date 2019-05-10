@@ -33,7 +33,7 @@
 					style="padding-top: 1em; padding-bottom: 1em">
 					<div class="col-12 col-sm-6 row" id="noti">
 						<!-- <c:if test="${noti=='1'}"> -->
-                            {{-- @if($noti=='1')
+                             @if($noti=='1')
                             <span style="color: green">Thêm tài khoản thành công.</span>
                             @endif
                             @if($noti=='2')
@@ -41,7 +41,7 @@
                             @endif
 						    @if($noti=='3')
 							<span style="color: red">Không được để trống các trường.</span>
-                            @endif --}}
+                            @endif 
 					</div>
 					<div class="col-12 col-sm-6 row justify-content-end">
 						<!-- <span><input id="btnsearch" type="button" name="submit"
@@ -169,6 +169,7 @@
 		style="height: 5em; line-height: 5em; padding-left: 5em; bottom: 0; background-color: #E8E8E8; z-index: 0">
 		<span>Copyright © BKTOEIC 2018</span>
 	</div>
+	
 
 	</div>
 
@@ -265,8 +266,9 @@
 				<div class="modal-header" style="background-color: #035904">
 					<h4 class="modal-title" style="color: white">Thêm account</h4>
 				</div>
-				<form action="{{URL("admin/account-manager/add")" method="POST"
-					modelAttribute="account" id="form-them" accept-charset="UTF-8">
+				<form action="{{url('/admin/account-manager/add')}}" method="POST"
+					modelAttribute="account" id="form-them" role="form" accept-charset="UTF-8">
+					{{ csrf_field() }}
 					<div class="modal-body">
 						<div class="input-modal row">
 							<span class="col-3" style="line-height: 35px">Họ tên</span> <input
@@ -330,7 +332,7 @@
 				<div class="modal-header" style="background-color: #c5a403">
 					<h4 class="modal-title" style="color: white">Update account(id=<span id="id-tittle-update"></span>)</h4>
 				</div>
-				<form action="admin/account-manager/update-account"
+				<form action="admin/account-manager/update"
 					modelAttribute="account" id="form-update" accept-charset="UTF-8">
 					<input name="id" style="display: none" id="id-submit-update"> 
 					<div class="modal-body">
