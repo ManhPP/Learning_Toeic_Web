@@ -56,6 +56,7 @@ class ReplyCommentController extends Controller
         }
         return 'false';
     }
+
     public function getSumReply(Request $request){
         $idCmt = $request['idCMT'];
 
@@ -65,5 +66,42 @@ class ReplyCommentController extends Controller
             return count($arrReply);
         }
         return 0;
+    }
+
+    public function update(Request $request){
+        $idRCmt = $request['id'];
+        $noiDung = $request['noiDung'];
+
+        $reply = ReplyComment::find($idRCmt);
+
+        //get Acc from session
+        $acc = Account::find(1);
+
+        if($acc->id == $reply->idAcc){
+            $reply->noiDung = $noiDung;
+            $check = $reply->save();
+            if($check >0){
+                return 'true';
+            }
+        }
+
+        return 'false';
+    }
+
+    public function delete(Request $request){
+        $idRCmt = $request['id'];
+        $reply = ReplyComment::find($idRCmt);
+
+        //get Acc from session
+        $acc = Account::find(1);
+
+        if($acc->id == $reply->idAcc){
+            $check = $reply->delete();
+            if($check >0){
+                return 'true';
+            }
+        }
+
+        return 'false';
     }
 }

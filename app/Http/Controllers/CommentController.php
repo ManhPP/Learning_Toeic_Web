@@ -40,4 +40,41 @@ class CommentController extends Controller
         }
         return 0;
     }
+
+    public function update(Request $request){
+        $id = $request['id'];
+
+        $cmt = Comment::find($id);
+
+        //get Acc from session
+        $acc = Account::find(1);
+        if($acc->id == $cmt->idAcc){
+            $cmt->noiDung = $request['noiDung'];
+            $check = $cmt->save();
+            if($check >0){
+                return 'true';
+            }
+        }
+
+        return 'false';
+    }
+
+    public function delete(Request $request){
+        $idCmt = $request['id'];
+        $cmt = Comment::find($idCmt);
+
+        //get Acc from session
+        $acc = Account::find(1);
+
+        if($acc->id == $cmt->idAcc){
+            $cmt->replyComment()->delete();
+            $cmt->report()->delete();
+            $check = $cmt->delete();
+            if($check >0){
+                error_log("done");
+                return 'true';
+            }
+        }
+        return 'false';
+    }
 }

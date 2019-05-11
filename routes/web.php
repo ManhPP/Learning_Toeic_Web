@@ -255,6 +255,12 @@ Route::get("/discussion/comment","CommentController@comment")
 Route::get("/discussion/get-sum-comment","CommentController@getSumComment")
     ->name('commentController.sumComment');
 
+Route::get("/discussion/update-cmt","CommentController@update")
+    ->name('commentController.update');
+
+Route::get("/discussion/del-cmt","CommentController@delete")
+    ->name('commentController.delete');
+
 //reply comment
 Route::get("/discussion/reply-comment","ReplyCommentController@reply")
     ->name('replyCommentController.reply');
@@ -264,6 +270,12 @@ Route::get("/discussion/reply-comment-view","ReplyCommentController@getListReply
 
 Route::get("/discussion/get-sum-reply-comment","ReplyCommentController@getSumReply")
     ->name('replyCommentController.sumReply');
+
+Route::get("/discussion/update-repcmt","ReplyCommentController@update")
+    ->name('replyCommentController.updateReply');
+
+Route::get("/discussion/del-rep-cmt","ReplyCommentController@delete")
+    ->name('replyCommentController.deleteReply');
 
 //================= end discussion =======================================
 // view quản lý phần nghe của admin
