@@ -37,7 +37,7 @@
 		</div>
 		<div class="row">
 			<div class="col-9 row" style="margin: 0 auto">
-				<div class="our-service col-12 col-lg-4 border-services right-border" id="prac-read" data-path="">
+				<div class="our-service col-12 col-lg-4 border-services right-border" id="prac-read" data-path="{{ Route("readingpartcontroller.index") }}">
 					<div class="tittle">
 						PRACTICE READING
 					</div>
@@ -45,7 +45,7 @@
 						Start practice reading with our extensive reading system
 					</div>
 				</div>
-				<div class="our-service col-12 col-lg-4 border-services  right-border" id="prac-lis" data-path="">
+				<div class="our-service col-12 col-lg-4 border-services  right-border" id="prac-lis" data-path="{{ Route("listeningpartcontroller.index") }}">
 					<div class="tittle">
 						PRACTICE LISTENING
 					</div>
@@ -53,7 +53,7 @@
 						Start listening with our extenxive listening
 					</div>
 				</div>
-				<div class="our-service col-12 col-lg-4 border-services" data-path="{{Route("testcontroller.index")}}">
+				<div class="our-service col-12 col-lg-4 border-services" data-path="{{ Route("testcontroller.index") }}">
 					<div class="tittle">
 						TOEIC TEST
 					</div>
