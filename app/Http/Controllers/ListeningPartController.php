@@ -18,6 +18,8 @@ class ListeningPartController extends Controller
     public function index()
     {
         //
+        $arrPN = ListeningPart::all();
+        return view('guest_luyennghe_home')->with("arrPN",$arrPN);
     }
 
     /**

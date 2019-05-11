@@ -15,7 +15,10 @@ use App\Part5;
 class ReadingPartController extends Controller
 {
 
-
+    public function index(){
+        $arrPD = ReadingPart::all();
+        return view('guest_luyendoc_home')->with("arrPD", $arrPD);
+    }
     public function getPartDoc(Request $request){
         $id = $request["id"];
         $partDoc = ReadingPart::find($id);

@@ -2,6 +2,8 @@
 @section('title','luyen doc')
 @section("css")
     <link rel="stylesheet" type="text/css" href="{{ URL::asset("css/guest_luyendoc_home/guest_luyendoc_home.css") }}">
+    <link rel="stylesheet" type="text/css" href="{{ URL::asset("css/swiper.min.css") }}">
+    <link rel="stylesheet" type="text/css" href="{{ URL::asset("css/animate.css") }}">
 @endsection
 @section('navbar')
     @parent
@@ -153,4 +155,5 @@
 
 @section('js')
     <script type="text/javascript" src="{{ URL::asset("js/guest_luyendoc_home/guest_luyendoc_home.js") }}"></script>
+    <script type="text/javascript" src="{{ URL::asset("js/swiper.js") }}"></script> 
 @endsection	

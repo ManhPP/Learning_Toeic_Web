@@ -185,6 +185,8 @@ Route::get("/guest/luyen-nghe","ListeningPartController@practicePartNghe")->name
 // luyen doc
 Route::get("/guest/luyen-doc","ReadingPartController@practicePartDoc")->name("readingpartcontroller.practiceartdoc");
 
+Route::get("/guest/reading","ReadingPartController@index")->name("readingpartcontroller.index");
+Route::get("/guest/listening","ListeningPartController@index")->name("listeningpartcontroller.index");
 
 
 //================= testing ==================================
