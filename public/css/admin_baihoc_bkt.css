@@ -29,6 +29,11 @@ body, html {
 	color: white !important;
 }
 
+#link-test{
+	color: white;
+	background: #686868;
+}
+
 .sidebar-nav li {
 	text-indent: 2em;
 	line-height: 3.5em;

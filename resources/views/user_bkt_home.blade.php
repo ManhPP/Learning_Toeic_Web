@@ -31,7 +31,7 @@
                         <div class="swiper-wrapper">
                             <div id="num-sile" class="hide">{{ count($arrBKT) }}</div>
                             @foreach($arrBKT as $bkt)
-                                <div class="swiper-slide row suggest" data-id="{{ $bkt->id }}">
+                                <div class="swiper-slide row suggest" data-id="{{ $bkt->id }}" data-path="{{Route("testcontroller.dotest")}}?id={{ $bkt->id }}">
                                     <div class="cover-lession col-12">
                                         <img
                                             src="{{ URL::asset("imgs/guest-luyennghe-home/cover-lession.jpg") }}">
@@ -140,6 +140,10 @@
         <!-- Open modal -->
         <button id="my-button" style="display: none;" data-toggle="modal"
             data-target="#myModal">Open modal</button>
+        <div style="display: none">
+            <div id="path-search">{{Route("testcontroller.searchtesting")}}</div>
+            <div id="path-view">{{Route("testcontroller.dotest")}}</div>
+        </div>
     
 @endsection
 

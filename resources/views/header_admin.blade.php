@@ -10,7 +10,7 @@
 		<img class="btn-expand hide" id="hide-ico" alt="expand"
 			src="{{URL::asset("imgs/hide.png")}}">
 
-		<a class="navbar-brand" href="#">BKTOEIC ADMIN</a>
+		<a class="navbar-brand" href="{{URL("")}}">BKTOEIC ADMIN</a>
 
 		<!-- Navbar links -->
 		<div class=" navbar-collapse justify-content-end"
@@ -34,14 +34,24 @@
 <!-- menu left -->
 <div id="sidebar-wrapper" class="hide">
 	<ul class="sidebar-nav">
-		<li>b <a href="#" class="choice"><img class="ico-manag"
+		<li><a id="link-acc" href="#" class="choice"><img class="ico-manag"
 				src="{{URL::asset("imgs/account-manager.png")}}">Quản
 				lý tài khoản</a>
 		</li>
-		<li><a href="#"><img class="ico-manag"
+
+		<li><a id="link-listen" href="{{Route("listeningpartcontroller.get")}}"><img class="ico-manag"
 				src="{{URL::asset("imgs/baihoc-manager.png")}}">Quản
-				lý bài học</a></li>
-		<li><a href="#"><img class="ico-manag"
+				lý bài nghe</a></li>
+
+		<li><a id="link-read" href="{{Route("readingpartcontroller.getlistpartdoc")}}"><img class="ico-manag"
+				src="{{URL::asset("imgs/baihoc-manager.png")}}">Quản
+				lý bài đọc</a></li>
+
+		<li><a id="link-test" href="{{Route("testcontroller.indexforadminhome")}}"><img class="ico-manag"
+				src="{{URL::asset("imgs/baihoc-manager.png")}}">Quản
+				lý bài BKT</a></li>
+
+		<li><a id="link-discuss" href="{{Route("discussioncontroller.indexadminmanager")}}"><img class="ico-manag"
 				src="{{URL::asset("imgs/btl-manager.png")}}">Quản
 				lý bài thảo luận</a></li>
 	</ul>

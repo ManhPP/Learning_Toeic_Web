@@ -21,6 +21,11 @@
             </thead>
             <tbody>
                     <?php $index = 1 ?>
+                    <?php $checkA="" ?>
+                    <?php $checkB="" ?>
+                    <?php $checkC="" ?>
+                    <?php $checkD="" ?>
+
                     @foreach($arrCau as $cau)
 
                     @if($cau->dADung == 'A')

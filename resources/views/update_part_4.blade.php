@@ -112,23 +112,23 @@
 				<div class="modal-body">
 					<div>
 						<div id="label-cauhoi">Câu hỏi <span id="lb-index-ques"></span></div>
-						<div><textarea class="input-ques-modal" cols="50""></textarea></div>
+						<div><textarea class="input-ques-modal" cols="50"></textarea></div>
 					</div>
 					<div>
 						<div class="label-da"><input class="radio-choise" type="radio" name="choise" value="A" checked="checked">Đáp án A:</div>
-						<div><textarea class="input-ques-modal" cols="50""></textarea></div>
+						<div><textarea class="input-ques-modal" cols="50"></textarea></div>
 					</div>
 					<div>
 						<div class="label-da"><input class="radio-choise" type="radio" name="choise" value="B">Đáp án B:</div>
-						<div><textarea class="input-ques-modal" cols="50""></textarea></div>
+						<div><textarea class="input-ques-modal" cols="50"></textarea></div>
 					</div>
 					<div>
 						<div class="label-da"><input class="radio-choise" type="radio" name="choise" value="C">Đáp án C:</div>
-						<div><textarea class="input-ques-modal" cols="50""></textarea></div>
+						<div><textarea class="input-ques-modal" cols="50"></textarea></div>
 					</div>
 					<div>
 						<div class="label-da"><input class="radio-choise" type="radio" name="choise" value="D">Đáp án D:</div>
-						<div><textarea class="input-ques-modal" cols="50""></textarea></div>
+						<div><textarea class="input-ques-modal" cols="50"></textarea></div>
 					</div>
 				</div>
 				<div class="modal-footer">

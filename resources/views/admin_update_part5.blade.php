@@ -12,7 +12,7 @@
 <div style="position: relative; top: 6em">
 	
     <div class="row col-12 col-sm-11 col-md-10 col-lg-9 col-xl-8 align-center no-padding">
-        <div class="label-style">**Update part 5</div>
+        <div class="label-style">**Update part 5 (<a target="_blank" style="font-size: 0.9em" href="{{Route("part5controller.index")}}">Cập nhập ngân hàng câu hỏi!</a>)</div>
         <div class="col-12 time-detail">
             <span>Tiêu đề: </span> <input id="tittle" value = "{{ $partDoc->title }}">
         </div>
@@ -76,7 +76,7 @@
                                 </div>
                                 <hr>
                             </div>
-                            {{ $index += 1 }}
+                            @php $index += 1 @endphp
                         @endforeach
                     </div>
 
@@ -131,16 +131,16 @@
                                 <?php $checkC = "" ?>
                                 <?php $checkD = "" ?>
                                 @if($cau->dADung == 'A')
-                                    {{ $checkA = "checked = 'checked'" }}
+                                    @php $checkA = "checked = 'checked'" @endphp
                                 @endif
                                 @if($cau->dADung == 'B')
-                                    {{ $checkB = "checked = 'checked'" }}
+                                    @php $checkB = "checked = 'checked'" @endphp
                                 @endif
                                 @if($cau->dADung == 'C')
-                                    {{ $checkC = "checked = 'checked'" }}
+                                    @php $checkC = "checked = 'checked'" @endphp
                                 @endif
                                 @if($cau->dADung == 'D')
-                                    {{ $checkD = "checked = 'checked'" }}
+                                    @php $checkD = "checked = 'checked'" @endphp
                                 @endif
                                 <tr class="d-flex" data-id="{{ $cau->id  }}">
                                     <td class="col-12"><input type="checkbox"
@@ -171,7 +171,7 @@
                                             </div>
                                         </div></td>
                                 </tr>
-                                {{ $index += 1 }}
+                                @php $index += 1 @endphp
                             @endforeach
                         </tbody>
                     </table>

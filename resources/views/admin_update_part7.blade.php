@@ -13,7 +13,7 @@
     <div class="body row">
         <!-- part 7 -->
         <div class="row col-12 col-sm-11 col-md-10 col-lg-9 col-xl-8 align-center no-padding">
-            <div class="label-style">**Tạo đề thi từ ngân hàng câu hỏi</div>
+            <div class="label-style">**Update part7 (<a target="_blank" style="font-size: 0.9em" href="{{Route("part7paragraphcontroller.getpart7paragraph")}}">Cập nhập ngân hàng đoạn văn!</a>)</div>
             <div class="col-12 time-detail">
                 <span>Tiêu đề: </span> <input id="tittle" value="{{$partDoc->title}}">
             </div>
@@ -41,7 +41,7 @@
                             @foreach($partDoc->part7Paragraphs as $doan)
                                 @if(strlen($doan->doanVan2)==0)
                                     <div data-id="{{$doan->id}}" class="boundary-para" data-num-ques="{{count($doan->cauPart7s)}}">
-                                        <p class="ques refer-ques">Questions {{$index}}-{{$index+ count($doan->cauPart7s)-1}} refer to the
+                                        <p class="ques refer-ques">Questions <span class="begin">{{$index}}</span>-<span class="end">{{$index+ count($doan->cauPart7s)-1}}</span> refer to the
                                             following conversation.</p>
                                         <div class="paragrap">
                                             <img src="{{URL::asset($doan->doanVan1)}}">
@@ -149,15 +149,12 @@
                                                 <hr>
                                             </div>
                                             <?php $index++;?>
-{{--                                        </c:forEach>--}}
                                         @endforeach
                                         <div class="align-right" style="width: 65%; margin: 0 auto">
                                             <img class="ico-modified ico-del" dara-idpara="{{$doan->id}}" alt="minus" data-idpara="{{$doan->id}}" src="{{URL::asset("imgs/round-minus.png")}}">
                                         </div>
                                     </div>
-{{--                                </c:if>--}}
                                 @endif
-{{--                            </c:forEach>--}}
                             @endforeach
                         </div>
                         <div class="align-right" style="margin: 0 auto; margin-right: 2em; margin-top: 2em">
@@ -209,8 +206,8 @@
                                     <td class="col-12">
                                         <input class="checkbox-choose" type="checkbox">
                                         <span class="ques-content">Đoạn văn id {{$doan->id}} - <span
-                                                    class="type-part">{{$doan->loadiPart}}(<span
-                                                        class="num-ques">{{$doan->cauPart7s}}</span> câu)</span>
+                                                    class="type-part">{{$doan->loaiPart}}(<span
+                                                        class="num-ques">{{ count($doan->cauPart7s)}}</span> câu)</span>
 											</span>
                                         <img class="expand-ico"
                                              src="{{URL::asset("imgs/next.png")}}">

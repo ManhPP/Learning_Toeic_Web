@@ -376,4 +376,35 @@ $(document).on("click", "input[name='choose-type']", function(){
 
 $(document).on("click", ".update, .view", function(e){
     e.stopPropagation();
-})
+});
+
+//mo modal chon part
+var modelChoosePart = function(callback){
+    $(document).on("click","#add",function(){
+        $(".checked-choose").removeClass("checked-choose");
+        $(".choose-part:first").addClass("checked-choose");
+        $("#model-choose-part").modal("show");
+    });
+
+    $(document).on("click", "#btn-input-yes",function () {
+        callback(true);
+        $("#model-choose-part").modal("hide");
+    });
+    $(document).on("click", "#btn-input-no",function () {
+        callback(false);
+        $("#model-choose-part").modal("hide");
+    });
+};
+
+modelChoosePart(function(data){
+    if(data==true){
+        window.open($(".checked-choose").attr("data-path"),"_blank");
+    }
+});
+
+$(document).on("click",".choose-part", function(){
+    $(".checked-choose").removeClass("checked-choose");
+    $(this).addClass("checked-choose");
+});
+
+

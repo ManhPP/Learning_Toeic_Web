@@ -12,7 +12,7 @@
     <div style="position: relative; top: 6em">
         <div
                 class="row col-12 col-sm-11 col-md-10 col-lg-9 col-xl-8 align-center no-padding">
-            <div class="label-style">**Update part 6</div>
+            <div class="label-style">**Update part 6 (<a target="_blank" style="font-size: 0.9em" href="{{Route("part6paragraphcontroller.listpart6para")}}">Cập nhập ngân hàng đoạn văn!</a>)</div>
             <div class="col-12 time-detail">
                 <span>Tiêu đề: </span> <input type="text" id="tittle" value="{{ $partDoc->title }}">
             </div>
@@ -257,7 +257,6 @@
 
     <div style="display: none;">
         <div id="root-path">{{URL("")}}</div>
-        <div id="id-user">{{$acc->id }}</div>
         <div id="id-part">{{$partDoc->id }}</div>
         <div id="path-update">{{Route("readingpartcontroller.updatepart6")}}</div>
     </div>

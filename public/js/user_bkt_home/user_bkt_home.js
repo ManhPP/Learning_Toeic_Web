@@ -72,17 +72,18 @@ $(document).on("click", "#search-submit", function(){
     var part = $("#select-part").val();
     
     $.ajax({
-        url: "bkt-home/search",
+        url: $("#path-search").html(),
         data: {
-            id: -1,
-            accessCount: -1,
-            tittle: tittle,
-            index: 1,
-            maxResult: 10
+            title: tittle,
+        },
+        method: "POST",
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
         },
         success: function(data){
+            console.log(data);
             $("#search-table tbody").html("");
-            resetPagination(tittle);
+            // resetPagination(tittle);
             for(var i=0;i<data.length; i++){
                 $("#search-table tbody")
                 .append('<tr class="d-flex r search-result" data-id="'
@@ -92,7 +93,7 @@ $(document).on("click", "#search-submit", function(){
                         +'/resources/img/guest-luyennghe-home/book.png"></span>'
                         + '<span style="padding-left: 0.5em">Bài kiểm tra'
                         +': '
-                        +data[i].tittle
+                        +data[i].title
                         +'</span></td><td class="col-0 col-sm-2 col-md-5 count">'
                         +data[i].accessCount
                         +'</td></tr>');
@@ -102,11 +103,11 @@ $(document).on("click", "#search-submit", function(){
 });
 
 $(document).on("click", ".search-result", function(){
-    window.location.href = $("#root-path").html()+ '/user/kiem-tra?id='+$(this).attr("data-id") ;
+    window.location.href = $("#path-view").html()+"?id="+$(this).attr("data-id") ;
 });
 
 $(document).on("click", ".suggest", function(){
-    window.location.href = $("#root-path").html()+ '/user/kiem-tra?id='+$(this).attr("data-id") ;
+    window.location.href = $(this).attr("data-path") ;
 });
 
 //del search

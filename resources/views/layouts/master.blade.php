@@ -31,10 +31,10 @@
             <div class="collapse navbar-collapse justify-content-end head-bar" id="collapsibleNavbar">
                 <ul class="navbar-nav">
                     <li class="nav-item">
-                        <a class="nav-link" href="#">HOME</a>
+                        <a class="nav-link" href="{{URL("")}}">HOME</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">FORUM</a>
+                        <a class="nav-link" href="{{Route("discussionController.home")}}">FORUM</a>
                     </li>
                     <li class="nav-item" id="btn-login">
                         <a class="nav-link" href="#">LOGIN</a>

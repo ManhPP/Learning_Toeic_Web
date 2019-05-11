@@ -240,4 +240,15 @@ class TestController extends Controller
 //        }
 //        return "false";
     }
+
+    public function searchTesting(Request $request){
+        $title = $request["title"];
+        $arrTest = array();
+        if(strlen($title)==0){
+            $arrTest = Test::all();
+        }else{
+            $arrTest = Test::where("title","like","%".$title."%")->get();
+        }
+        return Response()->json($arrTest, 200);
+    }
 }

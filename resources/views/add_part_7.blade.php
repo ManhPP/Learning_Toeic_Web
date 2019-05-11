@@ -12,7 +12,7 @@
     <!-- body -->
     <div class="body row">
         <div class="row col-12 col-sm-11 col-md-10 col-lg-9 col-xl-8 align-center no-padding">
-            <div class="label-style">**Tạo đề thi từ ngân hàng câu hỏi</div>
+            <div class="label-style">**Tạo đề thi từ ngân hàng câu hỏi (<a target="_blank" style="font-size: 0.9em" href="{{Route("part7paragraphcontroller.getpart7paragraph")}}">Cập nhập ngân hàng câu hỏi!</a>)</div>
             <div class="col-12 time-detail">
                 <span>Tiêu đề: </span> <input id="tittle">
             </div>

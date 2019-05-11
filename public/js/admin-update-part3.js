@@ -185,7 +185,7 @@ $(document).on("click","#add-part", function(){
     
     
     $.ajax({
-        url: $("path-update").html(),
+        url: $("#path-update").html(),
         method: "POST",
         //    contentType:"application/json; charset=utf-8",
         //    dataType:"json",
