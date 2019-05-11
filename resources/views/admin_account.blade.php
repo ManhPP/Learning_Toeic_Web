@@ -248,7 +248,7 @@
 					</h4>
 				</div>
 				<div class="modal-body">
-					<input type="text" id="filter-val" placeholder="Input put here" />
+					<input type="text" id="filter-val1" placeholder="Input put here" />
 				</div>
 				<div class="modal-footer">
 					<button type="button" class="btn btn-default" id="btn-filter-yes">Ok</button>
@@ -330,28 +330,30 @@
 			<!-- Modal content-->
 			<div class="modal-content">
 				<div class="modal-header" style="background-color: #c5a403">
-					<h4 class="modal-title" style="color: white">Update account(id=<span id="id-tittle-update"></span>)</h4>
+					<h4 class="modal-title" style="color: white">Update account</h4>
 				</div>
-<<<<<<< HEAD
-				<form action="admin/account-manager/update"
-					modelAttribute="account" id="form-update" accept-charset="UTF-8">
-=======
-				<form action="{{url('/admin/account-manager/update')}}"
+
+				<form action="{{url('/admin/account-manager/update')}}" method="POST"
 					modelAttribute="account" id="form-update" role="form" accept-charset="UTF-8">
 					{{ csrf_field() }}
->>>>>>> admin update account
 					<input name="id" style="display: none" id="id-submit-update"> 
+					<div >
+							<span class="col-3" style="line-height: 35px" >ID:</span> 
+							<input
+								type="text" name="ID" id="IDacc" value="">
+						</div>
 					<div class="modal-body">
+						
 						<div class="input-modal row">
 							<span class="col-3" style="line-height: 35px">Họ tên</span> <input
-								type="text" name="hoTen">
+								type="text" name="hoTen" >
 						</div>
 						<div class="input-modal row">
 							<span class="col-3" style="line-height: 35px">Ngày sinh</span><input
-								type="date" name="ngaySinh">
+								type="date" name="ngaySinh" >
 						</div>
 						<div class="input-modal row">
-							<span class="col-3" style="line-height: 35px">Giới tính</span><select
+							<span class="col-3" style="line-height: 35px" >Giới tính</span><select
 								name="gioiTinh">
 								<option value="Male">Male</option>
 								<option value="Female">Female</option>
@@ -359,7 +361,7 @@
 						</div>
 						<div class="input-modal row">
 							<span class="col-3" style="line-height: 35px">Username</span> <input
-								type="text" name="username" class="username"/> <img
+								type="text" name="username" class="updateusername" /> <img
 								class="ico-noti-usr hide right" alt="tick"
 								src="{{URL::asset("imgs/tick.png")}}" /> <img
 								class="ico-noti-usr hide wrong" alt="tick"
@@ -367,11 +369,11 @@
 						</div>
 						<div class="input-modal row">
 							<span class="col-3" style="line-height: 35px">Password</span> <input
-								type="password" name="pass">
+								type="password" name="pass" >
 						</div>
 						<div class="input-modal row">
 							<span class="col-3" style="line-height: 35px">Email</span> <input
-								type="text" name="email" class="email"> <img
+								type="text" name="email" class="updateemail" > <img
 								class="ico-noti-em hide right" alt="tick"
 								src="{{URL::asset("imgs/tick.png")}}" /> <img
 								class="ico-noti-em hide wrong" alt="tick"
@@ -417,7 +419,7 @@
 	<script type="text/javascript"
         src="{{URL::asset("js/jquery-3.3.1.min.js")}}"></script>
 	<script type="text/javascript"
-        src="{{URL::asset("js/admin-account.js")}}"></script>
+        src="{{URL::asset("js/admin-account1.js")}}"></script>
 	<script type="text/javascript"
         src="{{URL::asset("js/header-admin.js")}}"></script>
 	<script

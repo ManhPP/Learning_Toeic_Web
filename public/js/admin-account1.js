@@ -452,15 +452,29 @@ $(document).on("click", "#submit-add-btn", function() {
 });
 
 // submit update
-$(document).on(
-		"click",
-		"#update",
-		function() {
+$(document).on("click","#update",function() {
+			console.log(1);
 			var id = 0;
 			id = $("#my-table tbody tr.selected td:first").html();
-			console.log(id);
-			$("#id-tittle-update").html(id);
-			console.log($("#id-submit-update").val(id));
+			// hoTen = $("#my-table tbody tr.selected td:nth-child(2)").html();
+			// ngaySinh = $("#my-table tbody tr.selected td:nth-child(3)").html();
+			// console.log(ngaySinh);
+			// gioiTinh = $("#my-table tbody tr.selected td:nth-child(4)").html();
+			// username = $("#my-table tbody tr.selected td:nth-child(5)").html();
+			// email = $("#my-table tbody tr.selected td:nth-child(6)").html();
+			// hasRole = $("#my-table tbody tr.selected td:nth-child(7)").html();
+			// console.log(id);
+			
+			$("#IDacc").val(id);
+			// $("#hoTenupdate").val(hoTen);
+			// $("#ngaySinhupdate").html(ngaySinh);
+			// $("#gioiTinhupdate").val(gioiTinh);
+			// $("#usernameupdate").val(username);
+			// $("#emailupdate").val(email);
+			// $("#hasRoleupdate").html(hasRole);
+
+
+
 			if ((typeof ($("#id-submit-update").val()) != "undefined")
 					&& ($("#my-table tbody tr.selected").length == 1)) {
 				$("#myModal-update").modal();
@@ -469,9 +483,11 @@ $(document).on(
 			}
 		});
 $(document).on("click", "#submit-update-btn", function() {
-
+console.log(2);
 	
-	$("#form-update").submit();
+	if($('.isright').length==0){
+		$("#form-update").submit();}
+	else alert("Kiểm tra lại username và email");
 	
 });
 // confirm action delete
@@ -562,7 +578,46 @@ $(".username").change(function() {
 	}
 });
 
-// ajax cho check email
+// ajax cho check update username
+$(".updateusername").change(function() {
+	
+	var objr = $(this).parent().find("img.right");
+	var objw = $(this).parent().find("img.wrong");
+	if ($(this).val() == "") {
+		objr.addClass("hide");
+		objw.addClass("hide");
+	} else {
+		$.ajax({
+			url : $("#root-path").html()+"/account-manager/check-username",
+			data : {
+				username : $(this).val()
+			},
+			method: "POST",
+			headers: {
+			'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+			},
+			success : function(data) {
+				console.log(data);
+				if (data.length==0) {
+					objr.removeClass("hide");
+					objw.addClass("hide");
+					$('.updateusername').removeClass('isright');
+					console.log('usernamerigt');
+					console.log($('.isright').length);
+					
+				} else {
+					objw.removeClass("hide");
+					objr.addClass("hide");
+					$('.updateusername').addClass('isright');
+					console.log('usernamerfalse');
+					console.log($('.isright').length);
+				}
+			}
+		});
+	}
+});
+
+// ajax cho check update email
 $(".email").change(function() {
 	var objr = $(this).parent().find("img.right");
 	var objw = $(this).parent().find("img.wrong");
@@ -591,6 +646,43 @@ $(".email").change(function() {
 					objw.removeClass("hide");
 					objr.addClass("hide");
 					$('.email').removeClass('isright');
+					console.log('emailfalse');
+					console.log($('.isright').length);
+				}
+			}
+		});
+	}
+});
+
+// ajax cho check email
+$(".updateemail").change(function() {
+	var objr = $(this).parent().find("img.right");
+	var objw = $(this).parent().find("img.wrong");
+	if ($(this).val() == "") {
+		objr.addClass("hide");
+		objw.addClass("hide");
+	} else {
+		$.ajax({
+			url :  $("#root-path").html()+"/account-manager/check-email",
+			data : {
+				email : $(this).val()
+			},
+			method: "POST",
+			headers: {
+			'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+			},
+			success : function(data) {
+
+				if (data.length == 0) {
+					objr.removeClass("hide");
+					objw.addClass("hide");
+					$('.updateemail').removeClass('isright');
+					console.log('emailrigt');
+					console.log($('.isright').length);
+				} else {
+					objw.removeClass("hide");
+					objr.addClass("hide");
+					$('.updateemail').addClass('isright');
 					console.log('emailfalse');
 					console.log($('.isright').length);
 				}

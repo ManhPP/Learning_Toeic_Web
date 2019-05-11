@@ -66,8 +66,44 @@ class AccountController extends Controller
 
     //update tài khoản 
     public function update(Request $request){
+         try{
+        $id=$request['ID'];
         $hoTen=$request['hoTen'];
-        \Log::info($hoTen);
+        $ngaySinh=$request['ngaySinh'];
+        $gioiTinh=$request['gioiTinh'];
+        $username=$request['username'];
+        $pass=$request['pass'];
+        $pass = Hash::make($pass);
+        $email=$request['email'];
+        $hasRole=$request['hasRole'];
+        
+        if($hoTen!=""){
+            Account::find($id)->update(['hoTen'=>$hoTen]);
+        }
+        if($ngaySinh!=""){
+            Account::find($id)->update(['ngaySinh'=>$ngaySinh]);
+        }
+        if($gioiTinh!=""){
+            Account::find($id)->update(['gioiTinh'=>$gioiTinh]);
+        }
+        if($username!=""){
+            Account::find($id)->update(['username'=>$username]);
+        }
+        if($pass!=""){
+            Account::find($id)->update(['pass'=>$pass]);
+        }
+        if($email!=""){
+            Account::find($id)->update(['email'=>$email]);
+        }
+        if($hasRole!=""){
+            Account::find($id)->update(['hasRole'=>$hasRole]);
+        }
+        
+       
+        return Redirect::to('/admin/quanly/account');
+        }catch(Exception $e){
+             echo $e;
+        }
     }
 
 
