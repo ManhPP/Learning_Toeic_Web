@@ -2,7 +2,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title></title>
+<title>admin quản lý tài khoản</title>
 <meta name="csrf-token" content="{{ csrf_token() }}">
 <link rel="stylesheet" type="text/css"
     href="{{URL::asset("css/bootstrap.min.css")}}">

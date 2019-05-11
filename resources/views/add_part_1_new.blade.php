@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta name="csrf-token" content="{{ csrf_token() }}">
-<title>part1</title>
+<title>add part 1</title>
 <link rel="stylesheet" type="text/css"
 	href="{{URL::asset("css/bootstrap.min.css")}}">
 <link rel="stylesheet" type="text/css"

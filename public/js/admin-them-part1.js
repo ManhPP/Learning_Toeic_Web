@@ -49,7 +49,6 @@ $("#up-audio").change(function(event) {
         contentType: false, // khong cho trinh duyet tu dong them contentType text vao header
         processData: false,
         success: function(data){
-            alert('a');
             if(data!="false"){
                 formParent.attr("data-path", data.pathFile); 
             }

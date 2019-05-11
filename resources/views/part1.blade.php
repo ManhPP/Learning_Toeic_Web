@@ -1,5 +1,5 @@
 @extends("layouts.master")
-@section("title","Part 5")
+@section("title","Part 1")
 @section("css")
     <link rel="stylesheet" type="text/css" href="{{ URL::asset("css/part2home-css.css") }}">
     <link rel="stylesheet" type="text/css" href="{{ URL::asset("css/swiper.min.css") }}">

@@ -1,5 +1,5 @@
 @extends('layouts.master')
-@section('title','update part1')
+@section('title','update part 2')
 @section("css")
     <link rel="stylesheet" type="text/css" href="{{URL::asset("css/admin-update-part2.css")}}">
 @endsection
@@ -44,19 +44,19 @@
                     <hr>
                     <!-- list cau hoi -->
                     <div class="list-cau">
-                    {{ $index = 1  }}
+                    @php $index = 1  @endphp
                     @foreach($part2->part2 as $cauPart2)
                         {{$checkA = ""}}
                         {{$checkB = ""}}
                         {{$checkC = ""}}
                             @if($cauPart2->dADung == 'A')
-                                {{$checkA = "checked='checked'"}}
+                                @php $checkA = "checked='checked'" @endphp
                             @endif
                             @if($cauPart2->dADung == 'B')
-                                {{$checkB = "checked='checked'"}}
+                                @php $checkB = "checked='checked'" @endphp
                             @endif
                             @if($cauPart2->dADung == 'C')
-                                {{$checkC = "checked='checked'"}}
+                                @php $checkC = "checked='checked'" @endphp
                             @endif
                             <div class="ques" data-asw="{{$cauPart2->dADung}}" data-id="{{$cauPart2->id}}" id="q{{$index}}">
                                 <div class="no-ques">Câu {{$index }}</div>
@@ -66,7 +66,7 @@
                                     <label class="col-3"><input type="radio" name="choise-{{$index }}" value="C" {{$checkC }}>C</label>
                                 </div>
                             </div>
-                            {{$index++ }}
+                            @php $index++ @endphp
                         @endforeach
 
                         <div style="text-align: center;margin-top: 2em;">
@@ -77,6 +77,15 @@
             </div>
         </div>
     </div>
+    <!-- Open modal -->
+<button id="my-button" style="display: none;" data-toggle="modal"
+		data-target="#myModal">Open modal</button>
+	<div style="display: none;">
+		<div id="path-update">{{Route("part2controller.update")}}</div>
+		<div id="root-path">{{URL("")}}</div>
+		<div id="id-user">${acc.id }</div>
+		<div id="id-part">{{$part2->id}}</div>
+	</div>
 @endsection
 
 @section('footer')

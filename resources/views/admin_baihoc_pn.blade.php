@@ -105,7 +105,7 @@
 							<div class="choose-part col-8 col-md-6 checked-choose" data-path="{{Route("viewaddpart1")}}">Add part 1</div>
 						</div>
 						<div class="col-12">
-							<div class="choose-part col-8 col-md-6 checked-choose" data-path="#">Add part 2</div>
+							<div class="choose-part col-8 col-md-6 checked-choose" data-path="{{Route("viewaddpart2")}}">Add part 2</div>
 						</div>
 						<div class="col-12">
 							<div class="choose-part col-8 col-md-6" data-path="{{Route("viewaddpart3")}}">Add part 3</div>

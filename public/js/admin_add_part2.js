@@ -142,7 +142,7 @@ $(document).on("click", "#add-part", function(){
    //upload
     //upload
     $.ajax({
-        url: $("#root-path").html()+"/admin/manager-listening-part/add-part2/do-add",
+        url: $("#path-add").html(),
         method: "POST",
         //    contentType:"application/json; charset=utf-8",
         //    dataType:"json",
