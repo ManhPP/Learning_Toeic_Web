@@ -317,9 +317,14 @@ Route::post('/admin/account-manager/add',[
     'uses'=>'AccountController@add'
     ]);
 
-// updage tài khoản
+// update tài khoản
 Route::post('/admin/account-manager/update',[
     'uses'=>'AccountController@update'
+    ]);
+
+// xóa tài khoản
+Route::post('/admin/account-manager/delete',[
+    'uses'=>'AccountController@delete'
     ]);
 
 // kiểm tra username có tồn tại?

@@ -446,7 +446,7 @@ inputPage(function(confirm) {
 // submit add
 $(document).on("click", "#submit-add-btn", function() {
 	
-	if($('.isright').length==4){
+	if($('.isright').length==2){
 	$("#form-them").submit();}
 	else alert("Kiểm tra lại username và email");
 });
@@ -528,12 +528,30 @@ function delAcc() {
 	});
 
 	$.ajax({
-		url : "account-manager/del-account",
+		url : $("#root-path").html()+"/admin/account-manager/delete",
 		data : {
 			id : id
 		},
-		success : function(data) {
-			resetPagination($(".page-num.active").attr("data-page"));
+		method: "POST",
+		headers: {
+		'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+		},
+		success : function (data) {
+			if (data == 1) {
+				$("#noti").html("");
+				$("#noti")
+						.append(
+								'<span style="color: green">Xóa thành công.</span>');
+				$("tr.selected").each(function () {
+					$(this).remove();
+				  });
+			} else {
+				$("#noti").html("");
+				$("#noti")
+						.append(
+								'<span style="color: red">Xóa không thành công.</span>');
+			}
+			
 		}
 
 	});

@@ -147,7 +147,7 @@ class ListeningPartController extends Controller
         }
     }
 
-    ////// xóa part nghe
+    // xóa part nghe
     public function delete(Request $request){
         $arrID = $request["arrId"];
         \Log::info($arrID);

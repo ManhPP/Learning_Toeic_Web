@@ -105,6 +105,15 @@ class AccountController extends Controller
              echo $e;
         }
     }
+    public function delete(Request $request){
+        $arrID = $request["id"];
+        \Log::info($arrID);
+        foreach($arrID as $id){
+            $check=Account::find($id)->delete();
+            if($check==0) return 0;
+        }
+        return 1;
+    }
 
 
     public function checkuser(Request $request){
