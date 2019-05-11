@@ -37,7 +37,7 @@
                                     src="{{ URL::asset("imgs/guest-luyennghe-home/cover-lession.jpg") }}">
                             </div>
                             <div class="detail-lession col-12">
-                                <span>{{ $partDoc->loaiPart }}: </span><span>{{ $partDoc->tittle }}</span>
+                                <span>{{ $partDoc->loaiPart }}: </span><span>{{ $partDoc->title }}</span>
                             </div>
                         </div>
                     @endforeach
@@ -146,7 +146,11 @@
 <!-- Open modal -->
 <button id="my-button" style="display: none;" data-toggle="modal"
     data-target="#myModal">Open modal</button>
-
+    <div style="display: none">
+        <div id="path-search">{{Route("readingpartcontroller.searchreading")}}</div>
+        
+        {{-- <div id="path-view">{{Route("readingpartcontroller.dotest")}}</div> --}}
+    </div>
 @endsection
 
 @section('footer')

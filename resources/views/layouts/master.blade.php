@@ -20,7 +20,7 @@
     @section('navbar')
         <nav id="bar" class="navbar navbar-expand-md navbar-dark fixed-top nav-background">
             <!-- Brand -->
-            <a class="navbar-brand" href="#">BKTOEIC</a>
+            <a class="navbar-brand" href="{{URL("")}}">BKTOEIC</a>
 
             <!-- Toggler/collapsibe Button -->
             <button class="navbar-toggler" id="toggle-bar" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">

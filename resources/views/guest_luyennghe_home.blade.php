@@ -146,7 +146,11 @@
 <!-- Open modal -->
 <button id="my-button" style="display: none;" data-toggle="modal"
     data-target="#myModal">Open modal</button>
-
+    <div style="display: none">
+        <div id="path-search">{{Route("listeningpartcontroller.searchlistening")}}</div>
+        
+        {{-- <div id="path-view">{{Route("readingpartcontroller.dotest")}}</div> --}}
+    </div>
 @endsection
 
 @section('footer')

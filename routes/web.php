@@ -192,7 +192,13 @@ Route::get("/guest/listening",[
     'uses' => "ListeningPartController@index"
 ])->name("listeningpartcontroller.index");
 
+Route::post("guest/reading/search",[
+    "uses"=> "ReadingPartController@searchReading"
+])->name("readingpartcontroller.searchreading");
 
+Route::post("guest/listening/search",[
+    "uses"=> "ListeningPartController@searchListening"
+])->name("listeningpartcontroller.searchlistening");
 //================= testing ==================================
 //test
 //testing home
