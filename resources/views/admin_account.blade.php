@@ -76,7 +76,8 @@
 						</thead>
 						<tbody>
 							<!-- <c:forEach items="${arrUser }" var="acc"> -->
-                                @foreach($arrUser as $acc)
+								@foreach($arrUser as $acc)
+								@if($acc->active==1)
 								<tr class="d-flex" data-activ="{{$acc->active}}">
 									<td class="col-sm-1 col-md-1">{{$acc->id}}</td>
 									<td class="col-sm-2 col-md-2">{{$acc->hoTen}}</td>
@@ -86,7 +87,21 @@
 									<td class="col-sm-2 col-md-2">{{$acc->username}}</td>
 									<td class="col-sm-2 col-md-2">{{$acc->email}}</td>
 									<td class="col-sm-2 col-md-2">{{$acc->hasRole}}</td>
-                                </tr>
+								</tr>
+								@endif
+								@if($acc->active==0)
+									<tr class="d-flex ban" data-activ="{{$acc->active}}" >
+									<td class="col-sm-1 col-md-1">{{$acc->id}}</td>
+									<td class="col-sm-2 col-md-2">{{$acc->hoTen}}</td>
+									<td class="col-sm-2 col-md-2">
+											{{\Carbon\Carbon::parse($acc->ngaySinh)->format('d/m/Y')}}  </td>
+									<td class="col-sm-1 col-md-1">{{$acc->gioiTinh}}</td>
+									<td class="col-sm-2 col-md-2">{{$acc->username}}</td>
+									<td class="col-sm-2 col-md-2">{{$acc->email}}</td>
+									<td class="col-sm-2 col-md-2">{{$acc->hasRole}}</td>
+								</tr>
+								@endif
+								
                                 @endforeach
 						</tbody>
 					</table>
@@ -419,7 +434,7 @@
 	<script type="text/javascript"
         src="{{URL::asset("js/jquery-3.3.1.min.js")}}"></script>
 	<script type="text/javascript"
-        src="{{URL::asset("js/admin-account1.js")}}"></script>
+        src="{{URL::asset("js/admin-account.js")}}"></script>
 	<script type="text/javascript"
         src="{{URL::asset("js/header-admin.js")}}"></script>
 	<script

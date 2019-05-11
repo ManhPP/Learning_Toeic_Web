@@ -156,11 +156,19 @@ function ban() {
 		'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
 		},
 		success : function(data) {
-			console.log(data);
 			// resetPagination($(".page-num.active").attr("data-page"));
 			$("#noti span").remove();
 			$("#noti").append(
 					"<span style='color: #ff6508'>Đã ban tài khoản</span>");
+			$("table tbody tr").each(function() {
+				if ($(this).hasClass("selected")) {
+					$(this).removeClass("selected");
+					arrId[index] = $(this).find("td").eq(0).html();
+					index++;
+					$(this).removeClass("unban");
+					$(this).addClass("ban");
+				}
+			});
 		}
 	});
 }
@@ -189,6 +197,15 @@ function unBan() {
 			$("#noti span").remove();
 			$("#noti").append(
 					"<span style='color: #ff6508'>Đã unban tài khoản</span>");
+			$("table tbody tr").each(function() {
+				if ($(this).hasClass("selected")) {
+					$(this).removeClass("selected");
+					arrId[index] = $(this).find("td").eq(0).html();
+					index++;
+					$(this).removeClass("ban");
+					$(this).addClass("unban");
+				}
+			});
 		}
 	});
 }
