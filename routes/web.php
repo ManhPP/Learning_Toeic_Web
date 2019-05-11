@@ -139,6 +139,16 @@ Route::post('/admin/manager-listening-part/update-part1/do-update', [
 ])->name("part1controller.update");
 //================= end part 1 ===========================
 //================= part 2 ===========================
+Route::get('/admin/manager-listening-part/add-part2', function () {
+    return view('add_part_2');
+})->name("viewaddpart2");
+Route::post('/admin/manager-listening-part/add-part2/do-add', [
+    'uses' => 'Part2Controller@create'
+])->name("part2controller.create");
+// update các câu part2
+Route::post('/admin/manager-listening-part/update-part2/do-update', [
+    'uses' => 'Part2Controller@update'
+])->name("part2controller.update");
 //================= end part 2 ===========================
 //================= part 3, 4 ===========================
 // Thêm part 3,4
