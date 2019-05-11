@@ -142,7 +142,7 @@ $(document).on("click", "#add-part", function(){
    //upload
     //upload
     $.ajax({
-        url: $("#root-path").html()+"/part2/add",
+        url: $("#root-path").html()+"/admin/manager-listening-part/add-part2/do-add",
         method: "POST",
         //    contentType:"application/json; charset=utf-8",
         //    dataType:"json",
@@ -154,7 +154,7 @@ $(document).on("click", "#add-part", function(){
             listCau: arrCau
         },
         success: function(data){
-            console.log(data);
+            //console.log(data);
             if(data!=null){
                 alert("Thêm thành công!!");
             }else{

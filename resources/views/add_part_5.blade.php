@@ -1,4 +1,6 @@
-@extends('layouts.master')
+@extends('layoutheaders: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            },s.master')
 @section('title','add part 5')
 @section("css")
     <link rel="stylesheet" type="text/css" href="{{URL::asset("css/home_css_part5.css")}}">

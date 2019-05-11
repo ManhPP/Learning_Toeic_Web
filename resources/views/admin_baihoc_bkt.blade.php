@@ -6,7 +6,7 @@
     <link rel="stylesheet" type="text/css"
           href="{{ URL::asset("css/bootstrap.min.css") }}"/>
     <link rel="stylesheet" type="text/css"
-          href="{{ URL::asset("css/admin-baihoc-pd/admin-baihoc-pd.css") }}">
+          href="{{ URL::asset("css/admin_baihoc_bkt.css") }}">
 </head>
 <body>
 @include('header_admin')
@@ -56,7 +56,7 @@
                             <td class="col-sm-5 col-md-5">{{$baiHoc->title}}</td>
                             <td class="col-sm-4 col-md-4">{{$baiHoc->accessCount}}</td>
                             <td class="col-sm-2 col-md-2"><div class="detail">
-                                    <a target="_blank" class="view" href="${pageContext.request.contextPath }/user/kiem-tra?id=${baiHoc.id}">View</a>/<a target="_blank" class="update" href="${pageContext.request.contextPath}/admin/bai-hoc-manager/update-bkt?id=${baiHoc.id}"}>Update</a>
+                                    <a target="_blank" class="view" href="{{Route("testcontroller.dotest")}}?id={{$baiHoc->id}}">View</a>/<a target="_blank" class="update" href="{{Route("testcontroller.indexupdate")}}?id={{$baiHoc->id}}"}>Update</a>
                                 </div></td>
                         </tr>
                         <?php $index++ ?>
@@ -68,8 +68,10 @@
         <!-- btn delete -->
         <div class="col-11 row justify-content-start"
              style="margin-top: 3em; margin-bottom: 5em">
-            <input class="btn-mana" id="add" type="button" name=""
-                   value="Thêm bài học" style="background-color: #02671c">
+            <a href="{{Route("testcontroller.addindex")}}" target="_blank">
+                <input class="btn-mana" id="add" type="button" name=""
+                       value="Thêm bài học" style="background-color: #02671c">
+            </a>
             <input
                     class="btn-mana" id="delete" type="button" name=""
                     value="Xóa bài học" style="background-color: #F70000;">

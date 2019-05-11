@@ -155,11 +155,20 @@ function ban() {
 		headers: {
 		'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
 		},
-		success : function() {
-			resetPagination($(".page-num.active").attr("data-page"));
+		success : function(data) {
+			// resetPagination($(".page-num.active").attr("data-page"));
 			$("#noti span").remove();
 			$("#noti").append(
 					"<span style='color: #ff6508'>Đã ban tài khoản</span>");
+			$("table tbody tr").each(function() {
+				if ($(this).hasClass("selected")) {
+					$(this).removeClass("selected");
+					arrId[index] = $(this).find("td").eq(0).html();
+					index++;
+					$(this).removeClass("unban");
+					$(this).addClass("ban");
+				}
+			});
 		}
 	});
 }
@@ -184,10 +193,19 @@ function unBan() {
 		'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
 		},
 		success : function() {
-			resetPagination($(".page-num.active").attr("data-page"));
+			// resetPagination($(".page-num.active").attr("data-page"));
 			$("#noti span").remove();
 			$("#noti").append(
 					"<span style='color: #ff6508'>Đã unban tài khoản</span>");
+			$("table tbody tr").each(function() {
+				if ($(this).hasClass("selected")) {
+					$(this).removeClass("selected");
+					arrId[index] = $(this).find("td").eq(0).html();
+					index++;
+					$(this).removeClass("ban");
+					$(this).addClass("unban");
+				}
+			});
 		}
 	});
 }
@@ -444,18 +462,36 @@ inputPage(function(confirm) {
 
 // submit add
 $(document).on("click", "#submit-add-btn", function() {
-	$("#form-them").submit();
+	
+	if($('.isright').length==2){
+	$("#form-them").submit();}
+	else alert("Kiểm tra lại username và email");
 });
 
 // submit update
-$(document).on(
-		"click",
-		"#update",
-		function() {
+$(document).on("click","#update",function() {
+			console.log(1);
 			var id = 0;
 			id = $("#my-table tbody tr.selected td:first").html();
-			$("#id-tittle-update").html(id);
-			$("#id-submit-update").val(id);
+			// hoTen = $("#my-table tbody tr.selected td:nth-child(2)").html();
+			// ngaySinh = $("#my-table tbody tr.selected td:nth-child(3)").html();
+			// console.log(ngaySinh);
+			// gioiTinh = $("#my-table tbody tr.selected td:nth-child(4)").html();
+			// username = $("#my-table tbody tr.selected td:nth-child(5)").html();
+			// email = $("#my-table tbody tr.selected td:nth-child(6)").html();
+			// hasRole = $("#my-table tbody tr.selected td:nth-child(7)").html();
+			// console.log(id);
+			
+			$("#IDacc").val(id);
+			// $("#hoTenupdate").val(hoTen);
+			// $("#ngaySinhupdate").html(ngaySinh);
+			// $("#gioiTinhupdate").val(gioiTinh);
+			// $("#usernameupdate").val(username);
+			// $("#emailupdate").val(email);
+			// $("#hasRoleupdate").html(hasRole);
+
+
+
 			if ((typeof ($("#id-submit-update").val()) != "undefined")
 					&& ($("#my-table tbody tr.selected").length == 1)) {
 				$("#myModal-update").modal();
@@ -463,44 +499,14 @@ $(document).on(
 				alert("Hãy chọn 1 tài khoản để update");
 			}
 		});
-
-$(document)
-		.on(
-				"click",
-				"#submit-update-btn",
-				function() {
-					var param = $("#form-update").serialize();
-					if (typeof ($("#id-submit-update").val()) != "undefined") {
-						$
-								.ajax({
-									url : "account-manager/update-account",
-									data : param,
-									success : function(data) {
-										resetPagination($(".page-num.active")
-												.attr("data-page"));
-										$("#noti span").remove();
-										if (data == true) {
-											$("#noti")
-													.append(
-															'<span style="color: green">Update thành công id '
-																	+ $(
-																			"#id-submit-update")
-																			.val()
-																	+ '</span>');
-										} else {
-											$("#noti")
-													.append(
-															'<span style="color: red">Id '
-																	+ $(
-																			"#id-submit-update")
-																			.val()
-																	+ ' không được update</span>');
-										}
-									}
-								});
-					}
-				});
-
+$(document).on("click", "#submit-update-btn", function() {
+console.log(2);
+	
+	if($('.isright').length==0){
+		$("#form-update").submit();}
+	else alert("Kiểm tra lại username và email");
+	
+});
 // confirm action delete
 var modalConfirmDel = function(callback) {
 
@@ -539,46 +545,114 @@ function delAcc() {
 	});
 
 	$.ajax({
-		url : "account-manager/del-account",
+		url : $("#root-path").html()+"/admin/account-manager/delete",
 		data : {
 			id : id
 		},
-		success : function(data) {
-			resetPagination($(".page-num.active").attr("data-page"));
+		method: "POST",
+		headers: {
+		'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+		},
+		success : function (data) {
+			if (data == 1) {
+				$("#noti").html("");
+				$("#noti")
+						.append(
+								'<span style="color: green">Xóa thành công.</span>');
+				$("tr.selected").each(function () {
+					$(this).remove();
+				  });
+			} else {
+				$("#noti").html("");
+				$("#noti")
+						.append(
+								'<span style="color: red">Xóa không thành công.</span>');
+			}
+			
 		}
 
 	});
 }
 
 // ajax cho check username
-// $(".username").change(function() {
-// 	var objr = $(this).parent().find("img.right");
-// 	var objw = $(this).parent().find("img.wrong");
-// 	if ($(this).val() == "") {
-// 		objr.addClass("hide");
-// 		objw.addClass("hide");
-// 	} else {
-// 		$.ajax({
-// 			method : "GET",
-// 			url : "account-manager/check-username",
-// 			data : {
-// 				username : $(this).val()
-// 			},
-// 			success : function(data) {
+$(".username").change(function() {
+	
+	var objr = $(this).parent().find("img.right");
+	var objw = $(this).parent().find("img.wrong");
+	if ($(this).val() == "") {
+		objr.addClass("hide");
+		objw.addClass("hide");
+	} else {
+		$.ajax({
+			url : $("#root-path").html()+"/account-manager/check-username",
+			data : {
+				username : $(this).val()
+			},
+			method: "POST",
+			headers: {
+			'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+			},
+			success : function(data) {
+				console.log(data);
+				if (data.length==0) {
+					objr.removeClass("hide");
+					objw.addClass("hide");
+					$('.username').addClass('isright');
+					console.log('usernamerigt');
+					console.log($('.isright').length);
+					
+				} else {
+					objw.removeClass("hide");
+					objr.addClass("hide");
+					$('.username').removeClass('isright');
+					console.log('usernamerfalse');
+					console.log($('.isright').length);
+				}
+			}
+		});
+	}
+});
 
-// 				if (data == true) {
-// 					objr.removeClass("hide");
-// 					objw.addClass("hide");
-// 				} else {
-// 					objw.removeClass("hide");
-// 					objr.addClass("hide");
-// 				}
-// 			}
-// 		});
-// 	}
-// });
+// ajax cho check update username
+$(".updateusername").change(function() {
+	
+	var objr = $(this).parent().find("img.right");
+	var objw = $(this).parent().find("img.wrong");
+	if ($(this).val() == "") {
+		objr.addClass("hide");
+		objw.addClass("hide");
+	} else {
+		$.ajax({
+			url : $("#root-path").html()+"/account-manager/check-username",
+			data : {
+				username : $(this).val()
+			},
+			method: "POST",
+			headers: {
+			'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+			},
+			success : function(data) {
+				console.log(data);
+				if (data.length==0) {
+					objr.removeClass("hide");
+					objw.addClass("hide");
+					$('.updateusername').removeClass('isright');
+					console.log('usernamerigt');
+					console.log($('.isright').length);
+					
+				} else {
+					objw.removeClass("hide");
+					objr.addClass("hide");
+					$('.updateusername').addClass('isright');
+					console.log('usernamerfalse');
+					console.log($('.isright').length);
+				}
+			}
+		});
+	}
+});
 
-// ajax cho check email
+// ajax cho check update email
 $(".email").change(function() {
 	var objr = $(this).parent().find("img.right");
 	var objw = $(this).parent().find("img.wrong");
@@ -587,19 +661,65 @@ $(".email").change(function() {
 		objw.addClass("hide");
 	} else {
 		$.ajax({
-			method : "GET",
-			url : "account-manager/check-email",
+			url :  $("#root-path").html()+"/account-manager/check-email",
 			data : {
 				email : $(this).val()
 			},
+			method: "POST",
+			headers: {
+			'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+			},
 			success : function(data) {
 
-				if (data == true) {
+				if (data.length == 0) {
 					objr.removeClass("hide");
 					objw.addClass("hide");
+					$('.email').addClass('isright');
+					console.log('emailrigt');
+					console.log($('.isright').length);
 				} else {
 					objw.removeClass("hide");
 					objr.addClass("hide");
+					$('.email').removeClass('isright');
+					console.log('emailfalse');
+					console.log($('.isright').length);
+				}
+			}
+		});
+	}
+});
+
+// ajax cho check email
+$(".updateemail").change(function() {
+	var objr = $(this).parent().find("img.right");
+	var objw = $(this).parent().find("img.wrong");
+	if ($(this).val() == "") {
+		objr.addClass("hide");
+		objw.addClass("hide");
+	} else {
+		$.ajax({
+			url :  $("#root-path").html()+"/account-manager/check-email",
+			data : {
+				email : $(this).val()
+			},
+			method: "POST",
+			headers: {
+			'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+			},
+			success : function(data) {
+
+				if (data.length == 0) {
+					objr.removeClass("hide");
+					objw.addClass("hide");
+					$('.updateemail').removeClass('isright');
+					console.log('emailrigt');
+					console.log($('.isright').length);
+				} else {
+					objw.removeClass("hide");
+					objr.addClass("hide");
+					$('.updateemail').addClass('isright');
+					console.log('emailfalse');
+					console.log($('.isright').length);
 				}
 			}
 		});

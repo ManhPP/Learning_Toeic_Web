@@ -18,6 +18,8 @@ class ListeningPartController extends Controller
     public function index()
     {
         //
+        $arrPN = ListeningPart::all();
+        return view('guest_luyennghe_home')->with("arrPN",$arrPN);
     }
 
     /**
@@ -145,7 +147,7 @@ class ListeningPartController extends Controller
         }
     }
 
-    ////// xóa part nghe
+    // xóa part nghe
     public function delete(Request $request){
         $arrID = $request["arrId"];
         \Log::info($arrID);
@@ -182,7 +184,25 @@ class ListeningPartController extends Controller
         return $listeningPart->delete();
     }
 
+    public function searchListening(Request $request){
+        $title = $request["title"];
+        $part = $request["loaiPart"];
 
+        $arrTest = array();
+        if(strlen($title)==0 && $part==0){
+            $arrTest = ListeningPart::all();
+        }
+        elseif(strlen($title)!=0 && $part == 0){
+            $arrTest = ListeningPart::where("title","like","%".$title."%")->get();
+        }
+        elseif(strlen($title)==0 && $part != 0){
+            $arrTest = ListeningPart::where("loaiPart","like","%Part ".$part."%")->get();
+        }
+        else{
+            $arrTest = ListeningPart::where("loaiPart","like","%Part ".$part."%","and","title","like","%".$title."%")->get();
+        }
+        return Response()->json($arrTest, 200);
+    }
 
 
 

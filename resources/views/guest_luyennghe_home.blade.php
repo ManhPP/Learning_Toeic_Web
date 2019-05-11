@@ -2,6 +2,8 @@
 @section('title','luyen nghe')
 @section("css")
     <link rel="stylesheet" type="text/css" href="{{ URL::asset("css/guest_luyennghe_home/guest_luyennghe_home.css") }}">
+    <link rel="stylesheet" type="text/css" href="{{ URL::asset("css/swiper.min.css") }}">
+    <link rel="stylesheet" type="text/css" href="{{ URL::asset("css/animate.css") }}">
 @endsection
 @section('navbar')
     @parent
@@ -144,7 +146,11 @@
 <!-- Open modal -->
 <button id="my-button" style="display: none;" data-toggle="modal"
     data-target="#myModal">Open modal</button>
-
+    <div style="display: none">
+        <div id="path-search">{{Route("listeningpartcontroller.searchlistening")}}</div>
+        
+        {{-- <div id="path-view">{{Route("readingpartcontroller.dotest")}}</div> --}}
+    </div>
 @endsection
 
 @section('footer')
@@ -153,4 +159,5 @@
 
 @section('js')
     <script type="text/javascript" src="{{ URL::asset("js/guest_luyennghe_home/guest_luyennghe_home.js") }}"></script>
+    <script type="text/javascript" src="{{ URL::asset("js/swiper.js") }}"></script>
 @endsection	

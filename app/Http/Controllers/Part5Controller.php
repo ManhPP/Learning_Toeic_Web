@@ -10,7 +10,7 @@ class Part5Controller extends Controller
 {
     public function index(Request $request){
         //        $i=0;
-        $arrCau = Part5::offset(0)->limit(20)->get();
+        $arrCau = Part5::all();
 //        foreach ($arrDoan[0]->cauPart7s as $cauPart7) {
 //            error_log($i);
 //            $i++;

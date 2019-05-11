@@ -15,7 +15,10 @@ use App\Part5;
 class ReadingPartController extends Controller
 {
 
-
+    public function index(){
+        $arrPD = ReadingPart::all();
+        return view('guest_luyendoc_home')->with("arrPD", $arrPD);
+    }
     public function getPartDoc(Request $request){
         $id = $request["id"];
         $partDoc = ReadingPart::find($id);
@@ -305,5 +308,25 @@ class ReadingPartController extends Controller
         $partDoc = ReadingPart::find($request["id"]);
         return view('guest_part5_view')
             ->with("partDoc", $partDoc);
+    }
+
+    public function searchReading(Request $request){
+        $title = $request["title"];
+        $part = $request["loaiPart"];
+
+        $arrTest = array();
+        if(strlen($title)==0 && $part==0){
+            $arrTest = ReadingPart::all();
+        }
+        elseif(strlen($title)!=0 && $part == 0){
+            $arrTest = ReadingPart::where("title","like","%".$title."%")->get();
+        }
+        elseif(strlen($title)==0 && $part != 0){
+            $arrTest = ReadingPart::where("loaiPart","like","%Part ".$part."%")->get();
+        }
+        else{
+            $arrTest = ReadingPart::where("loaiPart","like","%Part ".$part."%","and","title","like","%".$title."%")->get();
+        }
+        return Response()->json($arrTest, 200);
     }
 }

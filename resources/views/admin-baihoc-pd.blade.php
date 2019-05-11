@@ -64,7 +64,7 @@
 									@endif
 									<td class="col-sm-3 col-md-3">{{$baiHoc->accessCount }}</td>
 									<td class="col-sm-1 col-md-1"><div class="detail">
-									<a target="_blank" class="view" href="{{URL("")}}/guest/luyen-doc?id={{$baiHoc->id}}">View</a>/<a target="_blank" class="update" href="{{URL("")}}/admin/bai-hoc-manager/update-part-doc?id={{$baiHoc->id}}"}>Update</a>
+									<a target="_blank" class="view" href="{{Route("readingpartcontroller.practiceartdoc")}}?id={{$baiHoc->id}}">View</a>/<a target="_blank" class="update" href="{{URL("")}}/admin/bai-hoc-manager/update-part-doc?id={{$baiHoc->id}}"}>Update</a>
 									</div></td>
 								</tr>
 								<?php $index +=1 ?>
@@ -73,55 +73,7 @@
 					</table>
 				</div>
 
-				<!-- pagination -->
-				<div class="col-12 row"
-					style="padding-top: 1em; padding-bottom: 1em">
-					{{--<fmt:formatNumber var="numPage" value="${numBaiHoc/10}"--}}
-						{{--maxFractionDigits="0" />--}}
-					<?php round($numBaiHoc/10) ?>
-					@if( $numBaiHoc > ($numPage*10) )
-						<?php $numbPage +=1 ?>
-					@endif
-					<?php $curPage = 0 ?>
-					@if($numBaiHoc > 0)
-						<?php $curPage =1 ?>
-					@endif
-					<span class="col-md-6 col-sm-12">Show <span id="cur-page">{{$curPage }}</span>
-						of <span id="sum-page">{{$numPage }}</span> table
-					</span> <span>
-						<ul class="pagination" data-max-page="{{$numPage }}">
-							<li class="page-item" id="pre"><span class="page-link"><</span></li>
-							@for($i=1;$i <= $numPage ; $i++)
-								<!-- add class active cho pagation day tien -->
-								<?php $cls = ''?>
-								@if( $i == 1 )
-									<?php $cls = 'active'?>
-								@endif
-								<!-- them dau 3... -->
-								@if($i == 2)
-									<li class="page-item hide more" id="first"><span
-										class="page-link">...</span></li>
-								@endif
-								@if($i == $numPage && $numPage >6)
-								{{--<c:if test="${(i==numPage) and (numPage>6)}">--}}
-									<li class="page-item more" id="last"><span
-										class="page-link">...</span></li>
-								@endif
-								<!-- an ca pagation phai sau -->
-								<?php $hi = ''?>
-								{{--<c:set var="hi" value="" />--}}
-								@if($i != $numPage && $i > 5)
-								{{--<c:if test="${(i!=numPage) and (i>5) }">--}}
-									{{--<c:set var="hi" value="hide" />--}}
-									<? $hi = 'hide'?>
-								@endif
-								<li class="page-num page-item {{$cls }} {{$hi}}" data-page="{{$i }}"><span
-									class="page-link">{{$i }}</span></li>
-							@endfor
-							<li class="page-item" id="ne"><span class="page-link">></span></li>
-						</ul>
-					</span>
-				</div>
+
 			</div>
 
 			<!-- btn delete -->
@@ -136,69 +88,42 @@
 
 	</div>
 
-	<!-- nhap so trang -->
+	<!-- chon part de them -->
 	<div class="modal fade" tabindex="-1" role="dialog"
-		aria-labelledby="mySmallModalLabel" aria-hidden="true"
-		id="model-input-page">
-		<div class="modal-dialog modal-sm">
-			<div class="modal-content">
+		 aria-labelledby="mySmallModalLabel" aria-hidden="true"
+		 id="model-choose-part">
+		<div class="modal-dialog" style="top: 5em">
+			<div class="modal-content" id="modal-content-iques">
 				<div class="modal-header">
-					<h4 class="modal-title" id="myModalLabel">Input page</h4>
+					<h4 class="modal-title" id="myModalLabel">Chọn part muốn thêm</h4>
 				</div>
 				<div class="modal-body">
-					<input type="text" id="input-number" placeholder="Input page' number"
-						oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');" />
+
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="choose-part col-8 col-md-6 checked-choose" data-path="{{Route("viewaddpart5")}}">Add part 5</div>
+                        </div>
+                        <div class="col-12">
+                            <div class="choose-part col-8 col-md-6" data-path="{{Route("viewaddpart6")}}">Add part 6</div>
+                        </div>
+                        <div class="col-12">
+                            <div class="choose-part col-8 col-md-6" data-path="{{Route("viewaddpart7")}}">Add part 7</div>
+                        </div>
+
+                    </div>
+
 				</div>
+
 				<div class="modal-footer">
-					<button type="button" class="btn btn-default" id="btn-input-yes">Ok</button>
+					<button type="button" class="btn btn-default" id="btn-input-yes"
+							data-next="false">Ok</button>
 					<button type="button" class="btn btn-primary" id="btn-input-no">Cancel</button>
 				</div>
 			</div>
 		</div>
 	</div>
 
-	<!-- filter -->
-	<div class="modal fade" tabindex="-1" role="dialog"
-		aria-labelledby="mySmallModalLabel" aria-hidden="true"
-		id="model-input-filter">
-		<div class="modal-dialog modal-sm">
-			<div class="modal-content">
-				<div class="modal-header">
-					<h4 class="modal-title" id="myModalLabel">
-						Filter
-						<spa id="type-filter"></spa>
-					</h4>
-				</div>
-				<div class="modal-body"></div>
-				<div class="modal-footer">
-					<button type="button" class="btn btn-default" id="btn-filter-yes">Ok</button>
-					<button type="button" class="btn btn-primary" id="btn-filter-no">Cancel</button>
-				</div>
-			</div>
-		</div>
-	</div>
 
-	<!-- container them de lay cho de -->
-	<div id="container-input-number" style="display: none;">
-		<input id="filter-val" placeholder="Input filter"
-			oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');" />
-	</div>
-	<!-- lay icon de append cho de -->
-	<div id="ico-append" style="display: none;">
-		<img class="ico-ext-filter" alt="ico-append"
-			src="{{URL::asset("imgs/cross.png")}}"
-			style="height: 13px" data-toggle="tooltip" title="Remove filter">
-	</div>
-	<div style="display: none;">
-		<div id="root-path">{{URL("")}}</div>
-		{{--<div id="id-user">{{$acc->id }}</div>--}}
-	</div>
-
-	{{--<!-- footer -->--}}
-	{{--<div class="container-fluid row justify-content-center footer"--}}
-		 {{--style="height: 5em; line-height: 5em; padding-left: 15em; position: fixed; bottom: 0; background-color: #E8E8E8; z-index: 0">--}}
-		{{--<span>Copyright © BKTOEIC 2018</span>--}}
-	{{--</div>--}}
 	<script type="text/javascript"
 			src="{{URL::asset("js/jquery-3.3.1.min.js")}}"></script>
 	<script type="text/javascript"
@@ -211,12 +136,3 @@
 			src="{{URL::asset("js/bootstrap.min.js")}}"></script>
 </body>
 </html>
-	{{--@endsection--}}
-
-
-	{{--@section('footer')--}}
-		{{--@parent--}}
-		{{--<script src="{{URL::asset("js/admin-baihoc-pd/admin-baihoc-pd.js")}}"></script>--}}
-		{{--<script type="text/javascript"--}}
-				{{--src="${pageContext.request.contextPath}/resources/js/jquery-3.3.1.min.js"></script>--}}
-{{--@endsection--}}

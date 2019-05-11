@@ -2,6 +2,13 @@
 	font-size: 0.97em;
 }
 
+.ban{
+	color: #b7b7dd;
+}
+.unban{
+	color: black;
+}
+
 body, html {
 	height: 100%;
 	overflow-x: hidden;

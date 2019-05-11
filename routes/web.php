@@ -35,24 +35,87 @@ Route::get('/register', function(){
 //Route::get('/part5/practice', [
 //    'uses' => 'ReadingPartController@indexGuestPart5'
 //]);
+
 //manage bai hoc admin
 //cho admin===========================================================================
+
+// ===nghe====
 //trang chu admin quan ly phan nghe
 Route::get('/admin/manager-listening-part', [
     'uses' => 'ListeningPartController@get'
-]);
+    ])->name("listeningpartcontroller.get");
+
+// admin lấy view update bài học phần nghe
+Route::get('/admin/bai-hoc-manager/update-part-nghe/{id}',[
+    'uses'=>'ListeningPartController@redirectViewUpdate'
+    ]);
+
+// admin lấy view bài học phần nghe
+Route::get('guest/luyen-nghe/{id}',[
+    'uses'=>'ListeningPartController@redirectView'
+    ]);
+
+// admin xóa phần nghe
+Route::post('/admin/bai-hoc-manager/delete-part-nghe',[
+    'uses'=>'ListeningPartController@delete'
+    ]);
+
+// ====doc=====
 //trang chu admin quan ly phan doc
-Route::get("/admin/manager-reading-part","ReadingPartController@getListPartDoc");
+Route::get("/admin/manager-reading-part","ReadingPartController@getListPartDoc")->name("readingpartcontroller.getlistpartdoc");
 Route::post("/admin/part-doc/del-part-doc","ReadingPartController@delPartDoc");
 Route::get('/admin/bai-hoc-manager/update-part-doc','ReadingPartController@getPartDoc');
+
+// ====account=====
+// view quản lý tài khoản của admin
+Route::get('/admin/quanly/account', [
+    'uses' => 'AccountController@get'
+]);
+
+// ban tài khoản
+Route::post('/admin/account-manager/ban',[
+    'uses'=>'AccountController@ban'
+    ]);
+
+
+// unban tài khoản
+Route::post('/admin/account-manager/unban',[
+    'uses'=>'AccountController@unban'
+    ]);
+// thêm tài khoản
+Route::post('/admin/account-manager/add',[
+    'uses'=>'AccountController@add'
+    ]);
+
+// update tài khoản
+Route::post('/admin/account-manager/update',[
+    'uses'=>'AccountController@update'
+    ]);
+
+// xóa tài khoản
+Route::post('/admin/account-manager/delete',[
+    'uses'=>'AccountController@delete'
+    ]);
+
+// kiểm tra username có tồn tại?
+Route::post('/account-manager/check-username',[
+    'uses'=>'AccountController@checkuser'
+    ]);
+
+// kiểm tra email có tồn tại?
+Route::post('/account-manager/check-email',[
+    'uses'=>'AccountController@checkemail'
+    ]);
+
+
 //trang chu admin quan ly bkt
 Route::get("/admin/manager-testing",[
     'uses'=>'TestController@indexForAdminHome'
-]);
+])->name("testcontroller.indexforadminhome");
 //trang chu admin quan ly bai thao luan
 Route::get("/admin/manager-discussion",[
    'uses'=> 'DiscussionController@indexAdminManager'
-]);
+])->name("discussioncontroller.indexadminmanager");
 
 //thêm/update ảnh phần nghe
 Route::post('/upload-image-listen', [
@@ -66,7 +129,7 @@ Route::post('/upload-audio-listen', [
 //================= part 1 ===========================
 Route::get('/admin/manager-listening-part/add-part1', function () {
     return view('add_part_1_new');
-});
+})->name("viewaddpart1");
 Route::post('/admin/manager-listening-part/add-part1/do-add', [
     'uses' => 'Part1Controller@create'
 ])->name("part1controller.create");
@@ -76,15 +139,25 @@ Route::post('/admin/manager-listening-part/update-part1/do-update', [
 ])->name("part1controller.update");
 //================= end part 1 ===========================
 //================= part 2 ===========================
+Route::get('/admin/manager-listening-part/add-part2', function () {
+    return view('add_part_2');
+})->name("viewaddpart2");
+Route::post('/admin/manager-listening-part/add-part2/do-add', [
+    'uses' => 'Part2Controller@create'
+])->name("part2controller.create");
+// update các câu part2
+Route::post('/admin/manager-listening-part/update-part2/do-update', [
+    'uses' => 'Part2Controller@update'
+])->name("part2controller.update");
 //================= end part 2 ===========================
 //================= part 3, 4 ===========================
 // Thêm part 3,4
 Route::get('/admin/manager-listening-part/add-part3', function () {
     return view('add_part_3');
-});
+})->name("viewaddpart3");
 Route::get('/admin/manager-listening-part/add-part4', function () {
     return view('add_part_4');
-});
+})->name("viewaddpart4");
 Route::post('/admin/manager-listening-part/add-part3/do-add', [
     'uses' => 'ConversationParagraphController@createCPPart3'
 ])->name("conversationparagraphcontroller.createcppart3");
@@ -97,7 +170,7 @@ Route::post('/admin/manager-listening-part/update-part3/do-update', [
 //them cau part 5
 Route::get('admin/manager-sentence-part5',[
     'uses' => 'Part5Controller@index'
-]);
+])->name("part5controller.index");
 Route::post('admin/manager-sentence-part5/add',[
     'uses' => 'Part5Controller@add'
 ])->name("part5controller.add");
@@ -112,7 +185,7 @@ Route::post('admin/manager-sentence-part5/delete',[
 //add part 5 index
 Route::get('admin/manager-reading-part/add-part5',[
     'uses' => 'ReadingPartController@indexAddPart5'
-]);
+])->name("viewaddpart5");
 Route::post('admin/manager-reading-part/add-part5/do-add',[
     'uses' => 'ReadingPartController@addPart5'
 ])->name("readingpartcontroller.add");
@@ -126,7 +199,7 @@ Route::post('/admin/manager-reading-part/update-part5/do-update',[
 //================= end part 5 ===========================
 //================= part 6 ===========================
 // manager doan part 6
-Route::get('admin/manager-para-part6', 'Part6ParagraphController@listPart6Para');
+Route::get('admin/manager-para-part6', 'Part6ParagraphController@listPart6Para')->name("part6paragraphcontroller.listpart6para");
 Route::post('/admin/manager-para-part6/delete', 'Part6ParagraphController@delete')
     ->name("part6paragraphcontroller.delete");
 Route::post('admin/manager-para-part6/add', 'Part6ParagraphController@add')
@@ -135,7 +208,7 @@ Route::post('admin/manager-para-part6/update', 'Part6ParagraphController@update'
     ->name("part6paragraphcontroller.update");
 // magager part 6
 //add part 6
-Route::get('/admin/manager-reading-part/add-part6','Part6ParagraphController@listPart6');
+Route::get('/admin/manager-reading-part/add-part6','Part6ParagraphController@listPart6')->name("viewaddpart6");
 Route::post('/admin/manager-reading-part/add-part6/do-add','ReadingPartController@addPart6')
     ->name("readingpartcontroller.addpart6");
 
@@ -146,7 +219,7 @@ Route::post('/admin/manager-reading-part/update-part6/do-update','ReadingPartCon
 // para part 7 admin
 Route::get('admin/manager-para-part7', [
     'uses' => 'Part7ParagraphController@getPart7Paragraph'
-]);
+])->name("part7paragraphcontroller.getpart7paragraph");
 //add para part 7
 Route::post("admin/manager-para-part7/add",[
     "uses"=> 'Part7ParagraphController@addPara'
@@ -167,7 +240,7 @@ Route::post("/manager-para-part7/upload",[
 // part 7 admin
 Route::get('/admin/manager-reading-part/add-part7', [
     'uses' => 'ReadingPartController@getPart7'
-]);
+])->name("viewaddpart7");
 Route::post('/admin/manager-reading-part/add-part7/do-add', [
     'uses' => 'ReadingPartController@addPart7'
 ])->name("readingpartcontroller.addpart7");
@@ -181,22 +254,34 @@ Route::post('/admin/manager-reading-part/update-part7/do-update', [
 //================= end part 7 ===========================
 //cho user va guest =================================================================================================
 //luyen nghe
-Route::get("/guest/luyen-nghe","ListeningPartController@practicePartNghe");
+Route::get("/guest/luyen-nghe","ListeningPartController@practicePartNghe")->name("listeningpartcontroller.practiceartnghe");
 // luyen doc
-Route::get("/guest/luyen-doc","ReadingPartController@practicePartDoc");
+Route::get("/guest/luyen-doc","ReadingPartController@practicePartDoc")->name("readingpartcontroller.practiceartdoc");
 
+Route::get("/guest/reading",[
+    'uses' => "ReadingPartController@index"
+])->name("readingpartcontroller.index");
+Route::get("/guest/listening",[
+    'uses' => "ListeningPartController@index"
+])->name("listeningpartcontroller.index");
 
+Route::post("guest/reading/search",[
+    "uses"=> "ReadingPartController@searchReading"
+])->name("readingpartcontroller.searchreading");
 
+Route::post("guest/listening/search",[
+    "uses"=> "ListeningPartController@searchListening"
+])->name("listeningpartcontroller.searchlistening");
 //================= testing ==================================
 //test
 //testing home
 Route::get('user/testing-home',[
     'uses' => 'TestController@index'
-]);
+])->name('testcontroller.index');
 
 Route::get('admin/manager-testing/add',[
     'uses' => 'TestController@addIndex'
-]);
+])->name("testcontroller.addindex");
 
 Route::post('admin/manager-testing/add/do-add', [
     'uses' => 'TestController@addTest'
@@ -204,7 +289,8 @@ Route::post('admin/manager-testing/add/do-add', [
 
 Route::get('user/testing-home/test',[
     'uses' => 'TestController@doTest'
-]);
+])->name("testcontroller.dotest");
+
 Route::post('admin/manager-testing/delete',[
     'uses'=>'TestController@delete'
 ])->name("testcontroller.delete");
@@ -212,12 +298,16 @@ Route::post('admin/manager-testing/delete',[
 // index update
 Route::get("admin/manager-testing/update",[
    'uses'=> "TestController@indexUpdate"
-]);
+])->name("testcontroller.indexupdate");
 
 //do update testing
 Route::post("admin/manager-testing/update/do-update", [
    "uses"=> "TestController@update"
 ])->name("testcontroller.update");
+
+Route::post("admin/manager-testing/search",[
+    "uses"=> "TestController@searchTesting"
+])->name("testcontroller.searchtesting");
 //================= endtesting ==================================
 
 //================= discussion =====================================
@@ -278,31 +368,7 @@ Route::get("/discussion/del-rep-cmt","ReplyCommentController@delete")
     ->name('replyCommentController.deleteReply');
 
 //================= end discussion =======================================
-// view quản lý phần nghe của admin
-Route::get('/admin/quanly/baihoc/phannghe', [
-    'uses' => 'ListeningPartController@get'
-]);
 
-// admin lấy view update bài học phần nghe
-Route::get('/admin/bai-hoc-manager/update-part-nghe/{id}',[
-    'uses'=>'ListeningPartController@redirectViewUpdate'
-    ]);
 
-// admin lấy view bài học phần nghe
-Route::get('guest/luyen-nghe/{id}',[
-    'uses'=>'ListeningPartController@redirectView'
-    ]);
-
-// admin xóa phần nghe
-Route::post('/admin/bai-hoc-manager/delete-part-nghe',[
-    'uses'=>'ListeningPartController@delete'
-    ]);
-
-// view quản lý tài khoản của admin
-Route::get('/admin/quanly/account', [
-    'uses' => 'AccountController@get'
-]);
-
-Route::post('/admin/account-manager/ban',['uses'=>'AccountController@ban']);
 
 

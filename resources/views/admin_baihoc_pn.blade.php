@@ -13,8 +13,7 @@
 
 	<!-- HEADER -->
 
-    <!-- <c:import url="header-admin.jsp" /> -->
-	@include('header_admin') 
+	@include('header_admin')
 
 	<!-- body -->
 	<div class="container-fluid" style="padding-top: 50px;">
@@ -55,103 +54,28 @@
 							</tr>
 						</thead>
 						<tbody>
-                            <!-- <c:set var="index" value="0" /> -->
                             @php $index=0; @endphp
-							<!-- <c:forEach items="${arrBaiHoc }" var="baiHoc"> -->
                                 @foreach($arrBaiHoc as $baihoc)
 								<tr class="d-flex">
 									<td class="col-sm-1 col-md-1">{{$baihoc->id}}</td>
 									<td class="col-sm-4 col-md-4">{{$baihoc->title}}</td>
-									<!-- <c:if test="${baiHoc.loaiPart==null }"> -->
                                         @if($baihoc->loaiPart==null)
 										<td class="col-sm-3 col-md-3">Bài kiểm tra</td>
-                                    <!-- </c:if>  -->
                                         @endif
-									<!-- <c:if test="${baiHoc.loaiPart!=null }"> -->
                                     @if($baihoc->loaiPart!=null)
 										<td class="col-sm-3 col-md-3">{{$baihoc->loaiPart}}</td>
-                                    <!-- </c:if> -->
                                     @endif
 									<td class="col-sm-3 col-md-3">{{$baihoc->acessCount}}</td>
 									<td class="col-sm-1 col-md-1"><div class="detail">
-									<a target="_blank" class="view" href="{{url('guest/luyen-nghe',$baihoc->id)}}">View</a>/<a target="_blank" class="update" href="{{url('admin/bai-hoc-manager/update-part-nghe',$baihoc->id)}} ">Update</a>
+									<a target="_blank" class="view" href="{{Route("listeningpartcontroller.practiceartnghe")}}?id={{$baihoc->id}}">View</a>/<a target="_blank" class="update" href="{{url('admin/bai-hoc-manager/update-part-nghe',$baihoc->id)}} ">Update</a>
 									</div></td>
 								</tr>
-                                <!-- <c:set var="index" value="${index+1 }" /> -->
                                 @php $index++ @endphp
-                            <!-- </c:forEach> -->
                             @endforeach
 						</tbody>
 					</table>
 				</div>
 
-				<!-- pagination -->
-				{{--<div class="col-12 row"
-					style="padding-top: 1em; padding-bottom: 1em">
-					<!-- <fmt:formatNumber var="numPage" value="${numBaiHoc/10}"
-                        maxFractionDigits="0" /> -->
-                        @php $numPage=round($numBaiHoc/10); @endphp
-					<!-- <c:if test="${numBaiHoc>(numPage*10) }"> -->
-                        @if($numBaiHoc>($numPage*10))
-                        <!-- <c:set var="numPage" value="${numPage+1 }" /> -->
-                            @php $numPage=$numPage+1; @endphp
-                    <!-- </c:if> -->
-                         @endif
-
-                    <!-- <c:set var="curPage" value="0" /> -->
-                    @php $curPage=0; @endphp
-					<!-- <c:if test="${numBaiHoc>0 }"> -->
-                        @if($numBaiHoc>0)
-                        <!-- <c:set var="curPage" value="1" /> -->
-                        @php $curPage=1; @endphp
-                    <!-- </c:if> -->
-                        @endif
-					<span class="col-md-6 col-sm-12">Show <span id="cur-page">{{$curPage}}</span>
-						of <span id="sum-page">{{$curPage}}</span> table
-					</span> <span>
-						<ul class="pagination" data-max-page="{{$curPage}}">
-							<li class="page-item" id="pre"><span class="page-link"><</span></li>
-							<!-- <c:forEach var="i" begin="1" end="${numPage }"> -->
-                                @for($i=1;$i<=$numPage;$i++)
-								<!-- add class active cho pagation day tien -->
-                                <!-- <c:set var="cls" value="" /> -->
-                                @php $cls; @endphp
-								<!-- <c:if test="${i==1 }"> -->
-                                   @if($i==1)
-                                    <!-- <c:set var="cls" value="active" /> -->
-                                    @php $cls="active"; @endphp
-                                <!-- </c:if> -->
-                                    @endif
-								<!-- them dau 3... -->
-								<!-- <c:if test="${(i==2)}"> -->
-                                    @if($i==2)
-									<li class="page-item hide more" id="first"><span
-										class="page-link">...</span></li>
-                                <!-- </c:if> -->
-                                    @endif
-								<!-- <c:if test="${(i==numPage) and (numPage>6)}"> -->
-                                    @if($i==$numPage&&$numPage>6)
-									<li class="page-item more" id="last"><span
-										class="page-link">...</span></li>
-                                <!-- </c:if> -->
-                                    @endif
-								<!-- an ca pagation phai sau -->
-                                <!-- <c:set var="hi" value="" /> -->
-                                @php $hi=""; @endphp
-								<!-- <c:if test="${(i!=numPage) and (i>5) }"> -->
-                                    @if($i!=$numPage&&$i>5)
-                                    <!-- <c:set var="hi" value="hide" /> -->
-                                    @php $hi="hide"; @endphp
-                                <!-- </c:if> -->
-                                    @endif
-								<li class="page-num page-item {{$cls}} {{$hi}}" data-page="{{$i}}"><span
-									class="page-link">{{$i}}</span></li>
-                            <!-- </c:forEach> -->
-                            @endfor
-							<li class="page-item" id="ne"><span class="page-link">></span></li>
-						</ul>
-					</span>
-				</div> --}}
 			</div>
 
 			<!-- btn delete -->
@@ -163,69 +87,46 @@
 					value="Xóa bài học" style="background-color: #F70000;">
 			</div>
 		</div>
-		<!-- footer -->
-	<div class="container-fluid row justify-content-center footer"
-		style="height: 5em; line-height: 5em; padding-left: 5em;  bottom: 0; background-color: #E8E8E8; z-index: 0">
-		<span>Copyright © BKTOEIC 2019</span>
 	</div>
 
-	</div>
-
-	<!-- nhap so trang -->
+	<!-- chon part de them -->
 	<div class="modal fade" tabindex="-1" role="dialog"
-		aria-labelledby="mySmallModalLabel" aria-hidden="true"
-		id="model-input-page">
-		<div class="modal-dialog modal-sm">
-			<div class="modal-content">
+		 aria-labelledby="mySmallModalLabel" aria-hidden="true"
+		 id="model-choose-part">
+		<div class="modal-dialog" style="top: 5em">
+			<div class="modal-content" id="modal-content-iques">
 				<div class="modal-header">
-					<h4 class="modal-title" id="myModalLabel">Input page</h4>
+					<h4 class="modal-title" id="myModalLabel">Chọn part muốn thêm</h4>
 				</div>
 				<div class="modal-body">
-					<input type="text" id="input-number"
-						placeholder="Input page' number"
-						oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');" />
+
+					<div class="row">
+						<div class="col-12">
+							<div class="choose-part col-8 col-md-6 checked-choose" data-path="{{Route("viewaddpart1")}}">Add part 1</div>
+						</div>
+						<div class="col-12">
+							<div class="choose-part col-8 col-md-6 checked-choose" data-path="#">Add part 2</div>
+						</div>
+						<div class="col-12">
+							<div class="choose-part col-8 col-md-6" data-path="{{Route("viewaddpart3")}}">Add part 3</div>
+						</div>
+						<div class="col-12">
+							<div class="choose-part col-8 col-md-6" data-path="{{Route("viewaddpart4")}}">Add part 4</div>
+						</div>
+
+					</div>
+
 				</div>
+
 				<div class="modal-footer">
-					<button type="button" class="btn btn-default" id="btn-input-yes">Ok</button>
+					<button type="button" class="btn btn-default" id="btn-input-yes"
+							data-next="false">Ok</button>
 					<button type="button" class="btn btn-primary" id="btn-input-no">Cancel</button>
 				</div>
 			</div>
 		</div>
 	</div>
 
-	<!-- filter -->
-	<div class="modal fade" tabindex="-1" role="dialog"
-		aria-labelledby="mySmallModalLabel" aria-hidden="true"
-		id="model-input-filter">
-		<div class="modal-dialog modal-sm">
-			<div class="modal-content">
-				<div class="modal-header">
-					<h4 class="modal-title" id="myModalLabel">
-						Filter
-						<spa id="type-filter"></spa>
-					</h4>
-				</div>
-				<div class="modal-body"></div>
-				<div class="modal-footer">
-					<button type="button" class="btn btn-default" id="btn-filter-yes">Ok</button>
-					<button type="button" class="btn btn-primary" id="btn-filter-no">Cancel</button>
-				</div>
-			</div>
-		</div>
-		
-	</div>
-
-	<!-- container them de lay cho de -->
-	<div id="container-input-number" style="display: none;">
-		<input id="filter-val" placeholder="Input filter"
-			oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');" />
-	</div>
-	<!-- lay icon de append cho de -->
-	<div id="ico-append" style="display: none;">
-		<img class="ico-ext-filter" alt="ico-append"
-			src="{{URL::asset("imgs/cross.png")}}"
-			style="height: 13px" data-toggle="tooltip" title="Remove filter">
-	</div>
 	<div style="display: none;">
 		<div id="csrf-name">${_csrf.headerName}</div>
 		<div id="csrf-value">${_csrf.token}</div>

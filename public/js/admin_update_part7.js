@@ -112,7 +112,7 @@ $(document).on("click", "#model-choose-ques2 table tbody tr", function(){
 })
 
 //del para 1
-$(document).on("click",".list-cau1 .ico-del", function(){
+    $(document).on("click",".list-cau1 .ico-del", function(){
     var id = $(this).attr("data-idpara");
     $(".content-container .boundary-para[data-id='"+id+"']").remove();
     resetIndex($(".list-cau1"));
@@ -127,71 +127,71 @@ $(document).on("click",".list-cau2 .ico-del", function(){
     removePara($("#model-choose-ques2 tbody tr[data-id='"+id+"']"))
 })
 
-// scroll 1 ajax 
-$("#model-choose-ques1").on("scroll",function(){
-    var sum = $("#sum-ques1").html();
-    var total = $("#total-ques1").html();
-    
-    if($("#sum-ques1").html() != $("#total-ques1").html()){
-        if(sum!=total){
-            var s = $("#model-choose-ques1").scrollTop(),
-                d = $("#model-choose-ques1 .modal-dialog").height(),
-                c = $(window).height();
-            if( (d-c-s <= 100) && loadAjax==true ){
-                loadAjax=false;
-                $.ajax({
-                    url: "add-part7/get-list-doan",
-                    data: {
-                        index: parseInt(sum),
-                        loaiPart: "Đoạn đơn"
-                    },
-                    success: function(data){
-                        $("#sum-ques1").html(parseInt(sum)+data.length);
-                        
-                        for(var i=0;i<data.length; i++){
-                            resetTable(data[i], $("#model-choose-ques1 table tbody"));
-                        }
-                        loadAjax= true;
-                        loadCheckQues($("#model-choose-ques1"), getListPara($(".list-cau1")));
-                    }
-                });
-            }
-        }
-    }
-});
+    // scroll 1 ajax
+    $("#model-choose-ques1").on("scroll",function(){
+        var sum = $("#sum-ques1").html();
+        var total = $("#total-ques1").html();
 
-// scroll 2 ajax 
-$("#model-choose-ques2").on("scroll",function(){
-    var sum = $("#sum-ques2").html();
-    var total = $("#total-ques2").html();
-    
-    if($("#sum-ques2").html() != $("#total-ques2").html()){
-        if(sum!=total){
-            var s = $("#model-choose-ques2").scrollTop(),
-            d = $("#model-choose-ques2 .modal-dialog").height(),
-            c = $(window).height();
-            if( (d-c-s <= 100) && loadAjax==true ){
-                loadAjax=false;
-                $.ajax({
-                    url: "add-part7/get-list-doan",
-                    data: {
-                        index: parseInt(sum),
-                        loaiPart: "Đoạn kép"
-                    },
-                    success: function(data){
-                        $("#sum-ques2").html(parseInt(sum)+data.length);
-                        
-                        for(var i=0;i<data.length; i++){
-                            resetTable(data[i], $("#model-choose-ques2 table tbody"));
+        if($("#sum-ques1").html() != $("#total-ques1").html()){
+            if(sum!=total){
+                var s = $("#model-choose-ques1").scrollTop(),
+                    d = $("#model-choose-ques1 .modal-dialog").height(),
+                    c = $(window).height();
+                if( (d-c-s <= 100) && loadAjax==true ){
+                    loadAjax=false;
+                    $.ajax({
+                        url: "add-part7/get-list-doan",
+                        data: {
+                            index: parseInt(sum),
+                            loaiPart: "Đoạn đơn"
+                        },
+                        success: function(data){
+                            $("#sum-ques1").html(parseInt(sum)+data.length);
+
+                            for(var i=0;i<data.length; i++){
+                                resetTable(data[i], $("#model-choose-ques1 table tbody"));
+                            }
+                            loadAjax= true;
+                            loadCheckQues($("#model-choose-ques1"), getListPara($(".list-cau1")));
                         }
-                        loadAjax= true;
-                        loadCheckQues($("#model-choose-ques2"), getListPara($(".list-cau2")));
-                    }
-                });
+                    });
+                }
             }
         }
-    }
-});
+    });
+
+    // scroll 2 ajax
+    $("#model-choose-ques2").on("scroll",function(){
+        var sum = $("#sum-ques2").html();
+        var total = $("#total-ques2").html();
+
+        if($("#sum-ques2").html() != $("#total-ques2").html()){
+            if(sum!=total){
+                var s = $("#model-choose-ques2").scrollTop(),
+                d = $("#model-choose-ques2 .modal-dialog").height(),
+                c = $(window).height();
+                if( (d-c-s <= 100) && loadAjax==true ){
+                    loadAjax=false;
+                    $.ajax({
+                        url: "add-part7/get-list-doan",
+                        data: {
+                            index: parseInt(sum),
+                            loaiPart: "Đoạn kép"
+                        },
+                        success: function(data){
+                            $("#sum-ques2").html(parseInt(sum)+data.length);
+
+                            for(var i=0;i<data.length; i++){
+                                resetTable(data[i], $("#model-choose-ques2 table tbody"));
+                            }
+                            loadAjax= true;
+                            loadCheckQues($("#model-choose-ques2"), getListPara($(".list-cau2")));
+                        }
+                    });
+                }
+            }
+        }
+    });
 
 
 function resetTable(doanVan, tbody){

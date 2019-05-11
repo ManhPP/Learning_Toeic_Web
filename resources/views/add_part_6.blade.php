@@ -12,7 +12,7 @@
     <div class="body row">
         <div
                 class="row col-12 col-sm-11 col-md-10 col-lg-9 col-xl-8 align-center no-padding">
-            <div class="label-style">**Tạo đề thi từ ngân hàng câu hỏi</div>
+            <div class="label-style">**Tạo đề thi từ ngân hàng câu hỏi (<a target="_blank" style="font-size: 0.9em" href="{{Route("part6paragraphcontroller.listpart6para")}}">Cập nhập ngân hàng đoạn văn!</a>)</div>
             <div class="col-12 time-detail">
                 <span>Tiêu đề: </span> <input id="tittle">
             </div>
@@ -153,7 +153,6 @@
     <div style="display: none;">
         <div id="path-add">{{Route("readingpartcontroller.addpart6")}}</div>
         <div id="root-path">{{URL("")}}</div>
-        <div id="id-user">{{$acc->id }}</div>
     </div>
 @endsection
 

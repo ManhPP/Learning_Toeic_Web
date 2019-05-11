@@ -29,6 +29,12 @@ body, html {
 	color: white !important;
 }
 
+
+#link-read{
+	color: white;
+	background: #686868;
+}
+
 .sidebar-nav li {
 	text-indent: 2em;
 	line-height: 3.5em;
@@ -119,6 +125,26 @@ th, td {
 .view:hover, .update:hover{
 	color: #18f54a;
 	text-decoration: none;
+}
+
+.choose-part{
+	margin: 0.5em auto;
+	text-align: center;
+	background: #efeffc;
+	color: #8b9299;
+	height: 3em;
+	line-height: 3em;
+	font-size: 1.2em;
+	border-radius: 1em;
+	font-weight: bold;
+	cursor: pointer;
+	border: 1px solid #dbd7d7cc;
+}
+
+.choose-part.checked-choose{
+	background: #117234;
+	color: white;
+	border: none;
 }
 
 /* filter */
