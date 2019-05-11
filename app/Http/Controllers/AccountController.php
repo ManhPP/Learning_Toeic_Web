@@ -6,6 +6,7 @@ use App\Account;
 use Illuminate\Http\Request;
 use PHPUnit\Framework\Exception;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Redirect;
 
 class AccountController extends Controller
 {
@@ -57,11 +58,18 @@ class AccountController extends Controller
         $check=Account::create(['hoTen'=>$hoTen,'ngaySinh'=>$ngaySinh,'gioiTinh'=>$gioiTinh,'username'=>$username
         ,'pass'=>$pass,'email'=>$email,'hasRole'=>$hasRole,'active'=>1]);
        
-        return Redirect::route('login');
+        return Redirect::to('/admin/quanly/account');
         }catch(Exception $e){
              echo $e;
         }
     }
+
+    //update tài khoản 
+    public function update(Request $request){
+        $hoTen=$request['hoTen'];
+        \Log::info($hoTen);
+    }
+
 
     public function checkuser(Request $request){
         $username=$request['username'];
@@ -138,10 +146,7 @@ class AccountController extends Controller
      * @param  \App\Account  $account
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Account $account)
-    {
-        //
-    }
+   
 
     /**
      * Remove the specified resource from storage.

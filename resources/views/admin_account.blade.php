@@ -332,8 +332,14 @@
 				<div class="modal-header" style="background-color: #c5a403">
 					<h4 class="modal-title" style="color: white">Update account(id=<span id="id-tittle-update"></span>)</h4>
 				</div>
+<<<<<<< HEAD
 				<form action="admin/account-manager/update"
 					modelAttribute="account" id="form-update" accept-charset="UTF-8">
+=======
+				<form action="{{url('/admin/account-manager/update')}}"
+					modelAttribute="account" id="form-update" role="form" accept-charset="UTF-8">
+					{{ csrf_field() }}
+>>>>>>> admin update account
 					<input name="id" style="display: none" id="id-submit-update"> 
 					<div class="modal-body">
 						<div class="input-modal row">
@@ -357,7 +363,7 @@
 								class="ico-noti-usr hide right" alt="tick"
 								src="{{URL::asset("imgs/tick.png")}}" /> <img
 								class="ico-noti-usr hide wrong" alt="tick"
-								src="${{URL::asset("imgs/cross.png")}}" />
+								src="{{URL::asset("imgs/cross.png")}}" />
 						</div>
 						<div class="input-modal row">
 							<span class="col-3" style="line-height: 35px">Password</span> <input
@@ -367,9 +373,9 @@
 							<span class="col-3" style="line-height: 35px">Email</span> <input
 								type="text" name="email" class="email"> <img
 								class="ico-noti-em hide right" alt="tick"
-								src=src="{{URL::asset("imgs/tick.png")}}"> <img
+								src="{{URL::asset("imgs/tick.png")}}" /> <img
 								class="ico-noti-em hide wrong" alt="tick"
-								src="${{URL::asset("imgs/cross.png")}}">
+								src="{{URL::asset("imgs/cross.png")}}" />
 						</div>
 						<div class="input-modal row">
 							<span class="col-3" style="line-height: 35px">Type account</span>
@@ -398,7 +404,7 @@
 	<!-- lay icon de append cho de -->
 	<div id="ico-append" style="display: none;">
 		<img class="ico-ext-filter" alt="ico-append"
-            src="${{URL::asset("imgs/cross.png")}}" style="height: 13px"
+            src="{{URL::asset("imgs/cross.png")}}" style="height: 13px"
 			data-toggle="tooltip" title="Remove filter">
 	</div>
 

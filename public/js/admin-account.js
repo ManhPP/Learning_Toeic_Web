@@ -458,8 +458,9 @@ $(document).on(
 		function() {
 			var id = 0;
 			id = $("#my-table tbody tr.selected td:first").html();
+			console.log(id);
 			$("#id-tittle-update").html(id);
-			$("#id-submit-update").val(id);
+			console.log($("#id-submit-update").val(id));
 			if ((typeof ($("#id-submit-update").val()) != "undefined")
 					&& ($("#my-table tbody tr.selected").length == 1)) {
 				$("#myModal-update").modal();
@@ -467,45 +468,12 @@ $(document).on(
 				alert("Hãy chọn 1 tài khoản để update");
 			}
 		});
+$(document).on("click", "#submit-update-btn", function() {
 
-$(document)
-		.on(
-				"click",
-				"#submit-update-btn",
-				function(e) {
-					var param = $("#form-update").serialize();
-
-					if (typeof ($("#id-submit-update").val()) != "undefined") {
-						$
-								.ajax({
-									url : "account-manager/update-account",
-									data : param,
-									success : function(data) {
-										resetPagination($(".page-num.active")
-												.attr("data-page"));
-										$("#noti span").remove();
-										if (data == true) {
-											$("#noti")
-													.append(
-															'<span style="color: green">Update thành công id '
-																	+ $(
-																			"#id-submit-update")
-																			.val()
-																	+ '</span>');
-										} else {
-											$("#noti")
-													.append(
-															'<span style="color: red">Id '
-																	+ $(
-																			"#id-submit-update")
-																			.val()
-																	+ ' không được update</span>');
-										}
-									}
-								});
-					}
-				});
-
+	
+	$("#form-update").submit();
+	
+});
 // confirm action delete
 var modalConfirmDel = function(callback) {
 

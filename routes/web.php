@@ -302,25 +302,32 @@ Route::get('/admin/quanly/account', [
     'uses' => 'AccountController@get'
 ]);
 
+// ban tài khoản
 Route::post('/admin/account-manager/ban',[
     'uses'=>'AccountController@ban'
     ]);
 
 
+// unban tài khoản
 Route::post('/admin/account-manager/unban',[
     'uses'=>'AccountController@unban'
     ]);
+// thêm tài khoản
 Route::post('/admin/account-manager/add',[
     'uses'=>'AccountController@add'
     ]);
 
+// updage tài khoản
 Route::post('/admin/account-manager/update',[
     'uses'=>'AccountController@update'
     ]);
+
+// kiểm tra username có tồn tại?
 Route::post('/account-manager/check-username',[
     'uses'=>'AccountController@checkuser'
     ]);
 
+// kiểm tra email có tồn tại?
 Route::post('/account-manager/check-email',[
     'uses'=>'AccountController@checkemail'
     ]);
