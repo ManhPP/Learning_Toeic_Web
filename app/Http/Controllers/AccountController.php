@@ -153,7 +153,7 @@ class AccountController extends Controller
                 Account::find($id)->update(['username'=>$username]);
             }
             if($pass!=""){
-                Account::find($id)->update(['pass'=>$pass]);
+                Account::find($id)->update(['password'=>$pass]);
             }
             if($email!=""){
                 Account::find($id)->update(['email'=>$email]);
