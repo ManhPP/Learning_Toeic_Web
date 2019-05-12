@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Discussion;
 use App\ListeningPart;
 use App\ConversationParagraph;
 use Auth;
@@ -37,12 +38,16 @@ class ListeningPartController extends Controller
 
     //upload ảnh lên server
     public function uploadimage(Request $request){
+        $userLogin = Auth::guard("accounts")->user();
+        if( $userLogin==null || !$userLogin->can('addListening', ListeningPart::class)){
+            return response()->json(['redirect'=>( Route('mylogincontroller.login'))]);
+        }
         try{
-        $file = $request->file("file-image");
-         $fileName = time().'.'.$file->getClientOriginalExtension();
-         $des=public_path('/images_upload');
-         $file->move($des,$fileName);
-         return response()->json(["pathFile"=>"images_upload"."/".$fileName], 200);
+             $file = $request->file("file-image");
+             $fileName = time().'.'.$file->getClientOriginalExtension();
+             $des=public_path('/images_upload');
+             $file->move($des,$fileName);
+             return response()->json(["pathFile"=>"images_upload"."/".$fileName], 200);
         }catch(Exception $e){
 
         }
@@ -52,7 +57,10 @@ class ListeningPartController extends Controller
 
     //updload audio lên server
     public function uploadaudio(Request $request){
-        error_log("a");
+        $userLogin = Auth::guard("accounts")->user();
+        if( $userLogin==null || !$userLogin->can('addListening', ListeningPart::class)){
+            return response()->json(['redirect'=>(Route('mylogincontroller.login'))]);
+        }
         try{
             $file = $request->file("audio");
             // $size=$request->file('audio')->getSize();
@@ -94,6 +102,10 @@ class ListeningPartController extends Controller
 
     //lấy dữ liệu cho view admin quản lý phần nghe
     public function get(Request $request){
+        $userLogin = Auth::guard("accounts")->user();
+        if( $userLogin==null || !$userLogin->can('manage', ListeningPart::class)){
+            return redirect(Route('mylogincontroller.login'));
+        }
         $arrBaiHoc=ListeningPart::all();
         $numBaiHoc=$arrBaiHoc->count();
         return view('admin_baihoc_pn')->with("arrBaiHoc",$arrBaiHoc)->with("numBaiHoc",$numBaiHoc);
@@ -101,6 +113,12 @@ class ListeningPartController extends Controller
 
     //return view udpate các part phần nghe
     public function redirectViewUpdate($id){
+
+        $userLogin = Auth::guard("accounts")->user();
+        if( $userLogin==null || !$userLogin->can('updateListening', ListeningPart::class)){
+            return redirect(Route('mylogincontroller.login'));
+        }
+
         $listeningPart=ListeningPart::find($id);
 
         $userLogin = Auth::guard("accounts")->user();
@@ -145,6 +163,12 @@ class ListeningPartController extends Controller
 
     // xóa part nghe
     public function delete(Request $request){
+
+        $userLogin = Auth::guard("accounts")->user();
+        if( $userLogin==null || !$userLogin->can('deleteListening', ListeningPart::class)){
+            return (Route('mylogincontroller.login'));
+        }
+
         $arrID = $request["arrId"];
         \Log::info($arrID);
         foreach($arrID as $id){

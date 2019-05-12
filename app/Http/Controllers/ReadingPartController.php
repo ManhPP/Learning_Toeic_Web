@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 
+use App\Discussion;
 use App\MapPart6Paragraph;
 use App\Part6Paragraph;
 
@@ -25,11 +26,17 @@ class ReadingPartController extends Controller
 
     //index update part doc
     public function getPartDoc(Request $request){
+
+        $userLogin = Auth::guard("accounts")->user();
+        if( $userLogin==null || !$userLogin->can('updateReading', ReadingPart::class)){
+            return redirect(Route('mylogincontroller.login'));
+        }
+
+
         $id = $request["id"];
         $partDoc = ReadingPart::find($id);
         $arrDoan = array();
         $sum = 0;
-        $userLogin = Auth::guard("accounts")->user();
 
         if($partDoc->loaiPart == "Part 6"){
             $arrDoan = Part6Paragraph::all();
@@ -62,6 +69,14 @@ class ReadingPartController extends Controller
 
 
     public function getListPartDoc(){
+
+
+        $userLogin = Auth::guard("accounts")->user();
+        if( $userLogin==null || !$userLogin->can('manage', ReadingPart::class)){
+            return redirect(Route('mylogincontroller.login'));
+        }
+
+
         $arrBaiHoc = ReadingPart::all();
         $numBaiHoc = count($arrBaiHoc);
         $numPage = round($numBaiHoc / 10,0,PHP_ROUND_HALF_DOWN)+1;
@@ -70,6 +85,12 @@ class ReadingPartController extends Controller
 
     public function delPartDoc(Request $request)
     {
+        $userLogin = Auth::guard("accounts")->user();
+        if( $userLogin==null || !$userLogin->can('deleteReading', ReadingPart::class)){
+            return (Route('mylogincontroller.login'));
+        }
+
+
         $arrId = $request->arrId;
         foreach ($arrId as $id) {
             $checked = $this->delPhanDoc($id);
@@ -82,6 +103,11 @@ class ReadingPartController extends Controller
 
     //su dung moi khi muon xoa partDoc rieng
     public function delPhanDoc($id){
+        $userLogin = Auth::guard("accounts")->user();
+        if( $userLogin==null || !$userLogin->can('deleteReading', ReadingPart::class)){
+            return (Route('mylogincontroller.login'));
+        }
+
         $partDoc = ReadingPart::find($id);
 
         if($partDoc->loaiPart == "Part 6"){
@@ -96,6 +122,14 @@ class ReadingPartController extends Controller
     }
 
     public function addPart6(Request $request){
+
+
+        $userLogin = Auth::guard("accounts")->user();
+        if( $userLogin==null || !$userLogin->can('addReading', ReadingPart::class)){
+            return (Route('mylogincontroller.login'));
+        }
+
+
         try{
             //parse string to part6
             $part6 = json_decode($request->part6);
@@ -121,6 +155,13 @@ class ReadingPartController extends Controller
     }
 
     public function updatePart6(Request $request){
+
+
+        $userLogin = Auth::guard("accounts")->user();
+        if( $userLogin==null || !$userLogin->can('updateReading', ReadingPart::class)){
+            return (Route('mylogincontroller.login'));
+        }
+
         try{
             $data = $request->part;
             $partDoc_Obj = json_decode($data);
@@ -182,6 +223,14 @@ class ReadingPartController extends Controller
    }
 
    public function addPart7(Request $request){
+
+
+       $userLogin = Auth::guard("accounts")->user();
+       if( $userLogin==null || !$userLogin->can('addReading', ReadingPart::class)){
+           return (Route('mylogincontroller.login'));
+       }
+
+
        $part7String = $request["part7"];
        $listDoanString = $request["listDoanVan"];
 
@@ -200,6 +249,12 @@ class ReadingPartController extends Controller
 
    public function indexUpdatePart7(Request $request)
    {
+       $userLogin = Auth::guard("accounts")->user();
+       if( $userLogin==null || !$userLogin->can('manage', ReadingPart::class)){
+           return redirect(Route('mylogincontroller.login'));
+       }
+
+
        $id = $request["id"];
        $partDoc = ReadingPart::find($id);
        $arrDoanDon = Part7Paragraph::all()->where('loaiPart7','=', 'Đoạn đơn');
@@ -218,6 +273,13 @@ class ReadingPartController extends Controller
    }
 
    public function updatePart7(Request $request){
+
+       $userLogin = Auth::guard("accounts")->user();
+       if( $userLogin==null || !$userLogin->can('updateReading', ReadingPart::class)){
+           return (Route('mylogincontroller.login'));
+       }
+
+
        $arrId = array();
 
        $part7String = $request["part7"];
@@ -249,18 +311,28 @@ class ReadingPartController extends Controller
      */
     public function indexAddPart5()
     {
-        //
-        // $arrCau = Part5::offset(0)->limit(20)->get();
+
+        $userLogin = Auth::guard("accounts")->user();
+        if( $userLogin==null || !$userLogin->can('addReading', ReadingPart::class)){
+            return redirect(Route('mylogincontroller.login'));
+        }
+
+
         $arrCau = Part5::all();
         $sum = Part5::count();
 
-        $userLogin = Auth::guard("accounts")->user();
 
         return view('admin_them_part5')
             ->with("arrCau",$arrCau)->with("sum",$sum)->with('userLogin', $userLogin);
     }
 
     public function addPart5(Request $request){
+        $userLogin = Auth::guard("accounts")->user();
+        if( $userLogin==null || !$userLogin->can('addReading', ReadingPart::class)){
+            return (Route('mylogincontroller.login'));
+        }
+
+
         $paraString = $request["partDoc"];
         $listCauString = $request["listCauPart5"];
         
@@ -280,17 +352,26 @@ class ReadingPartController extends Controller
 
     public function indexUpdatePart5(Request $request)
     {
-        //
-        // $arrCau = Part5::offset(0)->limit(20)->get();
+        $userLogin = Auth::guard("accounts")->user();
+        if( $userLogin==null || !$userLogin->can('updateReading', ReadingPart::class)){
+            return redirect(Route('mylogincontroller.login'));
+        }
+
+
         $arrCau = Part5::all();
         $sum = Part5::count();
         $partDoc = ReadingPart::find($request["id"]);
-        $userLogin = Auth::guard("accounts")->user();
         return view('admin_update_part5')
             ->with("arrCau",$arrCau)->with("sum",$sum)->with("partDoc", $partDoc)->with('userLogin', $userLogin);
     }
 
     public function updatePart5(Request $request){
+        $userLogin = Auth::guard("accounts")->user();
+        if( $userLogin==null || !$userLogin->can('updateReading', ReadingPart::class)){
+            return (Route('mylogincontroller.login'));
+        }
+
+
         $paraString = $request["partDoc"];
         $listCauString = $request["listCauPart5"];
         

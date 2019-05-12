@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Discussion;
 use App\ReplyComment;
 use App\Account;
 use Auth;
@@ -11,6 +12,13 @@ use Carbon\Carbon;
 class ReplyCommentController extends Controller
 {
     public function reply(Request $request){
+
+        $userLogin = Auth::guard("accounts")->user();
+        if( $userLogin==null || !$userLogin->can('addComment', ReplyComment::class)){
+            return (Route('mylogincontroller.login'));
+        }
+
+
         $noiDung = $request->noiDung;
         $idCMT = $request->idCMT;
         $reply = new ReplyComment();
@@ -70,13 +78,17 @@ class ReplyCommentController extends Controller
     }
 
     public function update(Request $request){
+
         $idRCmt = $request['id'];
         $noiDung = $request['noiDung'];
 
         $reply = ReplyComment::find($idRCmt);
 
-        //get Acc from session
         $userLogin = Auth::guard("accounts")->user();
+        if( $userLogin==null || !$userLogin->can('updateComment', $reply)){
+            return (Route('mylogincontroller.login'));
+        }
+
 
         if($userLogin->id == $reply->idAcc){
             $reply->noiDung = $noiDung;
@@ -93,16 +105,18 @@ class ReplyCommentController extends Controller
         $idRCmt = $request['id'];
         $reply = ReplyComment::find($idRCmt);
 
-        //get Acc from session
+
+
         $userLogin = Auth::guard("accounts")->user();
-
-        if($userLogin->id == $reply->idAcc){
-            $check = $reply->delete();
-            if($check >0){
-                return 'true';
-            }
+        if( $userLogin==null || !$userLogin->can('updateComment', $reply)){
+            return (Route('mylogincontroller.login'));
         }
+        try {
+            $reply->delete();
+            return 'true';
+        }catch (\Exception $e){
 
+        }
         return 'false';
     }
 }
