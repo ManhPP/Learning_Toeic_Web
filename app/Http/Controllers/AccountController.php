@@ -76,7 +76,6 @@ class AccountController extends Controller
 
     public function doRegister(Request $request){
 
-        error_log("asdasdadasdasda");
         $hoTen = $request["hoTen"];
         $username = $request["username"];
         $password = \Hash::make($request["password"]);
