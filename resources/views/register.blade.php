@@ -77,7 +77,7 @@
                                 <div class="col-2-re">
                                     <div class="input-group">
                                         <label class="label">Password</label>
-                                        <input class="input--style-4" type="text" name="pass">
+                                        <input class="input--style-4" type="text" name="password">
                                     </div>
                                 </div>
                             </div>

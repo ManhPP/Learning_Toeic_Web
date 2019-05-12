@@ -52,7 +52,7 @@ class AccountController extends Controller
         error_log("asdasdadasdasda");
         $hoTen = $request["hoTen"];
         $username = $request["username"];
-        $pass = \Hash::make($request["pass"]);
+        $password = \Hash::make($request["password"]);
         $ngaySinh = $request["ngaySinh"];
         $gioiTinh = $request["gioiTinh"];
         $email = $request["email"];
@@ -63,7 +63,7 @@ class AccountController extends Controller
         $acc = new Account();
         $acc->hoTen = $hoTen;
         $acc->username= $username;
-        $acc->pass = $pass;
+        $acc->password = $password;
         $acc->ngaySinh = $newDate;
         $acc->gioiTinh = $gioiTinh;
         $acc->email = $email;
