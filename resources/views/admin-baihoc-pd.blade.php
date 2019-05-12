@@ -64,7 +64,7 @@
 									@endif
 									<td class="col-sm-3 col-md-3">{{$baiHoc->accessCount }}</td>
 									<td class="col-sm-1 col-md-1"><div class="detail">
-									<a target="_blank" class="view" href="{{Route("readingpartcontroller.practiceartdoc")}}?id={{$baiHoc->id}}">View</a>/<a target="_blank" class="update" href="{{URL("")}}/admin/bai-hoc-manager/update-part-doc?id={{$baiHoc->id}}"}>Update</a>
+									<a target="_blank" class="view" href="{{route("readingpartcontroller.practicepartdoc")}}?id={{$baiHoc->id}}">View</a>/<a target="_blank" class="update" href="{{URL("")}}/admin/bai-hoc-manager/update-part-doc?id={{$baiHoc->id}}"}>Update</a>
 									</div></td>
 								</tr>
 								<?php $index +=1 ?>
