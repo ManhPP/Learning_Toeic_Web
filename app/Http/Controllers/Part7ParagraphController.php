@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Discussion;
 use App\Part7;
 use App\Part7Paragraph;
 use Auth;
@@ -14,7 +15,12 @@ class Part7ParagraphController extends Controller
 
 
     public function getPart7Paragraph(Request $request){
+
         $userLogin = Auth::guard("accounts")->user();
+        if( $userLogin==null || !$userLogin->can('manage', Part7Paragraph::class)){
+            return redirect(Route('mylogincontroller.login'));
+        }
+
         $arrDoan = Part7Paragraph::all();
         $sum = Part7Paragraph::count();
         return view('manager_para_part7')
@@ -23,6 +29,11 @@ class Part7ParagraphController extends Controller
     }
 
     public function uploadFile(Request $request){
+        $userLogin = Auth::guard("accounts")->user();
+        if( $userLogin==null || !$userLogin->can('addPara', Part7Paragraph::class)){
+            return response()->json(['redirect'=>(Route('mylogincontroller.login'))]);
+        }
+
         error_log("upppppp");
         $file = $request -> file('file-image');
         $current = Carbon::now()->timestamp;
@@ -33,11 +44,17 @@ class Part7ParagraphController extends Controller
     }
 
     public function addPara(Request $request){
+
+        $userLogin = Auth::guard("accounts")->user();
+        if( $userLogin==null || !$userLogin->can('addPara', Part7Paragraph::class)){
+            return (Route('mylogincontroller.login'));
+        }
+
         $paraString = $request["doanPart7"];
         $listCauString = $request["listCau"];
         error_log($paraString);
         $paraJson = json_decode($paraString, true);
-//        try {
+        try {
             $part7Para = Part7Paragraph::create($paraJson);
 
             $listCauJson = json_decode($listCauString, true);
@@ -46,12 +63,17 @@ class Part7ParagraphController extends Controller
             }
 
             return "true";
-//        }catch (Exception $e){
-//        }
-//        return "false";
+        }catch (Exception $e){
+        }
+        return "false";
     }
 
     public function updatePara(Request $request){
+        $userLogin = Auth::guard("accounts")->user();
+        if( $userLogin==null || !$userLogin->can('updatePara', Part7Paragraph::class)){
+            return (Route('mylogincontroller.login'));
+        }
+
         error_log("update");
         $paraString = $request["doanPart7"];
         $listCauString = $request["listCau"];
@@ -76,10 +98,16 @@ class Part7ParagraphController extends Controller
     }
 
     public function delPara(Request $request){
+
+        $userLogin = Auth::guard("accounts")->user();
+        if( $userLogin==null || !$userLogin->can('deletePara', Part7Paragraph::class)){
+            return (Route('mylogincontroller.login'));
+        }
+
+
         $id = $request["id"];
-//        try {
+        try {
             $part7Para = Part7Paragraph::find($id);
-//        error_log("aaa");
             foreach ($part7Para->cauPart7s as $cau){
                 $part7 = Part7::find($cau->id);
                 error_log("aaa");
@@ -95,9 +123,9 @@ class Part7ParagraphController extends Controller
             if($deleted>0) {
                 return 'true';
             }
-//        }catch (\Exception $e){
-//
-//        }
+        }catch (\Exception $e){
+
+        }
         return "false";
     }
 }

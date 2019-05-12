@@ -11,6 +11,11 @@ use Carbon\Carbon;
 class CommentController extends Controller
 {
     public function comment(Request $request){
+
+        $userLogin = Auth::guard("accounts")->user();
+        if ($userLogin==null || !$userLogin->can('addComment', Comment::class)){
+            return (Route('mylogincontroller.login'));
+        }
         $noiDung = $request->noiDung;
         $idBTL = $request->idBTL;
         $cmt = new Comment();
@@ -42,12 +47,18 @@ class CommentController extends Controller
     }
 
     public function update(Request $request){
+
+
         $id = $request['id'];
 
         $cmt = Comment::find($id);
 
-        //get Acc from session
         $userLogin = Auth::guard("accounts")->user();
+        if ($userLogin==null && !$userLogin->can('updateComment', $cmt)){
+            return (Route('mylogincontroller.login'));
+        }
+
+
         if($userLogin->id == $cmt->idAcc){
             $cmt->noiDung = $request['noiDung'];
             $check = $cmt->save();
@@ -63,8 +74,10 @@ class CommentController extends Controller
         $idCmt = $request['id'];
         $cmt = Comment::find($idCmt);
 
-        //get Acc from session
         $userLogin = Auth::guard("accounts")->user();
+        if ($userLogin==null && !$userLogin->can('deleteComment', $cmt)){
+            return (Route('mylogincontroller.login'));
+        }
 
         if($userLogin->id == $cmt->idAcc){
             $cmt->replyComment()->delete();
