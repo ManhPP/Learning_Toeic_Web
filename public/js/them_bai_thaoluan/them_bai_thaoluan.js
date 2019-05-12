@@ -73,7 +73,7 @@ $("#file-up").change(function(event) {
 
 $(document).on("click", "#btn-submit", function() {
 	$.ajax({
-		url: "/user/discussion/add",
+		url: $("#root-path").html()+"/user/discussion/add",
 		method: "post",
 		data:{
 			tieuDe: $("#tittle-discus").val(),

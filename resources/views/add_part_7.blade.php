@@ -36,7 +36,7 @@
                         </div> <!-- end listcau -->
 
                         <div class="div-choose-para">
-                            <img alt="add" id="ico-add1" src="/BKTOEIC/resources/img/round-add.png">
+                            <img alt="add" id="ico-add1" src="{{URL::asset("imgs/round-add.png")}}">
                         </div>
                     </div>
 
@@ -50,7 +50,7 @@
                         </div> <!-- end listcau -->
 
                         <div class="div-choose-para">
-                            <img alt="add" id="ico-add2" src="/BKTOEIC/resources/img/round-add.png">
+                            <img alt="add" id="ico-add2" src="{{URL::asset("imgs/round-add.png")}}">
                         </div>
                     </div>
 

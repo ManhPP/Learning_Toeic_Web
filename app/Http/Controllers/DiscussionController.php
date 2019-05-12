@@ -58,7 +58,7 @@ class DiscussionController extends Controller
    }
 
    public function indexAdd(Request $request){
-       $acc = Account::find(1);
+       $acc = Account::find(35);
         return view('them_bai_thaoluan',['acc'=>$acc]);
    }
 
@@ -74,7 +74,7 @@ class DiscussionController extends Controller
         $btl->ngayDang = $now->toDateTimeString();
 
         //set User in session
-        $acc = Account::find(1);
+        $acc = Account::find(35);
         $btl->idAcc = $acc->id;
 //        $acc->discussion()->create($btl);
         $check = $btl->saveOrFail();

@@ -10,7 +10,7 @@
 </head>
 <body>
     @include('header_admin')
-    <link rel="stylesheet" type="text/css" href="{{ URL::asset("css/admi_baihoc_bkt.css") }}"/>
+    <!-- <link rel="stylesheet" type="text/css" href="{{ URL::asset("css/admi_baihoc_bkt.css") }}"/> -->
     <link rel="stylesheet" type="text/css" href="{{ URL::asset("css/header-admin.css") }}"/>
 
     <!-- body -->
@@ -79,16 +79,19 @@
             <!-- btn delete -->
             <div class="col-11 row justify-content-start"
                  style="margin-top: 3em; margin-bottom: 5em">
-                <input class="btn-mana" id="add" type="button" name=""
-                       value="Thêm bài viết" style="background-color: #02671c"> <input
-                        class="btn-mana" id="delete" type="button" name=""
-                        value="Xóa bài viết" style="background-color: #F70000;">
+                <a class="btn-mana" id="add" type="button" name="" value="Thêm bài viết" href="{{Route("discussionController.indexAdd")}}" style="background-color: #02671c" >Thêm bài viết</a>
+                <input class="btn-mana" id="delete" type="button" name="" value="Xóa bài viết" data-path="{{Route("discussioncontroller.delete")}}" style="background-color: #F70000;">
             </div>
         </div>
 
         <div style="display: none">
             <div id="path-del">{{Route("discussioncontroller.delete")}}</div>
         </div>
+        <!-- footer -->
+		<div class="container-fluid row justify-content-center footer"
+			style="height: 5em; line-height: 5em; padding-left: 5em; bottom: 0; background-color: #E8E8E8; z-index: 0">
+			<span>Copyright © BKTOEIC 2019</span>
+		</div>
     </div>
 
 
@@ -101,6 +104,6 @@
     <script type="text/javascript"
             src="{{URL::asset("js/header-admin.js")}}"></script>
     <script type="text/javascript"
-            src="{{URL::asset("js/bootstrap.min.js")}}js/bootstrap.min.js"></script>
+            src="{{URL::asset("js/bootstrap.min.js")}}"></script>
 </body>
 </html>

@@ -40,11 +40,11 @@
                     <tr class="d-flex">
                         <th class="col-sm-1 col-md-1" data-name="id"><span>ID</span><img
                                     class="ico-filter" alt="filter"
-                                    src="${pageContext.request.contextPath}/resources/img/filter.png"></th>
+                                    src="{{URL::asset("imgs/filter.png")}}"></th>
                         <th class="col-sm-5 col-md-5" data-name="tittle"><span>Tiêu đề</span><img class="ico-filter" alt="filter"
-                                                                                                  src="${pageContext.request.contextPath}/resources/img/filter.png"></th>
+                        src="{{URL::asset("imgs/filter.png")}}"></th>
                         <th class="col-sm-4 col-md-4" data-name="accessCount"><span>Lượt truy cập</span><img class="ico-filter" alt="filter"
-                                                                                                             src="${pageContext.request.contextPath}/resources/img/filter.png"></th>
+                        src="{{URL::asset("imgs/filter.png")}}"></th>
                         <th class="col-sm-2 col-md-2"><span>Xem</span></th>
                     </tr>
                     </thead>
@@ -80,7 +80,11 @@
     <div style="display: none">
         <div id="path-delete">{{Route('testcontroller.delete')}}</div>
     </div>
-
+    <!-- footer -->
+	<div class="container-fluid row justify-content-center footer"
+		style="height: 5em; line-height: 5em; padding-left: 5em; bottom: 0; background-color: #E8E8E8; z-index: 0">
+		<span>Copyright © BKTOEIC 2019</span>
+	</div>
 </div>
 
 <script type="text/javascript"
