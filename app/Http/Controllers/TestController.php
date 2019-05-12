@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Test;
+use Auth;
 use Illuminate\Http\Request;
 use App\Part1;
 use App\Part2;
@@ -24,7 +25,9 @@ class TestController extends Controller
     {
         //
         $arrBKT = Test::all();
-        return view('user_bkt_home')->with('arrBKT',$arrBKT);
+        $userLogin = Auth::guard("accounts")->user();
+        return view('user_bkt_home')
+            ->with('arrBKT',$arrBKT)->with("userLogin", $userLogin);
     }
 
     public function addIndex(Request $request)
@@ -95,10 +98,11 @@ class TestController extends Controller
 
     public function doTest(Request $request){
         $id = $request["id"];
-        
+        $userLogin = Auth::guard("accounts")->user();
         $bkt = Test::find($id);
         
-        return view('user_bkt_view')->with('bkt', $bkt);
+        return view('user_bkt_view')
+            ->with('bkt', $bkt)->with("userLogin",$userLogin);
     }
     /**
      * Show the form for creating a new resource.

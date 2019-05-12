@@ -68,6 +68,7 @@ class AccountController extends Controller
         $acc->hasRole = "ROLE_ADMIN";
         $acc->active = 1;
         $acc->save();
+        return redirect(Route('mylogincontroller.login'));
     }
     /**
      * Display a listing of the resource.

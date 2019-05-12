@@ -12,6 +12,9 @@ class Account extends Authenticatable
     protected $primaryKey = 'id';
     protected $table='accounts';
     protected $filable=['hoTen','ngaySinh','username','password','email','gioiTinh','hasRole','active'];
+
+    protected $rememberTokenName = false;
+
     function discussion(){
         return $this -> hasMany('App\Discussion','idAcc');
     }

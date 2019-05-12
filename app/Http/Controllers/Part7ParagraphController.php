@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Part7;
 use App\Part7Paragraph;
+use Auth;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
 use PhpParser\Node\Expr\Cast\Object_;
@@ -13,12 +14,12 @@ class Part7ParagraphController extends Controller
 
 
     public function getPart7Paragraph(Request $request){
-//        $i=0;
-//        $arrDoan = Part7Paragraph::offset(0)->limit(20)->get();
+        $userLogin = Auth::guard("accounts")->user();
         $arrDoan = Part7Paragraph::all();
         $sum = Part7Paragraph::count();
         return view('manager_para_part7')
-            ->with("arrDoan", $arrDoan)->with("sum", $sum);
+            ->with("arrDoan", $arrDoan)->with("sum", $sum)
+            ->with('userLogin', $userLogin);
     }
 
     public function uploadFile(Request $request){

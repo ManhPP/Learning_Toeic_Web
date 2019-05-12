@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Account;
 use App\Comment;
+use Auth;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
 
@@ -16,13 +17,12 @@ class CommentController extends Controller
         $cmt->noiDung = $noiDung;
         $cmt->idBTL = $idBTL;
         $now = Carbon::now('GMT+7');
-//        error_log(."adasas");
         $cmt->ngayDang = $now->toDateTimeString();
 
         //get acc in session
-        $acc=Account::find(1);
+        $userLogin = Auth::guard("accounts")->user();
 
-        $cmt->idAcc = $acc->id;
+        $cmt->idAcc = $userLogin->id;
         $check = $cmt->saveOrFail();
         if($check >0){
             return 'true';

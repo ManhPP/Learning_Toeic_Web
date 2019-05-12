@@ -9,6 +9,7 @@ use App\Part6Paragraph;
 use App\Part7Paragraph;
 
 use App\ReadingPart;
+use Auth;
 use Illuminate\Http\Request;
 use App\Part5;
 
@@ -17,17 +18,23 @@ class ReadingPartController extends Controller
 
     public function index(){
         $arrPD = ReadingPart::all();
-        return view('guest_luyendoc_home')->with("arrPD", $arrPD);
+        $userLogin = Auth::guard("accounts")->user();
+        return view('guest_luyendoc_home')
+            ->with("arrPD", $arrPD)->with("userLogin",$userLogin);
     }
+
+    //index update part doc
     public function getPartDoc(Request $request){
         $id = $request["id"];
         $partDoc = ReadingPart::find($id);
         $arrDoan = array();
         $sum = 0;
+        $userLogin = Auth::guard("accounts")->user();
+
         if($partDoc->loaiPart == "Part 6"){
             $arrDoan = Part6Paragraph::all();
             $sum = Part6Paragraph::count();
-            return view('admin_update_part_6',['partDoc'=>$partDoc,'arrDoan'=>$arrDoan,'sum'=>$sum]);
+            return view('admin_update_part_6',['partDoc'=>$partDoc,'arrDoan'=>$arrDoan,'sum'=>$sum, 'userLogin'=>$userLogin]);
         }
         else if($partDoc->loaiPart == "Part 7"){
             $partDoc = ReadingPart::find($id);
@@ -40,16 +47,15 @@ class ReadingPartController extends Controller
             return view("admin_update_part7")
                 ->with("partDoc", $partDoc)
                 ->with("arrDoanDon", $arrDoanDon)->with("sumDoanDon", $sumDoanDon)
-                ->with("arrDoanKep", $arrDoanKep)->with("sumDoanKep", $sumDoanKep);
+                ->with("arrDoanKep", $arrDoanKep)->with("sumDoanKep", $sumDoanKep)
+                ->with('userLogin', $userLogin);
         }else if($partDoc->loaiPart == "Part 5"){
             $arrCau = Part5::all();
             $sum = Part5::count();
             return view('admin_update_part5')
-                ->with("arrCau",$arrCau)->with("sum",$sum)->with("partDoc", $partDoc);
-            $arrCau = Part5::all();
-            $sum = Part5::count();
-            return view('admin_update_part5')
-                ->with("arrCau",$arrCau)->with("sum",$sum)->with("partDoc", $partDoc);
+                ->with("arrCau",$arrCau)->with("sum",$sum)->with("partDoc", $partDoc)
+                ->with('userLogin', $userLogin);
+
         }
 
     }
@@ -149,12 +155,14 @@ class ReadingPartController extends Controller
         $view = $partDoc->accessCount;
         $partDoc->accessCount = $view +1;
         $partDoc->save();
+        $userLogin = Auth::guard("accounts")->user();
+
         if($partDoc->loaiPart == "Part 6"){
-            return view("part6", ['partDoc' => $partDoc]);
+            return view("part6", ['partDoc' => $partDoc, 'userLogin'=>$userLogin]);
         }else if($partDoc->loaiPart == "Part 7"){
-            return view("part7", ['partDoc' => $partDoc]);
+            return view("part7", ['partDoc' => $partDoc, 'userLogin'=>$userLogin]);
         }else if($partDoc->loaiPart == "Part 5"){
-           return view("guest_part5_view", ['partDoc' => $partDoc]);
+           return view("guest_part5_view", ['partDoc' => $partDoc, 'userLogin'=>$userLogin]);
         }
 
     }
@@ -200,10 +208,13 @@ class ReadingPartController extends Controller
        $sumDoanDon = Part7Paragraph::where('loaiPart7','=', 'Đoạn đơn')->count();
        $sumDoanKep = Part7Paragraph::where('loaiPart7','=', 'Đoạn kép')->count();
 
+       $userLogin = Auth::guard("accounts")->user();
+
        return view("admin_update_part7")
            ->with("partDoc", $partDoc)
            ->with("arrDoanDon", $arrDoanDon)->with("sumDoanDon", $sumDoanDon)
-           ->with("arrDoanKep", $arrDoanKep)->with("sumDoanKep", $sumDoanKep);
+           ->with("arrDoanKep", $arrDoanKep)->with("sumDoanKep", $sumDoanKep)
+           ->with('userLogin', $userLogin);
    }
 
    public function updatePart7(Request $request){
@@ -242,8 +253,11 @@ class ReadingPartController extends Controller
         // $arrCau = Part5::offset(0)->limit(20)->get();
         $arrCau = Part5::all();
         $sum = Part5::count();
+
+        $userLogin = Auth::guard("accounts")->user();
+
         return view('admin_them_part5')
-            ->with("arrCau",$arrCau)->with("sum",$sum);
+            ->with("arrCau",$arrCau)->with("sum",$sum)->with('userLogin', $userLogin);
     }
 
     public function addPart5(Request $request){
@@ -271,8 +285,9 @@ class ReadingPartController extends Controller
         $arrCau = Part5::all();
         $sum = Part5::count();
         $partDoc = ReadingPart::find($request["id"]);
+        $userLogin = Auth::guard("accounts")->user();
         return view('admin_update_part5')
-            ->with("arrCau",$arrCau)->with("sum",$sum)->with("partDoc", $partDoc);
+            ->with("arrCau",$arrCau)->with("sum",$sum)->with("partDoc", $partDoc)->with('userLogin', $userLogin);
     }
 
     public function updatePart5(Request $request){
@@ -301,12 +316,12 @@ class ReadingPartController extends Controller
 
 
 
-    public function indexGuestPart5(Request $request)
-    {
-        //
-        // $arrCau = Part5::offset(0)->limit(20)->get();
-        $partDoc = ReadingPart::find($request["id"]);
-        return view('guest_part5_view')
-            ->with("partDoc", $partDoc);
-    }
+//    public function indexGuestPart5(Request $request)
+//    {
+//        //
+//        // $arrCau = Part5::offset(0)->limit(20)->get();
+//        $partDoc = ReadingPart::find($request["id"]);
+//        return view('guest_part5_view')
+//            ->with("partDoc", $partDoc);
+//    }
 }

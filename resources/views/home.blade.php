@@ -21,9 +21,9 @@
 			<div class="center content-cover">
 				<p class="text-content">WITH ONE HOUR PER DAY,  OUR WEBSITE WILL HELP YOU IMPROVE YOUR LEVEL TOEIC</p>
 
-				<button class="register wow bounce no-outline" data-wow-duration="1.5s">REGISTER NOW</button>
+				<button id="btn-register" class="register wow bounce no-outline" data-wow-duration="1.5s">REGISTER NOW</button>
 				<b><i>OR</i></b>
-				<button class="register wow bounce no-outline" data-wow-duration="1.5s">LOGIN NOW</button>			
+				<button id="btn-login" class="register wow bounce no-outline" data-wow-duration="1.5s">LOGIN NOW</button>
 			</div>
 		</div>
 	</div>
@@ -69,6 +69,14 @@
 
 @section('footer')
 	@parent
+	<script>
+		$(document).on("click", "#btn-register", function(){
+			window.location.href = "{{Route("accountcontroller.registerindex")}}";
+		});
+		$(document).on("click", "#btn-login", function(){
+			window.location.href = "{{Route("mylogincontroller.login")}}"
+		});
+	</script>
 @endsection
 
 @section("js")

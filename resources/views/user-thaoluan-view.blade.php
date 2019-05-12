@@ -19,12 +19,10 @@
                 <div class="ques" id="noi-dung-btl">{!! $btl->noiDung !!}</div>
                 <div class="own-ques">
                     <p>
-                        @if($btl->account->id != $acc->id)
-                        {{--<c:when test="${btl.user.id != acc.id }">--}}
+                        @if($btl->account->id != $userLogin->id)
                             {{$btl->account->hoTen }} · <span class="reply-comment-color btn-report" data-id="{{$btl->id }}" data-type="rpbtl">Report</span>
                         @endif
-                        @if($btl->account->id == $acc->id)
-                        {{--<c:when test="${btl.user.id == acc.id }">--}}
+                        @if($btl->account->id == $userLogin->id)
                                 {{$btl->account->hoTen }} · <span class="reply-comment-color" id="update-btl">Update</span>
                         @endif
 
@@ -50,7 +48,7 @@
                                 <div class="asw-info">
                                     <span class="pointer">{{$cmt->account->hoTen }}</span> · <span
                                             class="reply-comment-color btn-report pointer" data-id="{{$cmt->id }}" data-type="rpcmt">Report</span>
-                                    @if($acc->id == $cmt->account->id)
+                                    @if($userLogin->id == $cmt->account->id)
 										<span class="more-action">··· <span
                                                     class="span-list-action hide"> <img class="triangle"
                                                                                         src="{{URL::asset("imgs/triangle.png")}}" />
@@ -62,8 +60,8 @@
 										</span>
 										</span>
                                     @endif
-                                    @if($acc->id != $cmt->account->id)
-                                        @if($acc->hasRole == 'ROLE_ADMIN')
+                                    @if($userLogin->id != $cmt->account->id)
+                                        @if($userLogin->hasRole == 'ROLE_ADMIN')
 											<span class="more-action">··· <span
                                                         class="span-list-action hide"> <img class="triangle"
                                                                                             src="{{URL::asset("imgs/triangle.png")}}" />

@@ -101,7 +101,7 @@
     </div>
 </div>
 <div style="display: none;" id="id-btl">{{ $btl->id }}</div>
-<div id="id-user" style="display: none;" >{{ $acc->id }}</div>
+<div id="id-user" style="display: none;" >{{ $userLogin->id }}</div>
 
 @endsection
 

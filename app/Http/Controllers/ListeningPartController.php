@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\ListeningPart;
 use App\ConversationParagraph;
+use Auth;
 use Illuminate\Http\Request;
 use App\Http\Requests;
 use Illuminate\Http\UploadedFile;
@@ -19,7 +20,9 @@ class ListeningPartController extends Controller
     {
         //
         $arrPN = ListeningPart::all();
-        return view('guest_luyennghe_home')->with("arrPN",$arrPN);
+        $userLogin = Auth::guard("accounts")->user();
+        return view('guest_luyennghe_home')
+            ->with("arrPN",$arrPN)->with("userLogin", $userLogin);
     }
 
     /**
@@ -67,37 +70,19 @@ class ListeningPartController extends Controller
     }
 
 
-//    public function indexGuestPart1(Request $request){
-//        $partNghe = ListeningPart::find($request["id"]);
-//        return view("guest_part1_view")->with("partNghe", $partNghe);
-//    }
-//
-//    public function indexGuestPart2(Request $request){
-//        $partNghe = ListeningPart::find($request["id"]);
-//        return view("guest_part2_view")->with("partNghe", $partNghe);
-//    }
-//
-//    public function indexGuestPart3(Request $request){
-//        $partNghe = ListeningPart::find($request["id"]);
-//        return view("guest_part3_view")->with("partNghe", $partNghe);
-//    }
-//    public function indexGuestPart4(Request $request){
-//        $partNghe = ListeningPart::find($request["id"]);
-//        return view("guest_part4_view")->with("partNghe", $partNghe);
-//    }
-
     public function practicePartNghe(Request $request)
     {
         $id = $request["id"];
         $partNghe = ListeningPart::find($id);
+        $userLogin = Auth::guard("accounts")->user();
         if($partNghe->loaiPart == "Part 1"){
-            return view("guest_part1_view", ['partNghe' => $partNghe]);
+            return view("guest_part1_view", ['partNghe' => $partNghe, 'userLogin'=>$userLogin]);
         }else if($partNghe->loaiPart == "Part 7"){
-            return view("guest_part2_view", ['partNghe' => $partNghe]);
+            return view("guest_part2_view", ['partNghe' => $partNghe, 'userLogin'=>$userLogin]);
         }else if($partNghe->loaiPart == "Part 5"){
-            return view("guest_part3_view", ['partNghe' => $partNghe]);
+            return view("guest_part3_view", ['partNghe' => $partNghe, 'userLogin'=>$userLogin]);
         }else{
-            return view("guest_part4_view")->with("partNghe", $partNghe);
+            return view("guest_part4_view")->with("partNghe", $partNghe)->with('userLogin',$userLogin);
         }
 
     }
@@ -112,19 +97,22 @@ class ListeningPartController extends Controller
     //return view udpate các part phần nghe
     public function redirectViewUpdate($id){
         $listeningPart=ListeningPart::find($id);
+
+        $userLogin = Auth::guard("accounts")->user();
+
         if($listeningPart->loaiPart=="Part 1"){
             $part1=$listeningPart;
-            return view('update_part_1')->with("part1", $part1);
+            return view('update_part_1')->with("part1", $part1)->with('userLogin', $userLogin);
         }else if($listeningPart->loaiPart=="Part 2"){
             $part2=$listeningPart;
-            return view('update_part_2')->with("part2",$part2);
+            return view('update_part_2')->with("part2",$part2)->with('userLogin', $userLogin);
         }else if($listeningPart->loaiPart=="Part 3"){
             $part3=$listeningPart;
-            return view('update_part_3')->with("partNghe",$part3);
+            return view('update_part_3')->with("partNghe",$part3)->with('userLogin', $userLogin);
         }
         else if($listeningPart->loaiPart=="Part 4"){
             $part4=$listeningPart;
-            return view('update_part_4')->with("partNghe",$part4);
+            return view('update_part_4')->with("partNghe",$part4)->with('userLogin', $userLogin);
         }
     }
 

@@ -18,8 +18,13 @@ class MyLoginController extends Controller
         if(Auth::guard('accounts')->attempt(['username'=>$username, 'password'=>$pass])){
             return redirect("/");
         }else{
-            error_log("noooo");
+            return redirect(Route('mylogincontroller.login'));
         }
+    }
+
+    public function logout(){
+        Auth::guard('accounts')->logout();
+        return redirect(URL(''));
     }
 
     public function username(){

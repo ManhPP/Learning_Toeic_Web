@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Part6;
 use App\Part6Paragraph;
+use Auth;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -16,13 +17,15 @@ class Part6ParagraphController extends Controller
     public function listPart6(){
         $data = Part6Paragraph::all();
         $sum = Part6Paragraph::count();
-        return view('add_part_6',['arrDoan'=>$data,'sum'=>$sum]);
+        $userLogin = Auth::guard("accounts")->user();
+        return view('add_part_6',['arrDoan'=>$data,'sum'=>$sum, 'userLogin'=>$userLogin]);
     }
 
     public function listPart6Para(){
         $data = Part6Paragraph::all();
         $sum = Part6Paragraph::count();
-        return view('add_part6_paragraph',['arrDoan'=>$data,'sum'=>$sum]);
+        $userLogin = Auth::guard("accounts")->user();
+        return view('add_part6_paragraph',['arrDoan'=>$data,'sum'=>$sum, 'userLogin'=>$userLogin]);
     }
 
     public function add(Request $request){

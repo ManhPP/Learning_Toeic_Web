@@ -9,9 +9,9 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
-Route::get('/', function () {
-    return view('home');
-});
+Route::get('/', [
+    'uses'=> 'HomeController@index'
+]);
 Route::get('/login', function(){
     return view('login');
 });
@@ -308,7 +308,7 @@ Route::post('/admin/account-manager/ban',['uses'=>'AccountController@ban']);
 // authentication
 Route::get("/account/login", [
     'uses'=> 'Auth\MyLoginController@getLogin'
-]);
+])->name('mylogincontroller.login');
 
 Route::post("/account/login/do-login", [
     'uses'=>'Auth\MyLoginController@postLogin'
@@ -316,11 +316,15 @@ Route::post("/account/login/do-login", [
 
 Route::get("/account/register",[
     'uses'=> 'AccountController@registerIndex'
-]);
+])->name('accountcontroller.registerindex');
 
 Route::post('/account/register/do-register',[
    'uses'=>'AccountController@doRegister'
 ])->name("accountcontroller.doregister");
+
+Route::get('/account/logout',[
+    'uses'=> 'Auth\MyLoginController@logout'
+])->name('mylogincontroller.logout');
 
 Auth::routes();
 

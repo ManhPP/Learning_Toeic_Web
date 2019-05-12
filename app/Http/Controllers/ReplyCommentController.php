@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\ReplyComment;
 use App\Account;
+use Auth;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
 
@@ -20,9 +21,9 @@ class ReplyCommentController extends Controller
         $reply->ngayDang = $now->toDateTimeString();
 
         //get acc in session
-        $acc=Account::find(1);
+        $userLogin = Auth::guard("accounts")->user();
 
-        $reply->idAcc = $acc->id;
+        $reply->idAcc = $userLogin->id;
         $check = $reply->saveOrFail();
         if($check >0){
             return 'true';
@@ -48,9 +49,9 @@ class ReplyCommentController extends Controller
             array_push($arr,$arrReply);
 
             //get acc from session
-            $acc = Account::find(1);
+            $userLogin = Auth::guard("accounts")->user();
 
-            array_push($arr,$acc);
+            array_push($arr,$userLogin);
 
             return $arr;
         }

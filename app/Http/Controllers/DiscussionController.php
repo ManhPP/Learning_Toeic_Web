@@ -7,10 +7,12 @@ use App\Comment;
 use App\Discussion;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
+use Auth;
 
 class DiscussionController extends Controller
 {
     public function home(Request $request){
+        $userLogin = Auth::guard("accounts")->user();
         $acc = Account::all();
         $arrBtl = Discussion::all();
         $arrNumCmt = array();
@@ -22,26 +24,23 @@ class DiscussionController extends Controller
             array_push($arrNumCmt,$numCmt);
         }
         return view('user_bai_thaoluan_home',['acc'=>$acc,'arrBtl'=>$arrBtl,'arrNumCmt'=>$arrNumCmt,
-        'numBtl'=>count($arrBtl),'numUser'=>Account::all()->count()]);
+        'numBtl'=>count($arrBtl),'numUser'=>Account::all()->count(), 'userLogin'=>$userLogin]);
     }
 
    public function accessDiscussion(Request $request){
        $id = $request["id"];
+       $userLogin = Auth::guard("accounts")->user();
        $btl = Discussion::find($id);
-//       $arrCmt = Comment::orderBy('id','desc')->where('idBtl',$id)->get();
-//       error_log(count($arrCmt));
-//       $btl->comment = $arrCmt;or
        $view = $btl->accessCount;
        $btl->accessCount = $view+1;
        $btl->save();
-       $acc = Account::find(1);
 
        $arrNumReply = array();
 
        foreach ($btl->comment as $cmt){
            array_push($arrNumReply,count($cmt->replyComment));
        }
-       return view('user-thaoluan-view',['btl'=>$btl,'acc'=>$acc,'listSumReply'=>$arrNumReply]);
+       return view('user-thaoluan-view',['btl'=>$btl,'userLogin'=>$userLogin,'listSumReply'=>$arrNumReply]);
    }
 
    public function upload_Img(Request $request){
@@ -58,8 +57,9 @@ class DiscussionController extends Controller
    }
 
    public function indexAdd(Request $request){
-       $acc = Account::find(1);
-        return view('them_bai_thaoluan',['acc'=>$acc]);
+       $userLogin = Auth::guard("accounts")->user();
+
+        return view('them_bai_thaoluan',['userLogin'=>$userLogin]);
    }
 
    public function addDiscussion(Request $request){
@@ -74,9 +74,8 @@ class DiscussionController extends Controller
         $btl->ngayDang = $now->toDateTimeString();
 
         //set User in session
-        $acc = Account::find(1);
-        $btl->idAcc = $acc->id;
-//        $acc->discussion()->create($btl);
+        $userLogin = Auth::guard("accounts")->user();
+        $btl->idAcc = $userLogin->id;
         $check = $btl->saveOrFail();
         if($check >0){
             return 'true';
@@ -87,8 +86,9 @@ class DiscussionController extends Controller
    public function indexUpdate(Request $request){
        $id = $request["id"];
        $btl = Discussion::find($id);
-       $acc = Account::find(1);
-        return view('update_bai_thaoluan',['acc'=>$acc,'btl'=>$btl]);
+           $userLogin = Auth::guard("accounts")->user();
+
+        return view('update_bai_thaoluan',['userLogin'=>$userLogin,'btl'=>$btl]);
    }
 
 
