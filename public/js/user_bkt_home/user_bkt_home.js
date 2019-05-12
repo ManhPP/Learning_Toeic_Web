@@ -89,8 +89,8 @@ $(document).on("click", "#search-submit", function(){
                 .append('<tr class="d-flex r search-result" data-id="'
                         +data[i].id
                         +'"><td class="col-12 col-sm-10 col-md-7"><span><img src="'
-                        +$("#root-path").html()
-                        +'/resources/img/guest-luyennghe-home/book.png"></span>'
+                        +$("#image-search").html()
+                        +'"></span>'
                         + '<span style="padding-left: 0.5em">Bài kiểm tra'
                         +': '
                         +data[i].title

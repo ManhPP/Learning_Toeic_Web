@@ -85,12 +85,6 @@
                         <th class="col-12 col-sm-10 col-md-7">Listening name</th>
                         <th class="col-0 col-sm-2 col-md-5 count">Access count</th>
                     </tr>
-                    @foreach($arrPN as $partNghe)
-                    <tr class="d-flex suggest" data-id="{{ $partNghe->id }}" style="cursor:pointer;" >
-                        <th class="col-12 col-sm-10 col-md-7">{{$partNghe->title}}</th>
-                        <th class="col-0 col-sm-2 col-md-5 count">{{$partNghe->acessCount}}</th>
-                    </tr>
-                    @endforeach
                 </thead>
                 <tbody>
                 </tbody>
@@ -112,6 +106,7 @@
 
 <div style="display: none">
     <div id="root-path">{{ URL("") }}</div>
+    <div id="image-search">{{ URL::asset("imgs/guest-luyennghe-home/book.png") }}</div>
 </div>
 
 <!-- modal -->
