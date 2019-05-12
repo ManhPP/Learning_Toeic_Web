@@ -47,8 +47,8 @@ class CommentController extends Controller
         $cmt = Comment::find($id);
 
         //get Acc from session
-        $acc = Account::find(1);
-        if($acc->id == $cmt->idAcc){
+        $userLogin = Auth::guard("accounts")->user();
+        if($userLogin->id == $cmt->idAcc){
             $cmt->noiDung = $request['noiDung'];
             $check = $cmt->save();
             if($check >0){
@@ -64,9 +64,9 @@ class CommentController extends Controller
         $cmt = Comment::find($idCmt);
 
         //get Acc from session
-        $acc = Account::find(1);
+        $userLogin = Auth::guard("accounts")->user();
 
-        if($acc->id == $cmt->idAcc){
+        if($userLogin->id == $cmt->idAcc){
             $cmt->replyComment()->delete();
             $cmt->report()->delete();
             $check = $cmt->delete();

@@ -76,9 +76,9 @@ class ReplyCommentController extends Controller
         $reply = ReplyComment::find($idRCmt);
 
         //get Acc from session
-        $acc = Account::find(1);
+        $userLogin = Auth::guard("accounts")->user();
 
-        if($acc->id == $reply->idAcc){
+        if($userLogin->id == $reply->idAcc){
             $reply->noiDung = $noiDung;
             $check = $reply->save();
             if($check >0){
@@ -94,9 +94,9 @@ class ReplyCommentController extends Controller
         $reply = ReplyComment::find($idRCmt);
 
         //get Acc from session
-        $acc = Account::find(1);
+        $userLogin = Auth::guard("accounts")->user();
 
-        if($acc->id == $reply->idAcc){
+        if($userLogin->id == $reply->idAcc){
             $check = $reply->delete();
             if($check >0){
                 return 'true';
