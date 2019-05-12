@@ -70,7 +70,7 @@
 							Or Sign Up Using
 						</span>
 
-						<a href="#" class="txt2">
+						<a href="{{Route("accountcontroller.registerindex")}}" class="txt2">
 							Sign Up
 						</a>
 					</div>

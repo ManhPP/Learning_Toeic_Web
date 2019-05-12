@@ -16,7 +16,12 @@ class MyLoginController extends Controller
         $username = $request["username"];
         $pass = $request["pass"];
         if(Auth::guard('accounts')->attempt(['username'=>$username, 'password'=>$pass])){
-            return redirect("/");
+            $user = Auth::guard('accounts')->user();
+            if($user->hasRole == 'ROLE_ADMIN'){
+                return redirect(Route("accountcontroller.get"));
+            }else {
+                return redirect("/");
+            }
         }else{
             return redirect(Route('mylogincontroller.login'));
         }

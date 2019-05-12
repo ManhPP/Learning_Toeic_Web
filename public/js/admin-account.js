@@ -156,6 +156,9 @@ function ban() {
 		'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
 		},
 		success : function(data) {
+			if(data!=1 && data!=2){
+				window.location.href = data;
+			}
 			// resetPagination($(".page-num.active").attr("data-page"));
 			$("#noti span").remove();
 			$("#noti").append(
@@ -177,6 +180,7 @@ function ban() {
 function unBan() {
 	var arrId = new Array();
 	var index = 0;
+
 	$("table tbody tr").each(function() {
 		if ($(this).hasClass("selected")) {
 			arrId[index] = $(this).find("td").eq(0).html();
@@ -192,7 +196,10 @@ function unBan() {
 		headers: {
 		'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
 		},
-		success : function() {
+		success : function(data) {
+			if(data!=1 && data!=2){
+				window.location.href = data;
+			}
 			// resetPagination($(".page-num.active").attr("data-page"));
 			$("#noti span").remove();
 			$("#noti").append(
@@ -562,11 +569,13 @@ function delAcc() {
 				$("tr.selected").each(function () {
 					$(this).remove();
 				  });
-			} else {
+			} else if(data == 2){
 				$("#noti").html("");
 				$("#noti")
 						.append(
 								'<span style="color: red">Xóa không thành công.</span>');
+			}else{
+				window.location.href = data;
 			}
 			
 		}

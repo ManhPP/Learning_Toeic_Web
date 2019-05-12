@@ -135,7 +135,7 @@ class AccountController extends Controller
             $tempAcc->id = $id;
 
             if( $userLogin==null || !$userLogin->can('update', $tempAcc)){
-                return (Route('mylogincontroller.login'));
+                return redirect(Route('mylogincontroller.login'));
             }
 
 
