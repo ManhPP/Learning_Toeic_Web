@@ -34,8 +34,11 @@ class AccountController extends Controller
 
 
         $arrUser=$request["arrId"];
-        try{ foreach($arrUser as $id){
-            Account::find($id)->update(['active'=>0]);
+        try{
+            foreach($arrUser as $id) {
+                $acc = Account::find($id);
+                $acc->active = 0;
+                $acc->save();
             }
             return 1;
         }catch(Exception $e){
@@ -54,8 +57,11 @@ class AccountController extends Controller
 
 
         $arrUser=$request["arrId"];
-        try{ foreach($arrUser as $id){
-            Account::find($id)->update(['active'=>1]);
+        try{
+            foreach($arrUser as $id){
+                $acc = Account::find($id);
+                $acc->active = 1;
+                $acc->save();
             }
             return 1;
         }catch(Exception $e){
@@ -138,29 +144,32 @@ class AccountController extends Controller
                 return redirect(Route('mylogincontroller.login'));
             }
 
+            $acc = Account::find($id);
 
 
              if($hoTen!=""){
-                Account::find($id)->update(['hoTen'=>$hoTen]);
+                $acc->hoTen = $hoTen;
             }
             if($ngaySinh!=""){
-                Account::find($id)->update(['ngaySinh'=>$ngaySinh]);
+                $acc->ngaySinh = $ngaySinh;
             }
             if($gioiTinh!=""){
-                Account::find($id)->update(['gioiTinh'=>$gioiTinh]);
+                $acc->gioiTinh = $gioiTinh;
             }
             if($username!=""){
-                Account::find($id)->update(['username'=>$username]);
+                $acc->username= $username;
             }
             if($pass!=""){
-                Account::find($id)->update(['password'=>$pass]);
+                $acc->password = $pass;
             }
             if($email!=""){
-                Account::find($id)->update(['email'=>$email]);
+                $acc->email = $email;
             }
             if($hasRole!=""){
-                Account::find($id)->update(['hasRole'=>$hasRole]);
+                $acc->hasRole = $hasRole;
             }
+
+            $acc->save();
 
 
             return Redirect::to('/admin/quanly/account');
