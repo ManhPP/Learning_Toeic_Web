@@ -60,7 +60,7 @@
                                                 <span class="checkmark"></span>
                                             </label>
                                             <label class="radio-container">Female
-                                                <input type="radio" name="gender">
+                                                <input type="radio" name="gioiTinh">
                                                 <span class="checkmark"></span>
                                             </label>
                                         </div>
@@ -77,7 +77,7 @@
                                 <div class="col-2-re">
                                     <div class="input-group">
                                         <label class="label">Password</label>
-                                        <input class="input--style-4" type="text" name="password">
+                                        <input class="input--style-4" type="password" name="password">
                                     </div>
                                 </div>
                             </div>

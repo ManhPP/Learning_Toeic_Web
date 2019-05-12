@@ -149,7 +149,7 @@
     <div style="display: none">
         <div id="path-search">{{Route("readingpartcontroller.searchreading")}}</div>
         
-        {{-- <div id="path-view">{{Route("readingpartcontroller.dotest")}}</div> --}}
+        <div id="path-view">{{Route("readingpartcontroller.practicepartdoc")}}</div>
     </div>
 @endsection
 
