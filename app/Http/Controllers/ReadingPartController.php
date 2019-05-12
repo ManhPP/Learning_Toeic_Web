@@ -346,4 +346,13 @@ class ReadingPartController extends Controller
         }
         return Response()->json($arrTest, 200);
     }
+
+    public function doPractice(Request $request){
+        $id = $request["id"];
+        $userLogin = Auth::guard("accounts")->user();
+        $bkt = ReadingPart::find($id);
+        
+        return view('user_bkt_view')
+            ->with('bkt', $bkt)->with("userLogin",$userLogin);
+    }
 }

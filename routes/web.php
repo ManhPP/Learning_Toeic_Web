@@ -254,9 +254,9 @@ Route::post('/admin/manager-reading-part/update-part7/do-update', [
 //================= end part 7 ===========================
 //cho user va guest =================================================================================================
 //luyen nghe
-Route::get("/guest/luyen-nghe","ListeningPartController@practicePartNghe")->name("listeningpartcontroller.practiceartnghe");
+Route::get("/guest/listening/practice","ListeningPartController@practicePartNghe")->name("listeningpartcontroller.practicepartnghe");
 // luyen doc
-Route::get("/guest/luyen-doc","ReadingPartController@practicePartDoc")->name("readingpartcontroller.practiceartdoc");
+Route::get("/guest/reading/practice","ReadingPartController@practicePartDoc")->name("readingpartcontroller.practicepartdoc");
 
 Route::get("/guest/reading",[
     'uses' => "ReadingPartController@index"
@@ -272,6 +272,7 @@ Route::post("guest/reading/search",[
 Route::post("guest/listening/search",[
     "uses"=> "ListeningPartController@searchListening"
 ])->name("listeningpartcontroller.searchlistening");
+
 //================= testing ==================================
 //test
 //testing home
