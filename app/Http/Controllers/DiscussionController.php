@@ -34,7 +34,7 @@ class DiscussionController extends Controller
        $view = $btl->accessCount;
        $btl->accessCount = $view+1;
        $btl->save();
-       $acc = Account::find(1);
+       $acc = Account::find(35);
 
        $arrNumReply = array();
 

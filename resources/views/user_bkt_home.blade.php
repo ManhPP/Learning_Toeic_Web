@@ -24,7 +24,7 @@
             @if(count($arrBKT) != 0)
                 <div class="suggess content-body row">
                     <div class="header-suggess">
-                        <span>Top of readings</span>
+                        <span>Top of testings</span>
                     </div>
                     <!-- Swiper -->
                     <div class="swiper-container col-8 col-sm-11" id="mySwiper">
@@ -78,6 +78,12 @@
                                 <th class="col-12 col-sm-10 col-md-7">Tiêu đề bài kiểm tra</th>
                                 <th class="col-0 col-sm-2 col-md-5 count">Access count</th>
                             </tr>
+                            @foreach($arrBKT as $bkt)
+                            <tr class="d-flex suggest" data-id="{{ $bkt->id }}" style="cursor:pointer;" >
+                                <th class="col-12 col-sm-10 col-md-7">{{$bkt->title}}</th>
+                                <th class="col-0 col-sm-2 col-md-5 count">{{$bkt->acessCount}}</th>
+                            </tr>
+                            @endforeach
                         </thead>
                         <tbody>
                         </tbody>

@@ -53,7 +53,7 @@
 	<div class="modal fade" tabindex="-1" role="dialog"
 		aria-labelledby="mySmallModalLabel" aria-hidden="true"
 		id="model-choose-ques">
-		<button type="button" class="btn btn-default" id="btn-input-yes" data-next="false">Ok</button>
+		<button type="button" class="btn btn-default" id="btn-input-yes" style="background-color:coral" data-next="false">Ok</button>
 		<button type="button" class="btn btn-primary" id="btn-input-no">Cancel</button>
 		<div id="num-ques-choose"><span id="num-cau-choose">0</span>/40</div>
 		<div class="modal-dialog" style="top: 2em;max-width: 100%;width: 65em;">

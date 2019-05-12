@@ -70,7 +70,7 @@ Route::get('/admin/bai-hoc-manager/update-part-doc','ReadingPartController@getPa
 // view quản lý tài khoản của admin
 Route::get('/admin/quanly/account', [
     'uses' => 'AccountController@get'
-]);
+])->name("accountcontroller.get");
 
 // ban tài khoản
 Route::post('/admin/account-manager/ban',[

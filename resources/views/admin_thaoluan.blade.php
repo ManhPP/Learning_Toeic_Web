@@ -67,7 +67,7 @@
                                 <td class="col-sm-1 col-md-1">{{$btl->accessCount}}</td>
                                 <td class="col-sm-1 col-md-1">{{$arrNumCmt[$index]}}</td>
 {{--                                <td class="col-sm-1 col-md-1">{{$arrNumReport[$index]}}</td>--}}
-                                <td class="col-sm-1 col-md-1"><button class="detail">View</button></td>
+                                <td class="col-sm-1 col-md-1"><a class="detail" href="{{Route('dicussionController.view',['id'=>$btl->id])}}">View</a></td>
                             </tr>
                             @php $index ++ @endphp
                         @endforeach
