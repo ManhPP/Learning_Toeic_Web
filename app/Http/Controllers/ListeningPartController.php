@@ -131,25 +131,27 @@ class ListeningPartController extends Controller
         }
     }
 
-    //return view  các part phần nghe
-    // public function redirectView($id){
-    //     $listeningPart=ListeningPart::find($id);
-    //     if($listeningPart->loaiPart=="Part 1"){
-    //         $partNghe=$listeningPart;
-    //         return view("guest_part1_view")->with("partNghe", $partNghe);
-    //     }else if($listeningPart->loaiPart=="Part 2"){
-    //         $partNghe=$listeningPart;
-    //         return view("guest_part2_view")->with("partNghe", $partNghe);
-    //     }else if($listeningPart->loaiPart=="Part 3"){
-    //         $partNghe=$listeningPart;
-    //         return view("guest_part3_view")->with("partNghe", $partNghe);
-    //     }
-    //     else if($listeningPart->loaiPart=="Part 4"){
-    //         \Log::inf("p4");
-    //         $partNghe=$listeningPart;
-    //         return view("guest_part4_view")->with("partNghe", $partNghe);
-    //     }
-    // }
+    // return view  các part phần nghe
+    public function redirectView($id){
+        $listeningPart=ListeningPart::find($id);
+        $view = $listeningPart->acessCount;
+        $listeningPart->acessCount = $view +1;
+        $listeningPart->save();
+        if($listeningPart->loaiPart=="Part 1"){
+            $partNghe=$listeningPart;
+            return view("guest_part1_view")->with("partNghe", $partNghe);
+        }else if($listeningPart->loaiPart=="Part 2"){
+            $partNghe=$listeningPart;
+            return view("guest_part2_view")->with("partNghe", $partNghe);
+        }else if($listeningPart->loaiPart=="Part 3"){
+            $partNghe=$listeningPart;
+            return view("guest_part3_view")->with("partNghe", $partNghe);
+        }
+        else if($listeningPart->loaiPart=="Part 4"){
+            $partNghe=$listeningPart;
+            return view("guest_part4_view")->with("partNghe", $partNghe);
+        }
+    }
 
     // xóa part nghe
     public function delete(Request $request){

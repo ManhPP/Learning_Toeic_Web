@@ -24,7 +24,7 @@
         @if(count($arrPN) != 0)
         <div class="suggess content-body row">
             <div class="header-suggess">
-                <span>Top of readings</span>
+                <span>Top of listenings</span>
             </div>
             <!-- Swiper -->
             <div class="swiper-container col-8 col-sm-11" id="mySwiper">
@@ -65,7 +65,7 @@
                 </select>
                 <span style="position: relative;">
                     <input id="search-input" type="text" name="search"
-                        placeholder="Search reading">
+                        placeholder="Search listening">
                     <img class="hide" id="del-search" src="{{ URL::asset("imgs/cross.png") }}">
                 </span>
                 <input id="search-submit"
@@ -82,9 +82,15 @@
                 id="search-table">
                 <thead>
                     <tr class="d-flex">
-                        <th class="col-12 col-sm-10 col-md-7">Reading name</th>
+                        <th class="col-12 col-sm-10 col-md-7">Listening name</th>
                         <th class="col-0 col-sm-2 col-md-5 count">Access count</th>
                     </tr>
+                    @foreach($arrPN as $partNghe)
+                    <tr class="d-flex suggest" data-id="{{ $partNghe->id }}" style="cursor:pointer;" >
+                        <th class="col-12 col-sm-10 col-md-7">{{$partNghe->title}}</th>
+                        <th class="col-0 col-sm-2 col-md-5 count">{{$partNghe->acessCount}}</th>
+                    </tr>
+                    @endforeach
                 </thead>
                 <tbody>
                 </tbody>

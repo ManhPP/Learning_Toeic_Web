@@ -84,6 +84,12 @@
                         <th class="col-12 col-sm-10 col-md-7">Reading name</th>
                         <th class="col-0 col-sm-2 col-md-5 count">Access count</th>
                     </tr>
+                    @foreach($arrPD as $partDoc)
+                    <tr class="d-flex suggest" data-id="{{ $partDoc->id }}" style="cursor:pointer;" >
+                        <th class="col-12 col-sm-10 col-md-7">{{$partDoc->title}}</th>
+                        <th class="col-0 col-sm-2 col-md-5 count">{{$partDoc->accessCount}}</th>
+                    </tr>
+                    @endforeach
                 </thead>
                 <tbody>
                 </tbody>

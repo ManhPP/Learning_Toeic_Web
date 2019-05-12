@@ -10,7 +10,7 @@
 </head>
 <body>
 @include('header_admin')
-<link rel="stylesheet" type="text/css" href="{{ URL::asset("css/admi_baihoc_bkt.css") }}"/>
+<!-- <link rel="stylesheet" type="text/css" href="{{ URL::asset("css/admi_baihoc_bkt.css") }}"/> -->
 <link rel="stylesheet" type="text/css" href="{{ URL::asset("css/header-admin.css") }}"/>
 <!-- body -->
 <div class="container-fluid" style="padding-top: 50px;">
@@ -96,6 +96,6 @@
 <script type="text/javascript"
         src="{{URL::asset("js/header-admin.js")}}"></script>
 <script type="text/javascript"
-        src="{{URL::asset("js/bootstrap.min.js")}}js/bootstrap.min.js"></script>
+        src="{{URL::asset("js/bootstrap.min.js")}}"></script>
 </body>
 </html>
