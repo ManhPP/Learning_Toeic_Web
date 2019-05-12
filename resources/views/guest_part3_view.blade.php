@@ -58,13 +58,13 @@
 									</div>
 									<div class="row">
 										<label class="col-12 col-md-6"><input type="radio"
-											name="choise{{ $index }}" value="A"> A<span class="asws">{{ $cht->daA }}</span></label>
+											name="choise{{ $index }}" value="A"> <span class="asws">{{ $cht->dAA }}</span></label>
 										<label class="col-12 col-md-6"><input type="radio"
-											name="choise{{ $index }}" value="B"> B<span class="asws">{{ $cht->daB }}</span></label>
+											name="choise{{ $index }}" value="B"> <span class="asws">{{ $cht->dAB }}</span></label>
 										<label class="col-12 col-md-6"><input type="radio"
-											name="choise{{ $index }}" value="C"> C<span class="asws">{{ $cht->daC }}</span></label>
+											name="choise{{ $index }}" value="C"> <span class="asws">{{ $cht->dAC }}</span></label>
 										<label class="col-12 col-md-6"><input type="radio"
-											name="choise{{ $index }}" value="D"> D<span class="asws">{{ $cht->daD }}</span></label>
+											name="choise{{ $index }}" value="D"> <span class="asws">{{ $cht->dAD }}</span></label>
 									</div>
 									<hr>
 								</div>

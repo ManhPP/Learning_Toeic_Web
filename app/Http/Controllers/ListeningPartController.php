@@ -74,12 +74,17 @@ class ListeningPartController extends Controller
     {
         $id = $request["id"];
         $partNghe = ListeningPart::find($id);
+
         $userLogin = Auth::guard("accounts")->user();
+
+        $view = $partNghe->acessCount;
+        $partNghe->acessCount = $view +1;
+        $partNghe->save();
         if($partNghe->loaiPart == "Part 1"){
             return view("guest_part1_view", ['partNghe' => $partNghe, 'userLogin'=>$userLogin]);
-        }else if($partNghe->loaiPart == "Part 7"){
+        }else if($partNghe->loaiPart == "Part 2"){
             return view("guest_part2_view", ['partNghe' => $partNghe, 'userLogin'=>$userLogin]);
-        }else if($partNghe->loaiPart == "Part 5"){
+        }else if($partNghe->loaiPart == "Part 3"){
             return view("guest_part3_view", ['partNghe' => $partNghe, 'userLogin'=>$userLogin]);
         }else{
             return view("guest_part4_view")->with("partNghe", $partNghe)->with('userLogin',$userLogin);
@@ -116,9 +121,12 @@ class ListeningPartController extends Controller
         }
     }
 
-    //return view  các part phần nghe
+    // return view  các part phần nghe
     public function redirectView($id){
         $listeningPart=ListeningPart::find($id);
+        $view = $listeningPart->acessCount;
+        $listeningPart->acessCount = $view +1;
+        $listeningPart->save();
         if($listeningPart->loaiPart=="Part 1"){
             $partNghe=$listeningPart;
             return view("guest_part1_view")->with("partNghe", $partNghe);
@@ -135,7 +143,7 @@ class ListeningPartController extends Controller
         }
     }
 
-    ////// xóa part nghe
+    // xóa part nghe
     public function delete(Request $request){
         $arrID = $request["arrId"];
         \Log::info($arrID);
@@ -172,7 +180,25 @@ class ListeningPartController extends Controller
         return $listeningPart->delete();
     }
 
+    public function searchListening(Request $request){
+        $title = $request["title"];
+        $part = $request["loaiPart"];
 
+        $arrTest = array();
+        if(strlen($title)==0 && $part==0){
+            $arrTest = ListeningPart::all();
+        }
+        elseif(strlen($title)!=0 && $part == 0){
+            $arrTest = ListeningPart::where("title","like","%".$title."%")->get();
+        }
+        elseif(strlen($title)==0 && $part != 0){
+            $arrTest = ListeningPart::where("loaiPart","like","%Part ".$part."%")->get();
+        }
+        else{
+            $arrTest = ListeningPart::where("loaiPart","like","%Part ".$part."%","and","title","like","%".$title."%")->get();
+        }
+        return Response()->json($arrTest, 200);
+    }
 
 
 

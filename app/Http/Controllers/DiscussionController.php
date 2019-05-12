@@ -35,6 +35,8 @@ class DiscussionController extends Controller
        $btl->accessCount = $view+1;
        $btl->save();
 
+       $acc = Account::find(35);
+
        $arrNumReply = array();
 
        foreach ($btl->comment as $cmt){
@@ -59,7 +61,8 @@ class DiscussionController extends Controller
    public function indexAdd(Request $request){
        $userLogin = Auth::guard("accounts")->user();
 
-        return view('them_bai_thaoluan',['userLogin'=>$userLogin]);
+       return view('them_bai_thaoluan',['userLogin'=>$userLogin]);
+
    }
 
    public function addDiscussion(Request $request){
@@ -70,12 +73,12 @@ class DiscussionController extends Controller
         $btl->noiDung = $noidung;
         $btl->accessCount = 0;
         $now = Carbon::now('GMT+7');
-//        error_log(."adasas");
         $btl->ngayDang = $now->toDateTimeString();
 
         //set User in session
         $userLogin = Auth::guard("accounts")->user();
         $btl->idAcc = $userLogin->id;
+
         $check = $btl->saveOrFail();
         if($check >0){
             return 'true';

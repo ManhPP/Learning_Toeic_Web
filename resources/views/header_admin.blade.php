@@ -51,6 +51,10 @@
 				src="{{URL::asset("imgs/baihoc-manager.png")}}">Quản
 				lý bài BKT</a></li>
 
+		<li><a id="link-discuss" href="{{Route("accountcontroller.get")}}"><img class="ico-manag"
+				src="{{URL::asset("imgs/account-manager.png")}}">Quản
+				lý tải khoản</a></li>
+
 		<li><a id="link-discuss" href="{{Route("discussioncontroller.indexadminmanager")}}"><img class="ico-manag"
 				src="{{URL::asset("imgs/btl-manager.png")}}">Quản
 				lý bài thảo luận</a></li>

@@ -458,14 +458,16 @@ $(document).on(
             if ($(this).parent().attr("data-cmt-lev") == "lev1") {
                 var id = $(this).parent().attr("data-cmt");
                 $.ajax({
-                    url : "bai-thao-luan/del-cmt",
+                    url : "del-cmt",
                     data : {
                         id : id,
                     },
                     success : function (data) {
-                        if (data == true) {
-                            resetPagination($(".page-num.active").attr(
-                                    "data-page"));
+                        if (data == 'true') {
+                            // resetPagination($(".page-num.active").attr(
+                            //         "data-page"));
+                            alert("Done.");
+                            location.reload();
                         }
                     }
                 });
@@ -473,12 +475,13 @@ $(document).on(
                 var id = $(this).parent().attr("data-reply-cmt");
                 $
                         .ajax({
-                            url : "bai-thao-luan/del-rep-cmt",
+                            url : "del-rep-cmt",
                             data : {
                                 id : id,
                             },
                             success : function (data) {
-                                if (data == true) {
+                                if (data == 'true') {
+                                    alert("done.");
                                     var numRep = $(".num-rep[data-cmt='"
                                             + $(
                                                     ".rep-cmt[data-reply-cmt='"
@@ -546,13 +549,13 @@ $(document).on("keypress", ".update-cmt", function(event){
    if($(this).attr("data-lev") == "lev1"){
        var idCMT = parent.attr("data-cmt");
        $.ajax({
-           url: "bai-thao-luan/update-cmt",
+           url: "update-cmt",
            data:{
              id: idCMT,
              noiDung: noiDung,
            },
            success: function(data){
-               if(data==true){
+               if(data=='true'){
                    parent.html(noiDung);
                }
            }
@@ -560,13 +563,13 @@ $(document).on("keypress", ".update-cmt", function(event){
    } else if($(this).attr("data-lev") == "lev2"){
        var idRCMT = parent.attr("data-reply-cmt");
        $.ajax({
-           url: "bai-thao-luan/update-repcmt",
+           url: "update-repcmt",
            data:{
              id: idRCMT,
              noiDung: noiDung,
            },
            success: function(data){
-               if(data==true){
+               if(data=='true'){
                    parent.html(noiDung);
                }
            }

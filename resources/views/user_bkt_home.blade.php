@@ -24,7 +24,7 @@
             @if(count($arrBKT) != 0)
                 <div class="suggess content-body row">
                     <div class="header-suggess">
-                        <span>Top of readings</span>
+                        <span>Top of testings</span>
                     </div>
                     <!-- Swiper -->
                     <div class="swiper-container col-8 col-sm-11" id="mySwiper">
@@ -100,6 +100,7 @@
         
         <div style="display: none">
             <div id="root-path">{{ URL("") }}</div>
+            <div id="image-search">{{ URL::asset("imgs/guest-luyennghe-home/book.png") }}</div>
         </div>
         
         <!-- modal -->

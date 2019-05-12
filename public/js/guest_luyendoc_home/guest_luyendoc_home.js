@@ -72,14 +72,14 @@ $(document).on("click", "#search-submit", function(){
     var part = $("#select-part").val();
     
     $.ajax({
-        url: "luyen-doc-home/search",
+        url: $("#path-search").html(),
         data: {
-            id: -1,
-            accessCount: -1,
-            tittle: tittle,
+            title: tittle,
             loaiPart: part,
-            index: 1,
-            maxResult: 10
+        },
+        method: "POST",
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
         },
         success: function(data){
             $("#search-table tbody").html("");
@@ -89,12 +89,12 @@ $(document).on("click", "#search-submit", function(){
                 .append('<tr class="d-flex r search-result" data-id="'
                         +data[i].id
                         +'"><td class="col-12 col-sm-10 col-md-7"><span><img src="'
-                        +$("#root-path").html()
-                        +'/resources/img/guest-luyennghe-home/book.png"></span>'
+                        +$("#image-search").html()
+                        +'"></span>'
                         + '<span style="padding-left: 0.5em">'
                         +data[i].loaiPart
                         +': '
-                        +data[i].tittle
+                        +data[i].title
                         +'</span></td><td class="col-0 col-sm-2 col-md-5 count">'
                         +data[i].accessCount
                         +'</td></tr>');
@@ -104,11 +104,11 @@ $(document).on("click", "#search-submit", function(){
 });
 
 $(document).on("click", ".search-result", function(){
-    window.location.href = $("#root-path").html()+ '/reading/luyen-doc?id='+$(this).attr("data-id") ;
+    window.location.href = $("#path-view").html()+'?id='+$(this).attr("data-id") ;
 });
 
 $(document).on("click", ".suggest", function(){
-    window.location.href = $("#root-path").html()+ '/guest/luyen-doc?id='+$(this).attr("data-id") ;
+    window.location.href = $(this).attr("data-path");
 });
 
 //del search

@@ -1,5 +1,5 @@
 @extends('layouts.master')
-@section('title','update part1')
+@section('title','add part 3')
 @section("css")
 <link rel="stylesheet" type="text/css" href="{{URL::asset("css/admin-them-part3.css")}}">
 @endsection
@@ -59,10 +59,10 @@
 									<span><img class="ico-edit" data-index="{{$index}}" src="{{URL::asset("imgs/edit.png")}}"></span>
 								</div>
 								<div class="row">
-									<label class="col-12 col-md-6"><input type="radio" name="choise{{$index}}" value="A"><span class="asws">A: </span></label>
-									<label class="col-12 col-md-6"><input type="radio" name="choise{{$index}}" value="B"><span class="asws">B: </span></label>
-									<label class="col-12 col-md-6"><input type="radio" name="choise{{$index}}" value="C"><span class="asws">C: </span></label>
-									<label class="col-12 col-md-6"><input type="radio" name="choise{{$index}}" value="D"><span class="asws">D: </span></label>
+									<label class="col-12 col-md-6"><input type="radio" name="choise{{$index}}" value="A"><span class="asws"> </span></label>
+									<label class="col-12 col-md-6"><input type="radio" name="choise{{$index}}" value="B"><span class="asws"> </span></label>
+									<label class="col-12 col-md-6"><input type="radio" name="choise{{$index}}" value="C"><span class="asws"> </span></label>
+									<label class="col-12 col-md-6"><input type="radio" name="choise{{$index}}" value="D"><span class="asws"> </span></label>
 								</div>
 								<hr>
 							</div>

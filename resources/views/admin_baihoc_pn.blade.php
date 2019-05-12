@@ -87,6 +87,11 @@
 					value="Xóa bài học" style="background-color: #F70000;">
 			</div>
 		</div>
+		<!-- footer -->
+		<div class="container-fluid row justify-content-center footer"
+			style="height: 5em; line-height: 5em; padding-left: 5em; bottom: 0; background-color: #E8E8E8; z-index: 0">
+			<span>Copyright © BKTOEIC 2019</span>
+		</div>	
 	</div>
 
 	<!-- chon part de them -->
@@ -105,7 +110,7 @@
 							<div class="choose-part col-8 col-md-6 checked-choose" data-path="{{Route("viewaddpart1")}}">Add part 1</div>
 						</div>
 						<div class="col-12">
-							<div class="choose-part col-8 col-md-6 checked-choose" data-path="#">Add part 2</div>
+							<div class="choose-part col-8 col-md-6 checked-choose" data-path="{{Route("viewaddpart2")}}">Add part 2</div>
 						</div>
 						<div class="col-12">
 							<div class="choose-part col-8 col-md-6" data-path="{{Route("viewaddpart3")}}">Add part 3</div>

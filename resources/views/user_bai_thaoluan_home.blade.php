@@ -40,7 +40,7 @@
                                             <tr class="d-flex">
                                                 <td class="col-12 col-md-10">
                                                     <div class="tittle" data-toggle="tooltip"
-                                                        data-placement="top" title="{{ $btl->tieuDe }}"><a class="color-tittle no-decoration" href="{{route('dicussionController.view',['id'=>$btl->id])}}">{{ $btl->tieuDe }}</a></div>
+                                                        data-placement="top" title="{{ $btl->tieuDe }}"><a class="color-tittle no-decoration" href="{{Route('dicussionController.view',['id'=>$btl->id])}}">{{ $btl->tieuDe }}</a></div>
                                                     <div>
                                                         <span class="user">{{ $btl->account->hoTen }}, </span><span
                                                             class="date">

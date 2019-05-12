@@ -85,7 +85,11 @@
 					value="Xóa bài học" style="background-color: #F70000;">
 			</div>
 		</div>
-
+		<!-- footer -->
+		<div class="container-fluid row justify-content-center footer"
+			style="height: 5em; line-height: 5em; padding-left: 5em; bottom: 0; background-color: #E8E8E8; z-index: 0">
+			<span>Copyright © BKTOEIC 2019</span>
+		</div>
 	</div>
 
 	<!-- chon part de them -->

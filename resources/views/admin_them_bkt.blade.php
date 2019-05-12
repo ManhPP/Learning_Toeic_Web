@@ -56,7 +56,7 @@
         <div class="modal fade modal-choose-part" tabindex="-1" role="dialog"
             aria-labelledby="mySmallModalLabel" aria-hidden="true"
             id="modal-choose-part1" data-part="1">
-            <button type="button" class="btn btn-yes btn-default" id="btn-input-yes1" data-next="false">Ok</button>
+            <button type="button" class="btn btn-yes btn-default" style="background-color:coral" id="btn-input-yes1" data-next="false">Ok</button>
             <button type="button" class="btn btn-cancle btn-primary" id="btn-input-no1">Cancel</button>
             <div class="modal-dialog" style="top: 2em;max-width: 100%;width: 65em;">
                 <div class="modal-content">
@@ -79,7 +79,7 @@
                                     @foreach($listPart1 as $part1)                                    
                                         <tr class="d-flex" data-id="{{ $part1->id }}">
                                             <td class="col-12">
-                                                <a href="${pageContext.request.contextPath}/guest/luyen-nghe?id={{ $part1->id }}" target="_blank">
+                                                <a href="{{URL("guest/luyen-nghe",$part1->id)}}" target="_blank">
                                                     <input type="checkbox" class="choose-ques-add">
                                                     <span class="content-ques">{{ $part1->title }} (id {{ $part1->id }})</span>
                                                     <img class="expand-ico" src="{{ URL::asset("imgs/next.png") }}">
@@ -99,7 +99,7 @@
         <div class="modal fade modal-choose-part" tabindex="-1" role="dialog"
             aria-labelledby="mySmallModalLabel" aria-hidden="true"
             id="modal-choose-part2" data-part="2">
-            <button type="button" class="btn btn-yes btn-default" id="btn-input-yes2" data-next="false">Ok</button>
+            <button type="button" class="btn btn-yes btn-default" id="btn-input-yes2" style="background-color:coral" data-next="false">Ok</button>
             <button type="button" class="btn btn-cancle btn-primary" id="btn-input-no2">Cancel</button>
             <div class="modal-dialog" style="top: 2em;max-width: 100%;width: 65em;">
                 <div class="modal-content">
@@ -122,7 +122,7 @@
                                         @foreach($listPart2 as $part2) 
                                         <tr class="d-flex" data-id="{{ $part2->id }}">
                                             <td class="col-12">
-                                                <a href="${pageContext.request.contextPath}/guest/luyen-nghe?id={{ $part2->id }}" target="_blank">
+                                                <a href="{{URL("guest/luyen-nghe",$part2->id)}}" target="_blank">
                                                     <input type="checkbox" class="choose-ques-add">
                                                     <span class="content-ques">{{ $part2->title }} (id {{ $part2->id }})</span>
                                                     <img class="expand-ico" src="{{ URL::asset("imgs/next.png") }}">
@@ -143,7 +143,7 @@
         <div class="modal fade modal-choose-part" tabindex="-1" role="dialog"
             aria-labelledby="mySmallModalLabel" aria-hidden="true"
             id="modal-choose-part3" data-part="3">
-            <button type="button" class="btn btn-yes btn-default" id="btn-input-yes3" data-next="false">Ok</button>
+            <button type="button" class="btn btn-yes btn-default" id="btn-input-yes3" style="background-color:coral" data-next="false">Ok</button>
             <button type="button" class="btn btn-cancle btn-primary" id="btn-input-no3">Cancel</button>
             <div class="modal-dialog" style="top: 2em;max-width: 100%;width: 65em;">
                 <div class="modal-content">
@@ -166,7 +166,7 @@
                                     @foreach($listPart3 as $part3) 
                                         <tr class="d-flex" data-id="{{ $part3->id }}">
                                             <td class="col-12">
-                                                <a href="${pageContext.request.contextPath}/guest/luyen-nghe?id={{ $part3->id }}" target="_blank">
+                                                <a href="{{URL("guest/luyen-nghe",$part3->id)}}" target="_blank">
                                                     <input type="checkbox" class="choose-ques-add">
                                                     <span class="content-ques">{{ $part3->title }} (id {{ $part3->id }})</span>
                                                     <img class="expand-ico" src="{{ URL::asset("imgs/next.png") }}">
@@ -187,7 +187,7 @@
         <div class="modal fade modal-choose-part" tabindex="-1" role="dialog"
             aria-labelledby="mySmallModalLabel" aria-hidden="true"
             id="modal-choose-part4" data-part="4">
-            <button type="button" class="btn btn-yes btn-default" id="btn-input-yes4" data-next="false">Ok</button>
+            <button type="button" class="btn btn-yes btn-default" id="btn-input-yes4" style="background-color:coral" data-next="false">Ok</button>
             <button type="button" class="btn btn-cancle btn-primary" id="btn-input-no4">Cancel</button>
             <div class="modal-dialog" style="top: 2em;max-width: 100%;width: 65em;">
                 <div class="modal-content">
@@ -211,7 +211,7 @@
                                     
                                         <tr class="d-flex" data-id="{{ $part4->id }}">
                                             <td class="col-12">
-                                                <a href="${pageContext.request.contextPath}/guest/luyen-nghe?id={{ $part4->id }}" target="_blank">
+                                                <a href="{{URL("guest/luyen-nghe",$part4->id)}}" target="_blank">
                                                     <input type="checkbox" class="choose-ques-add">
                                                     <span class="content-ques">{{ $part4->title }} (id {{ $part4->id }})</span>
                                                     <img class="expand-ico" src="{{ URL::asset("imgs/next.png") }}">
@@ -232,7 +232,7 @@
         <div class="modal fade modal-choose-part" tabindex="-1" role="dialog"
             aria-labelledby="mySmallModalLabel" aria-hidden="true"
             id="modal-choose-part5" data-part="5">
-            <button type="button" class="btn btn-yes btn-default" id="btn-input-yes5" data-next="false">Ok</button>
+            <button type="button" class="btn btn-yes btn-default" id="btn-input-yes5" style="background-color:coral" data-next="false">Ok</button>
             <button type="button" class="btn btn-cancle btn-primary" id="btn-input-no5">Cancel</button>
             <div class="modal-dialog" style="top: 2em;max-width: 100%;width: 65em;">
                 <div class="modal-content">
@@ -255,7 +255,7 @@
                                     @foreach($listPart5 as $part5)
                                         <tr class="d-flex" data-id="{{ $part5->id }}">
                                             <td class="col-12">
-                                                <a href="${pageContext.request.contextPath}/guest/luyen-doc?id={{ $part5->id }}" target="_blank">
+                                                <a href="{{URL("guest/luyen-nghe",$part5->id)}}" target="_blank">
                                                     <input type="checkbox" class="choose-ques-add">
                                                     <span class="content-ques">{{ $part5->title }} (id {{ $part5->id }})</span>
                                                     <img class="expand-ico" src="{{ URL::asset("imgs/next.png") }}">
@@ -276,7 +276,7 @@
         <div class="modal fade modal-choose-part" tabindex="-1" role="dialog"
             aria-labelledby="mySmallModalLabel" aria-hidden="true"
             id="modal-choose-part6" data-part="6">
-            <button type="button" class="btn btn-yes btn-default" id="btn-input-yes6" data-next="false">Ok</button>
+            <button type="button" class="btn btn-yes btn-default" id="btn-input-yes6" style="background-color:coral" data-next="false">Ok</button>
             <button type="button" class="btn btn-cancle btn-primary" id="btn-input-no6">Cancel</button>
             <div class="modal-dialog" style="top: 2em;max-width: 100%;width: 65em;">
                 <div class="modal-content">
@@ -299,7 +299,7 @@
                                     @foreach($listPart6 as $part6)
                                         <tr class="d-flex" data-id="{{ $part6->id }}">
                                             <td class="col-12">
-                                                <a href="${pageContext.request.contextPath}/guest/luyen-doc?id={{ $part6->id }}" target="_blank">
+                                                <a href="{{URL("guest/luyen-nghe",$part6->id)}}" target="_blank">
                                                     <input type="checkbox" class="choose-ques-add">
                                                     <span class="content-ques">{{ $part6->title }} (id {{ $part6->id }})</span>
                                                     <img class="expand-ico" src="{{ URL::asset("imgs/next.png") }}">
@@ -320,7 +320,7 @@
         <div class="modal fade modal-choose-part" tabindex="-1" role="dialog"
             aria-labelledby="mySmallModalLabel" aria-hidden="true"
             id="modal-choose-part7" data-part="7">
-            <button type="button" class="btn btn-yes btn-default" id="btn-input-yes7" data-next="false">Ok</button>
+            <button type="button" class="btn btn-yes btn-default" id="btn-input-yes7" style="background-color:coral" data-next="false">Ok</button>
             <button type="button" class="btn btn-cancle btn-primary" id="btn-input-no7">Cancel</button>
             <div class="modal-dialog" style="top: 2em;max-width: 100%;width: 65em;">
                 <div class="modal-content">
@@ -343,7 +343,7 @@
                                     @foreach($listPart7 as $part7)
                                         <tr class="d-flex" data-id="{{ $part7->id }}">
                                             <td class="col-12">
-                                                <a href="${pageContext.request.contextPath}/guest/luyen-doc?id={{ $part7->id }}" target="_blank">
+                                                <a href="{{URL("guest/luyen-nghe",$part7->id)}}" target="_blank">
                                                     <input type="checkbox" class="choose-ques-add">
                                                     <span class="content-ques">{{ $part7->title }} (id {{ $part7->id }})</span>
                                                     <img class="expand-ico" src="{{ URL::asset("imgs/next.png") }}">

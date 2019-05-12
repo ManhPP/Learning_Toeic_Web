@@ -60,18 +60,19 @@
             </div>
         </div>
     </div>
-
-@endsection
-
-@section('footer')
-    @parent
-@endsection
-<div style="display: none;">
+    <div style="display: none;">
+    <div id="path-add">{{Route("part2controller.create")}}</div>
     <div id="csrf-name">${_csrf.headerName}</div>
     <div id="csrf-value">${_csrf.token}</div>
     <div id="root-path">{{URL("")}}</div>
     <div id="id-user">1</div>
 </div>
+@endsection
+
+@section('footer')
+    @parent
+@endsection
+
 <!-- Open modal -->
 <button id="my-button" style="display: none;" data-toggle="modal"
         data-target="#myModal">Open modal</button>

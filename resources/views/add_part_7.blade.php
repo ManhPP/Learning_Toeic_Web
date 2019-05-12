@@ -36,7 +36,7 @@
                         </div> <!-- end listcau -->
 
                         <div class="div-choose-para">
-                            <img alt="add" id="ico-add1" src="/BKTOEIC/resources/img/round-add.png">
+                            <img alt="add" id="ico-add1" src="{{URL::asset("imgs/round-add.png")}}">
                         </div>
                     </div>
 
@@ -50,7 +50,7 @@
                         </div> <!-- end listcau -->
 
                         <div class="div-choose-para">
-                            <img alt="add" id="ico-add2" src="/BKTOEIC/resources/img/round-add.png">
+                            <img alt="add" id="ico-add2" src="{{URL::asset("imgs/round-add.png")}}">
                         </div>
                     </div>
 
@@ -68,7 +68,7 @@
     <div class="modal fade" tabindex="-1" role="dialog"
          aria-labelledby="mySmallModalLabel" aria-hidden="true"
          id="model-choose-ques1">
-        <button type="button" class="btn btn-default" id="btn-input-yes1"
+        <button type="button" class="btn btn-default" id="btn-input-yes1" style="background-color:coral"
                 data-next="false">Ok</button>
         <button type="button" class="btn btn-primary" id="btn-input-no1">Cancel</button>
         <div id="num-para-choose1">
@@ -178,7 +178,7 @@
     <div class="modal fade" tabindex="-1" role="dialog"
          aria-labelledby="mySmallModalLabel" aria-hidden="true"
          id="model-choose-ques2">
-        <button type="button" class="btn btn-default" id="btn-input-yes2"
+        <button type="button" class="btn btn-default" id="btn-input-yes2" style="background-color:coral"
                 data-next="false">Ok</button>
         <button type="button" class="btn btn-primary" id="btn-input-no2">Cancel</button>
         <div id="num-para-choose2">

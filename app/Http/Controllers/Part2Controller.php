@@ -9,15 +9,15 @@ use Illuminate\Http\Request;
 
 class Part2Controller extends Controller
 {
-    //lấy view update part2
-    public function get(Request $request)
-    {
-        // $idPartNghe=$request["id"];
-        $part2 = ListeningPart::find(1);
-        // print_r("1111");
-        return view('update_part_2')
-            ->with("part2", $part2);
-    }
+    // //lấy view update part2
+    // public function get(Request $request)
+    // {
+    //     // $idPartNghe=$request["id"];
+    //     $part2 = ListeningPart::find(1);
+    //     // print_r("1111");
+    //     return view('update_part_2')
+    //         ->with("part2", $part2);
+    // }
 
     // tạo câu part 2
     public function create(Request $request)
@@ -36,7 +36,7 @@ class Part2Controller extends Controller
         return Response($paraJson, 200);
     }
 
-    //update câu part 1
+    //update câu part 2
     public function update(Request $request)
     {
         $listeningPart = $request["part1"];
@@ -56,16 +56,16 @@ class Part2Controller extends Controller
         return 2;
     }
 
-    public function delete(Request $request){
-        // $id = $request["id"];
-        try {
-            $part1 = ListeningPart::find(1);
-            $part1->part1()->delete();
-            $part1->delete();
-            return 1;
-        }catch (\Exception $e){
+    // public function delete(Request $request){
+    //     // $id = $request["id"];
+    //     try {
+    //         $part1 = ListeningPart::find(1);
+    //         $part1->part1()->delete();
+    //         $part1->delete();
+    //         return 1;
+    //     }catch (\Exception $e){
 
-        }
-        return 2;
-    }
+    //     }
+    //     return 2;
+    // }
 }
