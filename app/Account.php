@@ -4,13 +4,14 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Foundation\Auth\User as Authenticatable;
 
-class Account extends Model
+class Account extends Authenticatable
 {
     //
     protected $primaryKey = 'id';
     protected $table='accounts';
-    protected $filable=['hoTen','ngaySinh','username','pass','email','gioiTinh','hasRole','active'];
+    protected $filable=['hoTen','ngaySinh','username','password','email','gioiTinh','hasRole','active'];
     function discussion(){
         return $this -> hasMany('App\Discussion','idAcc');
     }
@@ -32,5 +33,8 @@ class Account extends Model
     function readingPart(){
         return $this -> belongsToMany('App\ReadingPart','map_user_readings') -> withPivot('ngayLam');
     }
-    
+    //custom password field
+    public function getAuthPassword(){
+        return $this->password;
+    }
 }

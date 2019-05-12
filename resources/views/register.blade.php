@@ -25,37 +25,38 @@
                 <div class="card card-4">
                     <div class="card-body">
                         <h2 class="title">Registration New Account</h2>
-                        <form method="POST">
+                        <form method="POST" action="{{Route("accountcontroller.doregister")}}">
+                            {{ csrf_field() }}
                             <div class="row row-space">
                                 <div class="col-2-re">
                                     <div class="input-group">
-                                        <label class="label">first name</label>
-                                        <input class="input--style-4" type="text" name="first_name">
+                                        <label class="label">Họ tên</label>
+                                        <input class="input--style-4" type="text" name="hoTen">
                                     </div>
                                 </div>
                                 <div class="col-2-re">
                                     <div class="input-group">
-                                        <label class="label">last name</label>
-                                        <input class="input--style-4" type="text" name="last_name">
+                                        <label class="label">Ngày sinh</label>
+                                        <div class="input-group-icon" style="width: 100%">
+                                            <input class="input--style-4 js-datepicker" type="text" name="ngaySinh">
+                                            <i class="zmdi zmdi-calendar-note input-icon js-btn-calendar"></i>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                             <div class="row row-space">
                                 <div class="col-2-re">
                                     <div class="input-group">
-                                        <label class="label">Birthday</label>
-                                        <div class="input-group-icon" style="width: 100%">
-                                            <input class="input--style-4 js-datepicker" type="text" name="birthday">
-                                            <i class="zmdi zmdi-calendar-note input-icon js-btn-calendar"></i>
-                                        </div>
+                                        <label class="label">Email</label>
+                                        <input class="input--style-4" type="email" name="email">
                                     </div>
                                 </div>
                                 <div class="col-2-re">
                                     <div class="input-group row" style="margin-left: 0">
-                                        <label class="label col-2-re">Gender</label>
+                                        <label class="label col-2-re">Giới tính</label>
                                         <div class="p-t-10">
                                             <label class="radio-container m-r-45">Male
-                                                <input type="radio" checked="checked" name="gender">
+                                                <input type="radio" checked="checked" name="gioiTinh">
                                                 <span class="checkmark"></span>
                                             </label>
                                             <label class="radio-container">Female
@@ -69,11 +70,16 @@
                             <div class="row row-space">
                                 <div class="col-2-re">
                                     <div class="input-group">
-                                        <label class="label">Email</label>
-                                        <input class="input--style-4" type="email" name="email">
+                                        <label class="label">Username</label>
+                                        <input class="input--style-4" type="text" name="username">
                                     </div>
                                 </div>
-                            
+                                <div class="col-2-re">
+                                    <div class="input-group">
+                                        <label class="label">Password</label>
+                                        <input class="input--style-4" type="text" name="pass">
+                                    </div>
+                                </div>
                             </div>
                             
                             <div class="p-t-15">

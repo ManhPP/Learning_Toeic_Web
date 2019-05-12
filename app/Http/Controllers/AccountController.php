@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Account;
 use Illuminate\Http\Request;
 use PHPUnit\Framework\Exception;
+use DateTime;
 
 class AccountController extends Controller
 {
@@ -40,6 +41,34 @@ class AccountController extends Controller
         return 2;
     }
 
+    public function registerIndex(){
+        return View("register");
+    }
+
+    public function doRegister(Request $request){
+
+        error_log("asdasdadasdasda");
+        $hoTen = $request["hoTen"];
+        $username = $request["username"];
+        $pass = \Hash::make($request["pass"]);
+        $ngaySinh = $request["ngaySinh"];
+        $gioiTinh = $request["gioiTinh"];
+        $email = $request["email"];
+
+
+        $newDate = date("Y-m-d", strtotime($ngaySinh));
+
+        $acc = new Account();
+        $acc->hoTen = $hoTen;
+        $acc->username= $username;
+        $acc->pass = $pass;
+        $acc->ngaySinh = $newDate;
+        $acc->gioiTinh = $gioiTinh;
+        $acc->email = $email;
+        $acc->hasRole = "ROLE_ADMIN";
+        $acc->active = 1;
+        $acc->save();
+    }
     /**
      * Display a listing of the resource.
      *

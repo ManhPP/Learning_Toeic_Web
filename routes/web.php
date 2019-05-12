@@ -305,3 +305,23 @@ Route::get('/admin/quanly/account', [
 Route::post('/admin/account-manager/ban',['uses'=>'AccountController@ban']);
 
 
+// authentication
+Route::get("/account/login", [
+    'uses'=> 'Auth\MyLoginController@getLogin'
+]);
+
+Route::post("/account/login/do-login", [
+    'uses'=>'Auth\MyLoginController@postLogin'
+])->name("mylogincontroller.postlogin");
+
+Route::get("/account/register",[
+    'uses'=> 'AccountController@registerIndex'
+]);
+
+Route::post('/account/register/do-register',[
+   'uses'=>'AccountController@doRegister'
+])->name("accountcontroller.doregister");
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');

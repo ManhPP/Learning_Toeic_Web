@@ -32,7 +32,8 @@
 	<div class="limiter">
 		<div class="container-login100" style="background-image: url('images/bg-01.jpg');">
 			<div class="wrap-login100 p-l-55 p-r-55 p-t-65 p-b-54">
-				<form class="login100-form validate-form">
+				<form class="login100-form validate-form" method="post" action="{{ Route("mylogincontroller.postlogin") }}">
+					{{csrf_field()}}
 					<span class="login100-form-title p-b-49">
 						Login
 					</span>
