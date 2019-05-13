@@ -1,31 +1,44 @@
-FROM ubuntu:latest
+FROM php:7.2-apache
 
-RUN export LANG=en_US.UTF-8 \
-  && apt-get update \
-  && apt-get install -y apt-transport-https \
-  && apt-get -y install apache2
+RUN apt-get update
 
-ENV APACHE_RUN_USER www-data
-ENV APACHE_RUN_GROUP www-data
-ENV APACHE_LOG_DIR /var/log/apache2
-ENV APACHE_PID_FILE /var/run/apache2.pid
-ENV APACHE_RUN_DIR /var/run/apache2
-ENV APACHE_LOCK_DIR /var/lock/apache2
-RUN ln -sf /dev/stdout /var/log/apache2/access.log && \
-    ln -sf /dev/stderr /var/log/apache2/error.log
-RUN mkdir -p $APACHE_RUN_DIR $APACHE_LOCK_DIR $APACHE_LOG_DIR
+RUN apt-get install -y \
+    git \
+    zip \
+    curl \
+    sudo \
+    unzip \
+    libicu-dev \
+    libbz2-dev \
+    libpng-dev \
+    libjpeg-dev \
+    libmcrypt-dev \
+    libreadline-dev \
+    libfreetype6-dev \
+    g++
 
-RUN apt-get install -y php libapache2-mod-php
+ENV APACHE_DOCUMENT_ROOT=/var/www/html/public
+RUN sed -ri -e 's!/var/www/html!${APACHE_DOCUMENT_ROOT}!g' /etc/apache2/sites-available/*.conf
+RUN sed -ri -e 's!/var/www/!${APACHE_DOCUMENT_ROOT}!g' /etc/apache2/apache2.conf /etc/apache2/conf-available/*.conf
 
-RUN curl -sS https://getcomposer.org/installer -o composer-setup.php //cài composer
-RUN php composer-setup.php --install-dir=/usr/local/bin --filename=composer
+RUN a2enmod rewrite headers
 
-RUN apt-get update && apt-get install git
+RUN mv "$PHP_INI_DIR/php.ini-development" "$PHP_INI_DIR/php.ini"
 
-VOLUME [ "/var/www/html" ]
-WORKDIR /var/www/html
+RUN docker-php-ext-install \
+    bz2 \
+    intl \
+    iconv \
+    bcmath \
+    opcache \
+    calendar \
+    mbstring \
+    pdo_mysql \
+    zip
 
-EXPOSE 80
+COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 
-ENTRYPOINT [ "/usr/sbin/apache2" ]
-CMD ["-D", "FOREGROUND"]
+ARG UID=1000
+RUN useradd -G www-data,root -u $UID -d /home/devuser devuser
+RUN mkdir -p /home/devuser/.composer && \
+    chown -R devuser:devuser /home/devuser

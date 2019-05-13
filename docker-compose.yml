@@ -1,22 +1,39 @@
-version: '3'
-services: 
-  webserver:
-    build: .
-    ports: 
-      - '80:80'
-    volumes: 
-      - ./:/var/www/html
-      - ./apache.conf:etc/apache2/sites-available/000-default.conf
-    links: 
-      - db
-  
-  db:
+version: '3.5'
+
+services:
+  laravel-app:
+    build:
+      context: '.'
+      args:
+        UID: ${UID}
+    container_name: laravel-app
+    environment:
+      - APACHE_RUN_USER=#${UID}
+      - APACHE_RUN_GROUP=#${UID}
+    volumes:
+      - .:/var/www/html
+    ports:
+      - 8000:80
+    networks:
+      backend:
+        aliases:
+          - laravel-app
+
+  mysql-db:
     image: mysql:5.7
-    restart: always
-    environment: 
-      MYSQL_ROOT_PASSWORD: root
-      MYSQL_DATABASE: learning_toeic
-      MYSQL_USER: laravel
-      MYSQL_PASSWORD: laravel
-    ports: 
-      - "3306:3306"
+    container_name: mysql-db
+    volumes:
+      - ./run/var:/var/lib/mysql
+    environment:
+      - MYSQL_ROOT_PASSWORD=1233
+      - MYSQL_DATABASE=${DB_DATABASE}
+      - MYSQL_USER=${DB_USERNAME}
+      - MYSQL_PASSWORD=${DB_PASSWORD}
+    networks:
+      backend:
+        aliases:
+          - db
+
+networks:
+  backend:
+    name: backend-network
