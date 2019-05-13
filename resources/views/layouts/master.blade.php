@@ -45,8 +45,12 @@
                         <li class="nav-item" id="btn-ava">
                             <div id="ava">{{str_limit($userLogin->hoTen, $limit = 1, $end='')}}</div>
                             <div id="menu-acc" class="hide">
+                                <div class="menu-item item-1" data-path="{{Route('accountcontronller.indexupdateuseraccount')}}">My account</div>
+                                @if($userLogin->hasRole == 'ROLE_ADMIN')
+                                    <div class="menu-item item-1" data-path="{{Route('accountcontroller.get')}}">Admin manager</div>
+                                @endif
                                 <form action="{{Route("mylogincontroller.logout")}}" method="get">
-                                    <div id="bnt-logout">Logout</div>
+                                    <div class="menu-item" id="bnt-logout">Logout</div>
                                 </form>
                             </div>
                         </li>
@@ -83,7 +87,9 @@
             $(document).on("click", "#bnt-logout", function(){
                $(this).parent().submit();
             });
-
+            $(document).on("click", ".item-1", function(){
+               window.location.href = $(this).attr("data-path");
+            });
         </script>
     @show
     @yield("js")

@@ -67,6 +67,11 @@ Route::post("/admin/part-doc/del-part-doc","ReadingPartController@delPartDoc");
 Route::get('/admin/bai-hoc-manager/update-part-doc','ReadingPartController@getPartDoc');
 
 // ====account=====
+// view quan ly account cho user
+Route::get('/user/account-manager',[
+    'uses'=> 'AccountController@indexUpdateUserAccount'
+])->name('accountcontronller.indexupdateuseraccount');
+
 // view quản lý tài khoản của admin
 Route::get('/admin/quanly/account', [
     'uses' => 'AccountController@get'

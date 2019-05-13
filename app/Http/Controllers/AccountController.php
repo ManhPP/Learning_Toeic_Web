@@ -24,6 +24,10 @@ class AccountController extends Controller
 
     }
 
+    public function indexUpdateUserAccount(){
+        return View("user_manage_account");
+    }
+
     //ban tài khoảnhttp://127.0.0.1:8000/
     public function ban(Request $request){
         $userLogin = Auth::guard("accounts")->user();
