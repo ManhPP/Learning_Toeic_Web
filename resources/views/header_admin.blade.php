@@ -34,7 +34,7 @@
 <!-- menu left -->
 <div id="sidebar-wrapper" class="hide">
 	<ul class="sidebar-nav">
-		<li><a id="link-acc" href="#" class="choice"><img class="ico-manag"
+		<li><a id="link-acc" href="{{Route("accountcontroller.get")}}"><img class="ico-manag"
 				src="{{URL::asset("imgs/account-manager.png")}}">Quản
 				lý tài khoản</a>
 		</li>
@@ -50,10 +50,6 @@
 		<li><a id="link-test" href="{{Route("testcontroller.indexforadminhome")}}"><img class="ico-manag"
 				src="{{URL::asset("imgs/baihoc-manager.png")}}">Quản
 				lý bài BKT</a></li>
-
-		<li><a id="link-discuss" href="{{Route("accountcontroller.get")}}"><img class="ico-manag"
-				src="{{URL::asset("imgs/account-manager.png")}}">Quản
-				lý tải khoản</a></li>
 
 		<li><a id="link-discuss" href="{{Route("discussioncontroller.indexadminmanager")}}"><img class="ico-manag"
 				src="{{URL::asset("imgs/btl-manager.png")}}">Quản

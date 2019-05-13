@@ -1,0 +1,48 @@
+#ava{
+    width: 2.3em;
+    height: 2.3em;
+    color: white;
+    background: red;
+    border-radius: 2em;
+    line-height: 2.3em;
+    text-align: center;
+}
+
+#btn-login{
+    position: relative;
+}
+
+#menu-acc{
+    top: 2.4em;
+    position: absolute;
+    right: 0em;
+    width: 10em;
+    height: 2em;
+    line-height: 2em;
+    background: #0a1c5cb3;
+    color: white;
+
+}
+
+#menu-acc div{
+    padding-left: 1em;
+    height: 1.8em;
+    line-height: 1.8em;
+}
+
+#menu-acc div:hover{
+    background: white;
+    color: blue;
+}
+
+.hide{
+    display: none;
+}
+
+#ava{
+    cursor: pointer;
+}
+
+#btn-ava:hover #menu-acc{
+    display: block;
+}

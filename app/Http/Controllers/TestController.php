@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Discussion;
 use App\Test;
+use Auth;
 use Illuminate\Http\Request;
 use App\Part1;
 use App\Part2;
@@ -22,14 +24,25 @@ class TestController extends Controller
      */
     public function index(Request $request)
     {
-        //
+        $userLogin = Auth::guard("accounts")->user();
+        if( $userLogin==null || !$userLogin->can('doTest', Test::class)){
+            return redirect(Route('mylogincontroller.login'));
+        }
+
+
         $arrBKT = Test::all();
-        return view('user_bkt_home')->with('arrBKT',$arrBKT);
+        return view('user_bkt_home')
+            ->with('arrBKT',$arrBKT)->with("userLogin", $userLogin);
     }
 
     public function addIndex(Request $request)
     {
         //
+        $userLogin = Auth::guard("accounts")->user();
+        if( $userLogin==null || !$userLogin->can('addTest', Test::class)){
+            return redirect(Route('mylogincontroller.login'));
+        }
+
         $listPart1 = ListeningPart::where('loaiPart','=','Part 1')->get();
         $sum1 = count($listPart1);
 
@@ -58,12 +71,17 @@ class TestController extends Controller
                 ->with('listPart4',$listPart4)->with('sum4', $sum4)
                 ->with('listPart5',$listPart5)->with('sum5', $sum5)
                 ->with('listPart6',$listPart6)->with('sum6', $sum6)
-                ->with('listPart7',$listPart7)->with('sum7', $sum7);
+                ->with('listPart7',$listPart7)->with('sum7', $sum7)->with("userLogin", $userLogin);
     }
 
     public function addTest(Request $request)
     {
-        //
+
+        $userLogin = Auth::guard("accounts")->user();
+        if( $userLogin==null || !$userLogin->can('addTest', Test::class)){
+            return (Route('mylogincontroller.login'));
+        }
+
         $ids = $request['ids'];
         $title = $request['title'];
         $audio = $request['audio'];
@@ -94,11 +112,17 @@ class TestController extends Controller
     }
 
     public function doTest(Request $request){
+        $userLogin = Auth::guard("accounts")->user();
+        if( $userLogin==null || !$userLogin->can('doTest', Test::class)){
+            return redirect(Route('mylogincontroller.login'));
+        }
+
+
         $id = $request["id"];
-        
         $bkt = Test::find($id);
         
-        return view('user_bkt_view')->with('bkt', $bkt);
+        return view('user_bkt_view')
+            ->with('bkt', $bkt)->with("userLogin",$userLogin);
     }
     /**
      * Show the form for creating a new resource.
@@ -144,6 +168,13 @@ class TestController extends Controller
     }
 
     public function indexUpdate(Request $request){
+
+        $userLogin = Auth::guard("accounts")->user();
+        if( $userLogin==null || !$userLogin->can('updateTest', Test::class)){
+            return redirect(Route('mylogincontroller.login'));
+        }
+
+
         $id = $request["id"];
         $bkt = Test::find($id);
         $listPart1 = ListeningPart::where('loaiPart','=','Part 1')->get();
@@ -164,7 +195,7 @@ class TestController extends Controller
             ->with('listPart1',$listPart1)->with('listPart2',$listPart2)
             ->with('listPart3',$listPart3)->with('listPart4',$listPart4)
             ->with('listPart5',$listPart5)->with('listPart6',$listPart6)
-            ->with('listPart7',$listPart7)->with("bkt",$bkt);
+            ->with('listPart7',$listPart7)->with("bkt",$bkt)->with("userLogin",$userLogin);
     }
 
     /**
@@ -176,6 +207,11 @@ class TestController extends Controller
      */
     public function update(Request $request)
     {
+        $userLogin = Auth::guard("accounts")->user();
+        if( $userLogin==null || !$userLogin->can('updateTest', Test::class)){
+            return (Route('mylogincontroller.login'));
+        }
+
         $arrPartDoc = array();
         $arrPartNghe = array();
         $ids = $request["ids"];
@@ -221,13 +257,29 @@ class TestController extends Controller
     }
 
     public function indexForAdminHome(){
+
+        $userLogin = Auth::guard("accounts")->user();
+        if( $userLogin==null || !$userLogin->can('manage', Test::class)){
+            return redirect(Route('mylogincontroller.login'));
+        }
+
+        $userLogin = Auth::guard("accounts")->user();
+        if( $userLogin==null || !$userLogin->can('updateTest', Test::class)){
+            return redirect(Route('mylogincontroller.login'))->with("userLogin",$userLogin);
+        }
+
         $arrBaiHoc = Test::all();
         return View("admin_baihoc_bkt")->with("arrBaiHoc",$arrBaiHoc);
     }
 
     public function delete(Request $request){
-        error_log("asdasd");
-//        try{
+
+        $userLogin = Auth::guard("accounts")->user();
+        if( $userLogin==null || !$userLogin->can('deleteTest', Test::class)){
+            return (Route('mylogincontroller.login'));
+        }
+
+        try{
             $arrTest = Test::findMany($request["arrId"]);
             foreach ($arrTest as $test) {
                 $test->readingParts()->detach();
@@ -235,13 +287,20 @@ class TestController extends Controller
                 $test->delete();
             }
             return "true";
-//        }catch (\Exception $e){
-//
-//        }
-//        return "false";
+        }catch (\Exception $e){
+
+        }
+        return "false";
     }
 
     public function searchTesting(Request $request){
+
+
+        $userLogin = Auth::guard("accounts")->user();
+        if( $userLogin==null || !$userLogin->can('doTest', Test::class)){
+            return redirect(Route('mylogincontroller.login'));
+        }
+
         $title = $request["title"];
         $arrTest = array();
         if(strlen($title)==0){

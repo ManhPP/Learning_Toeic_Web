@@ -4,25 +4,30 @@ namespace App\Http\Controllers;
 
 use App\Account;
 use App\Comment;
+use Auth;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
 
 class CommentController extends Controller
 {
     public function comment(Request $request){
+
+        $userLogin = Auth::guard("accounts")->user();
+        if ($userLogin==null || !$userLogin->can('addComment', Comment::class)){
+            return (Route('mylogincontroller.login'));
+        }
         $noiDung = $request->noiDung;
         $idBTL = $request->idBTL;
         $cmt = new Comment();
         $cmt->noiDung = $noiDung;
         $cmt->idBTL = $idBTL;
         $now = Carbon::now('GMT+7');
-//        error_log(."adasas");
         $cmt->ngayDang = $now->toDateTimeString();
 
         //get acc in session
-        $acc=Account::find(1);
+        $userLogin = Auth::guard("accounts")->user();
 
-        $cmt->idAcc = $acc->id;
+        $cmt->idAcc = $userLogin->id;
         $check = $cmt->saveOrFail();
         if($check >0){
             return 'true';
@@ -42,13 +47,19 @@ class CommentController extends Controller
     }
 
     public function update(Request $request){
+
+
         $id = $request['id'];
 
         $cmt = Comment::find($id);
 
-        //get Acc from session
-        $acc = Account::find(1);
-        if($acc->id == $cmt->idAcc){
+        $userLogin = Auth::guard("accounts")->user();
+        if ($userLogin==null && !$userLogin->can('updateComment', $cmt)){
+            return (Route('mylogincontroller.login'));
+        }
+
+
+        if($userLogin->id == $cmt->idAcc){
             $cmt->noiDung = $request['noiDung'];
             $check = $cmt->save();
             if($check >0){
@@ -63,10 +74,12 @@ class CommentController extends Controller
         $idCmt = $request['id'];
         $cmt = Comment::find($idCmt);
 
-        //get Acc from session
-        $acc = Account::find(1);
+        $userLogin = Auth::guard("accounts")->user();
+        if ($userLogin==null && !$userLogin->can('deleteComment', $cmt)){
+            return (Route('mylogincontroller.login'));
+        }
 
-        if($acc->id == $cmt->idAcc){
+        if($userLogin->id == $cmt->idAcc){
             $cmt->replyComment()->delete();
             $cmt->report()->delete();
             $check = $cmt->delete();

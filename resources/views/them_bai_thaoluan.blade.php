@@ -40,7 +40,7 @@
 
 <div style="display: none;" id="div-submit"></div>
 <div id="path-upload" style="display: none;">{{URL("")}}/</div>
-<div id="id-user" style="display: none;">{{ $acc->id }}</div>
+<div id="id-user" style="display: none;">{{ $userLogin->id }}</div>
 <!-- end body -->
 
 <!-- modal -->

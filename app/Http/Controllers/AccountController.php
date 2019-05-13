@@ -3,8 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Account;
+use Auth;
 use Illuminate\Http\Request;
+use Illuminate\Routing\Route;
 use PHPUnit\Framework\Exception;
+use DateTime;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Redirect;
 
@@ -12,15 +15,30 @@ class AccountController extends Controller
 {
     public function get(){
         $arrUser=Account::all();
+        $userLogin = Auth::guard("accounts")->user();
+
+        if( $userLogin==null || !$userLogin->can('manage', Account::class)){
+            return redirect(Route('mylogincontroller.login'));
+        }
         return view('admin_account')->with("arrUser",$arrUser)->with("noti",0 );
 
     }
 
-    //ban tài khoản
+    //ban tài khoảnhttp://127.0.0.1:8000/
     public function ban(Request $request){
+        $userLogin = Auth::guard("accounts")->user();
+
+        if( $userLogin==null || !$userLogin->can('manage', Account::class)){
+            return (Route('mylogincontroller.login'));
+        }
+
+
         $arrUser=$request["arrId"];
-       try{ foreach($arrUser as $id){
-            Account::find($id)->update(['active'=>0]);
+        try{
+            foreach($arrUser as $id) {
+                $acc = Account::find($id);
+                $acc->active = 0;
+                $acc->save();
             }
             return 1;
         }catch(Exception $e){
@@ -31,9 +49,19 @@ class AccountController extends Controller
 
     //unban tài khoản
     public function unban(Request $request){
+        $userLogin = Auth::guard("accounts")->user();
+
+        if( $userLogin==null || !$userLogin->can('manage', Account::class)){
+            return (Route('mylogincontroller.login'));
+        }
+
+
         $arrUser=$request["arrId"];
-       try{ foreach($arrUser as $id){
-            Account::find($id)->update(['active'=>1]);
+        try{
+            foreach($arrUser as $id){
+                $acc = Account::find($id);
+                $acc->active = 1;
+                $acc->save();
             }
             return 1;
         }catch(Exception $e){
@@ -42,23 +70,52 @@ class AccountController extends Controller
         return 2;
     }
 
+    public function registerIndex(){
+        return View("register");
+    }
+
+    public function doRegister(Request $request){
+
+        $hoTen = $request["hoTen"];
+        $username = $request["username"];
+        $password = \Hash::make($request["password"]);
+        $ngaySinh = $request["ngaySinh"];
+        $gioiTinh = $request["gioiTinh"];
+        $email = $request["email"];
+
+
+        $newDate = date("Y-m-d", strtotime($ngaySinh));
+
+        $acc = new Account();
+        $acc->hoTen = $hoTen;
+        $acc->username= $username;
+        $acc->password = $password;
+        $acc->ngaySinh = $newDate;
+        $acc->gioiTinh = $gioiTinh;
+        $acc->email = $email;
+        $acc->hasRole = "ROLE_USER";
+        $acc->active = 1;
+        $acc->save();
+        return redirect(Route('mylogincontroller.login'));
+    }
     //thêm tài khoản
     public function add(Request $request){
         try{
-        $hoTen=$request['hoTen'];
-        $ngaySinh=$request['ngaySinh'];
-        $gioiTinh=$request['gioiTinh'];
-        $username=$request['username'];
-        $pass=$request['pass'];
-        $pass = Hash::make($pass);
-        $email=$request['email'];
-        $hasRole=$request['hasRole'];
-        // $check=Hash::check('admin', $pass); hàm check
-        
-        $check=Account::create(['hoTen'=>$hoTen,'ngaySinh'=>$ngaySinh,'gioiTinh'=>$gioiTinh,'username'=>$username
-        ,'pass'=>$pass,'email'=>$email,'hasRole'=>$hasRole,'active'=>1]);
-       
-        return Redirect::to('/admin/quanly/account');
+            $acc = new Account();
+            $acc->hoTen=$request['hoTen'];
+            $acc->ngaySinh=$request['ngaySinh'];
+            $acc->gioiTinh=$request['gioiTinh'];
+            $acc->username=$request['username'];
+            $pass=$request['pass'];
+            $acc->password = Hash::make($pass);
+            $acc->email=$request['email'];
+            $acc->hasRole=$request['hasRole'];
+            $acc->active = 1;
+            // $check=Hash::check('admin', $pass); hàm check
+
+            $acc->save();
+
+            return Redirect::to('/admin/quanly/account');
         }catch(Exception $e){
              echo $e;
         }
@@ -67,49 +124,72 @@ class AccountController extends Controller
     //update tài khoản 
     public function update(Request $request){
          try{
-        $id=$request['ID'];
-        $hoTen=$request['hoTen'];
-        $ngaySinh=$request['ngaySinh'];
-        $gioiTinh=$request['gioiTinh'];
-        $username=$request['username'];
-        $pass=$request['pass'];
-        $pass = Hash::make($pass);
-        $email=$request['email'];
-        $hasRole=$request['hasRole'];
-        
-        if($hoTen!=""){
-            Account::find($id)->update(['hoTen'=>$hoTen]);
-        }
-        if($ngaySinh!=""){
-            Account::find($id)->update(['ngaySinh'=>$ngaySinh]);
-        }
-        if($gioiTinh!=""){
-            Account::find($id)->update(['gioiTinh'=>$gioiTinh]);
-        }
-        if($username!=""){
-            Account::find($id)->update(['username'=>$username]);
-        }
-        if($pass!=""){
-            Account::find($id)->update(['pass'=>$pass]);
-        }
-        if($email!=""){
-            Account::find($id)->update(['email'=>$email]);
-        }
-        if($hasRole!=""){
-            Account::find($id)->update(['hasRole'=>$hasRole]);
-        }
-        
-       
-        return Redirect::to('/admin/quanly/account');
+            $id=$request['ID'];
+            $hoTen=$request['hoTen'];
+            $ngaySinh=$request['ngaySinh'];
+            $gioiTinh=$request['gioiTinh'];
+            $username=$request['username'];
+            $pass=$request['pass'];
+            $pass = Hash::make($pass);
+            $email=$request['email'];
+            $hasRole=$request['hasRole'];
+
+            $userLogin = Auth::guard("accounts")->user();
+
+            $tempAcc = new Account();
+            $tempAcc->id = $id;
+
+            if( $userLogin==null || !$userLogin->can('update', $tempAcc)){
+                return redirect(Route('mylogincontroller.login'));
+            }
+
+            $acc = Account::find($id);
+
+
+             if($hoTen!=""){
+                $acc->hoTen = $hoTen;
+            }
+            if($ngaySinh!=""){
+                $acc->ngaySinh = $ngaySinh;
+            }
+            if($gioiTinh!=""){
+                $acc->gioiTinh = $gioiTinh;
+            }
+            if($username!=""){
+                $acc->username= $username;
+            }
+            if($pass!=""){
+                $acc->password = $pass;
+            }
+            if($email!=""){
+                $acc->email = $email;
+            }
+            if($hasRole!=""){
+                $acc->hasRole = $hasRole;
+            }
+
+            $acc->save();
+
+
+            return Redirect::to('/admin/quanly/account');
         }catch(Exception $e){
              echo $e;
         }
     }
     public function delete(Request $request){
         $arrID = $request["id"];
-        \Log::info($arrID);
+
+        $userLogin = Auth::guard("accounts")->user();
+
         foreach($arrID as $id){
-            $check=Account::find($id)->delete();
+            $tempAcc=Account::find($id);
+
+
+            if( $userLogin==null || !$userLogin->can('delete', $tempAcc)){
+                return (Route('mylogincontroller.login'));
+            }
+            $check = $tempAcc->delete();
+
             if($check==0) return 0;
         }
         return 1;

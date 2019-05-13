@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Discussion;
 use App\ListeningPart;
 use App\ConversationParagraph;
+use Auth;
 use Illuminate\Http\Request;
 use App\Http\Requests;
 use Illuminate\Http\UploadedFile;
@@ -19,7 +21,9 @@ class ListeningPartController extends Controller
     {
         //
         $arrPN = ListeningPart::all();
-        return view('guest_luyennghe_home')->with("arrPN",$arrPN);
+        $userLogin = Auth::guard("accounts")->user();
+        return view('guest_luyennghe_home')
+            ->with("arrPN",$arrPN)->with("userLogin", $userLogin);
     }
 
     /**
@@ -34,12 +38,16 @@ class ListeningPartController extends Controller
 
     //upload ảnh lên server
     public function uploadimage(Request $request){
+        $userLogin = Auth::guard("accounts")->user();
+        if( $userLogin==null || !$userLogin->can('addListening', ListeningPart::class)){
+            return response()->json(['redirect'=>( Route('mylogincontroller.login'))]);
+        }
         try{
-        $file = $request->file("file-image");
-         $fileName = time().'.'.$file->getClientOriginalExtension();
-         $des=public_path('/images_upload');
-         $file->move($des,$fileName);
-         return response()->json(["pathFile"=>"images_upload"."/".$fileName], 200);
+             $file = $request->file("file-image");
+             $fileName = time().'.'.$file->getClientOriginalExtension();
+             $des=public_path('/images_upload');
+             $file->move($des,$fileName);
+             return response()->json(["pathFile"=>"images_upload"."/".$fileName], 200);
         }catch(Exception $e){
 
         }
@@ -49,7 +57,10 @@ class ListeningPartController extends Controller
 
     //updload audio lên server
     public function uploadaudio(Request $request){
-        error_log("a");
+        $userLogin = Auth::guard("accounts")->user();
+        if( $userLogin==null || !$userLogin->can('addListening', ListeningPart::class)){
+            return response()->json(['redirect'=>(Route('mylogincontroller.login'))]);
+        }
         try{
             $file = $request->file("audio");
             // $size=$request->file('audio')->getSize();
@@ -67,46 +78,34 @@ class ListeningPartController extends Controller
     }
 
 
-//    public function indexGuestPart1(Request $request){
-//        $partNghe = ListeningPart::find($request["id"]);
-//        return view("guest_part1_view")->with("partNghe", $partNghe);
-//    }
-//
-//    public function indexGuestPart2(Request $request){
-//        $partNghe = ListeningPart::find($request["id"]);
-//        return view("guest_part2_view")->with("partNghe", $partNghe);
-//    }
-//
-//    public function indexGuestPart3(Request $request){
-//        $partNghe = ListeningPart::find($request["id"]);
-//        return view("guest_part3_view")->with("partNghe", $partNghe);
-//    }
-//    public function indexGuestPart4(Request $request){
-//        $partNghe = ListeningPart::find($request["id"]);
-//        return view("guest_part4_view")->with("partNghe", $partNghe);
-//    }
-
     public function practicePartNghe(Request $request)
     {
         $id = $request["id"];
         $partNghe = ListeningPart::find($id);
+
+        $userLogin = Auth::guard("accounts")->user();
+
         $view = $partNghe->acessCount;
         $partNghe->acessCount = $view +1;
         $partNghe->save();
         if($partNghe->loaiPart == "Part 1"){
-            return view("guest_part1_view", ['partNghe' => $partNghe]);
+            return view("guest_part1_view", ['partNghe' => $partNghe, 'userLogin'=>$userLogin]);
         }else if($partNghe->loaiPart == "Part 2"){
-            return view("guest_part2_view", ['partNghe' => $partNghe]);
+            return view("guest_part2_view", ['partNghe' => $partNghe, 'userLogin'=>$userLogin]);
         }else if($partNghe->loaiPart == "Part 3"){
-            return view("guest_part3_view", ['partNghe' => $partNghe]);
+            return view("guest_part3_view", ['partNghe' => $partNghe, 'userLogin'=>$userLogin]);
         }else{
-            return view("guest_part4_view")->with("partNghe", $partNghe);
+            return view("guest_part4_view")->with("partNghe", $partNghe)->with('userLogin',$userLogin);
         }
 
     }
 
     //lấy dữ liệu cho view admin quản lý phần nghe
     public function get(Request $request){
+        $userLogin = Auth::guard("accounts")->user();
+        if( $userLogin==null || !$userLogin->can('manage', ListeningPart::class)){
+            return redirect(Route('mylogincontroller.login'));
+        }
         $arrBaiHoc=ListeningPart::all();
         $numBaiHoc=$arrBaiHoc->count();
         return view('admin_baihoc_pn')->with("arrBaiHoc",$arrBaiHoc)->with("numBaiHoc",$numBaiHoc);
@@ -114,20 +113,29 @@ class ListeningPartController extends Controller
 
     //return view udpate các part phần nghe
     public function redirectViewUpdate($id){
+
+        $userLogin = Auth::guard("accounts")->user();
+        if( $userLogin==null || !$userLogin->can('updateListening', ListeningPart::class)){
+            return redirect(Route('mylogincontroller.login'));
+        }
+
         $listeningPart=ListeningPart::find($id);
+
+        $userLogin = Auth::guard("accounts")->user();
+
         if($listeningPart->loaiPart=="Part 1"){
             $part1=$listeningPart;
-            return view('update_part_1')->with("part1", $part1);
+            return view('update_part_1')->with("part1", $part1)->with('userLogin', $userLogin);
         }else if($listeningPart->loaiPart=="Part 2"){
             $part2=$listeningPart;
-            return view('update_part_2')->with("part2",$part2);
+            return view('update_part_2')->with("part2",$part2)->with('userLogin', $userLogin);
         }else if($listeningPart->loaiPart=="Part 3"){
             $part3=$listeningPart;
-            return view('update_part_3')->with("partNghe",$part3);
+            return view('update_part_3')->with("partNghe",$part3)->with('userLogin', $userLogin);
         }
         else if($listeningPart->loaiPart=="Part 4"){
             $part4=$listeningPart;
-            return view('update_part_4')->with("partNghe",$part4);
+            return view('update_part_4')->with("partNghe",$part4)->with('userLogin', $userLogin);
         }
     }
 
@@ -155,6 +163,12 @@ class ListeningPartController extends Controller
 
     // xóa part nghe
     public function delete(Request $request){
+
+        $userLogin = Auth::guard("accounts")->user();
+        if( $userLogin==null || !$userLogin->can('deleteListening', ListeningPart::class)){
+            return (Route('mylogincontroller.login'));
+        }
+
         $arrID = $request["arrId"];
         \Log::info($arrID);
         foreach($arrID as $id){

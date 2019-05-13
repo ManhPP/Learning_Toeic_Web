@@ -393,11 +393,16 @@ $(document)
                                         idBTL : $(this).attr("data-btl"),
                                     },
                                     success : function (data) {
-                                        if (data == 'true') {
-                                            input.val("");
+                                        console.log(data);
+                                        if (data!="true" && data!="false"){
+                                            window.location.href = data;
+                                        }else{
+                                            if (data == 'true') {
+                                                input.val("");
+                                            }
+                                            // resetPagination();
+                                            location.reload();
                                         }
-                                        // resetPagination();
-                                        location.reload();
                                     }
                                 });
                             } else if ($(this).attr("data-lev") == 'lev2') {
@@ -410,7 +415,9 @@ $(document)
                                                 idCMT : idCMT,
                                             },
                                             success : function (data) {
-                                                if (data == 'true') {
+                                                if (data!="true" && data!=false){
+                                                    window.location.href = data;
+                                                }else if (data == 'true') {
                                                     var numRep = $(".num-rep[data-cmt='"
                                                             + input
                                                                     .attr("data-cmt")

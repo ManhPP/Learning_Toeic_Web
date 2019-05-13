@@ -2,14 +2,23 @@
 
 namespace App\Http\Controllers;
 
+use App\Discussion;
 use App\ReplyComment;
 use App\Account;
+use Auth;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
 
 class ReplyCommentController extends Controller
 {
     public function reply(Request $request){
+
+        $userLogin = Auth::guard("accounts")->user();
+        if( $userLogin==null || !$userLogin->can('addComment', ReplyComment::class)){
+            return (Route('mylogincontroller.login'));
+        }
+
+
         $noiDung = $request->noiDung;
         $idCMT = $request->idCMT;
         $reply = new ReplyComment();
@@ -20,9 +29,9 @@ class ReplyCommentController extends Controller
         $reply->ngayDang = $now->toDateTimeString();
 
         //get acc in session
-        $acc=Account::find(1);
+        $userLogin = Auth::guard("accounts")->user();
 
-        $reply->idAcc = $acc->id;
+        $reply->idAcc = $userLogin->id;
         $check = $reply->saveOrFail();
         if($check >0){
             return 'true';
@@ -48,9 +57,9 @@ class ReplyCommentController extends Controller
             array_push($arr,$arrReply);
 
             //get acc from session
-            $acc = Account::find(1);
+            $userLogin = Auth::guard("accounts")->user();
 
-            array_push($arr,$acc);
+            array_push($arr,$userLogin);
 
             return $arr;
         }
@@ -69,15 +78,19 @@ class ReplyCommentController extends Controller
     }
 
     public function update(Request $request){
+
         $idRCmt = $request['id'];
         $noiDung = $request['noiDung'];
 
         $reply = ReplyComment::find($idRCmt);
 
-        //get Acc from session
-        $acc = Account::find(1);
+        $userLogin = Auth::guard("accounts")->user();
+        if( $userLogin==null || !$userLogin->can('updateComment', $reply)){
+            return (Route('mylogincontroller.login'));
+        }
 
-        if($acc->id == $reply->idAcc){
+
+        if($userLogin->id == $reply->idAcc){
             $reply->noiDung = $noiDung;
             $check = $reply->save();
             if($check >0){
@@ -92,16 +105,18 @@ class ReplyCommentController extends Controller
         $idRCmt = $request['id'];
         $reply = ReplyComment::find($idRCmt);
 
-        //get Acc from session
-        $acc = Account::find(1);
 
-        if($acc->id == $reply->idAcc){
-            $check = $reply->delete();
-            if($check >0){
-                return 'true';
-            }
+
+        $userLogin = Auth::guard("accounts")->user();
+        if( $userLogin==null || !$userLogin->can('updateComment', $reply)){
+            return (Route('mylogincontroller.login'));
         }
+        try {
+            $reply->delete();
+            return 'true';
+        }catch (\Exception $e){
 
+        }
         return 'false';
     }
 }

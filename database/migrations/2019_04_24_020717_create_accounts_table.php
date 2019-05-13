@@ -18,7 +18,7 @@ class CreateAccountsTable extends Migration
             $table ->string('hoTen', 65);
             $table -> date('ngaySinh');
             $table ->string('username') -> unique();
-            $table -> string('pass');
+            $table -> string('password');
             $table -> string('email') -> unique();
             $table -> string('gioiTinh', 10);
             $table ->string('hasRole', 32);

@@ -108,7 +108,7 @@ $(document).on("click", ".search-result", function(){
 });
 
 $(document).on("click", ".suggest", function(){
-    window.location.href = $(this).attr("data-path");
+    window.location.href = $("#path-view").html()+'?id='+$(this).attr("data-id") ;
 });
 
 //del search

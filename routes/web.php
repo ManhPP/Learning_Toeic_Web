@@ -9,9 +9,9 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
-Route::get('/', function () {
-    return view('home');
-});
+Route::get('/', [
+    'uses'=> 'HomeController@index'
+]);
 Route::get('/login', function(){
     return view('login');
 });
@@ -254,9 +254,9 @@ Route::post('/admin/manager-reading-part/update-part7/do-update', [
 //================= end part 7 ===========================
 //cho user va guest =================================================================================================
 //luyen nghe
-Route::get("/guest/luyen-nghe","ListeningPartController@practicePartNghe")->name("listeningpartcontroller.practiceartnghe");
+Route::get("/guest/listening/practice","ListeningPartController@practicePartNghe")->name("listeningpartcontroller.practicepartnghe");
 // luyen doc
-Route::get("/guest/luyen-doc","ReadingPartController@practicePartDoc")->name("readingpartcontroller.practiceartdoc");
+Route::get("/guest/reading/practice","ReadingPartController@practicePartDoc")->name("readingpartcontroller.practicepartdoc");
 
 Route::get("/guest/reading",[
     'uses' => "ReadingPartController@index"
@@ -272,6 +272,7 @@ Route::post("guest/reading/search",[
 Route::post("guest/listening/search",[
     "uses"=> "ListeningPartController@searchListening"
 ])->name("listeningpartcontroller.searchlistening");
+
 //================= testing ==================================
 //test
 //testing home
@@ -372,3 +373,27 @@ Route::get("/discussion/del-rep-cmt","ReplyCommentController@delete")
 
 
 
+// authentication
+Route::get("/account/login", [
+    'uses'=> 'Auth\MyLoginController@getLogin'
+])->name('mylogincontroller.login');
+
+Route::post("/account/login/do-login", [
+    'uses'=>'Auth\MyLoginController@postLogin'
+])->name("mylogincontroller.postlogin");
+
+Route::get("/account/register",[
+    'uses'=> 'AccountController@registerIndex'
+])->name('accountcontroller.registerindex');
+
+Route::post('/account/register/do-register',[
+   'uses'=>'AccountController@doRegister'
+])->name("accountcontroller.doregister");
+
+Route::get('/account/logout',[
+    'uses'=> 'Auth\MyLoginController@logout'
+])->name('mylogincontroller.logout');
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');

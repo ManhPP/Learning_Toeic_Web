@@ -104,11 +104,11 @@ $(document).on("click", "#search-submit", function(){
 });
 
 $(document).on("click", ".search-result", function(){
-    window.location.href = $("#root-path").html()+ '/guest/luyen-nghe?id='+$(this).attr("data-id") ;
+    window.location.href = $("#path-view").html()+'?id='+$(this).attr("data-id") ;
 });
 
 $(document).on("click", ".suggest", function(){
-    window.location.href = $("#root-path").html()+ '/guest/luyen-nghe?id='+$(this).attr("data-id") ;
+    window.location.href = $("#path-view").html()+'?id='+$(this).attr("data-id") ;
 });
 
 //del search

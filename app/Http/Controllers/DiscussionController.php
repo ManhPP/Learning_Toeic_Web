@@ -7,10 +7,12 @@ use App\Comment;
 use App\Discussion;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
+use Auth;
 
 class DiscussionController extends Controller
 {
     public function home(Request $request){
+        $userLogin = Auth::guard("accounts")->user();
         $acc = Account::all();
         $arrBtl = Discussion::all();
         $arrNumCmt = array();
@@ -22,18 +24,17 @@ class DiscussionController extends Controller
             array_push($arrNumCmt,$numCmt);
         }
         return view('user_bai_thaoluan_home',['acc'=>$acc,'arrBtl'=>$arrBtl,'arrNumCmt'=>$arrNumCmt,
-        'numBtl'=>count($arrBtl),'numUser'=>Account::all()->count()]);
+        'numBtl'=>count($arrBtl),'numUser'=>Account::all()->count(), 'userLogin'=>$userLogin]);
     }
 
    public function accessDiscussion(Request $request){
        $id = $request["id"];
+       $userLogin = Auth::guard("accounts")->user();
        $btl = Discussion::find($id);
-//       $arrCmt = Comment::orderBy('id','desc')->where('idBtl',$id)->get();
-//       error_log(count($arrCmt));
-//       $btl->comment = $arrCmt;or
        $view = $btl->accessCount;
        $btl->accessCount = $view+1;
        $btl->save();
+
        $acc = Account::find(35);
 
        $arrNumReply = array();
@@ -41,54 +42,78 @@ class DiscussionController extends Controller
        foreach ($btl->comment as $cmt){
            array_push($arrNumReply,count($cmt->replyComment));
        }
-       return view('user-thaoluan-view',['btl'=>$btl,'acc'=>$acc,'listSumReply'=>$arrNumReply]);
+       return view('user-thaoluan-view',['btl'=>$btl,'userLogin'=>$userLogin,'listSumReply'=>$arrNumReply]);
    }
 
    public function upload_Img(Request $request){
-//       try{
+
+       $userLogin = Auth::guard("accounts")->user();
+       if( $userLogin==null || !$userLogin->can('addDiscuss', Discussion::class)){
+           return response()->json(['redirect'=>(Route('mylogincontroller.login'))]);
+       }
+
+       try{
            $file = $request->file("file-image");
            $fileName = time().'.'.$file->getClientOriginalExtension();
            $des=public_path('/images_btl');
            $file->move($des,$fileName);
            return response()->json(["pathFile"=>"images_btl"."/".$fileName], 200);
-//       }catch(Exception $e){
-//
-//       }
+       }catch(Exception $e){
+
+       }
        return 'false';
    }
 
    public function indexAdd(Request $request){
-       $acc = Account::find(35);
-        return view('them_bai_thaoluan',['acc'=>$acc]);
+       $userLogin = Auth::guard("accounts")->user();
+
+       $userLogin = Auth::guard("accounts")->user();
+
+       if( $userLogin==null || !$userLogin->can('addDiscuss', Discussion::class)){
+           return redirect(Route('mylogincontroller.login'));
+       }
+
+       return view('them_bai_thaoluan',['userLogin'=>$userLogin]);
+
    }
 
    public function addDiscussion(Request $request){
-        $tieude = $request["tieuDe"];
-        $noidung = $request["noiDung"];
-        $btl = new Discussion();
-        $btl->tieuDe = $tieude;
-        $btl->noiDung = $noidung;
-        $btl->accessCount = 0;
-        $now = Carbon::now('GMT+7');
-//        error_log(."adasas");
-        $btl->ngayDang = $now->toDateTimeString();
+       $userLogin = Auth::guard("accounts")->user();
 
-        //set User in session
-        $acc = Account::find(35);
-        $btl->idAcc = $acc->id;
-//        $acc->discussion()->create($btl);
-        $check = $btl->saveOrFail();
-        if($check >0){
-            return 'true';
-        }
-        return 'false';
+       if( $userLogin==null || !$userLogin->can('addDiscuss', Discussion::class)){
+           return (Route('mylogincontroller.login'));
+       }
+       $tieude = $request["tieuDe"];
+       $noidung = $request["noiDung"];
+       $btl = new Discussion();
+       $btl->tieuDe = $tieude;
+       $btl->noiDung = $noidung;
+       $btl->accessCount = 0;
+       $now = Carbon::now('GMT+7');
+       $btl->ngayDang = $now->toDateTimeString();
+
+       //set User in session
+       $btl->idAcc = $userLogin->id;
+       $check = $btl->saveOrFail();
+       if($check >0){
+           return 'true';
+       }
+       return 'false';
    }
 
    public function indexUpdate(Request $request){
+
        $id = $request["id"];
        $btl = Discussion::find($id);
-       $acc = Account::find(1);
-        return view('update_bai_thaoluan',['acc'=>$acc,'btl'=>$btl]);
+       $userLogin = Auth::guard("accounts")->user();
+
+       if( $userLogin==null || !$userLogin->can('updateDiscuss', $btl)){
+           return redirect(Route('mylogincontroller.login'));
+       }
+
+
+
+       return view('update_bai_thaoluan',['userLogin'=>$userLogin,'btl'=>$btl]);
    }
 
 
@@ -102,6 +127,13 @@ class DiscussionController extends Controller
 
        $btl->tieuDe = $tieuDe;
        $btl->noiDung = $noiDung;
+
+       $userLogin = Auth::guard("accounts")->user();
+
+       if( $userLogin==null || !$userLogin->can('updateDiscuss', $btl)){
+           return (Route('mylogincontroller.login'));
+       }
+
        $check = $btl->save();
        error_log($check);
        if ($check > 0) {
@@ -111,6 +143,13 @@ class DiscussionController extends Controller
    }
 
    public function indexAdminManager(){
+
+       $userLogin = Auth::guard("accounts")->user();
+
+       if( $userLogin==null || !$userLogin->can('manage', Discussion::class)){
+           return redirect(Route('mylogincontroller.login'));
+       }
+
         $arrNumCmt = array();
         $arrBtl = Discussion::all();
         foreach($arrBtl as $btl){
@@ -128,6 +167,12 @@ class DiscussionController extends Controller
         $arrId = $request["arrId"];
         try{
             $arrDiscuss = Discussion::findMany($arrId);
+            $userLogin = Auth::guard("accounts")->user();
+
+            if( $userLogin==null || !$userLogin->can('deleteDiscuss', Discussion::class)){
+                return (Route('mylogincontroller.login'));
+            }
+
             foreach($arrDiscuss as $discuss){
                 $arrCmt = $discuss->comment;
                 foreach ($arrCmt as $cmt) {

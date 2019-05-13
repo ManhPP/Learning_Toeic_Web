@@ -47,7 +47,6 @@ class ConversationParagraphController extends Controller
     public function updatePart3(Request $request)
     {
         $listeningPart = $request["part3"];
-        \Log::info($listeningPart);
         $listHoiThoai = $request["listHoiThoai"];
         $arrListCau = $request["arrListCau"];
 
@@ -74,7 +73,6 @@ class ConversationParagraphController extends Controller
 
     //Xóa part3,4
     public function deletePart3(Request $request){
-        // $id = $request["id"];
         try {
             $part3 = ListeningPart::find(41);
 

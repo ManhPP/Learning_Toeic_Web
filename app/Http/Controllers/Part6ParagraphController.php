@@ -2,8 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Discussion;
 use App\Part6;
 use App\Part6Paragraph;
+use App\ReadingPart;
+use Auth;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -14,25 +17,40 @@ class Part6ParagraphController extends Controller
 {
 
     public function listPart6(){
+        $userLogin = Auth::guard("accounts")->user();
+        if( $userLogin==null || !$userLogin->can('addReading', ReadingPart::class)){
+            return redirect(Route('mylogincontroller.login'));
+        }
+
         $data = Part6Paragraph::all();
         $sum = Part6Paragraph::count();
-        return view('add_part_6',['arrDoan'=>$data,'sum'=>$sum]);
+        $userLogin = Auth::guard("accounts")->user();
+        return view('add_part_6',['arrDoan'=>$data,'sum'=>$sum, 'userLogin'=>$userLogin]);
     }
 
     public function listPart6Para(){
+
+        $userLogin = Auth::guard("accounts")->user();
+        if( $userLogin==null || !$userLogin->can('addPara', Part6Paragraph::class)){
+            return redirect(Route('mylogincontroller.login'));
+        }
         $data = Part6Paragraph::all();
         $sum = Part6Paragraph::count();
-        return view('add_part6_paragraph',['arrDoan'=>$data,'sum'=>$sum]);
+        return view('add_part6_paragraph',['arrDoan'=>$data,'sum'=>$sum, 'userLogin'=>$userLogin]);
     }
 
     public function add(Request $request){
+        $userLogin = Auth::guard("accounts")->user();
+        if( $userLogin==null || !$userLogin->can('addPara', Part6Paragraph::class)){
+            return response()->json(['redirect'=>(Route('mylogincontroller.login'))]);
+        }
 
-            $para=$request["para"];
-            error_log($para);
-            // convert to model paraPart6
-            $json = json_decode($para,true);
+        $para=$request["para"];
+        error_log($para);
+        // convert to model paraPart6
+        $json = json_decode($para,true);
 
-            $part6Para = new Part6Paragraph();
+        $part6Para = new Part6Paragraph();
         try{
             $check=$part6Para->save();
             error_log("a");
@@ -52,7 +70,12 @@ class Part6ParagraphController extends Controller
     }
 
     public function update(Request $request){
-//        try{
+        $userLogin = Auth::guard("accounts")->user();
+        if( $userLogin==null || !$userLogin->can('updatePara', Part6Paragraph::class)){
+            return (Route('mylogincontroller.login'));
+        }
+
+        try{
             $para=$request["para"];
             error_log($para);
             // convert to model paraPart6
@@ -74,13 +97,18 @@ class Part6ParagraphController extends Controller
             $part6Para->save;
             return 'true';
 
-//        }catch(\Exception $ex){
-//            error_log($ex->getMessage());
-//        }
+        }catch(\Exception $ex){
+            error_log($ex->getMessage());
+        }
         return 'false';
     }
 
     public function delete(Request $request){
+        $userLogin = Auth::guard("accounts")->user();
+        if( $userLogin==null || !$userLogin->can('deletePara', Part6Paragraph::class)){
+            return (Route('mylogincontroller.login'));
+        }
+
         try{
             $id = $request->id;
             $part6Para = Part6Paragraph::find($id);

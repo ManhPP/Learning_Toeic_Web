@@ -44,13 +44,10 @@
 					<hr>
 					<!-- list cau hoi -->
 					<div class="list-cau">
-						<!-- <c:forEach var="index" begin="0" end="29"> -->
                             @for($index=0; $index<=29 ;$index++)
-							<!-- <c:if test="${index%3==0 }"> -->
                                 @if($index%3==0)
 								<div class="block" data-index="{{$index}}">
 								<p class="ques refer-ques">Questions {{$index+1}}-{{$index+3}} refer to the following conversation.</p>
-                            <!-- </c:if> -->
                             @endif
 							<div class="ques" data-index="{{$index}}">
 								<div>
@@ -66,12 +63,9 @@
 								</div>
 								<hr>
 							</div>
-							<!-- <c:if test="${index%3==2 }"> -->
                                 @if($index%3==2)
 								</div>
-                            <!-- </c:if> -->
                                 @endif
-                        <!-- </c:forEach> -->
                         @endfor
 						<div style="text-align: center;margin-top: 2em;">
 							<input style="width: 5em;" type="button" value="Add" id="add-part">

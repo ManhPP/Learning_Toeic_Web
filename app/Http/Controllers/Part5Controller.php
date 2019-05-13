@@ -2,25 +2,35 @@
 
 namespace App\Http\Controllers;
 
+use App\Discussion;
 use App\Part5;
+use Auth;
 use Illuminate\Http\Request;
 use TheSeer\Tokenizer\Exception;
 
 class Part5Controller extends Controller
 {
     public function index(Request $request){
+
+        $userLogin = Auth::guard("accounts")->user();
+        if( $userLogin==null || !$userLogin->can('manage', Part5::class)){
+            return redirect(Route('mylogincontroller.login'));
+        }
+
         //        $i=0;
         $arrCau = Part5::all();
-//        foreach ($arrDoan[0]->cauPart7s as $cauPart7) {
-//            error_log($i);
-//            $i++;
-//        }
+        $userLogin = Auth::guard("accounts")->user();
         $sum = Part5::count();
         return view('admin_manager_cau_part5')
-            ->with("arrCau", $arrCau)->with("sum", $sum);
+            ->with("arrCau", $arrCau)->with("sum", $sum)
+            ->with('userLogin', $userLogin);
     }
 
     public function add(Request $request){
+        $userLogin = Auth::guard("accounts")->user();
+        if( $userLogin==null || !$userLogin->can('addCau', Part5::class)){
+            return (Route('mylogincontroller.login'));
+        }
         $cauHoi = $request['cauHoi'];
         $daA = $request['daA'];
         $daB = $request['daB'];
@@ -46,6 +56,11 @@ class Part5Controller extends Controller
     }
 
     public function update(Request $request){
+        $userLogin = Auth::guard("accounts")->user();
+        if( $userLogin==null || !$userLogin->can('updateCau', Part5::class)){
+            return (Route('mylogincontroller.login'));
+        }
+
         $cauHoi = $request['cauHoi'];
         $id = $request['id'];
         $daA = $request['daA'];
@@ -74,6 +89,11 @@ class Part5Controller extends Controller
     }
 
     public function delete(Request $request){
+        $userLogin = Auth::guard("accounts")->user();
+        if( $userLogin==null || !$userLogin->can('deleteCau', Part5::class)){
+            return (Route('mylogincontroller.login'));
+        }
+
         $id = $request['id'];
 
         try{
