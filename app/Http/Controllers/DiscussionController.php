@@ -169,11 +169,13 @@ class DiscussionController extends Controller
             $arrDiscuss = Discussion::findMany($arrId);
             $userLogin = Auth::guard("accounts")->user();
 
-            if( $userLogin==null || !$userLogin->can('deleteDiscuss', Discussion::class)){
-                return (Route('mylogincontroller.login'));
-            }
+
 
             foreach($arrDiscuss as $discuss){
+                if( $userLogin==null || !$userLogin->can('deleteDiscuss', $discuss)){
+                    return (Route('mylogincontroller.login'));
+                }
+
                 $arrCmt = $discuss->comment;
                 foreach ($arrCmt as $cmt) {
                     $cmt->report()->delete();

@@ -95,12 +95,17 @@ Route::post('/admin/account-manager/add',[
 // update tài khoản
 Route::post('/admin/account-manager/update',[
     'uses'=>'AccountController@update'
-    ]);
+])->name('accountcontroller.update');
+
+// update tài khoản user
+Route::post('/user/account-manager/update',[
+    'uses'=>'AccountController@updateForUser'
+])->name('accountcontroller.updateforuser');
 
 // xóa tài khoản
 Route::post('/admin/account-manager/delete',[
     'uses'=>'AccountController@delete'
-    ]);
+])->name("accountcontroller.delete");
 
 // kiểm tra username có tồn tại?
 Route::post('/account-manager/check-username',[

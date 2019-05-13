@@ -25,7 +25,11 @@ class AccountController extends Controller
     }
 
     public function indexUpdateUserAccount(){
-        return View("user_manage_account");
+        $userLogin = Auth::guard("accounts")->user();
+        if( $userLogin==null || !$userLogin->can('getIndexUpdate', Account::class)){
+            return redirect(Route('mylogincontroller.login'));
+        }
+        return View("user_manage_account")->with('userLogin', $userLogin);
     }
 
     //ban tài khoảnhttp://127.0.0.1:8000/
@@ -125,7 +129,7 @@ class AccountController extends Controller
         }
     }
 
-    //update tài khoản 
+    //update tài khoản admin
     public function update(Request $request){
          try{
             $id=$request['ID'];
@@ -175,16 +179,72 @@ class AccountController extends Controller
             $acc->save();
 
 
-            return Redirect::to('/admin/quanly/account');
         }catch(Exception $e){
              echo $e;
         }
+        return Redirect::to('/admin/quanly/account');
     }
+
+    //update tài khoản user
+        public function updateForUser(Request $request){
+        try{
+            $id=$request['id'];
+            $hoTen=$request['hoTen'];
+            $ngaySinh=$request['ngaySinh'];
+            $gioiTinh=$request['gioiTinh'];
+            $username=$request['username'];
+            $pass=$request['pass'];
+            $pass = Hash::make($pass);
+            $email=$request['email'];
+
+            $userLogin = Auth::guard("accounts")->user();
+
+            $tempAcc = new Account();
+            $tempAcc->id = $id;
+
+            if( $userLogin==null || !$userLogin->can('update', $tempAcc)){
+                return redirect(Route('mylogincontroller.login'));
+            }
+
+            $acc = Account::find($id);
+
+
+            if($hoTen!=""){
+                $acc->hoTen = $hoTen;
+            }
+            if($ngaySinh!=""){
+                $acc->ngaySinh = $ngaySinh;
+            }
+            if($gioiTinh!=""){
+                $acc->gioiTinh = $gioiTinh;
+            }
+            if($username!=""){
+                $acc->username= $username;
+            }
+            if($pass!=""){
+                $acc->password = $pass;
+            }
+            if($email!=""){
+                $acc->email = $email;
+            }
+
+
+            $acc->save();
+            Auth::guard('accounts')->logout();
+
+            return "true";
+        }catch(Exception $e){
+            echo $e;
+        }
+        return "false";
+    }
+
     public function delete(Request $request){
         $arrID = $request["id"];
 
         $userLogin = Auth::guard("accounts")->user();
 
+        error_log("asdasdasd");
         foreach($arrID as $id){
             $tempAcc=Account::find($id);
 
