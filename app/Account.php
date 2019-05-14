@@ -29,7 +29,7 @@ class Account extends Authenticatable
         return $this -> hasMany('App\ReplyComment', 'idAcc');
     }
     function report(){
-        return $this -> hasMany('App\Report', 'idAcc');
+        return $this -> hasMany('App\Report', 'idAcc','id');
     }
     function listeningPart(){
         return $this -> belongsToMany('App\ListeningPart','map_user_listenings') -> withPivot('ngayLam');

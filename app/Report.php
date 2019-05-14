@@ -9,7 +9,7 @@ class Report extends Model
     protected $primaryKey = 'id';
     protected $table = 'reports';
     protected $fillable = [
-        'noiDung', 'loaiReport', 'isProcessed'
+        'noiDung', 'loaiReport', 'isProcessed','idAcc','idBtl','idCmt','idRepCmt'
     ];
 
     function discussion(){

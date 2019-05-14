@@ -380,7 +380,10 @@ Route::get("/discussion/del-rep-cmt","ReplyCommentController@delete")
 
 //================= end discussion =======================================
 
-
+// report
+Route::post("/bai-thao-luan/report", [
+    'uses'=>'ReportController@addReport'
+]);
 
 
 // authentication

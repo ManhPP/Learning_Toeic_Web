@@ -11,6 +11,7 @@
 
     <!-- body -->
     <div id="data-id-btl" style="display: none;">{{$btl->id }}</div>
+    <div id="data-id-acc" style="display: none;">{{$userLogin->id }}</div>
     <div class="body row" style="margin-top: 55px">
         <div class="content-discus col-12 col-md-10">
             <div id="tittle">{{$btl->tieuDe }}</div>
@@ -247,6 +248,7 @@
     <form action="{{route('discussionController.indexUpdate')}}" id="req-form-update" method="get">
         <div style="display: none;">
             <input name="id" value='{{$btl->id }}'>
+            <div id="id-user">{{$userLogin->id }}</div>
             {{--<input name="noiDung" value='{{$btl->noiDung }}'>--}}
             {{--<input name="tieuDe" value='{{$btl->tieuDe }}'>--}}
         </div>

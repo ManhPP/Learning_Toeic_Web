@@ -8,6 +8,8 @@ class Discussion extends Model
 {
     //
     protected $primaryKey = 'id';
+    protected $table='discussions';
+    protected $fillable=['tieuDe','noiDung','accessCount','ngayDang','idAcc'];
     function comment(){
         return $this -> hasMany('App\Comment', 'idBTL');
     }
@@ -17,7 +19,7 @@ class Discussion extends Model
     }
     
     function report(){
-        return $this -> hasMany('App\Report', 'idBTL');
+        return $this -> hasMany('App\Report', 'idBtl','id');
     }
     
 }
