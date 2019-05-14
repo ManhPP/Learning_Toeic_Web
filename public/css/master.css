@@ -17,20 +17,18 @@
     position: absolute;
     right: 0em;
     width: 10em;
-    height: 2em;
     line-height: 2em;
     background: #0a1c5cb3;
-    color: white;
-
 }
 
-#menu-acc div{
-    padding-left: 1em;
-    height: 1.8em;
-    line-height: 1.8em;
+.menu-item{
+    cursor: pointer;
+    color: #c8c6d9;
+    padding-left: 0.75em;
+    margin: 0 !important;
 }
 
-#menu-acc div:hover{
+.menu-item:hover{
     background: white;
     color: blue;
 }

@@ -43,14 +43,7 @@
 							<span style="color: red">Không được để trống các trường.</span>
                             @endif 
 					</div>
-					<div class="col-12 col-sm-6 row justify-content-end">
-						<!-- <span><input id="btnsearch" type="button" name="submit"
-							value="Search"></span> <input id="search" type="text" name="q"
-							style="border-radius: 4px"> -->
-						<span class="col-4 col-lg-3 col-xl-2 filter-active"><input type="radio" name="status-user" checked="checked" data-bool-active="undefined"><span>All</span></span>
-						<span class="col-4 col-lg-3 col-xl-2 filter-active"><input type="radio" name="status-user" data-bool-active="true"><span>Active</span></span>
-						<span class="col-4 col-lg-3 col-xl-2 filter-active"><input type="radio" name="status-user" data-bool-active="false"><span>Inactive</span></span>
-					</div>
+
 				</div>
 
 				<!-- TABLE -->
@@ -75,7 +68,6 @@
 							</tr>
 						</thead>
 						<tbody>
-							<!-- <c:forEach items="${arrUser }" var="acc"> -->
 								@foreach($arrUser as $acc)
 								@if($acc->active==1)
 								<tr class="d-flex" data-activ="{{$acc->active}}">
@@ -106,53 +98,6 @@
 						</tbody>
 					</table>
 				</div>
-
-				<!-- phantrang -->
-			{{--	<div class="col-12 row"
-					style="padding-top: 1em; padding-bottom: 1em">
-                    <!-- <fmt:formatNumber var="numPage" value="${numUser/10}" -->
-                    
-						maxFractionDigits="0" />
-					<c:if test="${numUser>(numPage*10) }">
-						<c:set var="numPage" value="${numPage+1 }" />
-					</c:if>
-
-					<c:set var="curPage" value="0" />
-					<c:if test="${numUser>0 }">
-						<c:set var="curPage" value="1" />
-					</c:if>
-					<span class="col-md-6 col-sm-12">Show <span id="cur-page">${curPage }</span>
-						of <span id="sum-page">${numPage }</span> table
-					</span> <span>
-						<ul class="pagination" data-max-page="${numPage }">
-							<li class="page-item" id="pre"><span class="page-link"><</span></li>
-							<c:forEach var="i" begin="1" end="${numPage }">
-								<!-- add class active cho pagation day tien -->
-								<c:set var="cls" value="" />
-								<c:if test="${i==1 }">
-									<c:set var="cls" value="active" />
-								</c:if>
-								<!-- them dau 3... -->
-								<c:if test="${(i==2)}">
-									<li class="page-item hide more" id="first"><span
-										class="page-link">...</span></li>
-								</c:if>
-								<c:if test="${(i==numPage) and (numPage>6)}">
-									<li class="page-item more" id="last"><span class="page-link">...</span></li>
-								</c:if>
-								<!-- an ca pagation phai sau -->
-								<c:set var="hi" value="" />
-								<c:if test="${(i!=numPage) and (i>5) }">
-									<c:set var="hi" value="hide" />
-								</c:if>
-								<li class="page-num page-item ${cls } ${hi}" data-page="${i }"><span
-									class="page-link">${i }</span></li>
-							</c:forEach>
-							<li class="page-item" id="ne"><span class="page-link">></span></li>
-						</ul>
-					</span>
-				</div>
-			</div> --}}
 
 			<!-- btn ban -->
 			<div class="col-11 row justify-content-start"

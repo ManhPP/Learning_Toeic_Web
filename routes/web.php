@@ -67,6 +67,11 @@ Route::post("/admin/part-doc/del-part-doc","ReadingPartController@delPartDoc");
 Route::get('/admin/bai-hoc-manager/update-part-doc','ReadingPartController@getPartDoc');
 
 // ====account=====
+// view quan ly account cho user
+Route::get('/user/account-manager',[
+    'uses'=> 'AccountController@indexUpdateUserAccount'
+])->name('accountcontronller.indexupdateuseraccount');
+
 // view quản lý tài khoản của admin
 Route::get('/admin/quanly/account', [
     'uses' => 'AccountController@get'
@@ -90,12 +95,17 @@ Route::post('/admin/account-manager/add',[
 // update tài khoản
 Route::post('/admin/account-manager/update',[
     'uses'=>'AccountController@update'
-    ]);
+])->name('accountcontroller.update');
+
+// update tài khoản user
+Route::post('/user/account-manager/update',[
+    'uses'=>'AccountController@updateForUser'
+])->name('accountcontroller.updateforuser');
 
 // xóa tài khoản
 Route::post('/admin/account-manager/delete',[
     'uses'=>'AccountController@delete'
-    ]);
+])->name("accountcontroller.delete");
 
 // kiểm tra username có tồn tại?
 Route::post('/account-manager/check-username',[
@@ -370,7 +380,10 @@ Route::get("/discussion/del-rep-cmt","ReplyCommentController@delete")
 
 //================= end discussion =======================================
 
-
+// report
+Route::post("/bai-thao-luan/report", [
+    'uses'=>'ReportController@addReport'
+]);
 
 
 // authentication

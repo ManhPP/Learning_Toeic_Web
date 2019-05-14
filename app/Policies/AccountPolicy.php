@@ -35,6 +35,9 @@ class AccountPolicy
             return false;
     }
 
+    public function getIndexUpdate(Account $user){
+        return true;
+    }
 
     public function update(Account $user, Account $user2){
         if($user->hasRole == "ROLE_ADMIN" || ($user->id == $user2->id))

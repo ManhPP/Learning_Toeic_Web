@@ -31,7 +31,6 @@ class Part1Controller extends Controller
         $paraJson = json_decode($listeningPart, true);
         try{
             $listeningPart = ListeningPart::create($paraJson);
-
             $listCauJson = json_decode($listCauString, true);
             foreach ($listCauJson as $cauJson) {
                 \error_log("7");

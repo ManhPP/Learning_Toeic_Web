@@ -7,9 +7,14 @@
 	margin: 0;
 }
 
-html, body {
-	height: 97%;
+html{
+	height: 100%;
+}
+
+body {
 	width: 100%;
+	position: relative;
+	min-height: 100%;
 }
 
 .pointer {
@@ -73,6 +78,7 @@ html, body {
 	margin: 0 auto;
 	background: #f9f9f9;
 	padding-top: 2em;
+	padding-bottom: 23em;
 }
 
 #tittle {
@@ -308,11 +314,12 @@ html, body {
 
 /*footer*/
 .footer {
+	position: absolute;
 	height: 190px;
 	width: 100%;
 	background-color: #383C3F;
-	margin-top: 10em;
 	color: white;
+	bottom: auto;
 }
 
 @media ( min-width : 768px) {

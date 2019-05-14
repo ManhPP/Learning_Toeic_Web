@@ -67,7 +67,7 @@
                                     @endif
 									<td class="col-sm-3 col-md-3">{{$baihoc->acessCount}}</td>
 									<td class="col-sm-1 col-md-1"><div class="detail">
-									<a target="_blank" class="view" href="{{Route("listeningpartcontroller.practiceartnghe")}}?id={{$baihoc->id}}">View</a>/<a target="_blank" class="update" href="{{url('admin/bai-hoc-manager/update-part-nghe',$baihoc->id)}} ">Update</a>
+									<a target="_blank" class="view" href="{{Route("listeningpartcontroller.practicepartnghe")}}?id={{$baihoc->id}}">View</a>/<a target="_blank" class="update" href="{{url('admin/bai-hoc-manager/update-part-nghe',$baihoc->id)}} ">Update</a>
 									</div></td>
 								</tr>
                                 @php $index++ @endphp

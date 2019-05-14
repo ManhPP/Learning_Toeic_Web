@@ -12,10 +12,19 @@ class ReportController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
-    {
-        //
+    public function addReport(Request $request){
+        $report=new  Report();
+        $report->noiDung=$request['noiDung'];
+        $report->idAcc=$request['accID'];
+        $report->loaiReport=$request['loaiReport'];
+        $report->idCmt=$request['idCMT'];
+        $report->idRepCmt=$request['idRepCMT'];
+        $report->idBtl=$request['idBTL'];
+        $report->isProcessed=0;
+        $report->save();
+        // Report::create(['id'=>null],['noiDung'=>$noiDung],['loaiReport'=>$loaiReport],['isProcessed'=>0],['idAcc'=>$idAcc],['idBtl'=>$idBTL],['idCmt'=>$idCMT],['idRepCmt'=>$idRepCMT]);
     }
+    
 
     /**
      * Show the form for creating a new resource.

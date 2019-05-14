@@ -56,11 +56,11 @@
                                         <label class="label col-2-re">Giới tính</label>
                                         <div class="p-t-10">
                                             <label class="radio-container m-r-45">Male
-                                                <input type="radio" checked="checked" name="gioiTinh">
+                                                <input type="radio" checked="checked" name="gioiTinh" value="Male   ">
                                                 <span class="checkmark"></span>
                                             </label>
                                             <label class="radio-container">Female
-                                                <input type="radio" name="gioiTinh">
+                                                <input type="radio" name="gioiTinh" value="Female">
                                                 <span class="checkmark"></span>
                                             </label>
                                         </div>
