@@ -2,7 +2,11 @@
 	font-size: 0.97em;
 }
 
-body, html {
+body{
+	min-height: 100%;
+	position: relative;
+}
+html {
 	height: 100%;
 	overflow-x: hidden;
 }
@@ -135,4 +139,5 @@ th, td {
 
 .footer {
 	bottom: -12px !important;
+	position: absolute;
 }

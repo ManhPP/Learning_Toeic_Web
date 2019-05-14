@@ -14,7 +14,12 @@
 	color: black;
 }
 
-body, html {
+body{
+	min-height: 100%;
+	position: relative;
+}
+
+html {
 	height: 100%;
 	overflow-x: hidden;
 	min-width: 300px;
@@ -80,6 +85,7 @@ th, td {
 
 .footer {
 	bottom: -12px !important;
+	position: absolute;
 }
 
 /* css for model add */

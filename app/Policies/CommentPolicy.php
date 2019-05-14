@@ -40,7 +40,8 @@ class CommentPolicy
         }
     }
     public function deleteComment(Account $user, Comment $cmt){
-        if($user->id == $cmt->account->id){
+        errer_log($user->hasRole);
+        if($user->id == $cmt->account->id || $user->hasRole == "ROLE_ADMIN"){
             return true;
         }else{
             return false;

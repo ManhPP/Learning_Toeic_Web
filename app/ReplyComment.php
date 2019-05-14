@@ -8,10 +8,11 @@ class ReplyComment extends Model
 {
     protected $primaryKey='id';
     protected $table='reply_comments';
+    protected $fillable = ['noiDung', 'ngayDang'];
     function comment(){
-        $this->belongsTo('App/Comment','idCmt','id');
+        return $this->belongsTo('App\Comment','idCmt','id');
     }
     function account(){
-        $this->belongsTo('App/Account','idAcc','id');
+        return $this->belongsTo('App\Account','idAcc','id');
     }
 }
