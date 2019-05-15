@@ -21,7 +21,7 @@
         <div
                 class="content-container col-12 col-sm-11 col-md-10 col-lg-9 col-xl-8">
             <div class="header-content">
-                <div>Practic part 7 (40 sentences)</div>
+                <div style="padding-left: 1em>Practic part 7 (40 sentences)</div>
             </div>
             <div class="content">
                 <div class="p1">
