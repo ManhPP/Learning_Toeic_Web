@@ -9,9 +9,9 @@ class ReplyComment extends Model
     protected $primaryKey='id';
     protected $table='reply_comments';
     function comment(){
-        $this->belongsTo('App/Comment','idCmt','id');
+        $this->belongsTo('App\Comment','idCmt','id');
     }
     function account(){
-        $this->belongsTo('App/Account','idAcc','id');
+        $this->belongsTo('App\Account','idAcc','id');
     }
 }

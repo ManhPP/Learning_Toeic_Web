@@ -203,7 +203,7 @@ function addPara(paras){
             +'</span></label></div><div class="align-right">'
             +'<img class="ico-modified ico-del" alt="minus" data-idpara="'
             +paras[i].id
-            +'" src="/BKTOEIC/resources/img/round-minus.png"></div><hr></div></div>';
+            +'" src="/imgs/round-minus.png"></div><hr></div></div>';
         
         begin+=3;
         $(".list-cau").append(row);
@@ -276,8 +276,8 @@ function resetTable(para, insertAfter, isPrepend){
     var row = '<tr class="d-flex row" data-id="'+para.id+'"><td class="col-12">'
             + '<input class="checkbox-choise" type="checkbox">'
             + '<span class="ques-content">Đoạn văn id '+para.id+'</span>'
-            + '<img class="expand-ico" src="/BKTOEIC/resources/img/next.png">'
-            + '<img class="shorten-ico hide" src="/BKTOEIC/resources/img/down-arrow.png">'
+            + '<img class="expand-ico" src="/imgs/next.png">'
+            + '<img class="shorten-ico hide" src="/imgs/down-arrow.png">'
             + '<div class="content-para hide">'
             +quess
             + '</div></td></tr>';

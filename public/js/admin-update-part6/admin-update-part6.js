@@ -160,7 +160,7 @@ function addPara(arrPara){
             if (j == 2){
                 add = '<div class="align-right">'
                         + '<img class="ico-modified ico-del" data-id="'+arrPara[i].id+'" alt="minus"'
-                        + ' src="'+$("#root-path").html()+'/resources/img/round-minus.png"></div>';
+                        + ' src="'+$("#root-path").html()+'/imgs/round-minus.png"></div>';
             }
             
             var daDung = arrPara[i].listCauPart6[j].daDung;
@@ -274,8 +274,8 @@ function resetTable(para, insertAfter, isPrepend){
     var row = '<tr class="d-flex row" data-id="'+para.id+'"><td class="col-12">'
             + '<input class="checkbox-choise" type="checkbox">'
             + '<span class="ques-content">Đoạn văn id '+para.id+'</span>'
-            + '<img class="expand-ico" src="/BKTOEIC/resources/img/next.png">'
-            + '<img class="shorten-ico hide" src="/BKTOEIC/resources/img/down-arrow.png">'
+            + '<img class="expand-ico" src="/imgs/next.png">'
+            + '<img class="shorten-ico hide" src="/imgs/down-arrow.png">'
             + '<div class="content-para hide">'
             +quess
             + '</div></td></tr>';
