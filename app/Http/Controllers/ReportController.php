@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Report;
+use Auth;
 use Illuminate\Http\Request;
 
 class ReportController extends Controller
@@ -13,18 +14,53 @@ class ReportController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function addReport(Request $request){
-        $report=new  Report();
-        $report->noiDung=$request['noiDung'];
-        $report->idAcc=$request['accID'];
-        $report->loaiReport=$request['loaiReport'];
-        $report->idCmt=$request['idCMT'];
-        $report->idRepCmt=$request['idRepCMT'];
-        $report->idBtl=$request['idBTL'];
-        $report->isProcessed=0;
-        $report->save();
+        $userLogin = Auth::guard("accounts")->user();
+        if ($userLogin==null || !$userLogin->can('addReport', Report::class)){
+            return (Route('mylogincontroller.login'));
+        }
+        try {
+            $report = new  Report();
+            $report->noiDung = $request['noiDung'];
+            $report->loaiReport = $request['loaiReport'];
+            $report->isProcessed = 0;
+            $report->idAcc = $request['accID'];
+
+            $idCmt = $request['idCMT'];
+            $idRepCmt = $request['idRepCMT'];
+            $idBtl = $request['idBTL'];
+
+            if ($idCmt != -1)
+                $report->idCmt = $request['idCMT'];
+            else if ($idRepCmt != -1)
+                $report->idRepCmt = $request['idRepCMT'];
+            else
+                $report->idBtl = $request['idBTL'];
+            $report->save();
+            return "true";
+        }catch (\Exception $e){
+
+        }
+        return "false";
         // Report::create(['id'=>null],['noiDung'=>$noiDung],['loaiReport'=>$loaiReport],['isProcessed'=>0],['idAcc'=>$idAcc],['idBtl'=>$idBTL],['idCmt'=>$idCMT],['idRepCmt'=>$idRepCMT]);
     }
     
+
+    public function changeStatusProcess(Request $request){
+        $userLogin = Auth::guard("accounts")->user();
+        if ($userLogin==null || !$userLogin->can('changeStatusProcess', Report::class)){
+            return (Route('mylogincontroller.login'));
+        }
+        try{
+            $id = $request["id"];
+            $report = Report::find($id);
+            $report->isProcessed = 1;
+            $report->save();
+            return "true";
+        }catch (\Exception $e){
+
+        }
+        return "false";
+    }
 
     /**
      * Show the form for creating a new resource.

@@ -19,9 +19,9 @@ class CreateReportsTable extends Migration
             $table -> string('loaiReport');
             $table -> boolean('isProcessed');
             $table -> integer('idAcc');
-            $table -> integer('idBtl');
-            $table -> integer('idCmt');
-            $table -> integer('idRepCmt');
+            $table -> integer('idBtl')->nullable(true);
+            $table -> integer('idCmt')->nullable(true);
+            $table -> integer('idRepCmt')->nullable(true);
             $table->timestamps();
         });
     }

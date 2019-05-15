@@ -385,6 +385,11 @@ Route::post("/bai-thao-luan/report", [
     'uses'=>'ReportController@addReport'
 ]);
 
+// skip report
+Route::post('/report-manage/skip',[
+    'uses'=>'ReportController@changeStatusProcess'
+])->name('reportcontroller.changestatusprocess');
+
 
 // authentication
 Route::get("/account/login", [

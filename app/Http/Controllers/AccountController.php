@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Account;
+use App\Report;
 use Auth;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Route;
@@ -16,11 +17,12 @@ class AccountController extends Controller
     public function get(){
         $arrUser=Account::all();
         $userLogin = Auth::guard("accounts")->user();
+        $listReport = Report::where('isProcessed', '=', '0')->get();
 
         if( $userLogin==null || !$userLogin->can('manage', Account::class)){
             return redirect(Route('mylogincontroller.login'));
         }
-        return view('admin_account')->with("arrUser",$arrUser)->with("noti",0 );
+        return view('admin_account')->with('listReport',$listReport)->with("arrUser",$arrUser)->with("noti",0 );
 
     }
 

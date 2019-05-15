@@ -61,7 +61,10 @@ $(document).on("click", "#btn-report", function(){
            idRepCMT: idRepCMT,
        },
        success: function(data){
-           if(data==true)
+           if(data!="true" && data!="false"){
+               window.location.href = $("#path-login").html();
+           }
+           if(data=="true")
                alert("Report thành công!!!");
            else
                alert("Report không thành công!!!");

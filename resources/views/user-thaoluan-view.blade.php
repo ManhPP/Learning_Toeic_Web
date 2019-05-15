@@ -11,7 +11,11 @@
 
     <!-- body -->
     <div id="data-id-btl" style="display: none;">{{$btl->id }}</div>
-    <div id="data-id-acc" style="display: none;">{{$userLogin->id }}</div>
+    @if($userLogin)
+        <div id="data-id-acc" style="display: none;">{{$userLogin->id }}</div>
+    @else
+        <div id="data-id-acc" style="display: none;">-1</div>
+    @endif
     <div class="body row" style="margin-top: 55px">
         <div class="content-discus col-12 col-md-10">
             <div id="tittle">{{$btl->tieuDe }}</div>
@@ -110,47 +114,6 @@
                             <?php $index +=1 ?>
                         @endforeach
                     </div>
-
-                    <!-- pagination -->
-                    {{--<fmt:formatNumber var="numPage" value="${numCmt/10}"--}}
-                                      {{--maxFractionDigits="0" />--}}
-                    {{--<c:if test="${numCmt>(numPage*10) }">--}}
-                        {{--<c:set var="numPage" value="${numPage+1 }" />--}}
-                    {{--</c:if>--}}
-
-                    {{--<c:set var="curPage" value="0" />--}}
-                    {{--<c:if test="${numCmt>0 }">--}}
-                        {{--<c:set var="curPage" value="1" />--}}
-                    {{--</c:if>--}}
-                    {{--<ul class="pagination"--}}
-                        {{--style="justify-content: center; margin-top: 20px; padding-top: 3em"--}}
-                        {{--data-max-page="${numPage }">--}}
-                        {{--<li class="page-item" id="pre"><span class="page-link"><</span></li>--}}
-                        {{--<c:forEach var="i" begin="1" end="${numPage }">--}}
-                            {{--<!-- add class active cho pagation day tien -->--}}
-                            {{--<c:set var="cls" value="" />--}}
-                            {{--<c:if test="${i==1 }">--}}
-                                {{--<c:set var="cls" value="active" />--}}
-                            {{--</c:if>--}}
-                            {{--<!-- them dau 3... -->--}}
-                            {{--<c:if test="${(i==2)}">--}}
-                                {{--<li class="page-item hide more" id="first"><span--}}
-                                            {{--class="page-link">...</span></li>--}}
-                            {{--</c:if>--}}
-                            {{--<c:if test="${(i==numPage) and (numPage>6)}">--}}
-                                {{--<li class="page-item more" id="last"><span--}}
-                                            {{--class="page-link">...</span></li>--}}
-                            {{--</c:if>--}}
-                            {{--<!-- an ca pagation phai sau -->--}}
-                            {{--<c:set var="hi" value="" />--}}
-                            {{--<c:if test="${(i!=numPage) and (i>5) }">--}}
-                                {{--<c:set var="hi" value="hide" />--}}
-                            {{--</c:if>--}}
-                            {{--<li class="page-num page-item ${cls } ${hi}" data-page="${i }"><span--}}
-                                        {{--class="page-link">${i }</span></li>--}}
-                        {{--</c:forEach>--}}
-                        {{--<li class="page-item" id="ne"><span class="page-link">></span></li>--}}
-                    {{--</ul>--}}
                 </div>
             </div>
         </div>
@@ -248,9 +211,12 @@
     <form action="{{route('discussionController.indexUpdate')}}" id="req-form-update" method="get">
         <div style="display: none;">
             <input name="id" value='{{$btl->id }}'>
-            <div id="id-user">{{$userLogin->id }}</div>
-            {{--<input name="noiDung" value='{{$btl->noiDung }}'>--}}
-            {{--<input name="tieuDe" value='{{$btl->tieuDe }}'>--}}
+            @if(isset($userLogin))
+                <div id="id-user">{{$userLogin->id }}</div>
+            @else
+                <div id="id-user">-1</div>
+            @endif
+            <div id="path-login">{{Route("mylogincontroller.login")}}</div>
         </div>
     </form>
     <!-- Open modal -->

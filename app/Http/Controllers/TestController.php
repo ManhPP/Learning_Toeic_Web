@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Discussion;
+use App\Report;
 use App\Test;
 use Auth;
 use Illuminate\Http\Request;
@@ -262,6 +263,7 @@ class TestController extends Controller
         if( $userLogin==null || !$userLogin->can('manage', Test::class)){
             return redirect(Route('mylogincontroller.login'));
         }
+        $listReport = Report::where('isProcessed', '=', '0')->get();
 
         $userLogin = Auth::guard("accounts")->user();
         if( $userLogin==null || !$userLogin->can('updateTest', Test::class)){
@@ -269,7 +271,7 @@ class TestController extends Controller
         }
 
         $arrBaiHoc = Test::all();
-        return View("admin_baihoc_bkt")->with("arrBaiHoc",$arrBaiHoc);
+        return View("admin_baihoc_bkt")->with("arrBaiHoc",$arrBaiHoc)->with('listReport', $listReport);
     }
 
     public function delete(Request $request){

@@ -78,7 +78,10 @@ class CommentController extends Controller
         }
         error_log("asdasd");
 
-        $cmt->replyComment()->delete();
+        foreach ($cmt->replyComment as $repCmt) {
+            $repCmt->report()->delete();
+            $repCmt->delete();
+        }
         $cmt->report()->delete();
         $check = $cmt->delete();
         if($check >0){
