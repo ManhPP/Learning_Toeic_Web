@@ -21,12 +21,15 @@ $(document).on("click", ".btn-report", function () {
     $("#btn-messreport").click();
     $("#mesage-report").find("#btn-report").attr("data-type", $(this).attr("data-type"));
     $("#mesage-report").find("#btn-report").attr("data-id", $(this).attr("data-id"));
+    
 });
 
 $(document).on("click", "#btn-report", function(){
     var idBTL = -1, idCMT=-1, idRepCMT=-1;
     var noiDung, loaiReport;
     var type = $(this).attr("data-type");
+    var accID=$('#id-user').html();
+    console.log(accID);
     
     noiDung = $("#input-report").val();
     if(type=="rpbtl"){
@@ -39,10 +42,18 @@ $(document).on("click", "#btn-report", function(){
         loaiReport="repcmt";
         idRepCMT = $(this).attr("data-id");
     }
+    console.log(noiDung+loaiReport+idBTL+idCMT+idRepCMT);
     
     $.ajax({
-       url: "bai-thao-luan/report",
+       url: $('#root-path').html()+"/bai-thao-luan/report",
+       method: "POST",
+       //    contentType:"application/json; charset=utf-8",
+       //    dataType:"json",
+          headers: {
+           'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+           },
        data: {
+           accID:accID,
            noiDung: noiDung,
            loaiReport: loaiReport,
            idBTL: idBTL,
@@ -50,7 +61,10 @@ $(document).on("click", "#btn-report", function(){
            idRepCMT: idRepCMT,
        },
        success: function(data){
-           if(data==true)
+           if(data!="true" && data!="false"){
+               window.location.href = $("#path-login").html();
+           }
+           if(data=="true")
                alert("Report thành công!!!");
            else
                alert("Report không thành công!!!");

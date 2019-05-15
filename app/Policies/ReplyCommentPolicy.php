@@ -39,7 +39,7 @@ class ReplyCommentPolicy
         }
     }
     public function deleteComment(Account $user, ReplyComment $cmt){
-        if($user->id == $cmt->account->id){
+        if($user->id == $cmt->account->id || $user->hasRole=="ROLE_ADMIN"){
             return true;
         }else{
             return false;

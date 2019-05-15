@@ -20,10 +20,14 @@
 			<div class="split"></div>
 			<div class="center content-cover">
 				<p class="text-content">WITH ONE HOUR PER DAY,  OUR WEBSITE WILL HELP YOU IMPROVE YOUR LEVEL TOEIC</p>
+				@if(isset($userLogin))
 
-				<button id="btn-register" class="register wow bounce no-outline" data-wow-duration="1.5s">REGISTER NOW</button>
-				<b><i>OR</i></b>
-				<button id="btn-login" class="register wow bounce no-outline" data-wow-duration="1.5s">LOGIN NOW</button>
+				@else
+					<button id="btn-register" class="register wow bounce no-outline" data-wow-duration="1.5s">REGISTER NOW</button>
+					<b><i>OR</i></b>
+					<button id="btn-login" class="register wow bounce no-outline" data-wow-duration="1.5s">LOGIN NOW</button>
+				@endif
+
 			</div>
 		</div>
 	</div>

@@ -20,7 +20,7 @@
 					<a class="nav-link mr-100" href="#">
 						<img class="ico-header" src="{{URL::asset("imgs/email-icon.png")}}">
 					</a>
-					<div class="sum-notice">{{$sumRepost=1}}</div>
+					<div class="sum-notice">{{count($listReport)}}</div>
 				</li>
 						
 				<li class="nav-item"><a class="nav-link" href="#"><img
@@ -61,53 +61,78 @@
 	<div id="csrf-name">${_csrf.headerName}</div>
 	<div id="csrf-value">${_csrf.token}</div>
 	<div id="root-path">{{URL("")}}</div>
+	<div id="skip-rp-path">{{Route("reportcontroller.changestatusprocess")}}</div>
 </div>
 
-<!-- nhap noi dung cau -->
-{{--<div class="modal fade" tabindex="-1" role="dialog"
-	aria-labelledby="mySmallModalLabel" aria-hidden="true"
-	id="model-message">
+
+<!-- report -->
+<div class="modal fade" tabindex="-1" role="dialog"
+	 aria-labelledby="mySmallModalLabel" aria-hidden="true"
+	 id="model-message">
 	<div class="modal-dialog" style="top: 2em;max-width: 100%;width: 65em;">
 		<div class="modal-content" id="modal-content-iques">
 			<div class="modal-header">
 				<h4 class="modal-title" id="myModalLabel">Thông báo</h4>
 			</div>
 			<div class="modal-body">
-                    @foreach($listReport as $rp)
-                    @php $loaiReport=""; @endphp
-					
-                    @if($rp->loaiReport == 'cmt')
-                        @php $loaiReport = "comment" @endphp
-                    @endif
-                    @if($rp->loaiReport == 'repcmt')
-                        @php $loaiReport = "reply comment" @endphp
-                    @endif
-                    @if($rp->loaiReport  == 'btl')
-                        @php $loaiReport = "bài thảo luận" @endphp
-                    @endif 
-                    
-					<div class="group-rp">
-						<div class="row one-rp">
-							<div class="col-12">
-								<span class="acc-rp">Tài khoản: ${rp.user.hoTen }, id ${rp.user.id } đã report ${loaiReport }: </span>
-								<span class="content-rp">${rp.noiDung }</span>
+				<div id="body-rp">
+					@foreach($listReport as $rp)
+						@php $loaiReport = "" @endphp
+						@if($rp->loaiReport == 'cmt')
+							@php $loaiReport = "comment" @endphp
+						@else
+							@if($rp->loaiReport == 'repcmt')
+								@php $loaiReport = "reply comment" @endphp
+							@else
+								@php $loaiReport == "bài thảo luận" @endphp
+							@endif
+						@endif
+						<div class="group-rp">
+							<div class="row one-rp">
+								<div class="col-12">
+									<span class="acc-rp">Tài khoản: {{$rp->user->hoTen}}, id {{$rp->user->id}} đã report {{$loaiReport }} với nội dung: </span>
+									<span class="content-rp">{{$rp->noiDung }}</span>
+								</div>
+							</div>
+
+							<div clas="col-12">
+								@if($rp->loaiReport == 'cmt')
+									<span class="acc-rp">Nội dung comment bị report: </span>
+									<span class="content-rp">{{$rp->comment->noiDung}}</span>
+								@endif
+								@if($rp->loaiReport == 'repcmt')
+									<span class="acc-rp">Nội dung reply comment bị report: </span>
+									<span class="content-rp">{{$rp->replyComment->noiDung }}</span>
+								@endif
+							</div>
+
+							<div class="col-12 div-proc-rp">
+								<button class="btn proc-rp admin-skip-report" id="skip-rp" data-id="{{$rp->id}}">Bỏ qua repport</button>
+								@if($rp->loaiReport == 'cmt')
+									<button class="btn proc-rp admin-del-cmt" id="view-rp" data-path="{{Route("commentController.delete")}}" data-id="{{$rp->comment->id}}">Xóa comment</button>
+								@endif
+								@if($rp->loaiReport == 'repcmt')
+									@php $idparent = -1 @endphp
+									@isset($rp->comment)
+										<div style="display: none">{{$idparent = $rp->comment->id}}</div>
+									@endisset
+									<button class="btn proc-rp admin-del-rep" id="view-rp" data-parent="{{$idparent}}" data-path="{{Route("replyCommentController.deleteReply")}}" data-id="{{$rp->replyComment->id}}">Xóa replycomment</button>
+								@endif
+								@if($rp->loaiReport == 'btl')
+									<a href="{{Route("dicussionController.view")}}?id={{$rp->discussion->id}}" target="_blank"><button class="btn proc-rp" id="view-rp">Đi đến btl</button></a>
+								@endif
 							</div>
 						</div>
-						<div class="col-12 div-proc-rp">
-							<button class="btn proc-rp" id="skip-rp" data-id="${rp.id }">Bỏ qua repport</button>
-							<button class="btn proc-rp" id="view-rp">Đi đến nội dung bị report</button>
-						</div>
-					</div>
-                @endforeach
+					@endforeach
+				</div>
 				<div class="row">
 					<div class="col-12" style="text-align: right;">
 						<button id="btn-close" class="btn" style="color: white; background: red">Close</button>
 					</div>
-					
+
 				</div>
 			</div>
-			
+
 		</div>
 	</div>
 </div>
---}}

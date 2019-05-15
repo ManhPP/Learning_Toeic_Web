@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Discussion;
 use App\ListeningPart;
 use App\ConversationParagraph;
+use App\Report;
 use Auth;
 use Illuminate\Http\Request;
 use App\Http\Requests;
@@ -106,9 +107,10 @@ class ListeningPartController extends Controller
         if( $userLogin==null || !$userLogin->can('manage', ListeningPart::class)){
             return redirect(Route('mylogincontroller.login'));
         }
+        $listReport = Report::where('isProcessed', '=', '0')->get();
         $arrBaiHoc=ListeningPart::all();
         $numBaiHoc=$arrBaiHoc->count();
-        return view('admin_baihoc_pn')->with("arrBaiHoc",$arrBaiHoc)->with("numBaiHoc",$numBaiHoc);
+        return view('admin_baihoc_pn')->with("arrBaiHoc",$arrBaiHoc)->with('listReport', $listReport)->with("numBaiHoc",$numBaiHoc);
     }
 
     //return view udpate các part phần nghe

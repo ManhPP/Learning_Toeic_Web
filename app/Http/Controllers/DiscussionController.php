@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Account;
 use App\Comment;
 use App\Discussion;
+use App\Report;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
 use Auth;
@@ -149,18 +150,19 @@ class DiscussionController extends Controller
        if( $userLogin==null || !$userLogin->can('manage', Discussion::class)){
            return redirect(Route('mylogincontroller.login'));
        }
+       $listReport = Report::where('isProcessed', '=', '0')->get();
 
-        $arrNumCmt = array();
-        $arrBtl = Discussion::all();
-        foreach($arrBtl as $btl){
-            $arrCmt = $btl->comment;
-            $num = count($arrCmt);
-            foreach ($arrCmt as $cmt){
-                $num+= $cmt->replyComment()->count();
-            }
-            array_push($arrNumCmt,$num);
-        }
-        return View("admin_thaoluan")->with("arrBtl", $arrBtl)->with("arrNumCmt", $arrNumCmt);
+       $arrNumCmt = array();
+       $arrBtl = Discussion::all();
+       foreach($arrBtl as $btl){
+           $arrCmt = $btl->comment;
+           $num = count($arrCmt);
+           foreach ($arrCmt as $cmt){
+               $num+= $cmt->replyComment()->count();
+           }
+           array_push($arrNumCmt,$num);
+       }
+       return View("admin_thaoluan")->with("arrBtl", $arrBtl)->with('listReport', $listReport)->with("arrNumCmt", $arrNumCmt);
    }
 
    public function delete(Request $request){
@@ -169,11 +171,13 @@ class DiscussionController extends Controller
             $arrDiscuss = Discussion::findMany($arrId);
             $userLogin = Auth::guard("accounts")->user();
 
-            if( $userLogin==null || !$userLogin->can('deleteDiscuss', Discussion::class)){
-                return (Route('mylogincontroller.login'));
-            }
+
 
             foreach($arrDiscuss as $discuss){
+                if( $userLogin==null || !$userLogin->can('deleteDiscuss', $discuss)){
+                    return (Route('mylogincontroller.login'));
+                }
+
                 $arrCmt = $discuss->comment;
                 foreach ($arrCmt as $cmt) {
                     $cmt->report()->delete();

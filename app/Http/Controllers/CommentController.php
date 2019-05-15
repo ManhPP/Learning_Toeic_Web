@@ -59,12 +59,10 @@ class CommentController extends Controller
         }
 
 
-        if($userLogin->id == $cmt->idAcc){
-            $cmt->noiDung = $request['noiDung'];
-            $check = $cmt->save();
-            if($check >0){
-                return 'true';
-            }
+        $cmt->noiDung = $request['noiDung'];
+        $check = $cmt->save();
+        if($check >0){
+            return 'true';
         }
 
         return 'false';
@@ -78,15 +76,17 @@ class CommentController extends Controller
         if ($userLogin==null && !$userLogin->can('deleteComment', $cmt)){
             return (Route('mylogincontroller.login'));
         }
+        error_log("asdasd");
 
-        if($userLogin->id == $cmt->idAcc){
-            $cmt->replyComment()->delete();
-            $cmt->report()->delete();
-            $check = $cmt->delete();
-            if($check >0){
-                error_log("done");
-                return 'true';
-            }
+        foreach ($cmt->replyComment as $repCmt) {
+            $repCmt->report()->delete();
+            $repCmt->delete();
+        }
+        $cmt->report()->delete();
+        $check = $cmt->delete();
+        if($check >0){
+            error_log("done");
+            return 'true';
         }
         return 'false';
     }

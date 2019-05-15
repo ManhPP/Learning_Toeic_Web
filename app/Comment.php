@@ -8,6 +8,8 @@ class Comment extends Model
 {
     //
     protected $primaryKey = 'id';
+    protected $table='comments';
+    protected $fillable=['noiDung','ngayDang','idBTL','idAcc'];
     function discussion(){
         return $this -> belongsTo('App\Discussion','idBTL');
     }
@@ -17,7 +19,7 @@ class Comment extends Model
     }
     
     function report(){ 
-        return $this -> hasMany('App\Report','idCmt');
+        return $this -> hasMany('App\Report','idCmt','id');
     }
     
     function replyComment(){    

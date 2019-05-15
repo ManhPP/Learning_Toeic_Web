@@ -35,7 +35,7 @@
 				<form class="login100-form validate-form" method="post" action="{{ Route("mylogincontroller.postlogin") }}">
 					{{csrf_field()}}
 					<span class="login100-form-title p-b-49">
-						Login to BKTOEIC
+						<u>Login BKToeic</u>
 					</span>
 
 					<div class="wrap-input100 validate-input m-b-23" data-validate = "Username is reauired">
@@ -49,14 +49,14 @@
 						<input class="input100" type="password" name="pass" placeholder="Type your password">
 						<span class="focus-input100" data-symbol="&#xf190;"></span>
 					</div>
-					
+{{-- 					
 					<div class="text-right p-t-8 p-b-31">
 						<a href="#">
 							Forgot password?
 						</a>
-					</div>
+					</div> --}}
 					
-					<div class="container-login100-form-btn">
+					<div class="container-login100-form-btn" style="margin-top: 3em">
 						<div class="wrap-login100-form-btn">
 							<div class="login100-form-bgbtn"></div>
 							<button class="login100-form-btn">
@@ -65,13 +65,18 @@
 						</div>
 					</div>
 
-					<div class="flex-col-c p-t-105">
+					<div class="flex-col-c p-t-105" style="padding-top: 3em;">
 						<span class="txt1 p-b-17">
 							Or Sign Up Using
 						</span>
 
 						<a href="{{Route("accountcontroller.registerindex")}}" class="txt2">
 							Sign Up
+						</a>
+					</div>
+					<div class="flex-col-c p-t-105" style="padding-top: 3em;">
+						<a href="{{Route("home")}}" class="txt2">
+							return home
 						</a>
 					</div>
 				</form>

@@ -11,7 +11,7 @@
 */
 Route::get('/', [
     'uses'=> 'HomeController@index'
-]);
+])->name('home');
 Route::get('/login', function(){
     return view('login');
 });
@@ -95,12 +95,17 @@ Route::post('/admin/account-manager/add',[
 // update tài khoản
 Route::post('/admin/account-manager/update',[
     'uses'=>'AccountController@update'
-    ]);
+])->name('accountcontroller.update');
+
+// update tài khoản user
+Route::post('/user/account-manager/update',[
+    'uses'=>'AccountController@updateForUser'
+])->name('accountcontroller.updateforuser');
 
 // xóa tài khoản
 Route::post('/admin/account-manager/delete',[
     'uses'=>'AccountController@delete'
-    ]);
+])->name("accountcontroller.delete");
 
 // kiểm tra username có tồn tại?
 Route::post('/account-manager/check-username',[
@@ -375,7 +380,15 @@ Route::get("/discussion/del-rep-cmt","ReplyCommentController@delete")
 
 //================= end discussion =======================================
 
+// report
+Route::post("/bai-thao-luan/report", [
+    'uses'=>'ReportController@addReport'
+]);
 
+// skip report
+Route::post('/report-manage/skip',[
+    'uses'=>'ReportController@changeStatusProcess'
+])->name('reportcontroller.changestatusprocess');
 
 
 // authentication

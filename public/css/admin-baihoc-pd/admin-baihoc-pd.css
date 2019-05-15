@@ -2,9 +2,15 @@
 	font-size: 0.97em;
 }
 
-body, html {
+
+html {
 	height: 100%;
 	overflow-x: hidden;
+}
+
+body{
+	min-height: 100%;
+	position: relative;
 }
 
 .container-fluid {
@@ -174,4 +180,5 @@ th, td {
 
 .footer {
 	bottom: -12px !important;
+	position: absolute;
 }

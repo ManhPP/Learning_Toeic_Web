@@ -58,6 +58,11 @@ class ReplyCommentController extends Controller
 
             //get acc from session
             $userLogin = Auth::guard("accounts")->user();
+            if($userLogin == null){
+                $userLogin = new Account();
+                $userLogin->id=-1;
+                $userLogin->hasRole = "NO_ROLE";
+            }
 
             array_push($arr,$userLogin);
 
@@ -108,10 +113,11 @@ class ReplyCommentController extends Controller
 
 
         $userLogin = Auth::guard("accounts")->user();
-        if( $userLogin==null || !$userLogin->can('updateComment', $reply)){
+        if( $userLogin==null || !$userLogin->can('deleteComment', $reply)){
             return (Route('mylogincontroller.login'));
         }
         try {
+            $reply->report()->delete();
             $reply->delete();
             return 'true';
         }catch (\Exception $e){

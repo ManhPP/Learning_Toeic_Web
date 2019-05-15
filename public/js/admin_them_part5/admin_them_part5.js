@@ -218,7 +218,6 @@ $(document).on("click", "#submit-add", function(){
         var id = $(this).attr("data-id");
         var arrDa = new Array();
         if(arrId.indexOf(""+id) == -1){
-            console.log(id);
             arrId[i] = id;
             i++;
         }
@@ -247,13 +246,9 @@ $(document).on("click", "#submit-add", function(){
     });
     arrCau+="]";
     
-    console.log($("#tittle").val() + "-" + arrId.length);
-    console.log($("#tittle").val().length+"--"+arrId.length);
     if($("#tittle").val().length > 0 && arrId.length == 40){
         partDoc = '{"id":"null","accessCount":"0", "loaiPart":"Part 5", "title":"'+$("#tittle").val()+'", "listCauPart5":'+arrCau+'}';
 
-        console.log(i);
-        console.log(arrId.length);
         // if(arrId.length == 40){
         //     $.ajax({
         //        url: $("#root-path").html()+"/admin/bai-hoc-manager/add-part-doc/check-repeat",
@@ -274,6 +269,7 @@ $(document).on("click", "#submit-add", function(){
                                listCauPart5: arrCau
                            },
                            success: function(data){
+                               console.log("data return:"+data);
                                if(data == "true"){
                                    alert("Thêm thành công!!!");
                                }else{

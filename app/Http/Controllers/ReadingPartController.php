@@ -10,6 +10,7 @@ use App\Part6Paragraph;
 use App\Part7Paragraph;
 
 use App\ReadingPart;
+use App\Report;
 use Auth;
 use Illuminate\Http\Request;
 use App\Part5;
@@ -75,12 +76,12 @@ class ReadingPartController extends Controller
         if( $userLogin==null || !$userLogin->can('manage', ReadingPart::class)){
             return redirect(Route('mylogincontroller.login'));
         }
-
+        $listReport = Report::where('isProcessed', '=', '0')->get();
 
         $arrBaiHoc = ReadingPart::all();
         $numBaiHoc = count($arrBaiHoc);
         $numPage = round($numBaiHoc / 10,0,PHP_ROUND_HALF_DOWN)+1;
-        return view('admin-baihoc-pd',['arrBaiHoc' => $arrBaiHoc,'numBaiHoc'=>$numBaiHoc,'numPage'=>$numPage]);
+        return view('admin-baihoc-pd',['arrBaiHoc' => $arrBaiHoc,'numBaiHoc'=>$numBaiHoc,'numPage'=>$numPage, 'listReport'=>$listReport]);
     }
 
     public function delPartDoc(Request $request)
