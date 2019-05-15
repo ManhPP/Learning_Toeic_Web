@@ -175,7 +175,7 @@
          aria-labelledby="mySmallModalLabel" aria-hidden="true"
          id="model-choose-ques1">
         <button type="button" class="btn btn-default" id="btn-input-yes1"
-                data-next="false">Ok</button>
+                data-next="false" style="background-color: coral;">Ok</button>
         <button type="button" class="btn btn-primary" id="btn-input-no1">Cancel</button>
         <div id="num-para-choose1">
             <span id="num-doan-choose1">0</span>/9 para
@@ -285,7 +285,7 @@
          aria-labelledby="mySmallModalLabel" aria-hidden="true"
          id="model-choose-ques2">
         <button type="button" class="btn btn-default" id="btn-input-yes2"
-                data-next="false">Ok</button>
+                data-next="false" style="background-color: coral;">Ok</button>
         <button type="button" class="btn btn-primary" id="btn-input-no2">Cancel</button>
         <div id="num-para-choose2">
             <span id="num-doan-choose2">0</span>/4
@@ -389,6 +389,39 @@
     <div style="display: none">
         <div id="path-update">{{Route("readingpartcontroller.updatepart7")}}</div>
         <div id="id-path">{{$partDoc->id}}</div>
+    </div>
+    <div style="display: none;">
+        <div id="style-for-prev">
+            <style>
+                .paragrap {
+                    text-align: center;
+                }
+                .paragrap img {
+                    max-width: 100%;
+                    margin-bottom: 2em;
+                }
+                .para .ques {
+                    width: 65%;
+                    margin: 0 auto;
+                }
+                .para .no-ques {
+                    border: none;
+                    width: 3.5em;
+                    height: 1.8em;
+                    line-height: 1.8em;
+                    text-align: center;
+                    margin: 40px auto 5px 1%;
+                    border-radius: 10px;
+                    background: #c53d1e;
+                    color: white;
+                    display: inline-block;
+                }
+                .row {
+                    width: 100%;
+                    margin: 0;
+                }
+            </style>
+        </div>
     </div>
 
 @endsection

@@ -102,7 +102,7 @@
     aria-labelledby="mySmallModalLabel" aria-hidden="true"
     id="model-choise-ques">
     <button type="button" class="btn btn-default" id="btn-input-yes"
-        data-next="false">Ok</button>
+        data-next="false" style="background-color: coral;">Ok</button>
     <button type="button" class="btn btn-primary" id="btn-input-no">Cancel</button>
     <div id="num-ques-choise">
         <span id="num-cau-choise">0</span>/40
@@ -146,7 +146,7 @@
                                     <td class="col-12"><input type="checkbox"
                                         class="choise-ques-add"> <span class="content-ques">{{ $cau->cauHoi }}</span>
                                         <img class="expand-ico"
-                                        src="{{ URL::asset("imgs/next.png") }}next.png">
+                                        src="{{ URL::asset("imgs/next.png") }}">
                                         <img class="shorten-ico hide"
                                         src="{{ URL::asset("imgs/down-arrow.png") }}">
                                         <div class="div-da hide">
@@ -156,16 +156,16 @@
                                             </div>
                                             <div class="row">
                                                 <label class="col-12 col-md-6"> <input
-                                                    disabled="disabled" type="radio" name="choise-${index }"
+                                                    disabled="disabled" type="radio" name="choise-{{$index}}"
                                                     value="A" {{ $checkA }}> <span>{{ $cau->daA }}</span>
                                                 </label> <label class="col-12 col-md-6"> <input
-                                                    disabled="disabled" type="radio" name="choise-${index }"
+                                                    disabled="disabled" type="radio" name="choise-{{$index}}"
                                                     value="B" {{ $checkB }}> <span>{{ $cau->daB }}</span>
                                                 </label> <label class="col-12 col-md-6"> <input
-                                                    disabled="disabled" type="radio" name="choise-${index }"
+                                                    disabled="disabled" type="radio" name="choise-{{$index}}"
                                                     value="C" {{ $checkC }}> <span>{{ $cau->daC }}</span>
                                                 </label> <label class="col-12 col-md-6"> <input
-                                                    disabled="disabled" type="radio" name="choise-${index }"
+                                                    disabled="disabled" type="radio" name="choise-{{$index}}"
                                                     value="D" {{ $checkD }}> <span>{{ $cau->daD }}</span>
                                                 </label>
                                             </div>

@@ -173,8 +173,7 @@ function addDataToModal(data, modal, typeUrl){
             +'<span class="content-ques">'
             +data[i].tittle+' (id '+data[i].id
             +')</span><img class="expand-ico" src="'
-            +$("#root-path").html()
-            +'/resources/img/next.png"></a></td></tr>';
+            +'/imgs/next.png"></a></td></tr>';
         modal.find("table tbody").append(tr);   
     }
     numPart = modal.find("#sum-ques");
