@@ -126,8 +126,8 @@ function resetTable(id, cauHoi, daDung, arrDa){
     var append = '<tr class="d-flex '+isChoiseThisQues+'" data-id="'
         +id+'"><td class="col-12"><input '+isDisabled+' '+isChecked+' type="checkbox" class="choise-ques-add">'
         + '<span class="content-ques">'+cauHoi
-        +'</span><img class="expand-ico" src="'+$("#root-path").html()+'/resources/img/next.png">'
-        + '<img class="shorten-ico hide" src="'+$("#root-path").html()+'/resources/img/down-arrow.png">'
+        +'</span><img class="expand-ico" src="'+'/imgs/next.png">'
+        + '<img class="shorten-ico hide" src="'+'/imgs/down-arrow.png">'
         + '<div class="div-da hide"><hr><div><b>Đáp án</b>'
         + '</div><div class="row"><label class="col-12 col-md-6">'
         + '<input disabled="disabled" type="radio" name="choise-'+id+'" value="A" '+checkA+'>'
@@ -180,8 +180,7 @@ function addQues(arrCau){
                 + arrCau[i].arrDa[3]
                 + '</span></label></div>'
                 +'<div class="align-right"><img class="ico-modified ico-del" alt="minus" src="'
-                +$("#root-path").html()
-                +'/resources/img/round-minus.png"></div><hr></div>';
+                +'/imgs/round-minus.png"></div><hr></div>';
 
         $("#list-to-add").append(cau);
     }
