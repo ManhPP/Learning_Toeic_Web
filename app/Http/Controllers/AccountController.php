@@ -115,6 +115,7 @@ class AccountController extends Controller
             $acc->hoTen=$request['hoTen'];
             $acc->ngaySinh=$request['ngaySinh'];
             $acc->gioiTinh=$request['gioiTinh'];
+            \Log::info($request['gioiTinh']);
             $acc->username=$request['username'];
             $pass=$request['pass'];
             $acc->password = Hash::make($pass);
