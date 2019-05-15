@@ -18,7 +18,7 @@
         </div>
         <div class="content-container col-12 col-sm-11 col-md-10 col-lg-9 col-xl-8">
             <div class="header-content">
-                <div>Practic part 2 (30 sentences), *(Admin phải upload tất cả các file và chọn đáp án đúng cho từng
+                <div style="padding-left: 1em">Practic part 2 (30 sentences), *(Admin phải upload tất cả các file và chọn đáp án đúng cho từng
                     câu)
                 </div>
             </div>
