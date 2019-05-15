@@ -29,7 +29,7 @@
                     @foreach($partDoc->part7Paragraphs as $doan)
                             @if( strlen($doan->doanVan2) == 0)
                             <div data-id="{{$doan->id }}">
-                                <p class="ques refer-ques">Questions {{$index }}-{{$index+count($doan->part7)-1 }} refer to the
+                                <p class="ques refer-ques">Questions {{$index }}-{{$index+count($doan->cauPart7s)-1 }} refer to the
                                     following conversation.</p>
                                 <div class="paragrap">
                                     <img src="{{URL::asset($doan->doanVan1) }}">
@@ -60,7 +60,7 @@
                     @foreach($partDoc->part7Paragraphs as $doan)
                         @if(strlen($doan->doanVan2) > 0)
                             <div>
-                                <p class="ques refer-ques">Questions {{$index }} - {{$index + count($doan->part7) -1}} refer to the
+                                <p class="ques refer-ques">Questions {{$index }} - {{$index + count($doan->cauPart7s) -1}} refer to the
                                     following conversation.</p>
                                 <div class="paragrap">
                                     <img src="{{URL::asset(''.$doan->doanVan1.'') }}">

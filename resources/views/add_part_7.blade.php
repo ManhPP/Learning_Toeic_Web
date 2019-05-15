@@ -104,7 +104,7 @@
                                                         class="num-ques">{{count($doan->cauPart7s)}}</span> câu)</span>
 											</span>
                                         <img class="expand-ico"
-                                             src="${pageContext.request.contextPath}/resources/img/next.png">
+                                             src="/imgs/next.png">
                                         <div class="div-append-para hide">
                                             <div class="boundary-para" data-id={{$doan->id}} data-num-ques="{{count($doan->cauPart7s)}}">
                                                 <div class="paragrap">
@@ -201,7 +201,7 @@
                             </tr>
                             </thead>
                             <tbody>
-                            {{$indexPara=0}}
+                            @php $indexPara=0@endphp
                             @foreach($arrDoanKep as $doan)
                                 <tr class="d-flex row" data-id="{{$doan->id}}">
                                     <td class="col-12">
@@ -209,7 +209,7 @@
                                         <span class="ques-content">Đoạn văn id {{$doan->id}} - <span
                                                     class="type-part">{{$doan->loaiPart7}}</span></span>
                                         <img class="expand-ico"
-                                             src="${pageContext.request.contextPath}/resources/img/next.png">
+                                             src="/imgs/next.png">
                                         <div class="div-append-para hide">
                                             <div class="boundary-para" data-num-ques="5" data-id="{{$doan->id}}">
                                                 <div class="paragrap">
