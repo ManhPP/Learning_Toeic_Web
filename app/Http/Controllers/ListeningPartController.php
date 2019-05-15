@@ -183,6 +183,13 @@ class ListeningPartController extends Controller
     // hàm con xử lý xóa
     public function deletePart($id){
         $listeningPart=ListeningPart::find($id);
+
+        foreach($listeningPart->tests as $ts){
+            $ts->listeningParts()->detach();
+            $ts->readingParts()->detach();
+            $ts->delete();
+        }
+
         if($listeningPart->loaiPart=="Part 1"){
             $listeningPart->part1()->delete();
 

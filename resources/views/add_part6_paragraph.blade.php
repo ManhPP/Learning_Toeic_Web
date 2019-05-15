@@ -36,7 +36,7 @@
                                 <span>•</span>
                                 <span class="btn-del" data-id="{{ $doan->id }}">delete</span>
                             </div>
-                            <img class="expand-ico" src="/resources/img/next.png">
+                            <img class="expand-ico" src="{{URL::asset("imgs/next.png")}}">
                             <img class="shorten-ico hide" src="{{URL::asset("imgs/down-arrow.png")}}">
 
                             <div class="content-para hide">
@@ -85,7 +85,7 @@
                 </tbody>
             </table>
         </div>
-        <img src="{{URL::asset("imgs/round-add.png")}}"
+        <img src="{{URL::asset("imgs/add.png")}}"
              id="ico-add-ques">
     </div>
 

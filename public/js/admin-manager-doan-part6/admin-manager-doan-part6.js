@@ -363,12 +363,12 @@ function resetTable(para, insertAfter, isPrepend){
         '<label class="col-12 col-md-6"><input '+checkD+' type="radio" disabled="disabled" name="choise'+para.listCauPart6[i].id+i+'"><span class="asw-content">'+para.listCauPart6[i].daD+'</span></label></div><hr></div>'
     }
     var row = '<tr class="d-flex row" data-id="'+para.id+'"><td class="col-12">'
-            + '<img class="ico-forward" src="/BKTOEIC/resources/img/forward-arrow.png">'
+            + '<img class="ico-forward" src="/imgs/forward-arrow.png">'
             + '<span class="ques-content">Đoạn văn id '+para.id+'</span><div class="controll-ques">'
             + '<span class="btn-update" data-id="'+para.id+'">update</span><span> • </span>'
             + '<span class="btn-del" data-id="'+para.id+'">delete</span></div>'
-            + '<img class="expand-ico" src="/BKTOEIC/resources/img/next.png">'
-            + '<img class="shorten-ico hide" src="/BKTOEIC/resources/img/down-arrow.png">'
+            + '<img class="expand-ico" src="/imgs/next.png">'
+            + '<img class="shorten-ico hide" src="/imgs/down-arrow.png">'
             + '<div class="content-para hide">'
             +quess
             + '</div></td></tr>';

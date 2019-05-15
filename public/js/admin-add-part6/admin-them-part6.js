@@ -203,8 +203,7 @@ function addPara(paras){
             +'</span></label></div><div class="align-right">'
             +'<img class="ico-modified ico-del" alt="minus" data-idpara="'
             +paras[i].id
-            +'" src="/BKTOEIC/resources/img/round-minus.png"></div><hr></div></div>';
-        
+            +'" src="/imgs/round-minus.png"></div><hr></div></div>';
         begin+=3;
         $(".list-cau").append(row);
     }

@@ -111,6 +111,13 @@ class ReadingPartController extends Controller
 
         $partDoc = ReadingPart::find($id);
 
+
+        foreach($partDoc->tests as $ts){
+            $ts->listeningParts()->detach();
+            $ts->readingParts()->detach();
+            $ts->delete();
+        }
+
         if($partDoc->loaiPart == "Part 6"){
             $partDoc->part6Paragraphs()->detach();
         }else if($partDoc->loaiPart == "Part 7"){
