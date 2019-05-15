@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\ListeningPart;
-use App\Part1;
 use App\Part2;
 use Illuminate\Http\Request;
 
@@ -39,8 +38,8 @@ class Part2Controller extends Controller
     //update câu part 2
     public function update(Request $request)
     {
-        $listeningPart = $request["part1"];
-        $listCauString = $request["listCauPart2"];
+        $listeningPart = $request["part2"];
+        $listCauString = $request["listCau"];
         $paraJson = json_decode($listeningPart, true);
 
         try {
@@ -49,7 +48,7 @@ class Part2Controller extends Controller
 
             $listCauJson = json_decode($listCauString, true);
             foreach ($listCauJson as $cauJson) {
-                Part1::find(((Object)$cauJson)->id)->update($cauJson);
+                Part2::find(((Object)$cauJson)->id)->update($cauJson);
             }
             return 1;
         } catch (Exception $e) { }
