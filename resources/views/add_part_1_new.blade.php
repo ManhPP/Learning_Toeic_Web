@@ -16,7 +16,7 @@
 	<nav id="bar"
 		class="navbar navbar-expand-md navbar-dark fixed-top nav-background">
 		<!-- Brand -->
-		<a class="navbar-brand" href="#">BKTOEIC</a>
+		<a class="navbar-brand" href="{{URL("")}}">BKTOEIC</a>
 
 		<!-- Toggler/collapsibe Button -->
 		<button class="navbar-toggler" id="toggle-bar" type="button"
@@ -28,10 +28,10 @@
 		<div class="collapse navbar-collapse justify-content-end head-bar"
 			id="collapsibleNavbar">
 			<ul class="navbar-nav">
-				<li class="nav-item"><a class="nav-link" href="#">HOME</a></li>
-				<li class="nav-item"><a class="nav-link" href="#">FORUM</a></li>
+				<li class="nav-item"><a class="nav-link" href="{{URL("")}}">HOME</a></li>
+				<li class="nav-item"><a class="nav-link" href="{{Route("discussionController.home")}}">FORUM</a></li>
 				<li class="nav-item" id="btn-login"><a class="nav-link"
-					href="#">LOGIN</a></li>
+					href="{{Route('mylogincontroller.login')}}">LOGIN</a></li>
 			</ul>
 		</div>
 	</nav>
@@ -50,7 +50,7 @@
 		<div
 			class="content-container col-12 col-sm-11 col-md-10 col-lg-9 col-xl-8">
 			<div class="header-content">
-				<div>Practic part 1 (10 sentences), *(Admin phải upload tất cả
+				<div style="padding-left: 1em">Practic part 1 (10 sentences), *(Admin phải upload tất cả
 					các file và chọn đáp án đúng cho từng câu)</div>
 			</div>
 			<div class="content">
@@ -78,8 +78,8 @@
 						<div class="ques">
 							<div class="no-ques">Câu 1</div>
 							<div class="div-img">
-								<span>Input image intro here</span>
-								<form class="form-upload-img">
+								<span>Input image here</span>
+								<form class="form-upload-img" style="padding: 1em">
 									<input class="up-img" type="file" name="file-image"
 										accept="image/*">
 								</form>
@@ -95,8 +95,8 @@
 						<div class="ques">
 							<div class="no-ques">Câu 2</div>
 							<div class="div-img">
-								<span>Input image intro here</span>
-								<form class="form-upload-img">
+								<span>Input image here</span>
+								<form class="form-upload-img" style="padding: 1em">
 									<input class="up-img" type="file" name="file-image"
 										accept="image/*">
 								</form>
@@ -112,8 +112,8 @@
 						<div class="ques">
 							<div class="no-ques">Câu 3</div>
 							<div class="div-img">
-								<span>Input image intro here</span>
-								<form class="form-upload-img">
+								<span>Input image here</span>
+								<form class="form-upload-img" style="padding: 1em">
 									<input class="up-img" type="file" name="file-image"
 										accept="image/*">
 								</form>
@@ -129,8 +129,8 @@
 						<div class="ques">
 							<div class="no-ques">Câu 4</div>
 							<div class="div-img">
-								<span>Input image intro here</span>
-								<form class="form-upload-img">
+								<span>Input image here</span>
+								<form class="form-upload-img" style="padding: 1em">
 									<input class="up-img" type="file" name="file-image"
 										accept="image/*">
 								</form>
@@ -146,8 +146,8 @@
 						<div class="ques">
 							<div class="no-ques">Câu 5</div>
 							<div class="div-img">
-								<span>Input image intro here</span>
-								<form class="form-upload-img">
+								<span>Input image here</span>
+								<form class="form-upload-img" style="padding: 1em">
 									<input class="up-img" type="file" name="file-image"
 										accept="image/*">
 								</form>
@@ -163,8 +163,8 @@
 						<div class="ques">
 							<div class="no-ques">Câu 6</div>
 							<div class="div-img">
-								<span>Input image intro here</span>
-								<form class="form-upload-img">
+								<span>Input image here</span>
+								<form class="form-upload-img" style="padding: 1em">
 									<input class="up-img" type="file" name="file-image"
 										accept="image/*">
 								</form>
@@ -180,8 +180,8 @@
 						<div class="ques">
 							<div class="no-ques">Câu 7</div>
 							<div class="div-img">
-								<span>Input image intro here</span>
-								<form class="form-upload-img">
+								<span>Input image here</span>
+								<form class="form-upload-img" style="padding: 1em">
 									<input class="up-img" type="file" name="file-image"
 										accept="image/*">
 								</form>
@@ -197,8 +197,8 @@
 						<div class="ques">
 							<div class="no-ques">Câu 8</div>
 							<div class="div-img">
-								<span>Input image intro here</span>
-								<form class="form-upload-img">
+								<span>Input image here</span>
+								<form class="form-upload-img" style="padding: 1em">
 									<input class="up-img" type="file" name="file-image"
 										accept="image/*">
 								</form>
@@ -214,8 +214,8 @@
 						<div class="ques">
 							<div class="no-ques">Câu 9</div>
 							<div class="div-img">
-								<span>Input image intro here</span>
-								<form class="form-upload-img">
+								<span>Input image here</span>
+								<form class="form-upload-img" style="padding: 1em">
 									<input class="up-img" type="file" name="file-image"
 										accept="image/*">
 								</form>
@@ -231,8 +231,8 @@
 						<div class="ques">
 							<div class="no-ques">Câu 10</div>
 							<div class="div-img">
-								<span>Input image intro here</span>
-								<form class="form-upload-img">
+								<span>Input image here</span>
+								<form class="form-upload-img" style="padding: 1em">
 									<input class="up-img" type="file" name="file-image"
 										accept="image/*">
 								</form>
