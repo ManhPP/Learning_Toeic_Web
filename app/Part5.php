@@ -10,6 +10,6 @@ class Part5 extends Model
     protected $table='part5s';
     protected $fillable = ['cauHoi','daA','daB','daC','daD','dADung'];
     function readingPart(){
-        $this->belongsToMany('App\ReadingPart','map_part5_reading_parts')->withPivot('idPartDoc');
+        return $this->belongsToMany('App\ReadingPart','map_part5_reading_parts', 'idPartDoc', 'idCau')->withPivot('idPartDoc');
     }
 }

@@ -97,11 +97,22 @@ class Part5Controller extends Controller
         $id = $request['id'];
 
         try{
-            Part5::find($id)->delete();
+            $cau = Part5::find($id);
+            $listPart5 = $cau->readingPart;
+            foreach ($listPart5 as $part5) {
+                foreach ($part5->tests as $ts){
+                    $ts->readingParts()->detach();
+                    $ts->listeningParts()->detach();
+                    $ts->delete();
+                }
+                $part5->cauPart5s()->detach();
+                $part5->delete();
+            }
+            $cau->delete();
             return "true";
         }
         catch(Exception $e){
-            
+
         }
         return "false";
     }

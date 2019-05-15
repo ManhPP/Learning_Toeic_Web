@@ -37,7 +37,7 @@
                                     src="{{ URL::asset("imgs/guest-luyennghe-home/cover-lession.jpg") }}">
                             </div>
                             <div class="detail-lession col-12">
-                                <span>{{ $partNghe->loaiPart }}: </span><span>{{ $partNghe->tittle }}</span>
+                                <span>{{ $partNghe->loaiPart }}: </span><span>{{ $partNghe->title }}</span>
                             </div>
                         </div>
                     @endforeach

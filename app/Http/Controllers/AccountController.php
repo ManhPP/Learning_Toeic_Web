@@ -115,6 +115,7 @@ class AccountController extends Controller
             $acc->hoTen=$request['hoTen'];
             $acc->ngaySinh=$request['ngaySinh'];
             $acc->gioiTinh=$request['gioiTinh'];
+            \Log::info($request['gioiTinh']);
             $acc->username=$request['username'];
             $pass=$request['pass'];
             $acc->password = Hash::make($pass);
@@ -140,7 +141,6 @@ class AccountController extends Controller
             $gioiTinh=$request['gioiTinh'];
             $username=$request['username'];
             $pass=$request['pass'];
-            $pass = Hash::make($pass);
             $email=$request['email'];
             $hasRole=$request['hasRole'];
 
@@ -169,6 +169,7 @@ class AccountController extends Controller
                 $acc->username= $username;
             }
             if($pass!=""){
+                $pass = Hash::make($pass);
                 $acc->password = $pass;
             }
             if($email!=""){
@@ -196,7 +197,6 @@ class AccountController extends Controller
             $gioiTinh=$request['gioiTinh'];
             $username=$request['username'];
             $pass=$request['pass'];
-            $pass = Hash::make($pass);
             $email=$request['email'];
 
             $userLogin = Auth::guard("accounts")->user();
@@ -224,6 +224,8 @@ class AccountController extends Controller
                 $acc->username= $username;
             }
             if($pass!=""){
+
+                $pass = Hash::make($pass);
                 $acc->password = $pass;
             }
             if($email!=""){

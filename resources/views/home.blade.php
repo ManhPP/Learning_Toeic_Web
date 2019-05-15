@@ -54,7 +54,7 @@
 						PRACTICE LISTENING
 					</div>
 					<div class="detail">
-						Start listening with our extenxive listening
+						Start listening with our extensive listening
 					</div>
 				</div>
 				<div class="our-service col-12 col-lg-4 border-services" data-path="{{ Route("testcontroller.index") }}">
