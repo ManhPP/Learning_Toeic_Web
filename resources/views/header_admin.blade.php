@@ -113,9 +113,7 @@
 								@endif
 								@if($rp->loaiReport == 'repcmt')
 									@php $idparent = -1 @endphp
-									@isset($rp->comment)
-										<div style="display: none">{{$idparent = $rp->comment->id}}</div>
-									@endisset
+									<div style="display: none">{{$idparent = $rp->replyComment->comment->id}}</div>
 									<button class="btn proc-rp admin-del-rep" id="view-rp" data-parent="{{$idparent}}" data-path="{{Route("replyCommentController.deleteReply")}}" data-id="{{$rp->replyComment->id}}">Xóa replycomment</button>
 								@endif
 								@if($rp->loaiReport == 'btl')

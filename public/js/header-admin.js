@@ -66,20 +66,23 @@ $(document).on("click", "#view-rp", function () {
 			if(data!="true" && data!="false"){
 				window.location.href = data;
 			}else if(data=="true"){
-				num = parseInt($(".sum-notice").html())-1;
-				$(".sum-notice").html(num);
 				row.remove();
 				if(button.hasClass("admin-del-cmt") == true){
+
+					console.log("sadfasdasd");
 					$(".admin-del-rep").each(function () {
 						if($(this).attr("data-parent") == id){
 							$(this).parent().parent().remove();
+							num = parseInt($(".sum-notice").html())-1;
+							$(".sum-notice").html(num);
 						}
 					});
 				}
+				num = parseInt($(".sum-notice").html())-1;
 			}else{
 				alert("Không thành công!!");
 			}
-
+			$(".sum-notice").html(num);
 		}
 	});
 });
