@@ -11,7 +11,7 @@
 */
 Route::get('/', [
     'uses'=> 'HomeController@index'
-]);
+])->name('home');
 Route::get('/login', function(){
     return view('login');
 });
