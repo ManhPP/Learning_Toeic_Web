@@ -138,7 +138,8 @@ Route::post('/upload-audio-listen', [
 //thêm các câu part1
 //================= part 1 ===========================
 Route::get('/admin/manager-listening-part/add-part1', function () {
-    return view('add_part_1_new');
+    $userLogin = Auth::guard("accounts")->user();
+    return view('add_part_1_new')->with("userLogin", $userLogin);
 })->name("viewaddpart1");
 Route::post('/admin/manager-listening-part/add-part1/do-add', [
     'uses' => 'Part1Controller@create'
@@ -150,7 +151,9 @@ Route::post('/admin/manager-listening-part/update-part1/do-update', [
 //================= end part 1 ===========================
 //================= part 2 ===========================
 Route::get('/admin/manager-listening-part/add-part2', function () {
-    return view('add_part_2');
+    $userLogin = Auth::guard("accounts")->user();
+
+    return view('add_part_2')->with("userLogin", $userLogin);
 })->name("viewaddpart2");
 Route::post('/admin/manager-listening-part/add-part2/do-add', [
     'uses' => 'Part2Controller@create'
@@ -163,10 +166,12 @@ Route::post('/admin/manager-listening-part/update-part2/do-update', [
 //================= part 3, 4 ===========================
 // Thêm part 3,4
 Route::get('/admin/manager-listening-part/add-part3', function () {
-    return view('add_part_3');
+    $userLogin = Auth::guard("accounts")->user();
+    return view('add_part_3')->with("userLogin", $userLogin);
 })->name("viewaddpart3");
 Route::get('/admin/manager-listening-part/add-part4', function () {
-    return view('add_part_4');
+    $userLogin = Auth::guard("accounts")->user();
+    return view('add_part_4')->with("userLogin", $userLogin);
 })->name("viewaddpart4");
 Route::post('/admin/manager-listening-part/add-part3/do-add', [
     'uses' => 'ConversationParagraphController@createCPPart3'
