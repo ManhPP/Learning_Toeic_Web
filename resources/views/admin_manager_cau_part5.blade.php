@@ -185,6 +185,7 @@
     <div id='path-delete'>
         {{ Route('part5controller.delete') }}
     </div>
+    <div id="root-path">{{URL("")}}</div>
 </div>
 
 @endsection
