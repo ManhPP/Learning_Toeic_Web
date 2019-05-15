@@ -180,6 +180,9 @@
 		<div id='path-add'>
 			{{ Route('readingpartcontroller.add') }}
 		</div>
+		<div id="root-path">
+			{{URL("")}}
+		</div>
 	</div>
 
 @endsection

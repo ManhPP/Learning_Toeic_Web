@@ -149,7 +149,7 @@ function addQues(arrCau){
                 + '</span></label></div>'
                 +'<div class="align-right"><img class="ico-modified ico-del" alt="minus" src="'
                 +$("#root-path").html()
-                +'/resources/img/round-minus.png"></div><hr></div>';
+                +'/imgs/round-minus.png"></div><hr></div>';
 
         $("#list-to-add").append(cau);
     }
