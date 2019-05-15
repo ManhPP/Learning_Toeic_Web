@@ -16,7 +16,7 @@
 	<nav id="bar"
 		class="navbar navbar-expand-md navbar-dark fixed-top nav-background">
 		<!-- Brand -->
-		<a class="navbar-brand" href="#">BKTOEIC</a>
+		<a class="navbar-brand" href="{{URL("")}}">BKTOEIC</a>
 
 		<!-- Toggler/collapsibe Button -->
 		<button class="navbar-toggler" id="toggle-bar" type="button"
@@ -28,10 +28,10 @@
 		<div class="collapse navbar-collapse justify-content-end head-bar"
 			id="collapsibleNavbar">
 			<ul class="navbar-nav">
-				<li class="nav-item"><a class="nav-link" href="#">HOME</a></li>
-				<li class="nav-item"><a class="nav-link" href="#">FORUM</a></li>
+				<li class="nav-item"><a class="nav-link" href="{{URL("")}}">HOME</a></li>
+				<li class="nav-item"><a class="nav-link" href="{{Route("discussionController.home")}}">FORUM</a></li>
 				<li class="nav-item" id="btn-login"><a class="nav-link"
-					href="#">LOGIN</a></li>
+					href="{{Route('mylogincontroller.login')}}">LOGIN</a></li>
 			</ul>
 		</div>
 	</nav>
