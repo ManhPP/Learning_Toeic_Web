@@ -27,14 +27,14 @@
                 @foreach($arrDoan as $doan)
                     <tr class="d-flex row" data-id="{{$doan->id }}">
                         <td class="col-12"><img class="ico-forward"
-                                                src="${pageContext.request.contextPath}/resources/img/forward-arrow.png">
+                                                src="{{URL::asset("imgs/forward-arrow.png")}}">
                             <span class="ques-content">Đoạn văn id {{$doan->id }} - <span
                                         class="type-part">{{$doan->loaiPart7 }}</span></span>
                             <div class="controll-ques">
                                 <span class="btn-update" data-id="{{$doan->id }}">update</span> <span>•</span>
                                 <span class="btn-del" data-id="{{$doan->id }}">delete</span>
                             </div> <img class="expand-ico"
-                                        src="${pageContext.request.contextPath}/resources/img/next.png">
+                                        src="{{URL::asset("imgs/next.png")}}">
 
 
                             <div class="div-append-para hide">
@@ -100,7 +100,7 @@
             </table>
         </div>
     </div>
-    <img src="${pageContext.request.contextPath}/resources/img/add.png"
+    <img src="{{URL::asset("imgs/add.png")}}"
          id="ico-add-ques">
 
     <!-- nhap noi dung cau -->
