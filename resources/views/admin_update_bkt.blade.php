@@ -60,7 +60,7 @@
         <div
                 class="content-container col-12 col-sm-11 col-md-10 col-lg-9 col-xl-8">
             <div class="header-content">
-                <div style="padding-left: 1em>Bài kiểm tra</div>
+                <div style="padding-left: 1em">Bài kiểm tra</div>
             </div>
             <div class="content">
                 <div class="choose-part row">
