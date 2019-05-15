@@ -233,7 +233,22 @@ class ListeningPartController extends Controller
         return Response()->json($arrTest, 200);
     }
 
-
+    public function indexAddPart1(){
+        $userLogin = Auth::guard("accounts")->user();
+        return view('add_part_1_new')->with('userLogin',$userLogin);
+    }
+    public function indexAddPart2(){
+        $userLogin = Auth::guard("accounts")->user();
+        return view('add_part_2')->with('userLogin',$userLogin);
+    }
+    public function indexAddPart3(){
+        $userLogin = Auth::guard("accounts")->user();
+        return view('add_part_3')->with('userLogin',$userLogin);
+    }
+    public function indexAddPart4(){
+        $userLogin = Auth::guard("accounts")->user();
+        return view('add_part_3')->with('userLogin',$userLogin);
+    }
 
 
     /**
