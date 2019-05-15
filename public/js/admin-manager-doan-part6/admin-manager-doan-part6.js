@@ -84,11 +84,13 @@ modalConfirmInput(function(confirm) {
 	                para:doanVan
                 },
 	            success: function(data){
-	                if(parseInt(data)>0){
+	                if(data[0] != 'false'){
 	                    if( parseInt($("#total-ques").html()) == parseInt($("#sum-ques").html()) ){
-	                        para["id"] = data;
+	                        para["id"] = data[0];
+	                        for(i = 0; i< (para.listCauPart6).length; i++){
+	                            para.listCauPart6[i].id = data[i+1];
+                            }
 	                        $("#sum-ques").html(parseInt($("#sum-ques").html())+1);
-	                        console.log(para+"----");
 	                        alert("Thêm thành công!!!")
 	                        resetTable(para);
 	                    }

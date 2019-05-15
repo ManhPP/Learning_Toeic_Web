@@ -40,6 +40,7 @@ class Part6ParagraphController extends Controller
     }
 
     public function add(Request $request){
+        $arr = array();
         $userLogin = Auth::guard("accounts")->user();
         if( $userLogin==null || !$userLogin->can('addPara', Part6Paragraph::class)){
             return response()->json(['redirect'=>(Route('mylogincontroller.login'))]);
@@ -53,19 +54,22 @@ class Part6ParagraphController extends Controller
         $part6Para = new Part6Paragraph();
         try{
             $check=$part6Para->save();
+            array_push($arr, Part6Paragraph::max('id'));
             error_log("a");
             if($check > 0)
             {
                 foreach (((Object)$json)->listCauPart6 as $jsonCau){
-                    $part6Para->part6()->create($jsonCau);
+                    $cau = $part6Para->part6()->create($jsonCau);
+                    array_push($arr, $cau->id);
                 }
             }
-            return Part6Paragraph::max('id');
+            return response()->json($arr, 200);
         }catch(\Exception $e){
             error_log("error".$e->getMessage());
         }
+        $arr[0] = 'false';
 
-        return 'false';
+        return response()->json($arr, 200);
 
     }
 
