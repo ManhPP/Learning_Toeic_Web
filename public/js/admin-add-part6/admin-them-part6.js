@@ -204,7 +204,7 @@ function addPara(paras){
             +'<img class="ico-modified ico-del" alt="minus" data-idpara="'
             +paras[i].id
             +'" src="/imgs/round-minus.png"></div><hr></div></div>';
-        
+
         begin+=3;
         $(".list-cau").append(row);
     }
@@ -355,7 +355,7 @@ $(document).on("click", "#submit-add", function(){
             part = '{"id":"null", "loaiPart":"Part 6", "tittle":"'
                     +$("#tittle").val()+'", "listDoanVanPart6":'+arrDoan+'}';
             // json = JSON.parse(part);
-
+            console.log(part);
             $.ajax({
                 url: $("#path-add").html(),
                 method: "POST",

@@ -22,7 +22,7 @@
         <div
                 class="content-container col-12 col-sm-11 col-md-10 col-lg-9 col-xl-8">
             <div class="header-content">
-                <div>Practic part 6 (12 sentences)</div>
+                <div style="padding-left: 1em">Practic part 6 (12 sentences)</div>
             </div>
             <div class="content">
                 <div class="p1">
@@ -157,7 +157,7 @@
          aria-labelledby="mySmallModalLabel" aria-hidden="true"
          id="model-choise-ques">
         <button type="button" class="btn btn-default" id="btn-input-yes"
-                data-next="false">Ok</button>
+                data-next="false" style="background-color: coral;">Ok</button>
         <button type="button" class="btn btn-primary" id="btn-input-no">Cancel</button>
         <div id="num-ques-choise">
             <span id="num-cau-choise">0</span>/4

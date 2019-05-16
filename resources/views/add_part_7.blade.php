@@ -21,7 +21,7 @@
         <!-- part 7 -->
         <div class="content-container col-12 col-sm-11 col-md-10 col-lg-9 col-xl-8">
             <div class="header-content">
-                <div>Practic part 7 (40 sentences)</div>
+                <div style="padding-left: 1em">Practic part 7 (40 sentences)</div>
             </div>
             <div class="content">
                 <div class="p1">
@@ -104,7 +104,7 @@
                                                         class="num-ques">{{count($doan->cauPart7s)}}</span> câu)</span>
 											</span>
                                         <img class="expand-ico"
-                                             src="${pageContext.request.contextPath}/resources/img/next.png">
+                                             src="{{URL::asset("imgs/next.png")}}">
                                         <div class="div-append-para hide">
                                             <div class="boundary-para" data-id={{$doan->id}} data-num-ques="{{count($doan->cauPart7s)}}">
                                                 <div class="paragrap">
@@ -201,7 +201,7 @@
                             </tr>
                             </thead>
                             <tbody>
-                            {{$indexPara=0}}
+                            @php $indexPara=0@endphp
                             @foreach($arrDoanKep as $doan)
                                 <tr class="d-flex row" data-id="{{$doan->id}}">
                                     <td class="col-12">
@@ -209,7 +209,7 @@
                                         <span class="ques-content">Đoạn văn id {{$doan->id}} - <span
                                                     class="type-part">{{$doan->loaiPart7}}</span></span>
                                         <img class="expand-ico"
-                                             src="${pageContext.request.contextPath}/resources/img/next.png">
+                                             src="{{URL::asset("imgs/next.png")}}">
                                         <div class="div-append-para hide">
                                             <div class="boundary-para" data-num-ques="5" data-id="{{$doan->id}}">
                                                 <div class="paragrap">

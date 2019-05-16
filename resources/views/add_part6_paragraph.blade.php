@@ -85,7 +85,7 @@
                 </tbody>
             </table>
         </div>
-        <img src="{{URL::asset("imgs/round-add.png")}}"
+        <img src="{{URL::asset("imgs/add.png")}}"
              id="ico-add-ques">
     </div>
 

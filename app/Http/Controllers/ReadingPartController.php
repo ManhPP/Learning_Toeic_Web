@@ -111,6 +111,13 @@ class ReadingPartController extends Controller
 
         $partDoc = ReadingPart::find($id);
 
+
+        foreach($partDoc->tests as $ts){
+            $ts->listeningParts()->detach();
+            $ts->readingParts()->detach();
+            $ts->delete();
+        }
+
         if($partDoc->loaiPart == "Part 6"){
             $partDoc->part6Paragraphs()->detach();
         }else if($partDoc->loaiPart == "Part 7"){
@@ -131,7 +138,8 @@ class ReadingPartController extends Controller
         }
 
 
-        try{
+//        try{
+        error_log($request);
             //parse string to part6
             $part6 = json_decode($request->part6);
 
@@ -149,10 +157,10 @@ class ReadingPartController extends Controller
                 }
             }
             return 'true';
-        }catch (\Exception $e){
-            error_log($e->getMessage());
-        }
-        return 'false';
+//        }catch (\Exception $e){
+//            error_log($e->getMessage());
+//        }
+//        return 'false';
     }
 
     public function updatePart6(Request $request){

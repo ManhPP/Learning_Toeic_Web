@@ -234,22 +234,15 @@ $("#up-audio")
                     formData.append("name", name);
 
                     $.ajax({
-                        url : $("#root-path").html()
-                                + "/admin/bai-hoc-manager/audio-upload",
+                        url : "/upload-audio-listen",
                         method : "post",
                         data : formData, // khong duoc dung { formData } ma
                                             // phai bo {}
                         contentType : false,
                         processData : false,
-                        beforeSend : function (xhr) {
-                            xhr.setRequestHeader(header, token);
-                        },
                         success : function (data) {
-                            if (data == true) {
-                                formParent.attr("data-path", $("#root-path")
-                                        .html()
-                                        + "/audio-upload/" + name);
-                            }
+                            console.log(data);
+                                formParent.attr("data-path", data.pathFile);
                         }
                     });
                 });

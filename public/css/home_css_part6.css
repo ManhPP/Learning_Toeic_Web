@@ -270,3 +270,10 @@ body {
 #myModal {
 	top: 140px;
 }
+
+#ico-add-ques{
+	position: fixed;
+	right: 1.7em;
+	cursor: pointer;
+	top: 5em;
+}

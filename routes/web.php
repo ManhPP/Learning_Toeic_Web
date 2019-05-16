@@ -137,10 +137,11 @@ Route::post('/upload-audio-listen', [
 ])->name("listeningpartcontroller.uploadaudio");
 //thêm các câu part1
 //================= part 1 ===========================
-Route::get('/admin/manager-listening-part/add-part1', function () {
-    $userLogin = Auth::guard("accounts")->user();
-    return view('add_part_1_new')->with("userLogin", $userLogin);
-})->name("viewaddpart1");
+
+Route::get('/admin/manager-listening-part/add-part1', [
+    'uses' => 'ListeningPartController@indexAddPart1'
+])->name("viewaddpart1");
+
 Route::post('/admin/manager-listening-part/add-part1/do-add', [
     'uses' => 'Part1Controller@create'
 ])->name("part1controller.create");
@@ -150,11 +151,11 @@ Route::post('/admin/manager-listening-part/update-part1/do-update', [
 ])->name("part1controller.update");
 //================= end part 1 ===========================
 //================= part 2 ===========================
-Route::get('/admin/manager-listening-part/add-part2', function () {
-    $userLogin = Auth::guard("accounts")->user();
 
-    return view('add_part_2')->with("userLogin", $userLogin);
-})->name("viewaddpart2");
+Route::get('/admin/manager-listening-part/add-part2', [
+    'uses'=> 'ListeningPartController@indexAddPart2'
+])->name("viewaddpart2");
+
 Route::post('/admin/manager-listening-part/add-part2/do-add', [
     'uses' => 'Part2Controller@create'
 ])->name("part2controller.create");
@@ -165,14 +166,14 @@ Route::post('/admin/manager-listening-part/update-part2/do-update', [
 //================= end part 2 ===========================
 //================= part 3, 4 ===========================
 // Thêm part 3,4
-Route::get('/admin/manager-listening-part/add-part3', function () {
-    $userLogin = Auth::guard("accounts")->user();
-    return view('add_part_3')->with("userLogin", $userLogin);
-})->name("viewaddpart3");
-Route::get('/admin/manager-listening-part/add-part4', function () {
-    $userLogin = Auth::guard("accounts")->user();
-    return view('add_part_4')->with("userLogin", $userLogin);
-})->name("viewaddpart4");
+
+Route::get('/admin/manager-listening-part/add-part3', [
+    'uses'=>'ListeningPartController@indexAddPart3'
+])->name("viewaddpart3");
+Route::get('/admin/manager-listening-part/add-part4', [
+    'uses'=>'ListeningPartController@indexAddPart4'
+])->name("viewaddpart4");
+
 Route::post('/admin/manager-listening-part/add-part3/do-add', [
     'uses' => 'ConversationParagraphController@createCPPart3'
 ])->name("conversationparagraphcontroller.createcppart3");

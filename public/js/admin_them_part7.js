@@ -241,7 +241,7 @@ function resetTable(doanVan, tbody){
             +numQues
             +'</span></span>'
             + '<img class="expand-ico"'
-            + 'src="'+$("#root-path").html()+'/resources/img/next.png">'
+            + 'src="'+'/imgs/next.png">'
             + '<div class="div-append-para hide"><div class="boundary-para" data-id="'
             +doanVan.id+'" data-num-ques="'
             +doanVan.listCauPart7.length+'"><div class="paragrap">'
@@ -332,7 +332,7 @@ function resetIndex(typeList){
     
     typeList.find(".boundary-para").each(function(i){
         var minusIco = '<div class="align-right"><img class="ico-modified ico-del" alt="minus" data-idpara="'
-                        +$(this).attr("data-id")+'" src="/BKTOEIC/resources/img/round-minus.png"></div>';
+                        +$(this).attr("data-id")+'" src="/imgs/round-minus.png"></div>';
         if($(this).find(".ico-del").length==0){
             $($.parseHTML(minusIco)).insertAfter($(this).find(".ques").last().find(".row"));
             $(this).prepend('<p class="ques refer-ques">Questions <span class="begin"></span>-<span class="end"></span> refer to the following conversation.</p>');

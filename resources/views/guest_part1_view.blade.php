@@ -13,8 +13,8 @@
 <div class="body row">
     <div class="row">
         <div class="col-12 time-detail">
-            <button class="timer-btn">Timer</button>
-            <span class="clock">00:00:00</span>
+
+            <span id="time">00:00:00</span>
         </div>
     </div>
 
@@ -115,4 +115,5 @@
 
 @section('js')
     <script type="text/javascript" src="{{ URL::asset("js/guest_part1_view/guest_part1_view.js") }}"></script>
+    <script type="text/javascript" src="{{ URL::asset("js/setTime.js") }}"></script>
 @endsection	
