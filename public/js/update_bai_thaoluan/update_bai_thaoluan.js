@@ -38,16 +38,16 @@ $("#file-up").change(function(event) {
 	var boundary = '--'+Math.random().toString().substr(2);
 	console.log($("#form-up-image")[0]);
 	$.ajax({
-		url: $("#root-path").html()+"/user/them-bai-thao-luan/file-upload",
+		url: "/user/discussion/upload-img",
 		method: "post",
 		data:formData, // khong duoc dung { formData } ma phai bo {}
 		contentType: false, // bat buoc
         processData: false, // bat buoc
 
 		success: function(data){
-			if(data==true){
+			// if(data==true){
 				readURL(name);	
-			}
+			// }
 		}
 	});
 });
