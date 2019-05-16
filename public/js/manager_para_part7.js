@@ -569,22 +569,18 @@ function resetTable(doanVan, isPrepend, insertAfter){
 
     var append = '<tr class="d-flex row" data-id="'+doanVan.id+'">'
         + '<td class="col-12"><img class="ico-forward"'
-<<<<<<< HEAD
-        + 'src="'+$("#root-path").html()+'/imgs/forward-arrow.png">'
-=======
+
         + 'src="'+'/imgs/forward-arrow.png">'
->>>>>>> 7a653c30c780d75e9da34ac7c5b2e06cef364e14
+
         + '<span class="ques-content"> Đoạn văn id '+doanVan.id+' - <span'
         + ' class="type-part">'+doanVan.loaiPart7+'</span></span>'
         + '<div class="controll-ques">'
         + '<span class="btn-update" data-id="'+doanVan.id+'">update</span><span> • </span>'
         + '<span class="btn-del" data-id="'+doanVan.id+'">delete</span>'
         + '</div> <img class="expand-ico"'
-<<<<<<< HEAD
-        + 'src="'+$("#root-path").html()+'/imgs/next.png">'
-=======
+
         + 'src="'+'/imgs/next.png">'
->>>>>>> 7a653c30c780d75e9da34ac7c5b2e06cef364e14
+
         + '<div class="div-append-para hide"><div><div class="paragrap">'
         + '<img src="'+doanVan.doanVan1+'">'
         + morePara

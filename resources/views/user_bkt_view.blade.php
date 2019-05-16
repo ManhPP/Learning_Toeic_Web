@@ -13,8 +13,8 @@
 	<div class="body row">
             <div class="row">
                 <div class="col-12 time-detail">
-                    <button class="timer-btn">Timer</button>
-                    <span class="clock">00:00:00</span>
+
+                    <span id="time">00:00:00</span>
                 </div>
                 <div class="audio col-12" id="audio-bkt">
                             <audio controls="controls">
@@ -98,7 +98,7 @@
     
                         <!-- intro img-->
                         <div class="intro">
-                            <img src="{{ $part1->intro }}">
+                            <img src="/{{ $part1->intro }}">
                         </div>
                         <hr>
                         <!-- list cau hoi -->
@@ -112,7 +112,7 @@
                                 <div class="ques" id="q{{ $index }}" data-asw="{{ $cauPart1->dADung }}" data-ques="{{ $numQues }}">
                                     <div class="no-ques">Câu {{ $numQues }}</div>
                                     <div class="div-img">
-                                        <img src="{{ $cauPart1->anh }}">
+                                        <img src="/{{ $cauPart1->anh }}">
                                     </div>
                                     <div class="tick col-12 col-sm-10 row">
                                         <label class="col-3"><input type="radio"
@@ -587,5 +587,35 @@
 @endsection
 
 @section('js')
+    <script>
+        // js dem nguoc thoi gian
+        // thiet lap thoi gian dem nguoc
+        var coundownTime= new Date().getTime()+120*60000+1000;
+
+        // countdown each 1 second
+        var x=setInterval(function(){
+
+            var now = new Date().getTime();
+
+            var distance= coundownTime - now;
+
+            var hours=Math.floor(distance/3600000); // milisecond
+
+            var minutes = Math.floor((distance % 3600000)/60000 );
+
+            var seconds = Math.floor( (distance % 60000)/1000 );
+
+            // hien len html
+            $("#time").html( hours +":"+minutes + ":" + seconds);
+
+            // neu het gio bao het gio
+            if(distance < 0 ){
+                clearInterval(x);
+                $("#time").html("TIME OUT");
+                markAnswer();
+            }
+
+        },1000);
+    </script>
     <script type="text/javascript" src="{{ URL::asset("js/user_bkt_view/user_bkt_view.js") }}"></script>
 @endsection	

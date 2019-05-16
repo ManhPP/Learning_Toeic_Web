@@ -79,7 +79,7 @@
                                     @foreach($listPart1 as $part1)                                    
                                         <tr class="d-flex" data-id="{{ $part1->id }}">
                                             <td class="col-12">
-                                                <a href="{{URL("guest/luyen-nghe",$part1->id)}}" target="_blank">
+                                                <a href="{{Route("listeningpartcontroller.practicepartnghe")}}?id={{ $part1->id }}" target="_blank">
                                                     <input type="checkbox" class="choose-ques-add">
                                                     <span class="content-ques">{{ $part1->title }} (id {{ $part1->id }})</span>
                                                     <img class="expand-ico" src="{{ URL::asset("imgs/next.png") }}">
@@ -122,7 +122,7 @@
                                         @foreach($listPart2 as $part2) 
                                         <tr class="d-flex" data-id="{{ $part2->id }}">
                                             <td class="col-12">
-                                                <a href="{{URL("guest/luyen-nghe",$part2->id)}}" target="_blank">
+                                                <a href="{{Route("listeningpartcontroller.practicepartnghe")}}?id={{ $part2->id }}" target="_blank">
                                                     <input type="checkbox" class="choose-ques-add">
                                                     <span class="content-ques">{{ $part2->title }} (id {{ $part2->id }})</span>
                                                     <img class="expand-ico" src="{{ URL::asset("imgs/next.png") }}">
@@ -166,7 +166,7 @@
                                     @foreach($listPart3 as $part3) 
                                         <tr class="d-flex" data-id="{{ $part3->id }}">
                                             <td class="col-12">
-                                                <a href="{{URL("guest/luyen-nghe",$part3->id)}}" target="_blank">
+                                                <a href="{{Route("listeningpartcontroller.practicepartnghe")}}?id={{ $part3->id }}" target="_blank">
                                                     <input type="checkbox" class="choose-ques-add">
                                                     <span class="content-ques">{{ $part3->title }} (id {{ $part3->id }})</span>
                                                     <img class="expand-ico" src="{{ URL::asset("imgs/next.png") }}">
@@ -211,7 +211,7 @@
                                     
                                         <tr class="d-flex" data-id="{{ $part4->id }}">
                                             <td class="col-12">
-                                                <a href="{{URL("guest/luyen-nghe",$part4->id)}}" target="_blank">
+                                                <a href="{{Route("listeningpartcontroller.practicepartnghe")}}?id={{ $part4->id }}" target="_blank">
                                                     <input type="checkbox" class="choose-ques-add">
                                                     <span class="content-ques">{{ $part4->title }} (id {{ $part4->id }})</span>
                                                     <img class="expand-ico" src="{{ URL::asset("imgs/next.png") }}">
@@ -255,7 +255,7 @@
                                     @foreach($listPart5 as $part5)
                                         <tr class="d-flex" data-id="{{ $part5->id }}">
                                             <td class="col-12">
-                                                <a href="{{URL("guest/luyen-nghe",$part5->id)}}" target="_blank">
+                                                <a href="{{Route("readingpartcontroller.practicepartdoc")}}?id={{ $part5->id }}" target="_blank">
                                                     <input type="checkbox" class="choose-ques-add">
                                                     <span class="content-ques">{{ $part5->title }} (id {{ $part5->id }})</span>
                                                     <img class="expand-ico" src="{{ URL::asset("imgs/next.png") }}">
@@ -299,7 +299,7 @@
                                     @foreach($listPart6 as $part6)
                                         <tr class="d-flex" data-id="{{ $part6->id }}">
                                             <td class="col-12">
-                                                <a href="{{URL("guest/luyen-nghe",$part6->id)}}" target="_blank">
+                                                <a href="{{Route("readingpartcontroller.practicepartdoc")}}?id={{ $part6->id }}" target="_blank">
                                                     <input type="checkbox" class="choose-ques-add">
                                                     <span class="content-ques">{{ $part6->title }} (id {{ $part6->id }})</span>
                                                     <img class="expand-ico" src="{{ URL::asset("imgs/next.png") }}">
@@ -343,7 +343,7 @@
                                     @foreach($listPart7 as $part7)
                                         <tr class="d-flex" data-id="{{ $part7->id }}">
                                             <td class="col-12">
-                                                <a href="{{URL("guest/luyen-nghe",$part7->id)}}" target="_blank">
+                                                <a href="{{Route("readingpartcontroller.practicepartdoc")}}?id={{ $part7->id }}" target="_blank">
                                                     <input type="checkbox" class="choose-ques-add">
                                                     <span class="content-ques">{{ $part7->title }} (id {{ $part7->id }})</span>
                                                     <img class="expand-ico" src="{{ URL::asset("imgs/next.png") }}">
