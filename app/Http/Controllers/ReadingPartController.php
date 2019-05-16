@@ -138,8 +138,8 @@ class ReadingPartController extends Controller
         }
 
 
-//        try{
-        error_log($request);
+        try{
+
             //parse string to part6
             $part6 = json_decode($request->part6);
 
@@ -157,10 +157,10 @@ class ReadingPartController extends Controller
                 }
             }
             return 'true';
-//        }catch (\Exception $e){
-//            error_log($e->getMessage());
-//        }
-//        return 'false';
+        }catch (\Exception $e){
+            error_log($e->getMessage());
+        }
+        return 'false';
     }
 
     public function updatePart6(Request $request){
